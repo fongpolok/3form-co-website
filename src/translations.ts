@@ -190,6 +190,7 @@ export const t = {
       tc: "深入了解顧問工作背後的工程開發 — 實際建構，並非紙上談兵。",
     },
     illustrative_badge: { en: "Coming Soon", tc: "即將推出" },
+    launch_demo: { en: "Launch Demo", tc: "啟動示範" },
     items: [
       {
         id: 1,
@@ -199,8 +200,9 @@ export const t = {
           en: "Extended an open-source warehouse platform with lot/expiry (FEFO) tracking, low-stock and expiry alerts, and void/audit trails — built for medical-device-grade inventory traceability.",
           tc: "在開源倉庫管理平台上加入批次／有效期（FEFO）追蹤、低庫存及到期預警，以及作廢／審核紀錄功能，達到醫療器材級別的存貨可追溯性。",
         },
-        note: { en: "Built on the open-source GreaterWMS platform", tc: "基於開源平台 GreaterWMS 建構" },
+        note: { en: "Built on the open-source GreaterWMS platform · register a free account to explore", tc: "基於開源平台 GreaterWMS 建構．註冊免費帳戶即可體驗" },
         real: true,
+        demoUrl: "https://fongpolok.github.io/3form-wms-demo-ui/",
       },
       {
         id: 2,
@@ -212,6 +214,7 @@ export const t = {
         },
         note: { en: "HKU MECH6048 dissertation project", tc: "香港大學 MECH6048 論文項目" },
         real: true,
+        demoUrl: "",
       },
       {
         id: 3,
@@ -220,6 +223,7 @@ export const t = {
         desc: { en: "Details coming soon.", tc: "詳情稍後公佈。" },
         note: { en: "", tc: "" },
         real: false,
+        demoUrl: "",
       },
       {
         id: 4,
@@ -228,6 +232,7 @@ export const t = {
         desc: { en: "UI/UX preview only — detection deployment in progress.", tc: "現僅提供UI/UX預覽 — 檢測部署開發中。" },
         note: { en: "", tc: "" },
         real: false,
+        demoUrl: "",
       },
     ],
   },

@@ -622,6 +622,12 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
                   {txt(demo.note, lang)}
                 </p>
               )}
+              {demo.demoUrl && (
+                <a href={demo.demoUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ fontSize: "14px", color: CONFIG.accent, fontWeight: 700, marginTop: "20px", textDecoration: "none" }}>
+                  {txt(t.demos.launch_demo, lang)} →
+                </a>
+              )}
             </div>
           ))}
         </div>
