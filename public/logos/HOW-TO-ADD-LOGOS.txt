@@ -1,0 +1,27 @@
+HOW TO ADD PARTNER LOGOS
+========================
+
+1. Download the official logo file from each partner's website (PNG or SVG preferred).
+2. Name the file exactly as listed below.
+3. Drop it into this folder (public/logos/).
+4. The website will automatically show the real logo in the scrolling strip.
+
+Required filenames
+------------------
+hkpc.png            → Hong Kong Productivity Council                       [added]
+cognex.png          → Cognex Corporation                                   [added]
+stp.png             → Hong Kong Science & Technology Parks Corporation     [added]
+hkqaa.png           → Hong Kong Quality Assurance Agency                   [MISSING — add manually]
+sgs.png             → SGS                                                  [added]
+bureau-veritas.png  → Bureau Veritas                                       [added]
+tuvsud.png          → TÜV SÜD                                              [added]
+investhk.png        → InvestHK                                             [added]
+
+Tips
+----
+- Use PNG with a transparent background (not white) for the cleanest look.
+- Recommended size: roughly 300 x 100 pixels or 300 x 120 pixels.
+- If the image fails to load, the website automatically falls back to a styled
+  text plate — so the site never looks broken.
+- To change a filename, update the imgUrl value in src/translations.ts under
+  the partners.items array.

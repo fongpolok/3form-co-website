@@ -1,0 +1,10 @@
+{
+  "description": "This web application serves as a professional platform for an engineering consulting company, offering information on services, projects, and contact details while supporting bilingual navigation.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
