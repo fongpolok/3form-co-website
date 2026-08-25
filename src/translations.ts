@@ -212,9 +212,9 @@ export const t = {
           en: "A Cantonese-first AI health companion for Hong Kong elderly with hypertension or type 2 diabetes — a local LLM grounded in HK clinical guidelines, with medication logging, OCR document scanning, and caregiver alerts.",
           tc: "為患有高血壓或二型糖尿病的香港長者而設的粵語人工智能健康伴侶 — 採用本地大型語言模型並以香港臨床指引為基礎，具備藥物記錄、OCR文件掃描及照顧者警報功能。",
         },
-        note: { en: "HKU MECH6048 dissertation project", tc: "香港大學 MECH6048 論文項目" },
+        note: { en: "HKU MECH6048 dissertation project · try it in Cantonese", tc: "香港大學 MECH6048 論文項目．可用粵語體驗" },
         real: true,
-        demoUrl: "",
+        demoUrl: "https://fongpolok.github.io/3form-elderly-demo-ui/",
       },
       {
         id: 3,
