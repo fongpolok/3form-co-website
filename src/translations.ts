@@ -220,10 +220,16 @@ export const t = {
         id: 3,
         tag: { en: "Compliance", tc: "合規" },
         title: { en: "ESG Auditing", tc: "ESG審核" },
-        desc: { en: "Details coming soon.", tc: "詳情稍後公佈。" },
-        note: { en: "", tc: "" },
-        real: false,
-        demoUrl: "",
+        desc: {
+          en: "An auditor-facing dashboard for a Hong Kong recycling facility — work orders, ESG metrics against HKEX/GRI frameworks, and PDF report generation.",
+          tc: "為香港回收設施而設的審核員儀表板 — 工作單、對照香港交易所／GRI框架的ESG指標，以及PDF報告生成。",
+        },
+        note: {
+          en: "UI preview only — backend integration in progress, login is not yet functional",
+          tc: "現僅提供UI預覽 — 後端整合開發中，登入功能尚未啟用",
+        },
+        real: true,
+        demoUrl: "https://esg-frontend-d6g2.onrender.com/ops/",
       },
       {
         id: 4,
