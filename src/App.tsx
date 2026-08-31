@@ -6,6 +6,15 @@
 import { useState, useEffect, useRef, Fragment, type ReactNode } from "react";
 import { t, txt, type Lang } from "./translations";
 
+// Resolves a root-relative path (e.g. "/logo.white.png") against the app's
+// actual base URL. Needed because this deploys under a subpath on GitHub
+// Pages (/3form-co-website/) — a bare "/logo.white.png" resolves against the
+// domain root instead and 404s there, even though the same path works fine
+// in local dev where the base is "/".
+function asset(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+}
+
 // ── Tunable visual parameters — change colours/sizes here ────────────────────
 const CONFIG = {
   navHeight: "72px",
@@ -331,7 +340,7 @@ function Navbar({ lang, setLang, page, setPage }: {
       <div style={{ maxWidth: "1280px", margin: "0 auto", height: "100%", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <button onClick={() => { setPage("home"); window.scrollTo({ top: 0 }); }}
           style={{ display: "flex", alignItems: "center", gap: "12px", background: "none", border: "none", cursor: "pointer" }}>
-          <img src="/logo.white.png" alt="" style={{ width: "40px", height: "auto", flexShrink: 0 }} />
+          <img src={asset("/logo.white.png")} alt="" style={{ width: "40px", height: "auto", flexShrink: 0 }} />
           <span style={{ fontFamily: "var(--font-serif)", color: "#FFFFFF", letterSpacing: "-0.015em", fontSize: "25px" }}>
             <span style={{ fontWeight: 700 }}>3form</span>{" "}
             <span style={{ fontWeight: 400 }}>Co</span>
@@ -719,7 +728,7 @@ function FounderSection({ lang }: { lang: Lang }) {
 
           {/* Left: photo + name */}
           <div style={{ textAlign: "center" }}>
-            <img src={f.photoUrl} alt={f.name} style={{
+            <img src={asset(f.photoUrl)} alt={f.name} style={{
               width: "200px", height: "200px", borderRadius: "50%", margin: "0 auto 24px",
               objectFit: "cover", boxShadow: "0 4px 20px rgba(0,45,114,0.15)",
             }} />
@@ -1240,7 +1249,7 @@ function PartnersSection({ lang }: { lang: Lang }) {
                 {hasLogo ? (
                   // Real logo image — loads from /logos/ folder in public/
                   <img
-                    src={partner.imgUrl}
+                    src={asset(partner.imgUrl)}
                     alt={partner.name}
                     style={{ maxWidth: "140px", maxHeight: "52px", objectFit: "contain" }}
                     onError={e => {
