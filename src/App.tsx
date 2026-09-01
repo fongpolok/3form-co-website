@@ -15,6 +15,16 @@ function asset(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 }
 
+// Standard clip-based sr-only pattern — present in the a11y tree for heading
+// hierarchy/navigation, invisible and taking no layout space. Used where a
+// section already communicates its heading visually via SectionLabel (a
+// styled <span>, not a real heading), so screen readers would otherwise see
+// the document outline skip a level.
+const visuallyHidden = {
+  position: "absolute", width: "1px", height: "1px", padding: 0, margin: "-1px",
+  overflow: "hidden", clip: "rect(0,0,0,0)", whiteSpace: "nowrap", border: 0,
+} as const;
+
 // ── Tunable visual parameters — change colours/sizes here ────────────────────
 const CONFIG = {
   navHeight: "72px",
@@ -216,7 +226,7 @@ const LANG_OPTIONS: { value: Lang; short: string; label: string }[] = [
   { value: "tc", short: "繁中", label: "繁體中文" },
 ];
 
-function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void }) {
+function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l: Lang) => void; inline?: boolean }) {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const current = LANG_OPTIONS.find(o => o.value === lang) ?? LANG_OPTIONS[0];
@@ -266,7 +276,15 @@ function LangToggle({ lang, setLang }: { lang: Lang; setLang: (l: Lang) => void 
 
       {open && (
         <div role="listbox" aria-label={lang === "en" ? "Language" : "語言"}
-          style={{
+          style={inline ? {
+            // Rendered in normal flow so the mobile menu's navy background
+            // (which only auto-sizes to in-flow content) actually grows to
+            // contain it — an absolutely-positioned flyout here would hang
+            // off the panel's bottom edge with page content showing behind it.
+            marginTop: "8px", minWidth: "150px", maxWidth: "220px",
+            background: "#fff", borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
+            overflow: "hidden",
+          } : {
             position: "absolute", top: "calc(100% + 8px)", right: 0, minWidth: "150px",
             background: "#fff", borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
             overflow: "hidden", zIndex: 10,
@@ -375,7 +393,7 @@ function Navbar({ lang, setLang, page, setPage }: {
               {txt(link.label, lang)}
             </button>
           ))}
-          <div style={{ marginTop: "16px" }}><LangToggle lang={lang} setLang={setLang} /></div>
+          <div style={{ marginTop: "16px" }}><LangToggle lang={lang} setLang={setLang} inline /></div>
         </div>
       )}
     </nav>
@@ -561,6 +579,7 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
     <section style={{ background: CONFIG.sectionBg.about, padding: "100px 32px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="Explore" tc="探索更多" />
+        <h2 style={visuallyHidden}>{lang === "en" ? "Explore" : "探索更多"}</h2>
         <p style={{ fontSize: "16px", color: "#6B7280", margin: "16px 0 48px", maxWidth: "560px" }}>
           {txt(t.home.intro, lang)}
         </p>
@@ -615,7 +634,7 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
                   {txt(demo.tag, lang)}
                 </span>
                 {!demo.real && (
-                  <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+                  <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
                     {txt(t.demos.illustrative_badge, lang)}
                   </span>
                 )}
@@ -741,7 +760,7 @@ function FounderSection({ lang }: { lang: Lang }) {
             {/* Credential pills */}
             <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
               {f.credentials.map((c, i) => (
-                <span key={i} style={{ display: "inline-block", background: "#E8F0FE", color: CONFIG.accent, fontSize: "11px", fontWeight: 600, letterSpacing: "0.06em", padding: "5px 12px", borderRadius: "2px", textAlign: "center" }}>
+                <span key={i} style={{ display: "inline-block", background: "#E8F0FE", color: CONFIG.accent, fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "2px", textAlign: "center" }}>
                   {txt(c, lang)}
                 </span>
               ))}
@@ -750,10 +769,10 @@ function FounderSection({ lang }: { lang: Lang }) {
 
           {/* Right: bio */}
           <div>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", marginBottom: "20px" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", marginBottom: "20px", maxWidth: "62ch" }}>
               {txt(f.bio_p1, lang)}
             </p>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", margin: 0 }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", margin: 0, maxWidth: "62ch" }}>
               {txt(f.bio_p2, lang)}
             </p>
           </div>
@@ -851,7 +870,7 @@ function ProjectCard({ p, lang }: { p: typeof t.projects.items[0]; lang: Lang })
           {txt(p.tag, lang)}
         </span>
         {!real && (
-          <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "10px", fontWeight: 600, letterSpacing: "0.06em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+          <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
             {txt(t.projects.illustrative_badge, lang)}
           </span>
         )}
@@ -1136,7 +1155,7 @@ function AllProjectsPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
       </div>
 
       {/* Filter tabs */}
-      <div style={{ background: "#fff", borderBottom: "1px solid #E5E7EB", padding: "0 32px" }}>
+      <div style={{ background: "#fff", borderBottom: "1px solid #E5E7EB", padding: "0 32px 4px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", display: "flex", gap: "0", overflowX: "auto" }}>
           <button key="all" onClick={() => { log.event("Projects filter:", "all"); setFilterTag("all"); }}
             style={{
@@ -1166,6 +1185,7 @@ function AllProjectsPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
       {/* Project grid */}
       <div style={{ background: CONFIG.sectionBg.allProjects, padding: "60px 32px 100px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <h2 style={visuallyHidden}>{lang === "en" ? "Project list" : "項目列表"}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="grid-responsive">
             {filtered.map(p => <ProjectCard key={p.id} p={p} lang={lang} />)}
           </div>

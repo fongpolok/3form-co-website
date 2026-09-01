@@ -31,14 +31,11 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      # Repo-Pages URLs are served from /<repo-name>/, so the build needs to
-      # know that prefix. FIGMA_PUBLIC_URL already drives vite.config.ts's
-      # `base` option, so this repo name (github.repository is "owner/repo")
-      # is all that needs to be plumbed through.
+      # Served from the custom domain's root (public/CNAME → 3formhk.com),
+      # not a /<repo-name>/ subpath, so the build needs no FIGMA_PUBLIC_URL
+      # override — vite.config.ts's `base` option defaults to "/".
       - name: Build
         run: pnpm run build
-        env:
-          FIGMA_PUBLIC_URL: /${{ github.event.repository.name }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
