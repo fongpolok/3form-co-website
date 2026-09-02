@@ -333,10 +333,9 @@ export const t = {
       en: "Ready to start a conversation? Reach out and we will get back to you within one business day.",
       tc: "準備好開始對話？歡迎聯絡，我們將在一個工作天內回覆您。",
     },
-    name:    { en: "Edward Fong",      tc: "方寶樂" },
     phone:   "5744 9594",
-    email:   "edwardfongpolok@gmail.com",
-    website: "www.3formco.com.hk",
+    email:   "edwardfong@3formhk.com",
+    website: "www.3form.com",
     form_name:    { en: "Your Name",   tc: "您的姓名" },
     form_email:   { en: "Your Email",  tc: "您的電郵" },
     form_message: { en: "Your Message", tc: "您的訊息" },
@@ -346,13 +345,13 @@ export const t = {
     sent_endpoint_body:    { en: "We will get back to you shortly.", tc: "我們將盡快回覆您。" },
     sent_mailto_heading:   { en: "Opening your email client…", tc: "正在開啟您的電郵程式…" },
     sent_mailto_body: {
-      en: "We've prepared your message for edwardfongpolok@gmail.com. If nothing opened, please email us directly.",
-      tc: "我們已為您準備好發送至 edwardfongpolok@gmail.com 的郵件。如未有反應，請直接發送電郵給我們。",
+      en: "We've prepared your message for edwardfong@3formhk.com. If nothing opened, please email us directly.",
+      tc: "我們已為您準備好發送至 edwardfong@3formhk.com 的郵件。如未有反應，請直接發送電郵給我們。",
     },
     error_heading: { en: "Something went wrong", tc: "發生錯誤" },
     error_body: {
-      en: "We couldn't send that. Please email us directly at edwardfongpolok@gmail.com.",
-      tc: "訊息未能發送，請直接發送電郵至 edwardfongpolok@gmail.com。",
+      en: "We couldn't send that. Please email us directly at edwardfong@3formhk.com.",
+      tc: "訊息未能發送，請直接發送電郵至 edwardfong@3formhk.com。",
     },
     send_another: { en: "Send another", tc: "再次發送" },
     try_again:    { en: "Try again",    tc: "重試" },
@@ -391,7 +390,7 @@ export const t = {
       sections: [
         {
           title: { en: "1. Acceptance of Terms", tc: "1. 接受條款" },
-          body:  { en: "By accessing and using www.3formco.com.hk ('the Website'), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the Website.", tc: "您訪問及使用 www.3formco.com.hk（「本網站」）即表示您接受並同意受本使用條款約束。如您不同意本條款，請勿使用本網站。" },
+          body:  { en: "By accessing and using www.3formhk.com ('the Website'), you accept and agree to be bound by these Terms of Use. If you do not agree to these terms, please do not use the Website.", tc: "您訪問及使用 www.3formhk.com（「本網站」）即表示您接受並同意受本使用條款約束。如您不同意本條款，請勿使用本網站。" },
         },
         {
           title: { en: "2. Use of Content", tc: "2. 內容使用" },
@@ -425,8 +424,8 @@ export const t = {
         {
           title: { en: "General", tc: "一般聲明" },
           body: {
-            en: "3form Co is committed to protecting the privacy of visitors to www.3formco.com.hk ('the Website'). In general, you can browse this Website without providing any personal data about yourself. We do not require you to register to access general information on the Website.",
-            tc: "3form Co 致力保護瀏覽 www.3formco.com.hk（「本網站」）人士的私隱。一般而言，您可在無需提供任何個人資料的情況下瀏覽本網站。您毋須登記即可查閱本網站上的一般資訊。",
+            en: "3form Co is committed to protecting the privacy of visitors to www.3formhk.com ('the Website'). In general, you can browse this Website without providing any personal data about yourself. We do not require you to register to access general information on the Website.",
+            tc: "3form Co 致力保護瀏覽 www.3formhk.com（「本網站」）人士的私隱。一般而言，您可在無需提供任何個人資料的情況下瀏覽本網站。您毋須登記即可查閱本網站上的一般資訊。",
           },
         },
         {
@@ -446,8 +445,8 @@ export const t = {
         {
           title: { en: "Use of Personal Data", tc: "個人資料的使用" },
           body: {
-            en: "Personal data collected is used to respond to your enquiries and to provide the consulting services you have requested. With your consent, data may also be used to send you information about our services. You may opt out of receiving such communications at any time by contacting us at edwardfongpolok@gmail.com.",
-            tc: "所收集的個人資料用於回應您的查詢及提供您所要求的顧問服務。在獲得您同意的情況下，資料亦可能用於向您發送有關我們服務的資訊。您可隨時發送電郵至 edwardfongpolok@gmail.com 選擇退出接收此類通訊。",
+            en: "Personal data collected is used to respond to your enquiries and to provide the consulting services you have requested. With your consent, data may also be used to send you information about our services. You may opt out of receiving such communications at any time by contacting us at edwardfong@3formhk.com.",
+            tc: "所收集的個人資料用於回應您的查詢及提供您所要求的顧問服務。在獲得您同意的情況下，資料亦可能用於向您發送有關我們服務的資訊。您可隨時發送電郵至 edwardfong@3formhk.com 選擇退出接收此類通訊。",
           },
         },
         {
@@ -467,8 +466,8 @@ export const t = {
         {
           title: { en: "Your Rights under the Personal Data (Privacy) Ordinance", tc: "您在《個人資料（私隱）條例》下的權利" },
           body: {
-            en: "Under the Personal Data (Privacy) Ordinance (Cap. 486) of Hong Kong, you have the right to request access to and correction of your personal data held by us. To make a data access or correction request, please write to us at edwardfongpolok@gmail.com.",
-            tc: "根據香港《個人資料（私隱）條例》（第486章），您有權要求查閱及更正我們持有的您的個人資料。如需提出查閱或更正資料的申請，請發送電郵至 edwardfongpolok@gmail.com 與我們聯絡。",
+            en: "Under the Personal Data (Privacy) Ordinance (Cap. 486) of Hong Kong, you have the right to request access to and correction of your personal data held by us. To make a data access or correction request, please write to us at edwardfong@3formhk.com.",
+            tc: "根據香港《個人資料（私隱）條例》（第486章），您有權要求查閱及更正我們持有的您的個人資料。如需提出查閱或更正資料的申請，請發送電郵至 edwardfong@3formhk.com 與我們聯絡。",
           },
         },
         {
@@ -492,10 +491,10 @@ export const t = {
   // ── Footer ───────────────────────────────────────────────────────────────────
   footer: {
     rights: {
-      en: "© 2025 3form Co. All rights reserved.",
-      tc: "© 2025 3form Co. 版權所有。",
+      en: "© 2026 3form Co. All rights reserved.",
+      tc: "© 2026 3form Co. 版權所有。",
     },
-    domain: "www.3formco.com.hk",
+    domain: "www.3formhk.com",
     // Social links — fill in your real URLs in the href values in App.tsx Footer component
     social: {
       linkedin:  { en: "LinkedIn",  tc: "LinkedIn" },

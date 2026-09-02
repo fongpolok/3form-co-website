@@ -150,15 +150,6 @@ function IconClose({ size = 24, color = "currentColor" }: { size?: number; color
   );
 }
 
-function IconUser({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="12" cy="8" r="4" />
-      <path d="M4 21c0-4.418 3.582-7 8-7s8 2.582 8 7" />
-    </svg>
-  );
-}
-
 function IconPhone({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -352,7 +343,7 @@ function Navbar({ lang, setLang, page, setPage }: {
   return (
     <nav style={{
       position: "fixed", top: 0, left: 0, right: 0, height: CONFIG.navHeight,
-      background: CONFIG.navBg, zIndex: 1000,
+      background: CONFIG.sectionBg.footer, zIndex: 1000,
       boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.25)" : "none", transition: "box-shadow 0.3s",
     }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto", height: "100%", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -386,7 +377,7 @@ function Navbar({ lang, setLang, page, setPage }: {
         </button>
       </div>
       {menuOpen && (
-        <div style={{ background: CONFIG.navBg, padding: "16px 32px 24px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
+        <div style={{ background: CONFIG.sectionBg.footer, padding: "16px 32px 24px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
           {navLinks.map(link => (
             <button key={link.key} onClick={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
               style={{ display: "block", width: "100%", textAlign: "left", color: page === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", background: "none", border: "none", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: "15px", fontWeight: page === link.key ? 700 : 500, padding: "10px 0", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
@@ -940,7 +931,6 @@ function ContactSection({ lang }: { lang: Lang }) {
               {txt(t.contact.sub, lang)}
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-              <ContactDetail icon={<IconUser size={18} />} label={lang === "en" ? "Contact Person" : "聯絡人"} value={txt(t.contact.name, lang)} />
               <ContactDetail icon={<IconPhone size={18} />} label={lang === "en" ? "Phone" : "電話"} value={t.contact.phone} />
               <ContactDetail icon={<IconMail size={18} />} label={lang === "en" ? "Email" : "電郵"} value={t.contact.email} />
               <ContactDetail icon={<IconGlobe size={18} />} label={lang === "en" ? "Website" : "網站"} value={t.contact.website} />
