@@ -12,7 +12,7 @@ Primary users are Hong Kong SME owners and operations leads in manufacturing, fo
 
 ## Product Purpose
 
-3form Co is a Hong Kong-based engineering and management consulting firm. It exists to help HK businesses achieve measurable operational improvement across four services: funding consulting (government grants/schemes such as BUD Fund, TCPSP), engineering & process enhancement (Six Sigma / Lean), AI & data digitalisation adoption, and production site setup (licensing, HACCP, GMP, FIFO). Success is a client that secures funding, passes compliance, or measurably improves a process/production metric as a result of the engagement.
+3form Co is a Hong Kong-based engineering and management consulting firm. It exists to help HK businesses achieve measurable operational improvement across seven services: funding consulting (government grants/schemes such as BUD Fund, TCPSP), engineering & process enhancement (Six Sigma / Lean), AI & data digitalisation adoption, production site setup (licensing, HACCP, GMP, FIFO), a hosted warehouse management system, general maintenance & repair, and industrial agentic development. Success is a client that secures funding, passes compliance, or measurably improves a process/production metric as a result of the engagement.
 
 ## Positioning
 
@@ -26,7 +26,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 
 ## Capabilities and Constraints
 
-- Four confirmed service lines: Funding Consulting; Engineering & Process Enhancement (Six Sigma/Lean); AI & Data Digitalisation Tech Adoption; Production Site Setup (licensing/HACCP/GMP/FIFO).
+- Seven confirmed service lines: Funding Consulting; Engineering & Process Enhancement (Six Sigma/Lean); AI & Data Digitalisation Tech Adoption; Production Site Setup (licensing/HACCP/GMP/FIFO); Warehouse Management System (SaaS); General Maintenance & Repair; Industrial Agentic Development.
 - Contact form currently only logs to console and shows a local "sent" confirmation (`src/App.tsx` `ContactSection`) — it does not actually send email or hit a backend. This is a known gap, not a design decision.
 - Office address is explicitly unconfirmed ("[Office Address — To Be Confirmed]" in both languages).
 - Social links (LinkedIn, Facebook, Instagram) are placeholder `#` hrefs — no real profiles wired up yet.
@@ -35,7 +35,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 ## Brand Commitments
 
 - Firm name: **3form Co**. Domain: `www.3formco.com.hk`.
-- Founder: **Edward Fong**, Founder & Principal Consultant. Credentials: IMechE Associate Member (HK Branch); BEng & MSc Mechanical Engineering (HKU, in progress); patent holder for a machine-vision inspection system for automotive parts.
+- Founder: **Edward Fong**, Founder & Principal Consultant. Credentials: IMechE Associate Member (HK Branch); BEng & MSc Mechanical Engineering (HKU, both completed); patent holder for a machine-vision inspection system for automotive parts.
 - Existing visual identity: dark navy (#001A4A/#002D72) with blue accent (#0050CC), serif display type + sans body, McKinsey-style authoritative tone — established in `src/App.tsx`. This is incumbent visual truth to preserve or deliberately supersede, not to ignore.
 - Contact: Edward Fong, phone 5744 9594, email edwardfongpolok@gmail.com.
 

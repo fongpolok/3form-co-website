@@ -74,8 +74,8 @@ export const t = {
         tc: "Edward 是一名機械工程師，在香港生產力促進局（HKPC）工作超過三年，現任智能機械及設備高級顧問。他的工作範疇包括物聯網4.0及倉庫管理系統（WMS）開發、人工智能機器視覺檢測，以及先進塑膠及複合材料製程，並透過新型工業化資助計劃（NIFS）、新型工業化及科技培訓計劃（NITTP）及現金回贈計劃（CRS）等政府資助計劃，協助香港製造商發展升級。",
       },
       bio_p2: {
-        en: "He holds a Bachelor of Engineering and is completing a Master of Science in Mechanical Engineering at the University of Hong Kong, and is an Associate Member of the Institution of Mechanical Engineers (IMechE), Hong Kong Branch. Edward previously developed a patented machine vision inspection system for automotive parts, and led an automated retail store project applying end-to-end automation to offline retail operations. He now channels this hands-on engineering and funding expertise into 3form Co, helping Hong Kong businesses modernise their operations and access the resources to grow.",
-        tc: "他於香港大學取得機械工程學士學位，並正在攻讀機械工程理學碩士學位，同時為英國機械工程師學會（IMechE）香港分會準會員。Edward 曾研發一套獲專利的汽車零件裝飾表面機器視覺檢測系統，並曾主導一個全自動零售店項目，將端對端自動化技術應用於線下零售營運。現時，他將這些扎實的工程及資助申請經驗帶到 3form Co，協助香港企業提升營運及爭取發展資源。",
+        en: "He holds a Bachelor of Engineering and a Master of Science in Mechanical Engineering from the University of Hong Kong, and is an Associate Member of the Institution of Mechanical Engineers (IMechE), Hong Kong Branch. Edward previously developed a patented machine vision inspection system for automotive parts, and led an automated retail store project applying end-to-end automation to offline retail operations. He now channels this hands-on engineering and funding expertise into 3form Co, helping Hong Kong businesses modernise their operations and access the resources to grow.",
+        tc: "他於香港大學取得機械工程學士及理學碩士學位，同時為英國機械工程師學會（IMechE）香港分會準會員。Edward 曾研發一套獲專利的汽車零件裝飾表面機器視覺檢測系統，並曾主導一個全自動零售店項目，將端對端自動化技術應用於線下零售營運。現時，他將這些扎實的工程及資助申請經驗帶到 3form Co，協助香港企業提升營運及爭取發展資源。",
       },
       // Key credential tags shown as pills under his name
       credentials: [
@@ -165,6 +165,30 @@ export const t = {
         detail: {
           en: "End-to-end support for setting up compliant production facilities — including licensing, HACCP food safety systems, GMP standards, and FIFO inventory management.",
           tc: "提供全面的合規生產設施設立支援，包括牌照申請、HACCP食品安全系統、GMP標準及先進先出存貨管理。",
+        },
+      },
+      {
+        id: 5,
+        title:  { en: "Warehouse Management System (SaaS)",                tc: "倉庫管理系統（SaaS）" },
+        detail: {
+          en: "A hosted warehouse management platform with lot and expiry (FEFO) tracking, low-stock and expiry alerting, and full audit trails — configured around how your stock actually moves.",
+          tc: "託管式倉庫管理平台，具備批次及效期（FEFO）追蹤、低庫存及到期預警，以及完整審計軌跡，並按您實際的存貨流轉方式設定。",
+        },
+      },
+      {
+        id: 6,
+        title:  { en: "General Maintenance & Repair",                      tc: "一般維修及保養服務" },
+        detail: {
+          en: "Preventive maintenance planning, breakdown diagnosis, and repair support for production equipment — keeping machinery serviceable and downtime measured rather than guessed at.",
+          tc: "為生產設備提供預防性保養規劃、故障診斷及維修支援，令機器保持可運作狀態，停機時間有數據可依，而非憑估算。",
+        },
+      },
+      {
+        id: 7,
+        title:  { en: "Industrial Agentic Development",                    tc: "工業智能代理開發" },
+        detail: {
+          en: "Build AI agents that work on real plant data — reading sensor streams, documents, and inspection results to automate the routine decisions your operations team repeats every day.",
+          tc: "開發能處理真實廠房數據的人工智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
         },
       },
     ],

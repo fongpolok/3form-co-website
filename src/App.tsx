@@ -33,6 +33,10 @@ const CONFIG = {
   accent:       "#0050CC",
   accentHover:  "#003FA3",
   heroOverlay:  "rgba(0, 29, 72, 0.78)",
+  // Overall strength of the hero's blueprint grid. The canvas paints on top of
+  // heroOverlay (painting it underneath meant the overlay ate ~78% of it), so
+  // this single dial is what actually governs how present the effect reads.
+  heroGridOpacity: 0.85,
   sectionBg: {
     hero:     "#001A4A",
     about:    "#F8FAFF",
@@ -462,9 +466,9 @@ function BlueprintGrid() {
       for (const p of points) {
         const d = Math.hypot(p.x - mouse.x, p.y - mouse.y);
         const near = Math.max(0, 1 - d / REACH);
-        const alpha = (0.16 + near * 0.7) * pulse;
+        const alpha = (0.3 + near * 0.65) * pulse;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 1.4 + near * 1.6, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, 1.6 + near * 1.8, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(91, 155, 240, ${alpha})`;
         ctx.fill();
 
@@ -480,7 +484,7 @@ function BlueprintGrid() {
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(neighbour.x, neighbour.y);
             ctx.strokeStyle = `rgba(91, 155, 240, ${lineAlpha})`;
-            ctx.lineWidth = 1;
+            ctx.lineWidth = 1.2;
             ctx.stroke();
           }
         }
@@ -513,7 +517,7 @@ function BlueprintGrid() {
 
   return (
     <canvas ref={canvasRef} aria-hidden="true"
-      style={{ position: "absolute", inset: 0, pointerEvents: "none" }} />
+      style={{ position: "absolute", inset: 0, pointerEvents: "none", opacity: CONFIG.heroGridOpacity }} />
   );
 }
 
@@ -522,9 +526,10 @@ function HeroSection({ lang }: { lang: Lang }) {
     <section id="home" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden", background: CONFIG.sectionBg.hero }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${CONFIG.heroImageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }} />
 
-      <BlueprintGrid />
+      <div style={{ position: "absolute", inset: 0, background: CONFIG.heroOverlay, pointerEvents: "none" }} />
 
-      <div style={{ position: "absolute", inset: 0, background: "rgba(0,29,72,0.78)", pointerEvents: "none" }} />
+      {/* Above the overlay, not below it — see CONFIG.heroGridOpacity. */}
+      <BlueprintGrid />
 
       <div style={{ position: "relative", maxWidth: "1280px", margin: "0 auto", padding: "120px 32px 80px", width: "100%" }}>
         <div style={{ maxWidth: "700px" }}>
@@ -797,8 +802,17 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
           {txt(t.services.sub, lang)}
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px", background: "#E5E7EB" }} className="services-grid">
-          {t.services.items.map((svc, i) => (
-            <div key={svc.id} className="sv-sweep-card" style={{ background: "#fff", padding: "48px 40px" }}>
+          {t.services.items.map((svc, i) => {
+            // An odd number of services would otherwise leave the last row
+            // half-empty, exposing the grid's gray seam background as a blank
+            // cell — the final card spans both columns instead. Spanning it
+            // also doubles its text measure, so that card alone caps its own.
+            const isWide = i === t.services.items.length - 1 && t.services.items.length % 2 === 1;
+            return (
+            <div key={svc.id} className="sv-sweep-card" style={{
+              background: "#fff", padding: "48px 40px",
+              gridColumn: isWide ? "1 / -1" : undefined,
+            }}>
               <div className="sv-sweep-bar" />
               <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
                 <div className="sv-sweep-photo" style={{
@@ -813,9 +827,12 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
               <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 16px" }}>
                 {txt(svc.title, lang)}
               </h3>
-              <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0 }}>{txt(svc.detail, lang)}</p>
+              <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
+                {txt(svc.detail, lang)}
+              </p>
             </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* CTA — request a demo or a quotation */}
