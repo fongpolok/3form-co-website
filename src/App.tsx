@@ -815,10 +815,13 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
             }}>
               <div className="sv-sweep-bar" />
               <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
+                {/* One icon per service, keyed to svc.id — these used to be
+                    four rotating crops of the hero skyline photo, which meant
+                    the mark never matched the service it sat above. */}
                 <div className="sv-sweep-photo" style={{
-                  width: "52px", height: "52px", borderRadius: "50%", overflow: "hidden", border: `2px solid ${CONFIG.accent}`, flexShrink: 0,
-                  backgroundImage: `url(${CONFIG.heroImageUrl})`, backgroundSize: "cover",
-                  backgroundPosition: ["top left", "top right", "bottom left", "bottom right"][i % 4],
+                  width: "64px", height: "64px", borderRadius: "50%", overflow: "hidden", border: `2px solid ${CONFIG.accent}`, flexShrink: 0,
+                  backgroundImage: `url(${asset(`/services/service-${String(svc.id).padStart(2, "0")}.webp`)})`,
+                  backgroundSize: "cover", backgroundPosition: "center",
                 }} />
                 <div style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   {String(svc.id).padStart(2, "0")}
@@ -1073,7 +1076,7 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
   // real href to activate a link; until then it renders muted and inert
   // rather than looking clickable.
   const socials = [
-    { label: "LinkedIn",  href: "",  icon: <IconLinkedIn  size={18} /> },
+    { label: "LinkedIn",  href: "https://www.linkedin.com/company/3form-engineering-hk/",  icon: <IconLinkedIn  size={18} /> },
     { label: "Facebook",  href: "",  icon: <IconFacebook  size={18} /> },
     { label: "Instagram", href: "",  icon: <IconInstagram size={18} /> },
   ];
@@ -1094,7 +1097,7 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
           {/* Social icons — muted and inert until a real profile URL is set above */}
           <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
             {socials.map(s => s.href ? (
-              <a key={s.label} href={s.href} title={s.label}
+              <a key={s.label} href={s.href} title={s.label} target="_blank" rel="noopener noreferrer"
                 style={{ display: "flex", alignItems: "center", color: "rgba(255,255,255,0.6)", transition: "opacity 0.2s", opacity: 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.6")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
