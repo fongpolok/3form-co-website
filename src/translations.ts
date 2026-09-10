@@ -363,7 +363,7 @@ export const t = {
     },
     phone:   "5744 9594",
     email:   "edwardfong@3formhk.com",
-    website: "www.3form.com",
+    website: "www.3formhk.com",
     form_name:    { en: "Your Name",   tc: "您的姓名" },
     form_email:   { en: "Your Email",  tc: "您的電郵" },
     form_message: { en: "Your Message", tc: "您的訊息" },

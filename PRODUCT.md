@@ -34,7 +34,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 
 ## Brand Commitments
 
-- Firm name: **3form Engineering Co**; **3form Co** is the accepted short form (used for the navbar wordmark and casual in-copy mentions). Domain: `www.3formco.com.hk`.
+- Firm name: **3form Engineering Co**; **3form Co** is the accepted short form (used for the navbar wordmark and casual in-copy mentions). Domain: `3formhk.com` (served over HTTPS from GitHub Pages; `public/CNAME` is the source of truth).
 - Founder: **Edward Fong**, Founder & Principal Consultant. Credentials: IMechE Associate Member (HK Branch); BEng & MSc Mechanical Engineering (HKU, both completed); patent holder for a machine-vision inspection system for automotive parts.
 - Existing visual identity: dark navy (#001A4A/#002D72) with blue accent (#0050CC), serif display type + sans body, McKinsey-style authoritative tone — established in `src/App.tsx`. This is incumbent visual truth to preserve or deliberately supersede, not to ignore.
 - Contact: Edward Fong, phone 5744 9594, email edwardfongpolok@gmail.com.
