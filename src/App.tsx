@@ -62,7 +62,16 @@ const PAGE_VALUES: readonly Page[] = ["home", "about", "projects", "services", "
 // ── Hash <-> Page — makes every page a real, bookmarkable, shareable URL ──────
 function pageFromHash(): Page {
   const h = window.location.hash.replace(/^#/, "");
-  return (PAGE_VALUES as readonly string[]).includes(h) ? (h as Page) : "home";
+  // A project detail lives at "projects/<id>" but is still the projects page
+  // as far as nav highlighting is concerned.
+  const base = h.split("/")[0];
+  return (PAGE_VALUES as readonly string[]).includes(base) ? (base as Page) : "home";
+}
+
+// Which project detail to show, if the hash names one. null = the list itself.
+function projectIdFromHash(): number | null {
+  const m = window.location.hash.replace(/^#/, "").match(/^projects\/(\d+)$/);
+  return m ? Number(m[1]) : null;
 }
 
 // ── Logger (open browser Console tab to see app events) ──────────────────────
@@ -638,9 +647,13 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
               <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 12px" }}>
                 {txt(demo.title, lang)}
               </h3>
-              <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
-                {txt(demo.desc, lang)}
-              </p>
+              {/* Some demos carry no blurb; keep the flex spacer so the note and
+                  link still sit flush with the bottom of every other card. */}
+              {txt(demo.desc, lang)
+                ? <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
+                    {txt(demo.desc, lang)}
+                  </p>
+                : <div style={{ flex: 1 }} />}
               {demo.real && txt(demo.note, lang) && (
                 <p style={{ fontSize: "12px", color: "#9CA3AF", margin: "16px 0 0", fontStyle: "italic" }}>
                   {txt(demo.note, lang)}
@@ -864,18 +877,26 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
 // Real, completed engagements (`featured: true`) and illustrative examples of the
 // kind of work we take on (`featured: false`) are visually distinct so neither is
 // mistaken for the other — see PRODUCT.md "Evidence on Hand".
-function ProjectCard({ p, lang }: { p: typeof t.projects.items[0]; lang: Lang }) {
+function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang: Lang; onOpen: () => void }) {
   const real = p.featured;
   return (
-    <div style={{
+    // A real <button>, not a click-handled <div>, so the card is reachable by
+    // keyboard and announced as actionable.
+    <button type="button" onClick={onOpen} style={{
+      display: "block",
+      width: "100%",
+      textAlign: "left",
+      font: "inherit",
+      cursor: "pointer",
+      border: "none",
       background: real ? "#fff" : "#FAFAFA",
       padding: "40px 32px",
       borderTop: `3px solid ${real ? CONFIG.accent : "#D1D5DB"}`,
       boxShadow: real ? "0 2px 16px rgba(0,45,114,0.06)" : "none",
       transition: "transform 0.2s, box-shadow 0.2s",
     }}
-      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; if (real) (e.currentTarget as HTMLDivElement).style.boxShadow = "0 8px 32px rgba(0,45,114,0.12)"; }}
-      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = real ? "0 2px 16px rgba(0,45,114,0.06)" : "none"; }}>
+      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; if (real) e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,45,114,0.12)"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = real ? "0 2px 16px rgba(0,45,114,0.06)" : "none"; }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "20px" }}>
         <span style={{ display: "inline-block", background: real ? "#E8F0FE" : "#F3F4F6", color: real ? CONFIG.accent : "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
           {txt(p.tag, lang)}
@@ -892,10 +913,15 @@ function ProjectCard({ p, lang }: { p: typeof t.projects.items[0]; lang: Lang })
       <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: "0 0 20px" }}>
         {txt(p.desc, lang)}
       </p>
-      <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : "#9CA3AF", background: real ? "#E8F0FE" : "#F3F4F6", display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
-        {real ? "✓ " : ""}{txt(p.result, lang)}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : "#9CA3AF", background: real ? "#E8F0FE" : "#F3F4F6", display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
+          {real ? "✓ " : ""}{txt(p.result, lang)}
+        </div>
+        <span style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, whiteSpace: "nowrap" }}>
+          {txt(t.projects.view_details, lang)} →
+        </span>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -1135,7 +1161,7 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
 // ─────────────────────────────────────────────────────────────────────────────
 // PROJECTS PAGE — full list of all projects
 // ─────────────────────────────────────────────────────────────────────────────
-function AllProjectsPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
+function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: () => void; onOpenProject: (id: number) => void }) {
   const [filterTag, setFilterTag] = useState<string>("all");
 
   // Collect unique tags, keeping both languages so the filter tabs stay bilingual
@@ -1197,7 +1223,7 @@ function AllProjectsPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
           <h2 style={visuallyHidden}>{lang === "en" ? "Project list" : "項目列表"}</h2>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "24px" }} className="grid-responsive">
-            {filtered.map(p => <ProjectCard key={p.id} p={p} lang={lang} />)}
+            {filtered.map(p => <ProjectCard key={p.id} p={p} lang={lang} onOpen={() => onOpenProject(p.id)} />)}
           </div>
           {filtered.length === 0 && (
             <p style={{ textAlign: "center", color: "#9CA3AF", padding: "60px 0" }}>
@@ -1208,6 +1234,76 @@ function AllProjectsPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
       </div>
 
       <PartnersSection lang={lang} />
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PROJECT DETAIL PAGE — one project's deliverables.
+// The header is real data off the same record as the card; the body is left
+// deliberately blank until the per-project write-ups are supplied.
+// ─────────────────────────────────────────────────────────────────────────────
+function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId: number; onBack: () => void }) {
+  const p = t.projects.items.find(item => item.id === projectId);
+
+  if (!p) {
+    return (
+      <div style={{ background: CONFIG.sectionBg.allProjects, padding: "100px 32px", textAlign: "center" }}>
+        <p style={{ color: "#6B7280", margin: "0 0 24px" }}>
+          {lang === "en" ? "Project not found." : "找不到此項目。"}
+        </p>
+        <button onClick={onBack}
+          style={{ background: "none", border: "none", color: CONFIG.accent, fontSize: "14px", fontWeight: 600, cursor: "pointer", padding: 0, fontFamily: "var(--font-sans)" }}>
+          {txt(t.projects.back_to_projects, lang)}
+        </button>
+      </div>
+    );
+  }
+
+  const real = p.featured;
+
+  return (
+    <div>
+      {/* Page header */}
+      <div style={{ background: CONFIG.navBg, padding: "40px 32px 60px" }}>
+        <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+          <button onClick={() => { log.event("Back to Projects from detail:", p.id); onBack(); }}
+            style={{ background: "none", border: "none", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontWeight: 500, cursor: "pointer", marginBottom: "32px", padding: 0, fontFamily: "var(--font-sans)" }}>
+            {txt(t.projects.back_to_projects, lang)}
+          </button>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginBottom: "18px" }}>
+            <span style={{ display: "inline-block", background: "rgba(0,80,204,0.22)", color: "#fff", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
+              {txt(p.tag, lang)}
+            </span>
+            {!real && (
+              <span style={{ display: "inline-block", color: "rgba(255,255,255,0.55)", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid rgba(255,255,255,0.25)" }}>
+                {txt(t.projects.illustrative_badge, lang)}
+              </span>
+            )}
+          </div>
+          <h1 style={{ fontFamily: "var(--font-serif)", color: "#fff", fontSize: "clamp(28px, 3.4vw, 44px)", fontWeight: 700, margin: "0 0 18px", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+            {txt(p.title, lang)}
+          </h1>
+          <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "16px", lineHeight: 1.7, margin: "0 0 24px", maxWidth: "62ch" }}>
+            {txt(p.desc, lang)}
+          </p>
+          <div style={{ display: "inline-block", fontSize: "13px", fontWeight: 700, color: "#fff", background: "rgba(0,80,204,0.35)", padding: "6px 12px", borderRadius: "2px" }}>
+            {real ? "\u2713 " : ""}{txt(p.result, lang)}
+          </div>
+        </div>
+      </div>
+
+      {/* Deliverables — awaiting the real write-up */}
+      <div style={{ background: CONFIG.sectionBg.allProjects, padding: "72px 32px 100px" }}>
+        <div style={{ maxWidth: "960px", margin: "0 auto" }}>
+          <SectionLabel lang={lang} en="Deliverables" tc="交付成果" />
+          <div style={{ background: "#fff", border: "1px dashed #D1D5DB", padding: "56px 40px", marginTop: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#6B7280", margin: "0 auto", maxWidth: "56ch" }}>
+              {txt(t.projects.detail_pending, lang)}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1386,6 +1482,7 @@ function LegalModal({ type, lang, onClose }: { type: LegalType; lang: Lang; onCl
 export default function App() {
   const [lang,      setLang]      = useState<Lang>("en");
   const [page,      setPageState] = useState<Page>(() => pageFromHash());
+  const [projectId, setProjectId] = useState<number | null>(() => projectIdFromHash());
   const [legalOpen, setLegalOpen] = useState<LegalType>(null);
 
   // The URL hash is the source of truth for `page`, so every page is a real,
@@ -1393,7 +1490,10 @@ export default function App() {
   // the site instead of leaving it. setPage() below just changes the hash;
   // this listener is what actually updates the rendered page.
   useEffect(() => {
-    const onHashChange = () => setPageState(pageFromHash());
+    const onHashChange = () => {
+      setPageState(pageFromHash());
+      setProjectId(projectIdFromHash());
+    };
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
@@ -1401,15 +1501,21 @@ export default function App() {
   const setPage = (p: Page) => {
     const targetHash = p === "home" ? "" : p;
     if (window.location.hash.replace(/^#/, "") === targetHash) {
-      setPageState(p); // hash already matches (e.g. re-clicking the active nav item)
+      setPageState(p);      // hash already matches (e.g. re-clicking the active nav item)
+      setProjectId(null);   // ...but a detail page may still be open under it
     } else {
       window.location.hash = targetHash; // triggers the hashchange listener above
     }
   };
 
+  const openProject = (id: number) => {
+    log.event("Open project detail:", id);
+    window.location.hash = `projects/${id}`;
+  };
+
   useEffect(() => { log.info("3form Co website initialised. Language:", lang); }, []);
   useEffect(() => { log.info("Language →", lang); document.documentElement.lang = lang === "tc" ? "zh-HK" : "en"; }, [lang]);
-  useEffect(() => { log.info("Page →", page); window.scrollTo({ top: 0 }); }, [page]);
+  useEffect(() => { log.info("Page →", page); window.scrollTo({ top: 0 }); }, [page, projectId]);
 
   return (
     <>
@@ -1434,7 +1540,10 @@ export default function App() {
         {page === "home"     && <HomePage     lang={lang} setPage={setPage} />}
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
-        {page === "projects" && <AllProjectsPage lang={lang} onBack={() => setPage("home")} />}
+        {page === "projects" && (projectId !== null
+          ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
+          : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />
+        )}
         {page === "demos"    && <DemosPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "contact"  && <ContactPage  lang={lang} onBack={() => setPage("home")} />}
       </main>

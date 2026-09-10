@@ -12,7 +12,7 @@ Primary users are Hong Kong SME owners and operations leads in manufacturing, fo
 
 ## Product Purpose
 
-3form Co is a Hong Kong-based engineering and management consulting firm. It exists to help HK businesses achieve measurable operational improvement across seven services: funding consulting (government grants/schemes such as BUD Fund, TCPSP), engineering & process enhancement (Six Sigma / Lean), AI & data digitalisation adoption, production site setup (licensing, HACCP, GMP, FIFO), a hosted warehouse management system, general maintenance & repair, and industrial agentic development. Success is a client that secures funding, passes compliance, or measurably improves a process/production metric as a result of the engagement.
+3form Co is a Hong Kong-based engineering and management consulting firm. It exists to help HK businesses achieve measurable operational improvement across seven services: funding consulting (government grants/schemes such as BUD Fund, NIFS, NIAS), engineering & process enhancement (Six Sigma / Lean), AI & data digitalisation adoption, production site setup (licensing, HACCP, GMP, FIFO), a hosted warehouse management system, general maintenance & repair, and industrial agentic development. Success is a client that secures funding, passes compliance, or measurably improves a process/production metric as a result of the engagement.
 
 ## Positioning
 
@@ -22,7 +22,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 
 - 3form Co is currently a **solo practice**: Edward Fong is the sole consultant, run alongside his full-time role as Senior Consultant — Smart Machinery and Equipment at the Hong Kong Productivity Council (HKPC).
 - The firm operates in a bilingual market: the site serves English and Traditional Chinese (zh-HK) content side by side (`src/translations.ts`), and this must be preserved in any future work.
-- Client engagements are grant-cycle and compliance-cycle driven (e.g. NIFS, NITTP, CRS, BUD Fund, TCPSP application windows; HACCP/GMP audit timelines).
+- Client engagements are grant-cycle and compliance-cycle driven (e.g. NIFS, NIAS, NITTP, CRS, BUD Fund application windows; HACCP/GMP audit timelines).
 
 ## Capabilities and Constraints
 
@@ -43,7 +43,8 @@ The firm's differentiator is combining engineering execution with funding/grant 
 
 - **Founder bio and credentials are real** (sourced from Edward's LinkedIn profile per code comment) — his HKPC role, patent, and academic credentials should be treated as factual and preserved.
 - **Homepage stats ("10+ years experience, 50+ projects completed, 30+ clients served") represent Edward's personal professional track record** accumulated via his HKPC role — **not** 3form Co's own independent history as a firm, since 3form Co is a new solo practice. Future copy should not imply these are the firm's own multi-year numbers.
-- **Of the 8 project case studies in `src/translations.ts`, only 3 are real** (`featured: true`: production line overhaul, BUD Fund application, KPI dashboard). **The other 5 are explicitly marked `[Placeholder]`** in both languages and must not be presented as genuine client work — they are illustrative only and need real content or removal before this counts as production-ready evidence.
+- **Of the 8 project case studies in `src/translations.ts`, 3 are marked `featured: true`** (production line overhaul, BUD Fund application, KPI dashboard) with full write-ups. **The other 5 (`featured: false`) are now labelled "Actual Example" per Edward's direction (2026-09-11)** rather than "Illustrative Example" — he indicated these are real engagements and the detailed write-ups (desc/result copy) will be supplied in a follow-up session. Until that copy arrives, treat the existing desc/result text on those 5 as provisional placeholder wording, not confirmed fact.
+- Each project (including the 5 above) now links to its own detail page (`#projects/<id>`, `ProjectDetailPage` in `src/App.tsx`) for a fuller deliverables write-up; the detail page body is intentionally blank pending that content.
 - Partner/affiliation logos (HKPC, Cognex, HKSTP, HKQAA, SGS, Bureau Veritas, TÜV SÜD, InvestHK) are referenced by path but logo image files are not confirmed to exist in `public/logos/`.
 - No pricing, licensing, or additional testimonials exist beyond the above — do not invent any.
 

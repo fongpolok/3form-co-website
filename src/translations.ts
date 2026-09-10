@@ -105,8 +105,8 @@ export const t = {
         {
           title: { en: "Fund", tc: "申請資助" },
           desc: {
-            en: "Prepare, submit, and manage grant applications — BUD Fund, TCPSP, and other SME-focused schemes.",
-            tc: "準備、提交及管理資助申請，包括BUD專項基金、TCPSP及其他中小企專項計劃。",
+            en: "Prepare, submit, and manage grant applications — BUD Fund, NIFS, NIAS, and other SME-focused schemes.",
+            tc: "準備、提交及管理資助申請，包括BUD專項基金、NIFS、NIAS及其他中小企專項計劃。",
           },
         },
         {
@@ -139,8 +139,8 @@ export const t = {
         id: 1,
         title:  { en: "Funding Consulting",                                tc: "資助顧問" },
         detail: {
-          en: "Identify, apply for, and manage government grants and funding schemes available to Hong Kong businesses — including BUD Fund, TCPSP, and SME-focused programmes.",
-          tc: "識別、申請及管理香港企業可獲取的政府資助計劃，包括BUD專項基金、TCPSP及中小企專項計劃。",
+          en: "Identify, apply for, and manage government grants and funding schemes available to Hong Kong businesses — including BUD Fund, NIFS, NIAS, and SME-focused programmes.",
+          tc: "識別、申請及管理香港企業可獲取的政府資助計劃，包括BUD專項基金、NIFS、NIAS及中小企專項計劃。",
         },
       },
       {
@@ -220,10 +220,7 @@ export const t = {
         id: 1,
         tag: { en: "IoT & WMS", tc: "物聯網及倉庫管理" },
         title: { en: "Warehouse Traceability & FEFO Alerting", tc: "倉庫可追溯性及FEFO預警系統" },
-        desc: {
-          en: "Extended an open-source warehouse platform with lot/expiry (FEFO) tracking, low-stock and expiry alerts, and void/audit trails — built for medical-device-grade inventory traceability.",
-          tc: "在開源倉庫管理平台上加入批次／有效期（FEFO）追蹤、低庫存及到期預警，以及作廢／審核紀錄功能，達到醫療器材級別的存貨可追溯性。",
-        },
+        desc:   { en: "", tc: "" },
         note: { en: "Built on the open-source GreaterWMS platform · register a free account to explore", tc: "基於開源平台 GreaterWMS 建構．註冊免費帳戶即可體驗" },
         real: true,
         demoUrl: "https://fongpolok.github.io/3form-wms-demo-ui/",
@@ -244,10 +241,7 @@ export const t = {
         id: 3,
         tag: { en: "Compliance", tc: "合規" },
         title: { en: "ESG Auditing", tc: "ESG審核" },
-        desc: {
-          en: "An auditor-facing dashboard for a Hong Kong recycling facility — work orders, ESG metrics against HKEX/GRI frameworks, and PDF report generation.",
-          tc: "為香港回收設施而設的審核員儀表板 — 工作單、對照香港交易所／GRI框架的ESG指標，以及PDF報告生成。",
-        },
+        desc:   { en: "", tc: "" },
         note: {
           en: "UI preview only — backend integration in progress, login is not yet functional",
           tc: "現僅提供UI預覽 — 後端整合開發中，登入功能尚未啟用",
@@ -277,10 +271,10 @@ export const t = {
   projects: {
     all_heading: { en: "All Projects",     tc: "所有項目" },
     all_sub: {
-      en: "Real results from completed engagements, alongside illustrative examples of the work we take on.",
-      tc: "已完成項目的真實成果，以及我們所承接工作類型的說明性範例。",
+      en: "Real results from completed engagements, alongside actual examples of the work we take on.",
+      tc: "已完成項目的真實成果，以及我們所承接工作類型的實際案例。",
     },
-    illustrative_badge: { en: "Illustrative Example", tc: "說明性範例" },
+    illustrative_badge: { en: "Actual Example", tc: "實際案例" },
     // ── All projects (shown on the /projects page) ───────────────────────────
     items: [
       {
@@ -326,8 +320,8 @@ export const t = {
       {
         id: 6,
         tag:    { en: "Funding",           tc: "資助" },
-        title:  { en: "TCPSP Grant for Technology Upgrade",         tc: "TCPSP科技升級資助" },
-        desc:   { en: "Prepared and submitted a successful TCPSP application enabling a manufacturer to upgrade legacy production equipment with government co-funding.", tc: "準備並提交成功的TCPSP申請，協助製造商利用政府共同資助升級舊有生產設備。" },
+        title:  { en: "NIFS & NIAS Grant for Technology Upgrade",   tc: "NIFS及NIAS科技升級資助" },
+        desc:   { en: "Prepared and submitted successful applications under the New Industrialisation Funding Scheme (NIFS) and New Industrialisation Acceleration Scheme (NIAS), enabling a manufacturer to upgrade legacy production equipment with government co-funding.", tc: "準備並提交新型工業化資助計劃（NIFS）及新型工業化加速計劃（NIAS）的成功申請，協助製造商利用政府共同資助升級舊有生產設備。" },
         result: { en: "HK$500K equipment co-funded", tc: "50萬港元設備共同資助" },
         featured: false,
       },
@@ -348,6 +342,13 @@ export const t = {
         featured: false,
       },
     ],
+    // ── Individual project detail page (per-project, blank pending write-up) ──
+    view_details:      { en: "View Details",        tc: "查看詳情" },
+    back_to_projects:  { en: "← Back to Projects",  tc: "← 返回項目列表" },
+    detail_pending: {
+      en: "Full deliverables write-up for this project is being prepared and will be added soon.",
+      tc: "本項目的完整交付成果說明正在準備中，將於稍後補充。",
+    },
   },
 
   // ── Contact Section ──────────────────────────────────────────────────────────
