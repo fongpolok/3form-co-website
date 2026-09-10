@@ -49,10 +49,10 @@ export const t = {
 
   // ── About Section ────────────────────────────────────────────────────────────
   about: {
-    heading: { en: "About 3form Co", tc: "關於 3form Co" },
+    heading: { en: "About 3form Engineering Co", tc: "關於 3form Engineering Co" },
     company_body: {
-      en: "3form Co is a Hong Kong–based engineering and management consulting firm dedicated to helping businesses improve operations, adopt emerging technologies, and navigate complex regulatory environments. We work across manufacturing, food production, and technology sectors — bringing structured methodology and hands-on execution to every engagement.",
-      tc: "3form Co 是一家總部位於香港的工程及管理顧問公司，致力協助企業改善營運、採用新興技術，並應對複雜的監管環境。我們在製造、食品生產及科技行業提供服務，為每個項目帶來系統化方法論及實際執行能力。",
+      en: "3form Engineering Co is a Hong Kong–based engineering and management consulting firm dedicated to helping businesses improve operations, adopt emerging technologies, and navigate complex regulatory environments. We work across manufacturing, food production, and technology sectors — bringing structured methodology and hands-on execution to every engagement.",
+      tc: "3form Engineering Co 是一家總部位於香港的工程及管理顧問公司，致力協助企業改善營運、採用新興技術，並應對複雜的監管環境。我們在製造、食品生產及科技行業提供服務，為每個項目帶來系統化方法論及實際執行能力。",
     },
     stat1_num:   "10+",
     stat1_label: { en: "Years of Experience", tc: "年豐富經驗" },
@@ -428,15 +428,15 @@ export const t = {
         },
         {
           title: { en: "2. Use of Content", tc: "2. 內容使用" },
-          body:  { en: "All content on this Website, including text, graphics, logos, and images, is the property of 3form Co and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our prior written consent.", tc: "本網站上的所有內容，包括文字、圖形、標誌及圖像，均為 3form Co 的財產，受適用知識產權法律保護。未經我們事先書面同意，您不得複製、分發或創建衍生作品。" },
+          body:  { en: "All content on this Website, including text, graphics, logos, and images, is the property of 3form Engineering Co and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our prior written consent.", tc: "本網站上的所有內容，包括文字、圖形、標誌及圖像，均為 3form Engineering Co 的財產，受適用知識產權法律保護。未經我們事先書面同意，您不得複製、分發或創建衍生作品。" },
         },
         {
           title: { en: "3. Disclaimer", tc: "3. 免責聲明" },
-          body:  { en: "The information provided on this Website is for general informational purposes only. 3form Co makes no representations or warranties of any kind regarding the accuracy or completeness of information on the Website.", tc: "本網站提供的資訊僅供一般參考之用。3form Co 對本網站上資訊的準確性或完整性不作任何形式的聲明或保證。" },
+          body:  { en: "The information provided on this Website is for general informational purposes only. 3form Engineering Co makes no representations or warranties of any kind regarding the accuracy or completeness of information on the Website.", tc: "本網站提供的資訊僅供一般參考之用。3form Engineering Co 對本網站上資訊的準確性或完整性不作任何形式的聲明或保證。" },
         },
         {
           title: { en: "4. Limitation of Liability", tc: "4. 責任限制" },
-          body:  { en: "3form Co shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this Website or its content.", tc: "3form Co 對因您使用或無法使用本網站或其內容而引起的任何直接、間接、附帶或後果性損害概不負責。" },
+          body:  { en: "3form Engineering Co shall not be liable for any direct, indirect, incidental, or consequential damages arising from your use of, or inability to use, this Website or its content.", tc: "3form Engineering Co 對因您使用或無法使用本網站或其內容而引起的任何直接、間接、附帶或後果性損害概不負責。" },
         },
         {
           title: { en: "5. Governing Law", tc: "5. 適用法律" },
@@ -444,7 +444,7 @@ export const t = {
         },
         {
           title: { en: "6. Changes to Terms", tc: "6. 條款變更" },
-          body:  { en: "3form Co reserves the right to modify these terms at any time. Continued use of the Website after changes constitutes acceptance of the new terms.", tc: "3form Co 保留隨時修改本條款的權利。在條款變更後繼續使用本網站即表示接受新條款。" },
+          body:  { en: "3form Engineering Co reserves the right to modify these terms at any time. Continued use of the Website after changes constitutes acceptance of the new terms.", tc: "3form Engineering Co 保留隨時修改本條款的權利。在條款變更後繼續使用本網站即表示接受新條款。" },
         },
       ],
     },
@@ -458,8 +458,8 @@ export const t = {
         {
           title: { en: "General", tc: "一般聲明" },
           body: {
-            en: "3form Co is committed to protecting the privacy of visitors to www.3formhk.com ('the Website'). In general, you can browse this Website without providing any personal data about yourself. We do not require you to register to access general information on the Website.",
-            tc: "3form Co 致力保護瀏覽 www.3formhk.com（「本網站」）人士的私隱。一般而言，您可在無需提供任何個人資料的情況下瀏覽本網站。您毋須登記即可查閱本網站上的一般資訊。",
+            en: "3form Engineering Co is committed to protecting the privacy of visitors to www.3formhk.com ('the Website'). In general, you can browse this Website without providing any personal data about yourself. We do not require you to register to access general information on the Website.",
+            tc: "3form Engineering Co 致力保護瀏覽 www.3formhk.com（「本網站」）人士的私隱。一般而言，您可在無需提供任何個人資料的情況下瀏覽本網站。您毋須登記即可查閱本網站上的一般資訊。",
           },
         },
         {
@@ -486,15 +486,15 @@ export const t = {
         {
           title: { en: "Security", tc: "資料安全" },
           body: {
-            en: "We implement appropriate technical and organisational measures to protect personal data against unauthorised access, disclosure, alteration, or destruction. Only authorised personnel have access to personal data held by 3form Co.",
-            tc: "我們採取適當的技術及組織措施，保護個人資料免遭未經授權的訪問、披露、更改或銷毀。只有獲授權人員方可訪問 3form Co 持有的個人資料。",
+            en: "We implement appropriate technical and organisational measures to protect personal data against unauthorised access, disclosure, alteration, or destruction. Only authorised personnel have access to personal data held by 3form Engineering Co.",
+            tc: "我們採取適當的技術及組織措施，保護個人資料免遭未經授權的訪問、披露、更改或銷毀。只有獲授權人員方可訪問 3form Engineering Co 持有的個人資料。",
           },
         },
         {
           title: { en: "Disclosure to Third Parties", tc: "向第三方披露" },
           body: {
-            en: "We do not sell or trade your personal data. Data may be shared with third-party service providers or technical staff who assist in operating the Website or delivering our services, and with parties required by law. Such parties are required to maintain the confidentiality of your data. 3form Co is not responsible for the privacy practices of external websites linked from this Website.",
-            tc: "我們不會出售或交易您的個人資料。資料可能與協助運營本網站或提供服務的第三方服務供應商或技術人員共享，以及與法律規定的各方共享。此類各方須對您的資料保密。3form Co 對本網站所連結的外部網站的私隱慣例概不負責。",
+            en: "We do not sell or trade your personal data. Data may be shared with third-party service providers or technical staff who assist in operating the Website or delivering our services, and with parties required by law. Such parties are required to maintain the confidentiality of your data. 3form Engineering Co is not responsible for the privacy practices of external websites linked from this Website.",
+            tc: "我們不會出售或交易您的個人資料。資料可能與協助運營本網站或提供服務的第三方服務供應商或技術人員共享，以及與法律規定的各方共享。此類各方須對您的資料保密。3form Engineering Co 對本網站所連結的外部網站的私隱慣例概不負責。",
           },
         },
         {
@@ -507,8 +507,8 @@ export const t = {
         {
           title: { en: "Changes to This Policy", tc: "政策變更" },
           body: {
-            en: "3form Co reserves the right to amend this Privacy Policy at any time. Any changes will be posted on this page. We recommend that you check this page periodically for updates.",
-            tc: "3form Co 保留隨時修改本私隱政策的權利。任何更改將發佈於本頁面。建議您定期查閱本頁面以了解最新資訊。",
+            en: "3form Engineering Co reserves the right to amend this Privacy Policy at any time. Any changes will be posted on this page. We recommend that you check this page periodically for updates.",
+            tc: "3form Engineering Co 保留隨時修改本私隱政策的權利。任何更改將發佈於本頁面。建議您定期查閱本頁面以了解最新資訊。",
           },
         },
         {
@@ -525,8 +525,8 @@ export const t = {
   // ── Footer ───────────────────────────────────────────────────────────────────
   footer: {
     rights: {
-      en: "© 2026 3form Co. All rights reserved.",
-      tc: "© 2026 3form Co. 版權所有。",
+      en: "© 2026 3form Engineering Co. All rights reserved.",
+      tc: "© 2026 3form Engineering Co. 版權所有。",
     },
     domain: "www.3formhk.com",
     // Social links — fill in your real URLs in the href values in App.tsx Footer component

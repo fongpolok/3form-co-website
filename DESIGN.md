@@ -1,5 +1,5 @@
 ---
-name: 3form Co
+name: 3form Engineering Co
 description: Hong Kong engineering & management consulting firm — bilingual marketing site
 colors:
   navy: "#002D72"
@@ -85,13 +85,13 @@ components:
     padding: "4px 10px"
 ---
 
-# Design System: 3form Co
+# Design System: 3form Engineering Co
 
 ## Overview
 
 **Creative North Star: "The Boardroom Brief"**
 
-3form Co's site reads like a document prepared for a client's executive committee, not a marketing page reaching for attention. Dark navy anchors authority at the top and bottom of every page (nav, hero, contact, footer); the interior is calm frost-white with a single restrained accent blue reserved for calls to action, active states, and evidence (stat blocks, result badges). Serif display type carries the weight of a considered argument; sans body type stays quiet and legible underneath it. Nothing in the system reaches for attention through saturation, motion, or ornament — credibility is built through restraint, precision, and legible hierarchy, the same register a consulting deliverable uses to be trusted by a reader who has seen a hundred slide decks.
+3form Engineering Co's site reads like a document prepared for a client's executive committee, not a marketing page reaching for attention. Dark navy anchors authority at the top and bottom of every page (nav, hero, contact, footer); the interior is calm frost-white with a single restrained accent blue reserved for calls to action, active states, and evidence (stat blocks, result badges). Serif display type carries the weight of a considered argument; sans body type stays quiet and legible underneath it. Nothing in the system reaches for attention through saturation, motion, or ornament — credibility is built through restraint, precision, and legible hierarchy, the same register a consulting deliverable uses to be trusted by a reader who has seen a hundred slide decks.
 
 Confirmed visual anti-references: no gradient text, no glassmorphism, no playful illustration, no bright multi-color palette. The one deliberate exception to "single accent" is the illustrative-vs-real project card distinction, where gray vs. blue is a functional signal (evidence status), not decoration.
 
