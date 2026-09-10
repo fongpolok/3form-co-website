@@ -401,11 +401,9 @@ export const t = {
       { id: 1,  name: "HKPC",           shortName: "HKPC",      imgUrl: "/logos/hkpc.png",           desc: { en: "Hong Kong Productivity Council",       tc: "香港生產力促進局" } },
       { id: 2,  name: "Cognex",         shortName: "COGNEX",    imgUrl: "/logos/cognex.png",         desc: { en: "Machine Vision & Barcode Solutions",   tc: "機器視覺及條碼解決方案" } },
       { id: 3,  name: "HKSTP",          shortName: "HKSTP",     imgUrl: "/logos/stp.png",            desc: { en: "Hong Kong Science & Technology Parks Corporation", tc: "香港科技園公司" } },
-      // imgUrl left empty until the real logo files land in public/logos/ —
-      // these render as the styled text plate in the meantime.
-      { id: 4,  name: "HKU iDendron",   shortName: "iDendron",  imgUrl: "",                          desc: { en: "HKU Innovation & Entrepreneurship Hub", tc: "香港大學創新及創業中心" } },
-      { id: 5,  name: "Keyence",        shortName: "KEYENCE",   imgUrl: "",                          desc: { en: "Sensors, Machine Vision & Automation", tc: "感測器、機器視覺及自動化" } },
-      { id: 6,  name: "Cyberport",      shortName: "CYBERPORT", imgUrl: "",                          desc: { en: "Hong Kong Digital Technology Hub",     tc: "香港數碼科技樞紐" } },
+      { id: 4,  name: "HKU iDendron",   shortName: "iDendron",  imgUrl: "/logos/idendron.png",       desc: { en: "HKU Innovation & Entrepreneurship Hub", tc: "香港大學創新及創業中心" } },
+      { id: 5,  name: "Keyence",        shortName: "KEYENCE",   imgUrl: "/logos/keyence.png",        desc: { en: "Sensors, Machine Vision & Automation", tc: "感測器、機器視覺及自動化" } },
+      { id: 6,  name: "OPC Hub @ Cyberport", shortName: "OPC",  imgUrl: "/logos/opc-cyberport.png",  desc: { en: "One Person Company Hub, Cyberport",    tc: "數碼港一人公司培育基地" } },
       { id: 7,  name: "TÜV SÜD",        shortName: "TÜV SÜD",  imgUrl: "/logos/tuvsud.png",         desc: { en: "International Certification",          tc: "國際認證機構" } },
       { id: 8,  name: "InvestHK",       shortName: "InvestHK",  imgUrl: "/logos/investhk.png",       desc: { en: "Dept. of Investment Promotion",        tc: "投資推廣署" } },
     ],
