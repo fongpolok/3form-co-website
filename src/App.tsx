@@ -647,13 +647,9 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
               <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 12px" }}>
                 {txt(demo.title, lang)}
               </h3>
-              {/* Some demos carry no blurb; keep the flex spacer so the note and
-                  link still sit flush with the bottom of every other card. */}
-              {txt(demo.desc, lang)
-                ? <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
-                    {txt(demo.desc, lang)}
-                  </p>
-                : <div style={{ flex: 1 }} />}
+              <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
+                {txt(demo.desc, lang)}
+              </p>
               {demo.real && txt(demo.note, lang) && (
                 <p style={{ fontSize: "12px", color: "#9CA3AF", margin: "16px 0 0", fontStyle: "italic" }}>
                   {txt(demo.note, lang)}
