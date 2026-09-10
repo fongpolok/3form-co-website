@@ -388,6 +388,12 @@ export const t = {
       en: "We work alongside industry-leading organisations to deliver the best outcomes for our clients.",
       tc: "我們與業界領先機構攜手合作，為客戶提供最佳成果。",
     },
+    // Standard affiliation disclaimer — listing an organisation as a partner
+    // is not a claim that it endorses anything said here.
+    disclaimer: {
+      en: "Any opinions, findings, conclusions or recommendations expressed in this material/publication (or by members of this company) do not reflect the views of aforementioned partners.",
+      tc: "本材料／刊物（或本公司成員）所表達的任何意見、研究結果、結論或建議，並不代表上述合作夥伴的觀點。",
+    },
     // To add a partner: add an object below.
     // imgUrl: put the path to the logo file here, e.g. "/logos/hkpc.png"
     //         Leave as "" to show the fallback text plate instead.

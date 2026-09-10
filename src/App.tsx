@@ -1305,6 +1305,17 @@ function PartnersSection({ lang }: { lang: Lang }) {
           })}
         </div>
       </div>
+
+      {/* Affiliation disclaimer — sits under the logos it qualifies, quiet
+          enough not to compete with them but legible on its own. */}
+      <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "28px 32px 0" }}>
+        <p style={{
+          fontSize: "12px", fontStyle: "italic", color: "#6B7280",
+          lineHeight: 1.65, margin: "0 auto", maxWidth: "760px", textAlign: "center",
+        }}>
+          {txt(t.partners.disclaimer, lang)}
+        </p>
+      </div>
     </section>
   );
 }
