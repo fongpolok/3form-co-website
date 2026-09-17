@@ -1,0 +1,7 @@
+# Helper env for scripts/facility_maintenance/ only — the site itself is Vite/React/pnpm.
+# conda env create -f environment.facility-maintenance.yml
+name: 3form-facility-maintenance
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11

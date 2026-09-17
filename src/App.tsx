@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useRef, Fragment, type ReactNode } from "react";
 import { t, txt, type Lang } from "./translations";
+import { FacilityMaintenanceBlock } from "./facilityMaintenance";
 
 // Resolves a root-relative path (e.g. "/logo.white.png") against the app's
 // actual base URL. Needed because this deploys under a subpath on GitHub
@@ -846,6 +847,15 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
             );
           })}
         </div>
+
+        {/* Facility Maintenance / 場地保養 — premises upkeep, distinct from the
+            production-equipment card above. Toggle/edit in src/facilityMaintenance/content.json. */}
+        <FacilityMaintenanceBlock
+          lang={lang}
+          accent={CONFIG.accent}
+          accentHover={CONFIG.accentHover}
+          onContact={() => setPage("contact")}
+        />
 
         {/* CTA — request a demo or a quotation */}
         <div style={{ marginTop: "2px", background: CONFIG.navBg, padding: "56px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>

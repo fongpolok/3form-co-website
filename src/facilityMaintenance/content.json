@@ -1,0 +1,82 @@
+{
+  "enabled": true,
+  "sectionId": "facility-maintenance",
+  "label": { "en": "Facility Maintenance", "tc": "場地保養" },
+  "heading": {
+    "en": "Facility maintenance for the building around your operation",
+    "tc": "場地保養：照顧營運所在的樓宇與空間"
+  },
+  "sub": {
+    "en": "3form provides facility maintenance covering HVAC, electrical systems, office equipment, and production line layout with first-in-first-out (FIFO) in mind. The exact scope of maintenance and adjustments is confirmed after a series of site walkthroughs, followed by a detailed quotation tailored to your needs.",
+    "tc": "3form 提供場地保養服務，範圍包括冷氣及通風（HVAC）、電力系統、辦公室設備，以及生產線佈局（須考慮先進先出 FIFO）。實際保養與調整範圍會於一連串實地視察（walkthrough）後釐清，並提供詳細報價以作匹配。"
+  },
+  "distinctionNote": {
+    "en": "Looking after production machinery itself? See General Maintenance & Repair above. This service covers your premises, office equipment and production line layout.",
+    "tc": "如需保養生產機器本身，請參閱上方「一般維修及保養服務」。本服務針對場地、辦公室設備及生產線佈局。"
+  },
+  "audiences": [
+    { "id": "offices_commercial", "label": { "en": "Offices & commercial buildings", "tc": "寫字樓及商業大廈" } },
+    { "id": "factories_warehouses", "label": { "en": "Factories & warehouses", "tc": "工廠及倉庫" } }
+  ],
+  "categories": [
+    {
+      "id": "hvac",
+      "enabled": true,
+      "covers": ["upkeep"],
+      "title": { "en": "HVAC", "tc": "冷氣及通風" },
+      "points": [
+        {
+          "en": "Maintenance of air-conditioning and ventilation systems",
+          "tc": "冷氣及通風系統保養"
+        }
+      ]
+    },
+    {
+      "id": "electrical",
+      "enabled": true,
+      "covers": ["upkeep"],
+      "title": { "en": "Electrical systems", "tc": "電力系統" },
+      "points": [
+        {
+          "en": "Maintenance of the site's electrical systems",
+          "tc": "場地電力系統保養"
+        }
+      ]
+    },
+    {
+      "id": "office_equipment",
+      "enabled": true,
+      "covers": ["support"],
+      "title": { "en": "Office equipment", "tc": "辦公室設備" },
+      "points": [
+        {
+          "en": "Maintenance and support for office equipment on site",
+          "tc": "場地辦公室設備的保養及支援"
+        }
+      ]
+    },
+    {
+      "id": "production_line_fifo",
+      "enabled": true,
+      "covers": ["design"],
+      "title": {
+        "en": "Production line layout with first-in-first-out (FIFO) concern",
+        "tc": "生產線佈局（須考慮先進先出 FIFO）"
+      },
+      "points": [
+        {
+          "en": "Planning the production line layout so materials flow first-in-first-out (FIFO)",
+          "tc": "規劃生產線佈局，確保物料按先進先出（FIFO）原則流轉"
+        }
+      ]
+    }
+  ],
+  "cta": {
+    "heading": { "en": "Tell us about your site", "tc": "告訴我們您的場地情況" },
+    "sub": {
+      "en": "Share the site type and what needs covering. We will arrange site walkthroughs to confirm the scope, then send a detailed quotation.",
+      "tc": "告訴我們場地類型及需要涵蓋的範圍，我們會安排實地視察以釐清範圍，並提供詳細報價。"
+    },
+    "button": { "en": "Enquire about facility maintenance", "tc": "查詢場地保養" }
+  }
+}

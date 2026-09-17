@@ -2,7 +2,7 @@
   "title": "3form Co — Engineering & Management Consulting",
   "description": "This web application serves as a professional platform for an engineering consulting company, offering information on services, projects, and contact details while supporting bilingual navigation.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
