@@ -3,9 +3,19 @@
 // McKinsey-style: dark navy, clean, professional, bilingual EN/TC
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { useState, useEffect, useRef, Fragment, type ReactNode } from "react";
+import { useState, useEffect, useRef, Fragment, type CSSProperties, type ReactNode } from "react";
 import { t, txt, type Lang } from "./translations";
-import { FacilityMaintenanceBlock } from "./facilityMaintenance";
+import { FacilityMaintenanceBlock, facilityMaintenanceConfig } from "./facilityMaintenance";
+import {
+  HOME_ROUTE,
+  navKeyFor,
+  parsePath,
+  routeFromLegacyHash,
+  routeHref,
+  routeMeta,
+  type Page,
+  type Route,
+} from "./routes";
 
 // Resolves a root-relative path (e.g. "/logo.white.png") against the app's
 // actual base URL. Needed because this deploys under a subpath on GitHub
@@ -56,23 +66,38 @@ const CONFIG = {
   contactFormEndpoint: "",
 };
 
-// ── Page type — controls which "page" is visible ──────────────────────────────
-type Page = "home" | "about" | "projects" | "services" | "demos" | "contact";
-const PAGE_VALUES: readonly Page[] = ["home", "about", "projects", "services", "demos", "contact"];
+// ── Routing ───────────────────────────────────────────────────────────────────
+// The page + language a URL maps to lives in src/routes.ts, shared with the
+// build-time prerenderer. Nothing here reads the URL hash any more: pages are
+// real paths (/services/facility-maintenance/, /tc/contact/) so each one is a
+// separate, crawlable, prerendered document.
 
-// ── Hash <-> Page — makes every page a real, bookmarkable, shareable URL ──────
-function pageFromHash(): Page {
-  const h = window.location.hash.replace(/^#/, "");
-  // A project detail lives at "projects/<id>" but is still the projects page
-  // as far as nav highlighting is concerned.
-  const base = h.split("/")[0];
-  return (PAGE_VALUES as readonly string[]).includes(base) ? (base as Page) : "home";
+/** The route for the current browser URL. Falls back to home during SSR. */
+function currentRoute(): Route {
+  if (typeof window === "undefined") return HOME_ROUTE;
+  return parsePath(window.location.pathname);
 }
 
-// Which project detail to show, if the hash names one. null = the list itself.
-function projectIdFromHash(): number | null {
-  const m = window.location.hash.replace(/^#/, "").match(/^projects\/(\d+)$/);
-  return m ? Number(m[1]) : null;
+/** Upsert a <meta name|property="..." content="..."> tag in the document head. */
+function setHeadMeta(attr: "name" | "property", key: string, content: string): void {
+  let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+  if (!el) {
+    el = document.createElement("meta");
+    el.setAttribute(attr, key);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("content", content);
+}
+
+/** Upsert a <link rel="..." href="..."> tag in the document head. */
+function setHeadLink(rel: string, href: string): void {
+  let el = document.head.querySelector<HTMLLinkElement>(`link[rel="${rel}"]`);
+  if (!el) {
+    el = document.createElement("link");
+    el.setAttribute("rel", rel);
+    document.head.appendChild(el);
+  }
+  el.setAttribute("href", href);
 }
 
 // ── Logger (open browser Console tab to see app events) ──────────────────────
@@ -84,6 +109,46 @@ const log = {
 // ─────────────────────────────────────────────────────────────────────────────
 // Reusable small components
 // ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * An internal link that is a real `<a href>` in the HTML but navigates
+ * client-side when clicked.
+ *
+ * The href matters as much as the click handler: a crawler only follows real
+ * anchors, so every nav item, card and CTA that used to be a `<button>` with an
+ * onClick is one of these now. That is what connects the prerendered pages into
+ * a link graph instead of leaving them as orphans only reachable via sitemap.
+ */
+function RouteLink({ to, onNavigate, style, className, children, ariaCurrent, onMouseEnter, onMouseLeave }: {
+  to: Route;
+  onNavigate: () => void;
+  style?: CSSProperties;
+  className?: string;
+  children: ReactNode;
+  ariaCurrent?: boolean;
+  onMouseEnter?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  onMouseLeave?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  return (
+    <a
+      href={routeHref(to)}
+      className={className}
+      aria-current={ariaCurrent ? "page" : undefined}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onClick={(e) => {
+        // Leave modified clicks alone so "open in new tab" and middle-click
+        // still hit the real URL — the whole point of having one.
+        if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+        e.preventDefault();
+        onNavigate();
+      }}
+      style={{ textDecoration: "none", ...style }}
+    >
+      {children}
+    </a>
+  );
+}
 
 function SectionLabel({ lang, en, tc, light = false }: { lang: Lang; en: string; tc: string; light?: boolean }) {
   return (
@@ -231,7 +296,8 @@ const LANG_OPTIONS: { value: Lang; short: string; label: string }[] = [
   { value: "tc", short: "繁中", label: "繁體中文" },
 ];
 
-function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l: Lang) => void; inline?: boolean }) {
+function LangToggle({ route, setLang, inline = false }: { route: Route; setLang: (l: Lang) => void; inline?: boolean }) {
+  const lang = route.lang;
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const current = LANG_OPTIONS.find(o => o.value === lang) ?? LANG_OPTIONS[0];
@@ -261,7 +327,7 @@ function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l
     <div ref={wrapRef} style={{ position: "relative" }}>
       <button
         onClick={() => setOpen(o => !o)}
-        aria-haspopup="listbox" aria-expanded={open}
+        aria-haspopup="true" aria-expanded={open}
         aria-label={lang === "en" ? "Select language" : "選擇語言"}
         style={{
           display: "flex", alignItems: "center", gap: "8px",
@@ -280,7 +346,7 @@ function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l
       </button>
 
       {open && (
-        <div role="listbox" aria-label={lang === "en" ? "Language" : "語言"}
+        <div aria-label={lang === "en" ? "Language" : "語言"}
           style={inline ? {
             // Rendered in normal flow so the mobile menu's navy background
             // (which only auto-sizes to in-flow content) actually grows to
@@ -294,14 +360,17 @@ function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l
             background: "#fff", borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
             overflow: "hidden", zIndex: 10,
           }}>
+          {/* Real links to the same page in the other language, so a crawler
+              (and a visitor sharing the URL) lands on the translated document
+              rather than an identical URL that switches language in JS only. */}
           {LANG_OPTIONS.map(opt => {
             const active = opt.value === lang;
             return (
-              <button key={opt.value} role="option" aria-selected={active}
-                onClick={() => { log.event("Language →", opt.value); setLang(opt.value); setOpen(false); }}
+              <RouteLink key={opt.value} to={{ ...route, lang: opt.value }}
+                onNavigate={() => { log.event("Language →", opt.value); setLang(opt.value); setOpen(false); }}
                 style={{
                   display: "block", width: "100%", textAlign: "left", padding: "12px 16px",
-                  background: active ? "#E8F0FE" : "transparent", border: "none",
+                  background: active ? "#E8F0FE" : "transparent",
                   color: active ? CONFIG.accent : "#374151", fontSize: "14px",
                   fontWeight: active ? 700 : 500, cursor: "pointer", fontFamily: "var(--font-sans)",
                 }}
@@ -309,7 +378,7 @@ function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l
                 onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}
               >
                 {opt.label}
-              </button>
+              </RouteLink>
             );
           })}
         </div>
@@ -321,10 +390,12 @@ function LangToggle({ lang, setLang, inline = false }: { lang: Lang; setLang: (l
 // ─────────────────────────────────────────────────────────────────────────────
 // Navigation bar
 // ─────────────────────────────────────────────────────────────────────────────
-function Navbar({ lang, setLang, page, setPage }: {
-  lang: Lang; setLang: (l: Lang) => void;
-  page: Page; setPage: (p: Page) => void;
+function Navbar({ route, setLang, setPage }: {
+  route: Route; setLang: (l: Lang) => void; setPage: (p: Page) => void;
 }) {
+  const lang = route.lang;
+  // The Facility Maintenance landing page highlights "Services" in the nav.
+  const activeKey = navKeyFor(route.page);
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
 
@@ -361,29 +432,32 @@ function Navbar({ lang, setLang, page, setPage }: {
       boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.25)" : "none", transition: "box-shadow 0.3s",
     }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto", height: "100%", padding: "0 32px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <button onClick={() => { setPage("home"); window.scrollTo({ top: 0 }); }}
-          style={{ display: "flex", alignItems: "center", gap: "12px", background: "none", border: "none", cursor: "pointer" }}>
+        <RouteLink to={{ page: "home", lang, projectId: null }}
+          onNavigate={() => { setPage("home"); window.scrollTo({ top: 0 }); }}
+          style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
           <img src={asset("/logo.white.png")} alt="" style={{ width: "40px", height: "auto", flexShrink: 0 }} />
           <span style={{ fontFamily: "var(--font-serif)", color: "#FFFFFF", letterSpacing: "-0.015em", fontSize: "25px" }}>
             <span style={{ fontWeight: 700 }}>3form</span>{" "}
             <span style={{ fontWeight: 400 }}>Co</span>
           </span>
-        </button>
+        </RouteLink>
         <div style={{
           display: "flex", alignItems: "center", gap: "36px",
           borderLeft: "1px solid rgba(255,255,255,0.15)",
           paddingLeft: "28px",
         }} className="hidden-mobile">
           {navLinks.map(link => (
-            <button key={link.key} onClick={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
-              style={{ color: page === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", background: "none", border: "none", fontSize: "14px", fontWeight: page === link.key ? 700 : 500, letterSpacing: "0.02em", cursor: "pointer", transition: "color 0.2s", fontFamily: "var(--font-sans)" }}
+            <RouteLink key={link.key} to={{ page: link.key, lang, projectId: null }}
+              ariaCurrent={activeKey === link.key}
+              onNavigate={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
+              style={{ color: activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", fontSize: "14px", fontWeight: activeKey === link.key ? 700 : 500, letterSpacing: "0.02em", cursor: "pointer", transition: "color 0.2s", fontFamily: "var(--font-sans)" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-              onMouseLeave={e => (e.currentTarget.style.color = page === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)")}>
+              onMouseLeave={e => (e.currentTarget.style.color = activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)")}>
               {txt(link.label, lang)}
-            </button>
+            </RouteLink>
           ))}
           <div style={{ width: "1px", height: "24px", background: "rgba(255,255,255,0.15)" }} />
-          <LangToggle lang={lang} setLang={setLang} />
+          <LangToggle route={route} setLang={setLang} />
         </div>
         <button onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (lang === "en" ? "Close menu" : "關閉選單") : (lang === "en" ? "Open menu" : "開啟選單")}
           style={{ display: "none", background: "none", border: "none", color: "#fff", cursor: "pointer", padding: 0, lineHeight: 0 }} className="show-mobile">
@@ -393,12 +467,14 @@ function Navbar({ lang, setLang, page, setPage }: {
       {menuOpen && (
         <div style={{ background: CONFIG.sectionBg.footer, padding: "16px 32px 24px", borderTop: "1px solid rgba(255,255,255,0.1)" }}>
           {navLinks.map(link => (
-            <button key={link.key} onClick={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
-              style={{ display: "block", width: "100%", textAlign: "left", color: page === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", background: "none", border: "none", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: "15px", fontWeight: page === link.key ? 700 : 500, padding: "10px 0", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
+            <RouteLink key={link.key} to={{ page: link.key, lang, projectId: null }}
+              ariaCurrent={activeKey === link.key}
+              onNavigate={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
+              style={{ display: "block", width: "100%", textAlign: "left", color: activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: "15px", fontWeight: activeKey === link.key ? 700 : 500, padding: "10px 0", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
               {txt(link.label, lang)}
-            </button>
+            </RouteLink>
           ))}
-          <div style={{ marginTop: "16px" }}><LangToggle lang={lang} setLang={setLang} inline /></div>
+          <div style={{ marginTop: "16px" }}><LangToggle route={route} setLang={setLang} inline /></div>
         </div>
       )}
     </nav>
@@ -531,7 +607,7 @@ function BlueprintGrid() {
   );
 }
 
-function HeroSection({ lang }: { lang: Lang }) {
+function HeroSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => void }) {
   return (
     <section id="home" style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", overflow: "hidden", background: CONFIG.sectionBg.hero }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${CONFIG.heroImageUrl})`, backgroundSize: "cover", backgroundPosition: "center" }} />
@@ -556,16 +632,18 @@ function HeroSection({ lang }: { lang: Lang }) {
             {txt(t.hero.sub, lang)}
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            <a href="#services" style={{ display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", textDecoration: "none", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
+            <RouteLink to={{ page: "services", lang, projectId: null }} onNavigate={() => { log.event("Hero CTA → services"); setPage("services"); }}
+              style={{ display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.background = CONFIG.accentHover)}
               onMouseLeave={e => (e.currentTarget.style.background = CONFIG.accent)}>
               {txt(t.hero.cta, lang)}
-            </a>
-            <a href="#contact" style={{ display: "inline-block", border: "1.5px solid rgba(255,255,255,0.6)", color: "#fff", padding: "14px 32px", textDecoration: "none", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
+            </RouteLink>
+            <RouteLink to={{ page: "contact", lang, projectId: null }} onNavigate={() => { log.event("Hero CTA → contact"); setPage("contact"); }}
+              style={{ display: "inline-block", border: "1.5px solid rgba(255,255,255,0.6)", color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
               {txt(t.hero.cta2, lang)}
-            </a>
+            </RouteLink>
           </div>
         </div>
       </div>
@@ -580,6 +658,17 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
     { key: "services", heading: t.nav.services, teaser: t.home.links.services, cta: { en: "View services",  tc: "查看服務" } },
     { key: "projects", heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } },
     { key: "contact",  heading: t.nav.contact,  teaser: t.home.links.contact,  cta: { en: "Contact us",     tc: "聯絡我們" } },
+    // Facility Maintenance is not a nav item, so the home page is where a
+    // crawler first picks up its URL. Hidden when the block is switched off in
+    // content.json, which is also when the landing page stops being built.
+    ...(facilityMaintenanceConfig.enabled
+      ? [{
+          key: "facilityMaintenance" as Page,
+          heading: facilityMaintenanceConfig.label,
+          teaser: { en: "HVAC, electrical, office equipment and FIFO line layout for your premises.", tc: "冷氣通風、電力系統、辦公室設備及先進先出生產線佈局。" },
+          cta: { en: "View facility maintenance", tc: "查看場地保養" },
+        }]
+      : []),
   ];
   return (
     <section style={{ background: CONFIG.sectionBg.about, padding: "100px 32px" }}>
@@ -589,11 +678,13 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
         <p style={{ fontSize: "16px", color: "#6B7280", margin: "16px 0 48px", maxWidth: "560px" }}>
           {txt(t.home.intro, lang)}
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "24px" }} className="grid-responsive">
+        {/* auto-fit rather than a fixed 4 columns — the Facility Maintenance
+            card is conditional, so the count varies with content.json. */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(228px, 1fr))", gap: "24px" }} className="grid-responsive">
           {cards.map(c => (
-            <button key={c.key}
-              onClick={() => { log.event("Home quicklink →", c.key); setPage(c.key); }}
-              style={{ textAlign: "left", background: "#fff", border: "1px solid #E5E7EB", borderTop: `5px solid ${CONFIG.accent}`, padding: "40px 28px", cursor: "pointer", boxShadow: "0 2px 16px rgba(0,45,114,0.06)", transition: "transform 0.2s" }}
+            <RouteLink key={c.key} to={{ page: c.key, lang, projectId: null }}
+              onNavigate={() => { log.event("Home quicklink →", c.key); setPage(c.key); }}
+              style={{ display: "block", textAlign: "left", background: "#fff", border: "1px solid #E5E7EB", borderTop: `5px solid ${CONFIG.accent}`, padding: "40px 28px", cursor: "pointer", boxShadow: "0 2px 16px rgba(0,45,114,0.06)", transition: "transform 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-4px)")}
               onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}>
               <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "23px", fontWeight: 700, color: "#001A4A", margin: "0 0 12px" }}>
@@ -603,7 +694,7 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
                 {txt(c.teaser, lang)}
               </p>
               <span style={{ fontSize: "14px", color: CONFIG.accent, fontWeight: 700 }}>{txt(c.cta, lang)} →</span>
-            </button>
+            </RouteLink>
           ))}
         </div>
       </div>
@@ -620,9 +711,11 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
     <section style={{ background: CONFIG.sectionBg.projects, padding: "100px 32px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="Live Demos" tc="現場示範" />
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
+        {/* <h1>, not <h2>: this section is the whole Demos page, and every
+            prerendered page needs exactly one top-level heading. */}
+        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.demos.heading, lang)}
-        </h2>
+        </h1>
         <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "56px", maxWidth: "620px" }}>
           {txt(t.demos.sub, lang)}
         </p>
@@ -645,9 +738,11 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
                   </span>
                 )}
               </div>
-              <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 12px" }}>
+              {/* <h2> under the page <h1> — each demo is a top-level topic of
+                  the Demos page, which is the whole of this section. */}
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 12px" }}>
                 {txt(demo.title, lang)}
-              </h3>
+              </h2>
               <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
                 {txt(demo.desc, lang)}
               </p>
@@ -683,9 +778,10 @@ function AboutCompanySection({ lang }: { lang: Lang }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "center" }} className="grid-responsive">
           <div>
             <SectionLabel lang={lang} en="Who We Are" tc="關於我們" />
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
+            {/* The About page's top-level heading — see the note on the Demos <h1>. */}
+            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
               {txt(t.about.heading, lang)}
-            </h2>
+            </h1>
             <p style={{ fontSize: "16px", lineHeight: 1.8, color: "#4B5563", margin: 0 }}>
               {txt(t.about.company_body, lang)}
             </p>
@@ -805,9 +901,10 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
       `}</style>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="What We Do" tc="我們的服務範疇" />
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
+        {/* The Services page's top-level heading — see the note on the Demos <h1>. */}
+        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.services.heading, lang)}
-        </h2>
+        </h1>
         <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "56px", maxWidth: "560px" }}>
           {txt(t.services.sub, lang)}
         </p>
@@ -837,9 +934,11 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
                   {String(svc.id).padStart(2, "0")}
                 </div>
               </div>
-              <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 16px" }}>
+              {/* <h2> under the page <h1> — each service card is a top-level
+                  topic of the Services page, not a subsection of one. */}
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 16px" }}>
                 {txt(svc.title, lang)}
-              </h3>
+              </h2>
               <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
                 {txt(svc.detail, lang)}
               </p>
@@ -855,24 +954,32 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
           accent={CONFIG.accent}
           accentHover={CONFIG.accentHover}
           onContact={() => setPage("contact")}
+          secondaryAction={
+            <RouteLink to={{ page: "facilityMaintenance", lang, projectId: null }}
+              onNavigate={() => { log.event("Services → facility maintenance page"); setPage("facilityMaintenance"); }}
+              style={{ color: CONFIG.accent, fontSize: "14px", fontWeight: 600, whiteSpace: "nowrap" }}>
+              {lang === "en" ? "Full facility maintenance details →" : "查看場地保養詳情 →"}
+            </RouteLink>
+          }
         />
 
         {/* CTA — request a demo or a quotation */}
         <div style={{ marginTop: "2px", background: CONFIG.navBg, padding: "56px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
           <div style={{ maxWidth: "480px" }}>
-            <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: "#fff", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: "#fff", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
               {txt(t.services.cta.heading, lang)}
-            </h3>
+            </h2>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: 0 }}>
               {txt(t.services.cta.sub, lang)}
             </p>
           </div>
-          <button onClick={() => { log.event("Services CTA → contact"); setPage("contact"); }}
-            style={{ flexShrink: 0, background: CONFIG.accent, color: "#fff", border: "none", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
+          <RouteLink to={{ page: "contact", lang, projectId: null }}
+            onNavigate={() => { log.event("Services CTA → contact"); setPage("contact"); }}
+            style={{ flexShrink: 0, display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
             onMouseEnter={e => (e.currentTarget.style.background = CONFIG.accentHover)}
             onMouseLeave={e => (e.currentTarget.style.background = CONFIG.accent)}>
             {txt(t.services.cta.button, lang)}
-          </button>
+          </RouteLink>
         </div>
       </div>
     </section>
@@ -886,15 +993,15 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
 function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang: Lang; onOpen: () => void }) {
   const real = p.featured;
   return (
-    // A real <button>, not a click-handled <div>, so the card is reachable by
-    // keyboard and announced as actionable.
-    <button type="button" onClick={onOpen} style={{
+    // A real <a href>, not a click-handled <div>: keyboard reachable, announced
+    // as a link, and — since each project detail is its own prerendered page —
+    // the anchor a crawler follows to reach it.
+    <RouteLink to={{ page: "projects", lang, projectId: p.id }} onNavigate={onOpen} style={{
       display: "block",
       width: "100%",
       textAlign: "left",
       font: "inherit",
       cursor: "pointer",
-      border: "none",
       background: real ? "#fff" : "#FAFAFA",
       padding: "40px 32px",
       borderTop: `3px solid ${real ? CONFIG.accent : "#D1D5DB"}`,
@@ -927,7 +1034,7 @@ function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang:
           {txt(t.projects.view_details, lang)} →
         </span>
       </div>
-    </button>
+    </RouteLink>
   );
 }
 
@@ -976,9 +1083,10 @@ function ContactSection({ lang }: { lang: Lang }) {
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }} className="grid-responsive">
           <div>
             <SectionLabel lang={lang} en="Get In Touch" tc="聯絡我們" light />
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#FFFFFF", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
+            {/* The Contact page's top-level heading — see the note on the Demos <h1>. */}
+            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#FFFFFF", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
               {txt(t.contact.heading, lang)}
-            </h2>
+            </h1>
             <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "48px" }}>
               {txt(t.contact.sub, lang)}
             </p>
@@ -1061,7 +1169,7 @@ function ContactSection({ lang }: { lang: Lang }) {
 function HomePage({ lang, setPage }: { lang: Lang; setPage: (p: Page) => void }) {
   return (
     <>
-      <HeroSection lang={lang} />
+      <HeroSection lang={lang} setPage={setPage} />
       <QuickLinksSection lang={lang} setPage={setPage} />
       <PartnersSection lang={lang} />
     </>
@@ -1082,6 +1190,49 @@ function ServicesPage({ lang, onBack, setPage }: { lang: Lang; onBack: () => voi
   return (
     <PageShell lang={lang} onBack={onBack}>
       <ServicesSection lang={lang} setPage={setPage} />
+    </PageShell>
+  );
+}
+
+// ── Facility Maintenance / 場地保養 — its own indexable page ──────────────────
+// Same block as the one on the Services page, but promoted to a standalone URL
+// with its own <h1> and <title> so the phrase people actually search for has a
+// document to rank. Copy still comes from facilityMaintenance/content.json —
+// nothing is duplicated here.
+function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack: () => void; setPage: (p: Page) => void }) {
+  const cfg = facilityMaintenanceConfig;
+  return (
+    <PageShell lang={lang} onBack={onBack}>
+      <section style={{ background: CONFIG.sectionBg.services, padding: "80px 32px 100px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: "#6B7280", marginBottom: "24px" }}>
+            <RouteLink to={{ page: "services", lang, projectId: null }}
+              onNavigate={() => { log.event("Breadcrumb → services"); setPage("services"); }}
+              style={{ color: CONFIG.accent, fontWeight: 600 }}>
+              {txt(t.nav.services, lang)}
+            </RouteLink>
+            <span aria-hidden="true" style={{ margin: "0 8px", color: "#9CA3AF" }}>/</span>
+            <span>{txt(cfg.label, lang)}</span>
+          </nav>
+
+          {/* Headline role, sized to match the All-Projects page <h1> — the
+              other standalone page heading in DESIGN.md's hierarchy. */}
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "20ch" }}>
+            {txt(cfg.heading, lang)}
+          </h1>
+          <p style={{ fontSize: "16px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: "68ch" }}>
+            {txt(cfg.sub, lang)}
+          </p>
+
+          <FacilityMaintenanceBlock
+            lang={lang}
+            accent={CONFIG.accent}
+            accentHover={CONFIG.accentHover}
+            onContact={() => setPage("contact")}
+            omitIntro
+          />
+        </div>
+      </section>
     </PageShell>
   );
 }
@@ -1485,42 +1636,70 @@ function LegalModal({ type, lang, onClose }: { type: LegalType; lang: Lang; onCl
 // ─────────────────────────────────────────────────────────────────────────────
 // Root App
 // ─────────────────────────────────────────────────────────────────────────────
-export default function App() {
-  const [lang,      setLang]      = useState<Lang>("en");
-  const [page,      setPageState] = useState<Page>(() => pageFromHash());
-  const [projectId, setProjectId] = useState<number | null>(() => projectIdFromHash());
+/**
+ * `initialRoute` is supplied by src/entry-server.tsx when the build prerenders
+ * a page; in the browser it is omitted and the route comes from the URL. Both
+ * paths resolve to the same route for the same URL, which is what lets
+ * hydration match the prerendered markup.
+ */
+export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
+  const [route, setRoute] = useState<Route>(() => initialRoute ?? currentRoute());
   const [legalOpen, setLegalOpen] = useState<LegalType>(null);
 
-  // The URL hash is the source of truth for `page`, so every page is a real,
-  // bookmarkable, shareable link and the browser Back button navigates within
-  // the site instead of leaving it. setPage() below just changes the hash;
-  // this listener is what actually updates the rendered page.
-  useEffect(() => {
-    const onHashChange = () => {
-      setPageState(pageFromHash());
-      setProjectId(projectIdFromHash());
-    };
-    window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
-  }, []);
+  const { lang, page, projectId } = route;
 
-  const setPage = (p: Page) => {
-    const targetHash = p === "home" ? "" : p;
-    if (window.location.hash.replace(/^#/, "") === targetHash) {
-      setPageState(p);      // hash already matches (e.g. re-clicking the active nav item)
-      setProjectId(null);   // ...but a detail page may still be open under it
-    } else {
-      window.location.hash = targetHash; // triggers the hashchange listener above
+  // The path is the source of truth: every page is a real, bookmarkable,
+  // shareable URL that the server answers with prerendered HTML. Navigation
+  // pushes history and swaps the rendered page without a reload.
+  const navigate = (next: Route, { replace = false } = {}) => {
+    const href = routeHref(next);
+    if (typeof window !== "undefined" && window.location.pathname !== href) {
+      window.history[replace ? "replaceState" : "pushState"](null, "", href);
     }
+    setRoute(next);
   };
 
+  useEffect(() => {
+    const onPopState = () => setRoute(parsePath(window.location.pathname));
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  // Legacy hash links (#services, #projects/3) were the only URLs this site had
+  // before paths existed, so they may still be in bookmarks and other people's
+  // pages. Rewrite them to the real path once, on load, rather than silently
+  // dropping the visitor on the home page.
+  useEffect(() => {
+    const legacy = routeFromLegacyHash(window.location.hash, route.lang);
+    if (!legacy) return;
+    log.info("Redirecting legacy hash URL →", routeHref(legacy));
+    navigate(legacy, { replace: true });
+  }, []);
+
+  const setPage  = (p: Page)  => navigate({ page: p, lang, projectId: null });
+  const setLang  = (l: Lang)  => navigate({ ...route, lang: l });
   const openProject = (id: number) => {
     log.event("Open project detail:", id);
-    window.location.hash = `projects/${id}`;
+    navigate({ page: "projects", lang, projectId: id });
   };
 
   useEffect(() => { log.info("3form Co website initialised. Language:", lang); }, []);
-  useEffect(() => { log.info("Language →", lang); document.documentElement.lang = lang === "tc" ? "zh-HK" : "en"; }, [lang]);
+
+  // Keep the document head in step with client-side navigation. The prerendered
+  // HTML already carries the right tags for the first page a visitor lands on;
+  // this is what keeps them correct after an in-app navigation, for renderers
+  // that execute JS and for the browser tab / share sheet.
+  useEffect(() => {
+    const meta = routeMeta(route);
+    document.title = meta.title;
+    document.documentElement.lang = meta.htmlLang;
+    setHeadMeta("name", "description", meta.description);
+    setHeadMeta("property", "og:title", meta.title);
+    setHeadMeta("property", "og:description", meta.description);
+    setHeadMeta("property", "og:url", meta.canonical);
+    setHeadLink("canonical", meta.canonical);
+  }, [route]);
+
   useEffect(() => { log.info("Page →", page); window.scrollTo({ top: 0 }); }, [page, projectId]);
 
   return (
@@ -1540,12 +1719,13 @@ export default function App() {
         }
       `}</style>
 
-      <Navbar lang={lang} setLang={setLang} page={page} setPage={setPage} />
+      <Navbar route={route} setLang={setLang} setPage={setPage} />
 
       <main style={{ paddingTop: CONFIG.navHeight }}>
         {page === "home"     && <HomePage     lang={lang} setPage={setPage} />}
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
+        {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />

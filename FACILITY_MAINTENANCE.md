@@ -29,6 +29,7 @@ This is **separate** from the existing service card "General Maintenance & Repai
 | `src/facilityMaintenance/logger.ts` | Console logger, prefix `[3form][facility-maintenance]` |
 | `src/facilityMaintenance/index.ts` | Module exports |
 | `src/App.tsx` (`ServicesSection`) | Renders the block below the service cards, above the Services CTA |
+| `src/App.tsx` (`FacilityMaintenancePage`) | The dedicated `/services/facility-maintenance/` landing page — same block with `omitIntro`, under its own `<h1>` |
 | `scripts/facility_maintenance/validate_config.py` | Content validator (Python, stdlib only) |
 | `environment.facility-maintenance.yml` | Conda env `3form-facility-maintenance` |
 
@@ -69,6 +70,13 @@ pnpm install
 pnpm dev
 ```
 
-Open the Services page (nav → Services, or `#services`). Use the language switch to check both EN and 繁中.
+Open the Services page (nav → Services, or `/services/`), and the dedicated
+landing page at `/services/facility-maintenance/` (`/tc/services/facility-maintenance/`
+for 繁中). Use the language switch to check both EN and 繁中.
+
+Both places read this same `content.json`, so `"enabled": false` removes the
+Services-page block, the landing page's home-page card, and the landing page's
+content together. The landing page is prerendered to static HTML at build time —
+see `SEO.md`.
 
 Do **not** publish or deploy until Edward has reviewed it.

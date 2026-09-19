@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "pnpm run build:client && pnpm run build:ssr && pnpm run build:prerender",
+    "build:client": "vite build",
+    "build:ssr": "vite build --ssr src/entry-server.tsx --outDir .ssr-build",
+    "build:prerender": "node scripts/prerender/index.mjs",
     "preview": "vite preview",
     "format": "oxfmt"
   },

@@ -1,0 +1,161 @@
+# SEO: real HTML for every page (static prerender)
+
+## The problem this fixes
+
+The site routed on the URL **hash** (`#services`, `#contact`, `#projects/3`). A
+fragment is never sent to the server, so every crawler — Google, Bing, LinkedIn's
+link preview, an AI crawler — requested exactly one URL, `https://3formhk.com/`,
+and got back:
+
+```html
+<title>3form Co — Engineering & Management Consulting</title>
+<div id="root"></div>
+```
+
+One title and one description for the entire site, no H1, no body copy, and no
+separate URL that Facility Maintenance or Contact could ever rank on.
+
+Two things changed:
+
+1. **Routing moved from the hash to real paths.** `#services` → `/services/`.
+2. **The build prerenders each path to a static HTML file** containing the real
+   title, meta description, H1 and body text. React then hydrates that markup
+   in the browser, so the site still behaves as a single-page app.
+
+## Routes
+
+English is served at the root; Traditional Chinese (`zh-HK`) under `/tc/`. Each
+one is a real file in `dist/`, so it works on GitHub Pages with no redirect
+rules or server config.
+
+| URL | zh-HK | File | Priority |
+| --- | --- | --- | --- |
+| `/` | `/tc/` | `dist/index.html` | 1.0 |
+| `/services/` | `/tc/services/` | `dist/services/index.html` | 0.9 |
+| **`/services/facility-maintenance/`** | **`/tc/services/facility-maintenance/`** | `dist/services/facility-maintenance/index.html` | 0.9 |
+| **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
+| `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
+| `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
+| `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
+| `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
+
+**30 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
+404 by silently client-rendering the home page).
+
+Old hash links still work: `App.tsx` rewrites `#services`, `#contact`,
+`#facility-maintenance` and `#projects/<id>` to their new paths on load, so
+existing bookmarks and third-party links land on the right page.
+
+## Facility maintenance now has its own page
+
+It was a block partway down the Services page, with an `<h3>` — not something
+that could rank for "facility maintenance Hong Kong" or 場地保養. It now also has
+a standalone URL with its own `<title>`, `<h1>`, meta description and
+`schema.org/Service` markup listing all four categories.
+
+Nothing was duplicated: the page reads the same
+`src/facilityMaintenance/content.json` as the Services-page block, and passes
+`omitIntro` so the heading isn't printed twice. Editing `content.json` still
+changes both places, and setting `"enabled": false` still removes the block,
+the landing page link, and the home-page card together.
+
+## Files changed
+
+| Path | What it does |
+| --- | --- |
+| `src/routes.ts` | **New.** The route table: path ↔ page ↔ language, per-page titles and descriptions (EN + zh-HK), canonicals, hreflang, and `ALL_ROUTES` — the list of pages the build writes. Add a page here. |
+| `src/structuredData.ts` | **New.** JSON-LD (`Organization`, `Service`, `ContactPage`, `BreadcrumbList`) built from the same translations the page renders, so the markup can't drift from the visible text. |
+| `src/entry-server.tsx` | **New.** SSR entry. Renders one route to an HTML string; also the only bridge between the TypeScript app and the plain-JS build script. |
+| `scripts/prerender/index.mjs` | **New.** Renders every route, writes `dist/**/index.html`, `sitemap.xml`, `robots.txt`, `404.html`. |
+| `scripts/prerender/html.mjs` | **New.** Head-tag assembly, sitemap XML, the 404 page. |
+| `scripts/prerender/logger.mjs` | **New.** `[3form][prerender]` logger, matching the app's runtime logging style. |
+| `src/main.tsx` | Hydrates the prerendered markup instead of discarding it. Falls back to a plain client render under `vite dev`, where `#root` is empty. |
+| `src/App.tsx` | Path routing (`pushState` / `popstate`) instead of hash routing; new `RouteLink` component; new `FacilityMaintenancePage`; per-page `<h1>`s; head tags kept in sync on client-side navigation. |
+| `src/facilityMaintenance/FacilityMaintenanceBlock.tsx` | New `omitIntro` and `secondaryAction` props; heading levels adapt to where the block sits. |
+| `package.json` | `build` is now three logged stages: `build:client` → `build:ssr` → `build:prerender`. |
+| `.gitignore` | Ignores `.ssr-build/`, the intermediate SSR bundle. |
+
+### Nav links are real `<a href>` now
+
+Buttons with `onClick` handlers are invisible to a crawler — it has no link to
+follow. Every internal navigation (nav bar, logo, home cards, project cards,
+hero CTAs, Services CTA, language switch) is a `RouteLink`: a real anchor with a
+real `href` that intercepts plain left-clicks for client-side navigation and
+leaves ⌘-click / middle-click to the browser. That is what connects the 30
+prerendered pages into a crawlable graph rather than 30 orphans.
+
+## Verify locally
+
+```bash
+pnpm install
+pnpm run build            # add PRERENDER_VERBOSE=1 to log every file written
+npx vite preview --port 4599
+```
+
+Then **view source** (not DevTools' Elements panel, which shows the hydrated
+DOM) on:
+
+- <http://localhost:4599/services/facility-maintenance/>
+- <http://localhost:4599/contact/>
+- <http://localhost:4599/tc/services/facility-maintenance/>
+
+You should see, in the raw HTML before any JavaScript runs: a page-specific
+`<title>`, `<meta name="description">`, `<link rel="canonical">`, `hreflang`
+alternates, a JSON-LD block, and the full rendered page inside
+`<div id="root">` — including the `<h1>`.
+
+From the command line:
+
+```bash
+# Title, description and H1 straight out of the file
+grep -o '<title>[^<]*' dist/services/facility-maintenance/index.html
+grep -o '<meta name="description"[^>]*' dist/contact/index.html
+grep -o '<h1[^>]*>[^<]*' dist/services/facility-maintenance/index.html
+
+# Every page that got built
+find dist -name index.html | sort
+```
+
+What was checked on this branch, in headless Chrome against the built output:
+
+- No React hydration errors on `/`, `/contact/`,
+  `/services/facility-maintenance/` or the zh-HK equivalent — the prerendered
+  HTML is kept, not thrown away and re-rendered.
+- Every page has exactly one `<h1>` and no skipped heading levels.
+- `/#services`, `/#contact`, `/#facility-maintenance` and `/#projects/3`
+  redirect to their new paths.
+- Clicking an internal link navigates without a reload and updates the
+  `<title>`, description and canonical; the Back button works.
+- `pnpm dev` still serves every path (Vite's SPA fallback), client-rendered.
+
+## Deployment
+
+`.github/workflows/deploy-pages.yml` runs `pnpm run build` and uploads `dist/`.
+It picks up all three stages with **no workflow change**. Nothing here has been
+deployed — this is ready for review.
+
+After the first deploy, worth doing once:
+
+1. Submit `https://3formhk.com/sitemap.xml` in Google Search Console.
+2. Request indexing for `/services/facility-maintenance/` and `/contact/`.
+3. Run the two priority pages through the Rich Results Test to confirm the
+   JSON-LD parses.
+
+## Follow-ups (not in this change)
+
+- **Contact page copy is thin** (~65 words EN, ~34 zh-HK). It ranks on the
+  `ContactPage` + `Organization` schema and the phone/email, but a short
+  paragraph on where 3form works and what to expect after enquiring would help.
+  Needs Edward's words, not invented copy.
+- **Per-service landing pages.** `/services/facility-maintenance/` is the
+  pattern; the other six service cards could each get one the same way — add a
+  page to `PAGE_SEGMENT` and `PRERENDERED_PAGES` in `src/routes.ts` and a
+  component in `App.tsx`. Each needs real copy first, or they'd be thin
+  duplicates of the Services page and would hurt more than help.
+- **`og:image`.** No social preview image is set, so shared links render without
+  a card image. Add one via `openGraph.image` in `.figma/make/site.json`, or
+  per-page in `routes.ts`.
+- **Analytics.** `analytics.googleAnalyticsId` in `.figma/make/site.json` is
+  unset. Client-side navigation would need a pageview call in the route effect
+  in `App.tsx`.

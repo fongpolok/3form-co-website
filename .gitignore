@@ -1,5 +1,7 @@
 node_modules/
 dist/
+# Intermediate SSR bundle consumed by scripts/prerender/ during `pnpm build`.
+.ssr-build/
 build/
 .cache/
 .env*

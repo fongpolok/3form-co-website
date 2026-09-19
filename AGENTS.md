@@ -13,13 +13,30 @@ A Vite development server is **already running** on `$PORT` (default 8443). You 
 
 This is the canonical project structure. Start with task-relevant files below. Only follow imports or inspect other files when required, when a documented path is missing, or when the repository contradicts this guide.
 
-- `src/main.tsx` - React entrypoint; imports `src/index.css` and mounts `src/App.tsx` into the `#root` element
+- `src/main.tsx` - React entrypoint; imports `src/index.css` and hydrates (or mounts) `src/App.tsx` into the `#root` element
 - `src/App.tsx` - Primary application component and the usual starting point for UI work
+- `src/routes.ts` - URL table and per-page SEO metadata; **add a page here first**
+- `src/entry-server.tsx` - SSR entry used by the prerender build stage
+- `src/structuredData.ts` - JSON-LD emitted into each prerendered page
 - `src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
+- `scripts/prerender/` - Build stage that writes one static HTML file per route
 - `index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
 - `package.json` - Project dependencies and the Vite build, development, preview, and formatting scripts
 - `vite.config.ts` - Vite configuration with React, Tailwind CSS v4, and Figma Make plugins plus the `@` alias for `src`
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
+- `SEO.md` - How routing and the static prerender work, and how to verify them
+
+## Routing and the build
+
+Pages are **real paths** (`/services/`, `/tc/contact/`), not URL hashes, and
+`pnpm build` prerenders each one to a static HTML file so crawlers get a real
+title, description, H1 and body. `pnpm build` is three logged stages:
+`build:client` → `build:ssr` → `build:prerender`.
+
+Anything rendered during the initial render must be SSR-safe: no `window`,
+`document` or `navigator` outside `useEffect`. Internal links should use the
+`RouteLink` component in `src/App.tsx` (a real `<a href>`) rather than a
+`<button onClick>`, or crawlers cannot follow them. See `SEO.md`.
 
 ## Dependencies
 

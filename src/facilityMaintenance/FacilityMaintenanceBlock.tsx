@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { t, txt, type Lang } from "../translations";
 import { facilityMaintenanceConfig as cfg } from "./config";
 import { facilityLog } from "./logger";
@@ -9,6 +9,15 @@ type Props = {
   accentHover: string;
   /** Navigates to the Contact page (App's setPage("contact")). */
   onContact: () => void;
+  /**
+   * Skip the label/heading/intro paragraph. Set on the dedicated
+   * /services/facility-maintenance/ page, which renders that copy itself as
+   * the page <h1> — repeating it here would duplicate the heading in the
+   * document outline and in the indexed text.
+   */
+  omitIntro?: boolean;
+  /** Extra link rendered beside the CTA (Services page → the full landing page). */
+  secondaryAction?: ReactNode;
 };
 
 // "5744 9594" → "tel:+85257449594" (Hong Kong numbers are 8 digits, no area code)
@@ -19,7 +28,14 @@ const telHref = `tel:+852${t.contact.phone.replace(/\D/g, "")}`;
  * Premises (HVAC, electrical, office equipment, FIFO production line layout) — not the production-equipment
  * "General Maintenance & Repair" card. Copy lives in content.json.
  */
-export default function FacilityMaintenanceBlock({ lang, accent, accentHover, onContact }: Props) {
+export default function FacilityMaintenanceBlock({ lang, accent, accentHover, onContact, omitIntro = false, secondaryAction }: Props) {
+  // Keep the document outline contiguous in both placements: on the Services
+  // page the block's own heading is an <h2> under that page's <h1>, so its
+  // subheadings are <h3>; on its own page the page supplies the <h1> and the
+  // block starts at <h2>.
+  const CategoryHeading = omitIntro ? "h2" : "h3";
+  const CtaHeading = omitIntro ? "h2" : "h3";
+
   useEffect(() => {
     if (!cfg.enabled) {
       facilityLog.info("block disabled via config");
@@ -41,18 +57,22 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
       `}</style>
 
       <div className="fm-pad" style={{ padding: "48px 40px 40px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
-          <div style={{ width: "32px", height: "2px", background: accent }} />
-          <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: accent }}>
-            {txt(cfg.label, lang)}
-          </span>
-        </div>
-        <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(22px, 2.5vw, 28px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px", letterSpacing: "-0.01em" }}>
-          {txt(cfg.heading, lang)}
-        </h3>
-        <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 20px", maxWidth: "68ch" }}>
-          {txt(cfg.sub, lang)}
-        </p>
+        {!omitIntro && (
+          <>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+              <div style={{ width: "32px", height: "2px", background: accent }} />
+              <span style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: accent }}>
+                {txt(cfg.label, lang)}
+              </span>
+            </div>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(22px, 2.5vw, 28px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px", letterSpacing: "-0.01em" }}>
+              {txt(cfg.heading, lang)}
+            </h2>
+            <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 20px", maxWidth: "68ch" }}>
+              {txt(cfg.sub, lang)}
+            </p>
+          </>
+        )}
 
         {/* Who it is for */}
         <ul aria-label={lang === "en" ? "Suitable for" : "適用場地"} style={{ display: "flex", flexWrap: "wrap", gap: "8px", listStyle: "none", padding: 0, margin: "0 0 32px" }}>
@@ -69,9 +89,9 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
               <div style={{ fontSize: "13px", fontWeight: 600, color: accent, letterSpacing: "0.1em", marginBottom: "10px" }}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <h4 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 14px" }}>
+              <CategoryHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 14px" }}>
                 {txt(cat.title, lang)}
-              </h4>
+              </CategoryHeading>
               <ul style={{ margin: 0, paddingLeft: "18px", display: "flex", flexDirection: "column", gap: "8px" }}>
                 {cat.points.map((p, j) => (
                   <li key={j} style={{ fontSize: "14px", lineHeight: 1.7, color: "#4B5563" }}>
@@ -91,9 +111,9 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
       {/* Block-level CTA — kept light so it doesn't stack against the navy Services CTA below */}
       <div className="fm-pad" style={{ borderTop: "1px solid #E5E7EB", padding: "28px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}>
         <div style={{ maxWidth: "560px" }}>
-          <h4 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", margin: "0 0 6px" }}>
+          <CtaHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", margin: "0 0 6px" }}>
             {txt(cfg.cta.heading, lang)}
-          </h4>
+          </CtaHeading>
           <p style={{ fontSize: "14px", color: "#4B5563", lineHeight: 1.65, margin: "0 0 6px" }}>
             {txt(cfg.cta.sub, lang)}
           </p>
@@ -107,13 +127,16 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
             </a>
           </p>
         </div>
-        <button type="button"
-          onClick={() => { facilityLog.event("CTA → contact"); onContact(); }}
-          style={{ flexShrink: 0, background: accent, color: "#fff", border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s" }}
-          onMouseEnter={e => (e.currentTarget.style.background = accentHover)}
-          onMouseLeave={e => (e.currentTarget.style.background = accent)}>
-          {txt(cfg.cta.button, lang)}
-        </button>
+        <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+          {secondaryAction}
+          <button type="button"
+            onClick={() => { facilityLog.event("CTA → contact"); onContact(); }}
+            style={{ background: accent, color: "#fff", border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.background = accentHover)}
+            onMouseLeave={e => (e.currentTarget.style.background = accent)}>
+            {txt(cfg.cta.button, lang)}
+          </button>
+        </div>
       </div>
     </div>
   );
