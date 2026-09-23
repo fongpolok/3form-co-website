@@ -201,6 +201,77 @@ export const t = {
       },
       button: { en: "Request a Demo / Quotation", tc: "查詢示範／報價" },
     },
+
+    // ── Funding Consulting landing page (/services/funding-consulting/).
+    // Built from Edward's interview answers (2026-09-23): who the client is
+    // and how the engagement runs. A results section is deliberately absent
+    // until he has a result he can publish — add it here, don't invent one.
+    fundingPage: {
+      label: { en: "Funding Consulting", tc: "資助顧問" },
+      heading: {
+        en: "NIFS funding consulting for manufacturers in Hong Kong",
+        tc: "新型工業化資助計劃（NIFS）申請顧問 — 香港製造業",
+      },
+      intro: {
+        en: "3form helps manufacturers turn a production problem into a funded project. We assess your line on site, design the fix with Lean and Six Sigma, and prepare the New Industrialisation Funding Scheme (NIFS) application that helps pay for it.",
+        tc: "3form 協助製造商把生產上的難題轉化為獲資助的項目。我們會實地評估您的生產線，以精益及六西格瑪原則設計改善方案，並準備申請新型工業化資助計劃（NIFS），為項目爭取資助。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Hong Kong manufacturers", tc: "香港製造商" },
+          body: {
+            en: "You run production in Hong Kong and want a turnkey upgrade: one team from diagnosis to a funded, working solution, with no handoff between separate vendors.",
+            tc: "您在香港從事生產，希望以一站式方式升級：由同一團隊負責，由診斷到獲資助並投入運作的方案，毋須在不同供應商之間轉手。",
+          },
+        },
+        {
+          title: { en: "Mainland manufacturers setting up in Hong Kong", tc: "來港設廠的內地製造商" },
+          body: {
+            en: "You plan to set up a production site in Hong Kong and want NIFS funding to support it. We evaluate the site and the production plan, then prepare the application.",
+            tc: "您計劃在香港設立生產基地，並希望以 NIFS 資助支持項目。我們會評估場地及生產規劃，再準備資助申請。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "On-site assessment", tc: "實地評估" },
+          body: {
+            en: "We visit your site, evaluate how production runs today, and pin down the pain points.",
+            tc: "我們親臨您的廠房，評估現時的生產運作，找出痛點所在。",
+          },
+        },
+        {
+          title: { en: "A holistic solution", tc: "整體改善方案" },
+          body: {
+            en: "We design one solution for the whole problem, based on Lean and Six Sigma principles, rather than a one-off fix.",
+            tc: "我們以精益及六西格瑪原則，針對整體問題設計完整方案，而非一次性的修補。",
+          },
+        },
+        {
+          title: { en: "The funding application", tc: "資助申請" },
+          body: {
+            en: "We prepare, submit and manage the NIFS application. Where another scheme fits better, we also look at the BUD Fund, NIAS and other SME programmes.",
+            tc: "我們負責準備、提交及管理 NIFS 申請。如其他計劃更合適，我們亦會考慮 BUD 專項基金、NIAS 及其他中小企計劃。",
+          },
+        },
+        {
+          title: { en: "Delivery to sign-off", tc: "執行至完成審核" },
+          body: {
+            en: "We carry the work through implementation to compliance sign-off, so the team that designed the solution also delivers it.",
+            tc: "我們跟進項目實施直至合規審核完成，由設計方案的團隊親自落實。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Planning a NIFS project?", tc: "正在籌劃 NIFS 項目？" },
+      ctaBody: {
+        en: "Tell us about your production line or your Hong Kong site plan. We reply within one business day.",
+        tc: "告訴我們您的生產線或在港設廠計劃，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full funding consulting details →", tc: "查看資助顧問詳情 →" },
+    },
   },
 
   // ── Live Demos — engineering builds behind the advisory work. `real: true`
@@ -357,9 +428,10 @@ export const t = {
   // ── Contact Section ──────────────────────────────────────────────────────────
   contact: {
     heading: { en: "Contact Us",       tc: "聯絡我們" },
+    // Approved by Edward, 2026-09-23 (SEO item 4: the page was ~65 words).
     sub: {
-      en: "Ready to start a conversation? Reach out and we will get back to you within one business day.",
-      tc: "準備好開始對話？歡迎聯絡，我們將在一個工作天內回覆您。",
+      en: "3form Engineering Co works with manufacturers, food producers, warehouses and technology firms across Hong Kong. Tell us what you want to improve: a funding application, a production line, a warehouse system, or equipment that keeps breaking down. We reply within one business day to arrange a short call. For work on site, we first walk through your site and then send a written quotation based on what we saw.",
+      tc: "3form Engineering Co 為全港製造商、食品生產商、倉儲及科技企業提供服務。請告訴我們您想改善的地方，無論是資助申請、生產線、倉庫系統，還是經常故障的設備。我們會於一個工作天內回覆，安排簡短通話。如涉及現場工作，我們會先實地視察，再按所見提供書面報價。",
     },
     phone:   "5744 9594",
     email:   "edwardfong@3formhk.com",
@@ -451,7 +523,7 @@ export const t = {
 
     privacy: {
       heading: { en: "Privacy Policy", tc: "私隱政策" },
-      updated: { en: "Last updated: January 2025", tc: "最後更新：2025年1月" },
+      updated: { en: "Last updated: September 2026", tc: "最後更新：2026年9月" },
       // Content modelled on the Federation of Hong Kong Industries privacy policy structure
       // Reference: https://www.industryhk.org/tc/privacy-policy/
       sections: [
@@ -465,8 +537,8 @@ export const t = {
         {
           title: { en: "Cookies and Automatic Data Collection", tc: "Cookies 及自動資料收集" },
           body: {
-            en: "Like most websites, this Website uses cookies to record visit data. Information collected automatically may include your browser type, operating system, IP address, and domain name. This information is used solely for general statistical analysis to improve the Website and does not identify you personally.",
-            tc: "與大多數網站一樣，本網站使用 Cookies 記錄訪問資料。自動收集的資訊可能包括您的瀏覽器類型、作業系統、IP地址及域名。這些資訊僅用於一般統計分析以改善本網站，不會識別您的個人身份。",
+            en: "Like most websites, this Website uses cookies to record visit data. Information collected automatically may include your browser type, operating system, IP address, and domain name. This information is used solely for general statistical analysis to improve the Website and does not identify you personally. We use Google Analytics for this analysis, so the data is processed by Google; you can opt out with Google's browser add-on at https://tools.google.com/dlpage/gaoptout.",
+            tc: "與大多數網站一樣，本網站使用 Cookies 記錄訪問資料。自動收集的資訊可能包括您的瀏覽器類型、作業系統、IP地址及域名。這些資訊僅用於一般統計分析以改善本網站，不會識別您的個人身份。我們使用 Google Analytics 進行此分析，相關資料由 Google 處理；您可透過 Google 的瀏覽器外掛程式選擇退出：https://tools.google.com/dlpage/gaoptout。",
           },
         },
         {

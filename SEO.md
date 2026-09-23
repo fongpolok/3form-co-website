@@ -33,13 +33,14 @@ rules or server config.
 | `/` | `/tc/` | `dist/index.html` | 1.0 |
 | `/services/` | `/tc/services/` | `dist/services/index.html` | 0.9 |
 | **`/services/facility-maintenance/`** | **`/tc/services/facility-maintenance/`** | `dist/services/facility-maintenance/index.html` | 0.9 |
+| **`/services/funding-consulting/`** | **`/tc/services/funding-consulting/`** | `dist/services/funding-consulting/index.html` | 0.9 |
 | **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
 | `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
 
-**30 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**32 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 
@@ -156,15 +157,22 @@ Add another profile there only once it is real and public.
 
 ## Follow-ups (not in this change)
 
-- **Contact page copy is thin** (~65 words EN, ~34 zh-HK). It ranks on the
-  `ContactPage` + `Organization` schema and the phone/email, but a short
-  paragraph on where 3form works and what to expect after enquiring would help.
-  Needs Edward's words, not invented copy.
-- **Per-service landing pages.** `/services/facility-maintenance/` is the
-  pattern; the other six service cards could each get one the same way — add a
-  page to `PAGE_SEGMENT` and `PRERENDERED_PAGES` in `src/routes.ts` and a
-  component in `App.tsx`. Each needs real copy first, or they'd be thin
-  duplicates of the Services page and would hurt more than help.
+- ✅ **Contact page copy.** Done. The intro (`t.contact.sub`) is now a
+  paragraph Edward approved on 2026-09-23: who 3form works with, the
+  one-business-day reply, and walkthrough-then-quotation for site work.
+- **Per-service landing pages.** In progress, one service at a time from an
+  interview with Edward. Live pattern: add the page to `Page`, `PAGE_SEGMENT`,
+  `SERVICE_PAGES`, `PAGE_TITLE`, `PAGE_DESCRIPTION` and `PRERENDERED_PAGES` in
+  `src/routes.ts`; a component in `App.tsx`; a `Service` node in
+  `src/structuredData.ts`; and a card link on the Services page. Never publish
+  one without real copy: thin duplicates of the Services page hurt rankings.
+  - ✅ Facility Maintenance: `/services/facility-maintenance/`
+  - ✅ Funding Consulting: `/services/funding-consulting/`. Copy lives in
+    `t.services.fundingPage`. A results section is still pending Edward's
+    publishable example.
+  - Still to interview: Engineering & Process Enhancement, AI & Data,
+    Production Site Setup, Warehouse Management System, General Maintenance &
+    Repair, Industrial Agentic Development.
 - ✅ **`og:image`.** Done. Every page ships `og:image` (1200×630, with alt
   text in the page's language) and `twitter:card=summary_large_image`. The
   card is `public/og-image.png`; its source is `scripts/og-image/card.html`,
@@ -178,6 +186,9 @@ Add another profile there only once it is real and public.
   `foundingDate` and `legalName`. Google's Rich Results Test lists these as
   optional. A "missing postalCode" warning can be ignored: Hong Kong has no
   postcodes.
-- **Analytics.** `analytics.googleAnalyticsId` in `.figma/make/site.json` is
-  unset. Client-side navigation would need a pageview call in the route effect
-  in `App.tsx`.
+- ✅ **Analytics.** Done. GA4 `G-8XY75DG091` is set in
+  `.figma/make/site.json`, and `vite.config.ts` injects the tag into every
+  page. In-app navigation is counted by GA4's enhanced measurement (browser
+  history events, on by default), so there is no manual `page_view` call.
+  Adding one would double-count. The Privacy Policy names Google Analytics
+  and links Google's opt-out add-on.

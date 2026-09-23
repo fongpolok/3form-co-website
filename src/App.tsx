@@ -943,6 +943,15 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
               <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
                 {txt(svc.detail, lang)}
               </p>
+              {/* Services with their own landing page link to it — a real <a>
+                  so crawlers can follow it. Add an id here as pages ship. */}
+              {svc.id === 1 && (
+                <RouteLink to={{ page: "fundingConsulting", lang, projectId: null }}
+                  onNavigate={() => { log.event("Services → funding consulting page"); setPage("fundingConsulting"); }}
+                  style={{ display: "inline-block", marginTop: "20px", color: CONFIG.accent, fontSize: "14px", fontWeight: 600 }}>
+                  {txt(t.services.fundingPage.cardLink, lang)}
+                </RouteLink>
+              )}
             </div>
             );
           })}
@@ -1232,6 +1241,81 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
             onContact={() => setPage("contact")}
             omitIntro
           />
+        </div>
+      </section>
+    </PageShell>
+  );
+}
+
+// ── Funding Consulting / 資助顧問 — its own indexable page ────────────────────
+// Targets "NIFS funding consultant Hong Kong" searches. Copy lives in
+// t.services.fundingPage; the Services-page card links here.
+function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: () => void; setPage: (p: Page) => void }) {
+  const fp = t.services.fundingPage;
+  const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
+  const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px" };
+  const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0 };
+  return (
+    <PageShell lang={lang} onBack={onBack}>
+      <section style={{ background: CONFIG.sectionBg.services, padding: "80px 32px 100px" }}>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: "#6B7280", marginBottom: "24px" }}>
+            <RouteLink to={{ page: "services", lang, projectId: null }}
+              onNavigate={() => { log.event("Breadcrumb → services"); setPage("services"); }}
+              style={{ color: CONFIG.accent, fontWeight: 600 }}>
+              {txt(t.nav.services, lang)}
+            </RouteLink>
+            <span aria-hidden="true" style={{ margin: "0 8px", color: "#9CA3AF" }}>/</span>
+            <span>{txt(fp.label, lang)}</span>
+          </nav>
+
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "22ch" }}>
+            {txt(fp.heading, lang)}
+          </h1>
+          <p style={{ fontSize: "16px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 72px", maxWidth: "68ch" }}>
+            {txt(fp.intro, lang)}
+          </p>
+
+          <h2 style={h2Style}>{txt(fp.audienceHeading, lang)}</h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
+            {fp.audiences.map((a, i) => (
+              <div key={i} style={{ background: CONFIG.sectionBg.about, borderTop: `3px solid ${CONFIG.accent}`, padding: "32px" }}>
+                <h3 style={h3Style}>{txt(a.title, lang)}</h3>
+                <p style={bodyStyle}>{txt(a.body, lang)}</p>
+              </div>
+            ))}
+          </div>
+
+          <h2 style={h2Style}>{txt(fp.stepsHeading, lang)}</h2>
+          <ol style={{ listStyle: "none", padding: 0, margin: "0 0 72px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "40px 48px" }} className="grid-responsive">
+            {fp.steps.map((step, i) => (
+              <li key={i} style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
+                <span aria-hidden="true" style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, letterSpacing: "0.1em", paddingTop: "5px", minWidth: "24px" }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 style={h3Style}>{txt(step.title, lang)}</h3>
+                  <p style={bodyStyle}>{txt(step.body, lang)}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div style={{ background: CONFIG.navBg, padding: "48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
+            <div style={{ maxWidth: "520px" }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: "#fff", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+                {txt(fp.ctaHeading, lang)}
+              </h2>
+              <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: 0 }}>
+                {txt(fp.ctaBody, lang)}
+              </p>
+            </div>
+            <RouteLink to={{ page: "contact", lang, projectId: null }}
+              onNavigate={() => { log.event("Funding page → contact"); setPage("contact"); }}
+              style={{ background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
+              {txt(fp.ctaButton, lang)}
+            </RouteLink>
+          </div>
         </div>
       </section>
     </PageShell>
@@ -1727,6 +1811,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
+        {page === "fundingConsulting" && <FundingConsultingPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />

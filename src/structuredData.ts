@@ -54,9 +54,10 @@ function breadcrumbs(route: Route): Record<string, unknown> | null {
     { name: txt(t.nav.home, route.lang), route: { page: "home", lang: route.lang, projectId: null } },
   ];
 
-  if (route.page === "facilityMaintenance") {
+  if (route.page === "facilityMaintenance" || route.page === "fundingConsulting") {
+    const label = route.page === "facilityMaintenance" ? facilityMaintenanceConfig.label : t.services.fundingPage.label;
     trail.push({ name: txt(t.nav.services, route.lang), route: { page: "services", lang: route.lang, projectId: null } });
-    trail.push({ name: txt(facilityMaintenanceConfig.label, route.lang), route });
+    trail.push({ name: txt(label, route.lang), route });
   } else if (route.projectId !== null) {
     const project = t.projects.items.find((p) => p.id === route.projectId);
     trail.push({ name: txt(t.nav.projects, route.lang), route: { page: "projects", lang: route.lang, projectId: null } });
@@ -105,6 +106,21 @@ function facilityMaintenanceService(route: Route): Record<string, unknown> {
   };
 }
 
+/** The Funding Consulting landing page. Built from the same copy the page renders. */
+function fundingConsultingService(route: Route): Record<string, unknown> {
+  const fp = t.services.fundingPage;
+  return {
+    "@type": "Service",
+    "@id": `${routeUrl(route)}#service`,
+    serviceType: txt(fp.label, route.lang),
+    name: txt(fp.heading, route.lang),
+    description: txt(fp.intro, route.lang),
+    provider: { "@id": `${SITE_ORIGIN}/#organization` },
+    areaServed: { "@type": "Place", name: "Hong Kong" },
+    audience: fp.audiences.map((a) => ({ "@type": "BusinessAudience", audienceType: txt(a.title, route.lang) })),
+  };
+}
+
 /** Every service card on the Services page, as a catalogue. */
 function servicesCatalog(route: Route): Record<string, unknown> {
   return {
@@ -141,6 +157,7 @@ export function structuredDataFor(route: Route): Record<string, unknown> {
   }
 
   if (route.page === "facilityMaintenance") graph.push(facilityMaintenanceService(route));
+  if (route.page === "fundingConsulting") graph.push(fundingConsultingService(route));
   if (route.page === "services") graph.push(servicesCatalog(route));
 
   if (route.page === "contact") {
