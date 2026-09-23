@@ -182,10 +182,13 @@ Add another profile there only once it is real and public.
   `public/logo.navy.png`, a navy mark on white. Google shows it on a white
   background, where the site header's white-on-transparent mark would be
   invisible. `description` reuses the About page's company text.
-- **Organization fields that need Edward's facts:** `streetAddress`,
-  `foundingDate` and `legalName`. Google's Rich Results Test lists these as
-  optional. A "missing postalCode" warning can be ignored: Hong Kong has no
-  postcodes.
+- ✅ **Organization facts.** `legalName` (3form Engineering Co Ltd),
+  `foundingDate` (2026) and a full `PostalAddress` (Room C22, 12/F, Wong King
+  Industrial Building, San Po Kong, Kowloon) come from `t.contact` in
+  `src/translations.ts`. The Contact page shows the same address, so the
+  name, address and phone match everywhere. A "missing postalCode" warning
+  can be ignored: Hong Kong has no postcodes. The zh-HK page shows the address
+  in English until the Chinese building name is confirmed.
 - ✅ **Analytics.** Done. GA4 `G-8XY75DG091` is set in
   `.figma/make/site.json`, and `vite.config.ts` injects the tag into every
   page. In-app navigation is counted by GA4's enhanced measurement (browser

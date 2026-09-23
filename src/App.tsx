@@ -256,6 +256,15 @@ function IconGlobe({ size = 18, color = "currentColor" }: { size?: number; color
   );
 }
 
+function IconMapPin({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" />
+      <circle cx="12" cy="9.5" r="2.5" />
+    </svg>
+  );
+}
+
 function IconCheckCircle({ size = 48, color = "currentColor" }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -801,7 +810,7 @@ function AboutCompanySection({ lang }: { lang: Lang }) {
   );
 }
 
-// ── About: engagement roadmap — Diagnose → Fund → Engineer → Certify ────────
+// ── About: engagement roadmap — Diagnose → Fund → Engineer → Deliver ────────
 function RoadmapSection({ lang }: { lang: Lang }) {
   const steps = t.about.roadmap.steps;
   return (
@@ -1104,6 +1113,7 @@ function ContactSection({ lang }: { lang: Lang }) {
               <ContactDetail icon={<IconPhone size={18} />} label={lang === "en" ? "Phone" : "電話"} value={t.contact.phone} />
               <ContactDetail icon={<IconMail size={18} />} label={lang === "en" ? "Email" : "電郵"} value={t.contact.email} />
               <ContactDetail icon={<IconGlobe size={18} />} label={lang === "en" ? "Website" : "網站"} value={t.contact.website} />
+              <ContactDetail icon={<IconMapPin size={18} />} label={lang === "en" ? "Office" : "辦公室"} value={txt(t.contact.address.display, lang)} />
             </div>
           </div>
           <div style={{ background: "#fff", padding: "48px 40px", borderRadius: "4px" }}>

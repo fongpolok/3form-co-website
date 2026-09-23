@@ -70,8 +70,8 @@ export const t = {
         tc: "創辦人及首席顧問",
       },
       bio_p1: {
-        en: "Edward is a Mechanical Engineer with over three years at the Hong Kong Productivity Council (HKPC), where he currently serves as Senior Consultant — Smart Machinery and Equipment. His work spans IoT 4.0 and warehouse management system (WMS) development, AI-driven computer vision inspection, and advanced plastic and composite processing — supporting Hong Kong manufacturers through government-funded schemes including the New Industrialisation Funding Scheme (NIFS), the New Industrialisation and Technology Training Programme (NITTP), and the Cash Rebate Scheme (CRS).",
-        tc: "Edward 是一名機械工程師，在香港生產力促進局（HKPC）工作超過三年，現任智能機械及設備高級顧問。他的工作範疇包括物聯網4.0及倉庫管理系統（WMS）開發、人工智能機器視覺檢測，以及先進塑膠及複合材料製程，並透過新型工業化資助計劃（NIFS）、新型工業化及科技培訓計劃（NITTP）及現金回贈計劃（CRS）等政府資助計劃，協助香港製造商發展升級。",
+        en: "Edward is a Mechanical Engineer with over three years at the Hong Kong Productivity Council (HKPC), where he currently serves as Senior Consultant — Smart Machinery and Equipment. His work spans IoT 4.0 and warehouse management system (WMS) development, AI-driven computer vision inspection, and advanced plastic and composite processing — supporting Hong Kong manufacturers through government funding applications and schemes such as the New Industrialisation and Technology Training Programme (NITTP) and the Cash Rebate Scheme (CRS).",
+        tc: "Edward 是一名機械工程師，在香港生產力促進局（HKPC）工作超過三年，現任智能機械及設備高級顧問。他的工作範疇包括物聯網4.0及倉庫管理系統（WMS）開發、人工智能機器視覺檢測，以及先進塑膠及複合材料製程，並透過政府資助申請，以及新型工業化及科技培訓計劃（NITTP）、現金回贈計劃（CRS）等計劃，協助香港製造商發展升級。",
       },
       bio_p2: {
         en: "He holds a Bachelor of Engineering and a Master of Science in Mechanical Engineering from the University of Hong Kong, and is an Associate Member of the Institution of Mechanical Engineers (IMechE), Hong Kong Branch. Edward previously developed a patented machine vision inspection system for automotive parts, and led an automated retail store project applying end-to-end automation to offline retail operations. He now channels this hands-on engineering and funding expertise into 3form Co, helping Hong Kong businesses modernise their operations and access the resources to grow.",
@@ -86,13 +86,14 @@ export const t = {
     },
 
     // ── Engagement roadmap — the four stages of a typical client engagement,
-    // in order. Mirrors PRODUCT.md's positioning: diagnosis through funded
-    // implementation to compliance sign-off, without a vendor handoff.
+    // in order: diagnosis through funded implementation to project delivery,
+    // without a vendor handoff. Compliance work is offered where a project
+    // needs it, not promised as a universal final step (Edward, 2026-09-23).
     roadmap: {
       heading: { en: "How We Work", tc: "我們的工作方式" },
       sub: {
-        en: "One firm, one team, from first diagnosis to final sign-off — no handoff between separate vendors.",
-        tc: "一家公司，一個團隊，由診斷到最終合規審核一站式完成，毋須在不同供應商之間轉手。",
+        en: "One firm, one team, from first diagnosis to project delivery — no handoff between separate vendors.",
+        tc: "一家公司，一個團隊，由診斷到項目交付一站式完成，毋須在不同供應商之間轉手。",
       },
       steps: [
         {
@@ -105,8 +106,8 @@ export const t = {
         {
           title: { en: "Fund", tc: "申請資助" },
           desc: {
-            en: "Prepare, submit, and manage grant applications — BUD Fund, NIFS, NIAS, and other SME-focused schemes.",
-            tc: "準備、提交及管理資助申請，包括BUD專項基金、NIFS、NIAS及其他中小企專項計劃。",
+            en: "Prepare, submit, and manage funding applications — BUD Fund, NIAS, and other general funding schemes.",
+            tc: "準備、提交及管理資助申請，包括BUD專項基金、NIAS及其他一般資助計劃。",
           },
         },
         {
@@ -117,10 +118,10 @@ export const t = {
           },
         },
         {
-          title: { en: "Certify", tc: "合規認證" },
+          title: { en: "Deliver", tc: "項目交付" },
           desc: {
-            en: "Carry the work through to compliance sign-off — licensing, HACCP, and GMP included.",
-            tc: "跟進至合規審核完成，包括牌照申請、HACCP及GMP標準。",
+            en: "Deliver the project, with licensing, HACCP or GMP compliance support where the project needs it.",
+            tc: "交付項目，並在項目需要時提供牌照申請、HACCP或GMP合規支援。",
           },
         },
       ],
@@ -139,8 +140,8 @@ export const t = {
         id: 1,
         title:  { en: "Funding Consulting",                                tc: "資助顧問" },
         detail: {
-          en: "Identify, apply for, and manage government grants and funding schemes available to Hong Kong businesses — including BUD Fund, NIFS, NIAS, and SME-focused programmes.",
-          tc: "識別、申請及管理香港企業可獲取的政府資助計劃，包括BUD專項基金、NIFS、NIAS及中小企專項計劃。",
+          en: "Identify, apply for, and manage government grants and funding schemes available to Hong Kong businesses — including BUD Fund, NIAS, and general funding applications for SMEs.",
+          tc: "識別、申請及管理香港企業可獲取的政府資助計劃，包括BUD專項基金、NIAS及中小企一般資助申請。",
         },
       },
       {
@@ -432,6 +433,20 @@ export const t = {
     sub: {
       en: "3form Engineering Co works with manufacturers, food producers, warehouses and technology firms across Hong Kong. Tell us what you want to improve: a funding application, a production line, a warehouse system, or equipment that keeps breaking down. We reply within one business day to arrange a short call. For work on site, we first walk through your site and then send a written quotation based on what we saw.",
       tc: "3form Engineering Co 為全港製造商、食品生產商、倉儲及科技企業提供服務。請告訴我們您想改善的地方，無論是資助申請、生產線、倉庫系統，還是經常故障的設備。我們會於一個工作天內回覆，安排簡短通話。如涉及現場工作，我們會先實地視察，再按所見提供書面報價。",
+    },
+    // Company facts from Edward, 2026-09-23. Also feed the Organization
+    // JSON-LD (legalName, foundingDate, address) in src/structuredData.ts.
+    legalName:    "3form Engineering Co Ltd",
+    foundingYear: "2026",
+    address: {
+      street:   "Room C22, 12/F, Wong King Industrial Building",
+      locality: "San Po Kong",
+      region:   "Kowloon",
+      // Chinese building name not yet confirmed, so the TC page shows English.
+      display: {
+        en: "Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong",
+        tc: "Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong",
+      },
     },
     phone:   "5744 9594",
     email:   "edwardfong@3formhk.com",

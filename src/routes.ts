@@ -234,8 +234,8 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     tc: "3form Engineering Co 總部設於香港，協助製造業、食品生產及科技企業改善營運、採用新技術並符合監管要求。了解我們的團隊、工作方式及往績。",
   },
   services: {
-    en: "Funding consulting (BUD, NIFS, NIAS), Six Sigma and Lean process enhancement, AI and data digitalisation, production site setup, warehouse management SaaS, equipment repair and facility maintenance.",
-    tc: "3form 提供資助顧問（BUD、NIFS、NIAS）、六西格瑪及精益流程優化、人工智能及數據數碼化、生產場地設立、倉庫管理系統、設備維修及場地保養服務。",
+    en: "Funding consulting (BUD, NIAS and general funding applications), Six Sigma and Lean process enhancement, AI and data digitalisation, production site setup, warehouse management SaaS, equipment repair and facility maintenance.",
+    tc: "3form 提供資助顧問（BUD、NIAS 及一般資助申請）、六西格瑪及精益流程優化、人工智能及數據數碼化、生產場地設立、倉庫管理系統、設備維修及場地保養服務。",
   },
   facilityMaintenance: {
     en: "Facility maintenance in Hong Kong for offices, commercial buildings, factories and warehouses: HVAC, electrical systems, office equipment and FIFO production line layout. Scope confirmed by site walkthrough, then a detailed quotation.",

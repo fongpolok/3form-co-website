@@ -20,7 +20,9 @@ function organization(route: Route): Record<string, unknown> {
     "@type": "Organization",
     "@id": `${SITE_ORIGIN}/#organization`,
     name: SITE_NAME,
+    legalName: t.contact.legalName,
     alternateName: "3form Co",
+    foundingDate: t.contact.foundingYear,
     url: SITE_ORIGIN,
     description: txt(t.about.company_body, route.lang),
     // Google shows this logo on a white background, so it must not be the
@@ -35,7 +37,14 @@ function organization(route: Route): Record<string, unknown> {
     email: t.contact.email,
     telephone: TEL,
     areaServed: { "@type": "Place", name: "Hong Kong" },
-    address: { "@type": "PostalAddress", addressCountry: "HK", addressLocality: "Hong Kong" },
+    // Hong Kong has no postcodes, so postalCode is intentionally absent.
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: t.contact.address.street,
+      addressLocality: t.contact.address.locality,
+      addressRegion: t.contact.address.region,
+      addressCountry: "HK",
+    },
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",
