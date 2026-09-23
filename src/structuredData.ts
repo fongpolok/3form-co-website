@@ -15,14 +15,22 @@ import { HTML_LANG, SITE_NAME, SITE_ORIGIN, SOCIAL_PROFILES, routeUrl, type Rout
 /** "5744 9594" → "+85257449594" — Hong Kong numbers are 8 digits, no area code. */
 const TEL = `+852${t.contact.phone.replace(/\D/g, "")}`;
 
-function organization(): Record<string, unknown> {
+function organization(route: Route): Record<string, unknown> {
   return {
     "@type": "Organization",
     "@id": `${SITE_ORIGIN}/#organization`,
     name: SITE_NAME,
     alternateName: "3form Co",
     url: SITE_ORIGIN,
-    logo: `${SITE_ORIGIN}/logo.white.png`,
+    description: txt(t.about.company_body, route.lang),
+    // Google shows this logo on a white background, so it must not be the
+    // white-on-transparent mark the navy site header uses (logo.white.png).
+    logo: {
+      "@type": "ImageObject",
+      url: `${SITE_ORIGIN}/logo.navy.png`,
+      width: 512,
+      height: 512,
+    },
     sameAs: Object.values(SOCIAL_PROFILES),
     email: t.contact.email,
     telephone: TEL,
@@ -119,7 +127,7 @@ function servicesCatalog(route: Route): Record<string, unknown> {
  * <script type="application/ld+json"> tag.
  */
 export function structuredDataFor(route: Route): Record<string, unknown> {
-  const graph: Record<string, unknown>[] = [organization()];
+  const graph: Record<string, unknown>[] = [organization(route)];
 
   if (route.page === "home") {
     graph.push({

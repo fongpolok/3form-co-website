@@ -165,9 +165,19 @@ Add another profile there only once it is real and public.
   page to `PAGE_SEGMENT` and `PRERENDERED_PAGES` in `src/routes.ts` and a
   component in `App.tsx`. Each needs real copy first, or they'd be thin
   duplicates of the Services page and would hurt more than help.
-- **`og:image`.** No social preview image is set, so shared links render without
-  a card image. Add one via `openGraph.image` in `.figma/make/site.json`, or
-  per-page in `routes.ts`.
+- ✅ **`og:image`.** Done. Every page ships `og:image` (1200×630, with alt
+  text in the page's language) and `twitter:card=summary_large_image`. The
+  card is `public/og-image.png`; its source is `scripts/og-image/card.html`,
+  which has the one-line command to regenerate it. The URL and alt text live
+  in `OG_IMAGE` in `src/routes.ts`.
+- ✅ **Organization logo and description.** The schema logo is
+  `public/logo.navy.png`, a navy mark on white. Google shows it on a white
+  background, where the site header's white-on-transparent mark would be
+  invisible. `description` reuses the About page's company text.
+- **Organization fields that need Edward's facts:** `streetAddress`,
+  `foundingDate` and `legalName`. Google's Rich Results Test lists these as
+  optional. A "missing postalCode" warning can be ignored: Hong Kong has no
+  postcodes.
 - **Analytics.** `analytics.googleAnalyticsId` in `.figma/make/site.json` is
   unset. Client-side navigation would need a pageview call in the route effect
   in `App.tsx`.

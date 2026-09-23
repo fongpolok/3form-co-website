@@ -256,6 +256,22 @@ export type RouteMeta = {
   canonical: string;
   /** hreflang alternates — the same page in every language, plus x-default. */
   alternates: { hreflang: string; href: string }[];
+  /** Social preview card shown when a link is shared (og:image / twitter:image). */
+  ogImage: { url: string; width: number; height: number; alt: string };
+};
+
+/**
+ * One bilingual card for every page. Source: scripts/og-image/card.html —
+ * regenerate the PNG from there if the wording changes.
+ */
+const OG_IMAGE = {
+  url: `${SITE_ORIGIN}/og-image.png`,
+  width: 1200,
+  height: 630,
+  alt: {
+    en: `${SITE_NAME} — engineering and management consulting in Hong Kong`,
+    tc: `${SITE_NAME} — 香港工程及管理顧問`,
+  },
 };
 
 export function routeMeta(route: Route): RouteMeta {
@@ -283,6 +299,12 @@ export function routeMeta(route: Route): RouteMeta {
       })),
       { hreflang: "x-default", href: routeUrl({ ...route, lang: "en" }) },
     ],
+    ogImage: {
+      url: OG_IMAGE.url,
+      width: OG_IMAGE.width,
+      height: OG_IMAGE.height,
+      alt: txt(OG_IMAGE.alt, route.lang),
+    },
   };
 }
 

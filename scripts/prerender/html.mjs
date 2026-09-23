@@ -38,7 +38,8 @@ function stripSharedHeadTags(html) {
   return html
     .replace(/<title>[\s\S]*?<\/title>\s*/i, "")
     .replace(/<meta\s+name="description"[^>]*>\s*/gi, "")
-    .replace(/<meta\s+property="og:(?:title|description|url|locale|type|site_name)"[^>]*>\s*/gi, "")
+    .replace(/<meta\s+property="og:(?:title|description|url|locale|type|site_name|image(?::\w+)?)"[^>]*>\s*/gi, "")
+    .replace(/<meta\s+name="twitter:(?:card|image)"[^>]*>\s*/gi, "")
     .replace(/<link\s+rel="canonical"[^>]*>\s*/gi, "");
 }
 
@@ -57,7 +58,12 @@ function headTags({ meta, structuredData, siteName }) {
     `<meta property="og:description" content="${attr(meta.description)}" />`,
     `<meta property="og:url" content="${attr(meta.canonical)}" />`,
     `<meta property="og:locale" content="${attr(meta.ogLocale)}" />`,
-    `<meta name="twitter:card" content="summary" />`,
+    `<meta property="og:image" content="${attr(meta.ogImage.url)}" />`,
+    `<meta property="og:image:width" content="${meta.ogImage.width}" />`,
+    `<meta property="og:image:height" content="${meta.ogImage.height}" />`,
+    `<meta property="og:image:alt" content="${attr(meta.ogImage.alt)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:image" content="${attr(meta.ogImage.url)}" />`,
     `<script type="application/ld+json">${jsonLd(structuredData)}</script>`,
   ];
   return tags.map((tag) => `    ${tag}`).join("\n");
