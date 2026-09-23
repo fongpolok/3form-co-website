@@ -10,7 +10,7 @@
 
 import { t, txt } from "./translations";
 import { facilityMaintenanceConfig } from "./facilityMaintenance/config";
-import { HTML_LANG, SITE_NAME, SITE_ORIGIN, routeUrl, type Route } from "./routes";
+import { HTML_LANG, SITE_NAME, SITE_ORIGIN, SOCIAL_PROFILES, routeUrl, type Route } from "./routes";
 
 /** "5744 9594" → "+85257449594" — Hong Kong numbers are 8 digits, no area code. */
 const TEL = `+852${t.contact.phone.replace(/\D/g, "")}`;
@@ -23,6 +23,7 @@ function organization(): Record<string, unknown> {
     alternateName: "3form Co",
     url: SITE_ORIGIN,
     logo: `${SITE_ORIGIN}/logo.white.png`,
+    sameAs: Object.values(SOCIAL_PROFILES),
     email: t.contact.email,
     telephone: TEL,
     areaServed: { "@type": "Place", name: "Hong Kong" },

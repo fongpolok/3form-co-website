@@ -135,12 +135,24 @@ What was checked on this branch, in headless Chrome against the built output:
 It picks up all three stages with **no workflow change**. Nothing here has been
 deployed — this is ready for review.
 
-After the first deploy, worth doing once:
+After the first deploy, worth doing once. **All three are done:**
 
-1. Submit `https://3formhk.com/sitemap.xml` in Google Search Console.
-2. Request indexing for `/services/facility-maintenance/` and `/contact/`.
-3. Run the two priority pages through the Rich Results Test to confirm the
-   JSON-LD parses.
+1. ✅ Submit `https://3formhk.com/sitemap.xml` in Google Search Console. The
+   property is verified with the HTML file in `public/`.
+2. ✅ Request indexing for `/services/facility-maintenance/` and `/contact/`,
+   EN and zh-HK.
+3. ✅ Run the two priority pages through the Rich Results Test. Breadcrumbs
+   and Organization parse, with non-critical warnings only.
+
+Indexing takes days to weeks to show up in Search Console. Check the Pages
+report there before assuming anything is wrong.
+
+### Organization `sameAs`
+
+The Organization JSON-LD lists the firm's LinkedIn company page under `sameAs`,
+which links the site and the profile as one entity for Google. The URL lives in
+`SOCIAL_PROFILES` in `src/routes.ts` and the footer icon reads the same value.
+Add another profile there only once it is real and public.
 
 ## Follow-ups (not in this change)
 

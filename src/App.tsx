@@ -13,6 +13,7 @@ import {
   routeFromLegacyHash,
   routeHref,
   routeMeta,
+  SOCIAL_PROFILES,
   type Page,
   type Route,
 } from "./routes";
@@ -1259,7 +1260,7 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
   // real href to activate a link; until then it renders muted and inert
   // rather than looking clickable.
   const socials = [
-    { label: "LinkedIn",  href: "https://www.linkedin.com/company/3form-engineering-hk/",  icon: <IconLinkedIn  size={18} /> },
+    { label: "LinkedIn",  href: SOCIAL_PROFILES.linkedin,  icon: <IconLinkedIn  size={18} /> },
     { label: "Facebook",  href: "",  icon: <IconFacebook  size={18} /> },
     { label: "Instagram", href: "",  icon: <IconInstagram size={18} /> },
   ];

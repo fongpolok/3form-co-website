@@ -22,6 +22,15 @@ import { facilityMaintenanceConfig } from "./facilityMaintenance/config";
 export const SITE_ORIGIN = "https://3formhk.com";
 export const SITE_NAME = "3form Engineering Co";
 
+/**
+ * The firm's official profiles elsewhere. Used by the footer icons and by the
+ * Organization JSON-LD `sameAs`, which tells Google these profiles are the same
+ * entity as this site. Add a URL here only once the profile is real and public.
+ */
+export const SOCIAL_PROFILES = {
+  linkedin: "https://www.linkedin.com/company/3form-engineering-hk/",
+} as const;
+
 export const LANGS = ["en", "tc"] as const;
 
 /** BCP 47 tags for <html lang>, hreflang and og:locale. "tc" is our internal key. */
