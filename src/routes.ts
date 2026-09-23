@@ -207,8 +207,8 @@ const PAGE_TITLE: Record<Page, BiString> = {
     tc: "場地保養服務（香港）— 冷氣通風、電力系統、FIFO 生產線佈局",
   },
   fundingConsulting: {
-    en: "NIFS Funding Consulting for Hong Kong Manufacturers",
-    tc: "新型工業化資助計劃（NIFS）申請顧問 — 香港製造業",
+    en: "Engineering Consulting & Funding Applications for Manufacturers",
+    tc: "製造業工程顧問及資助申請 — 香港",
   },
   projects: {
     en: "Projects & Case Studies",
@@ -242,8 +242,8 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     tc: "3form 為香港寫字樓、商業大廈、工廠及倉庫提供場地保養服務：冷氣及通風（HVAC）、電力系統、辦公室設備，以及先進先出（FIFO）生產線佈局。經實地視察釐清範圍後提供詳細報價。",
   },
   fundingConsulting: {
-    en: "On-site assessment, a Lean and Six Sigma solution and the NIFS application, for Hong Kong manufacturers and Mainland firms setting up production in Hong Kong.",
-    tc: "3form 為香港製造商及來港設廠的內地企業提供實地評估、精益及六西格瑪改善方案，以及新型工業化資助計劃（NIFS）申請服務。",
+    en: "On-site assessment, a Lean and Six Sigma solution and the funding application, for Hong Kong manufacturers and Mainland firms setting up production in Hong Kong.",
+    tc: "3form 為香港製造商及來港設廠的內地企業提供實地評估、精益及六西格瑪改善方案，以及資助申請服務。",
   },
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",

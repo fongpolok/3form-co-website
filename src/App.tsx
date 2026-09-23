@@ -1248,7 +1248,7 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
 }
 
 // ── Funding Consulting / 資助顧問 — its own indexable page ────────────────────
-// Targets "NIFS funding consultant Hong Kong" searches. Copy lives in
+// Targets engineering-consulting and funding-application searches. Copy lives in
 // t.services.fundingPage; the Services-page card links here.
 function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: () => void; setPage: (p: Page) => void }) {
   const fp = t.services.fundingPage;

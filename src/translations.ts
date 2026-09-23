@@ -209,12 +209,12 @@ export const t = {
     fundingPage: {
       label: { en: "Funding Consulting", tc: "資助顧問" },
       heading: {
-        en: "NIFS funding consulting for manufacturers in Hong Kong",
-        tc: "新型工業化資助計劃（NIFS）申請顧問 — 香港製造業",
+        en: "Engineering consulting for manufacturers in Hong Kong",
+        tc: "香港製造業工程顧問",
       },
       intro: {
-        en: "3form helps manufacturers turn a production problem into a funded project. We assess your line on site, design the fix with Lean and Six Sigma, and prepare the New Industrialisation Funding Scheme (NIFS) application that helps pay for it.",
-        tc: "3form 協助製造商把生產上的難題轉化為獲資助的項目。我們會實地評估您的生產線，以精益及六西格瑪原則設計改善方案，並準備申請新型工業化資助計劃（NIFS），為項目爭取資助。",
+        en: "3form helps manufacturers turn a production problem into a funded project. We assess your line on site, design the fix with Lean and Six Sigma, and prepare the funding application that helps pay for it.",
+        tc: "3form 協助製造商把生產上的難題轉化為獲資助的項目。我們會實地評估您的生產線，以精益及六西格瑪原則設計改善方案，並準備資助申請，為項目爭取資助。",
       },
       audienceHeading: { en: "Who we work with", tc: "服務對象" },
       audiences: [
@@ -228,8 +228,8 @@ export const t = {
         {
           title: { en: "Mainland manufacturers setting up in Hong Kong", tc: "來港設廠的內地製造商" },
           body: {
-            en: "You plan to set up a production site in Hong Kong and want NIFS funding to support it. We evaluate the site and the production plan, then prepare the application.",
-            tc: "您計劃在香港設立生產基地，並希望以 NIFS 資助支持項目。我們會評估場地及生產規劃，再準備資助申請。",
+            en: "You plan to set up a production site in Hong Kong and want funding to support it. We evaluate the site and the production plan, then prepare a general funding application.",
+            tc: "您計劃在香港設立生產基地，並希望以資助支持項目。我們會評估場地及生產規劃，再準備一般資助申請。",
           },
         },
       ],
@@ -250,21 +250,21 @@ export const t = {
           },
         },
         {
-          title: { en: "The funding application", tc: "資助申請" },
+          title: { en: "The right solution and funding", tc: "合適方案及資助" },
           body: {
-            en: "We prepare, submit and manage the NIFS application. Where another scheme fits better, we also look at the BUD Fund, NIAS and other SME programmes.",
-            tc: "我們負責準備、提交及管理 NIFS 申請。如其他計劃更合適，我們亦會考慮 BUD 專項基金、NIAS 及其他中小企計劃。",
+            en: "We look for the proper solution and the financial incentives, such as a funding application, that fit what you need and how you will use it.",
+            tc: "我們按您的需要及實際用途，尋求合適的方案及財務誘因，例如資助申請。",
           },
         },
         {
-          title: { en: "Delivery to sign-off", tc: "執行至完成審核" },
+          title: { en: "Project delivery", tc: "項目交付" },
           body: {
-            en: "We carry the work through implementation to compliance sign-off, so the team that designed the solution also delivers it.",
-            tc: "我們跟進項目實施直至合規審核完成，由設計方案的團隊親自落實。",
+            en: "We deliver the project, carried out by the same team that designed the solution.",
+            tc: "由設計方案的同一團隊負責交付項目。",
           },
         },
       ],
-      ctaHeading: { en: "Planning a NIFS project?", tc: "正在籌劃 NIFS 項目？" },
+      ctaHeading: { en: "Planning a funded project?", tc: "正在籌劃資助項目？" },
       ctaBody: {
         en: "Tell us about your production line or your Hong Kong site plan. We reply within one business day.",
         tc: "告訴我們您的生產線或在港設廠計劃，我們會於一個工作天內回覆。",
