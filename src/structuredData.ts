@@ -10,7 +10,7 @@
 
 import { t, txt } from "./translations";
 import { facilityMaintenanceConfig } from "./facilityMaintenance/config";
-import { HTML_LANG, SITE_NAME, SITE_ORIGIN, SOCIAL_PROFILES, routeUrl, type Route } from "./routes";
+import { HTML_LANG, SERVICE_LANDINGS, SITE_NAME, SITE_ORIGIN, SOCIAL_PROFILES, routeUrl, type Route, type ServiceLandingContent } from "./routes";
 
 /** "5744 9594" → "+85257449594" — Hong Kong numbers are 8 digits, no area code. */
 const TEL = `+852${t.contact.phone.replace(/\D/g, "")}`;
@@ -63,8 +63,9 @@ function breadcrumbs(route: Route): Record<string, unknown> | null {
     { name: txt(t.nav.home, route.lang), route: { page: "home", lang: route.lang, projectId: null } },
   ];
 
-  if (route.page === "facilityMaintenance" || route.page === "fundingConsulting") {
-    const label = route.page === "facilityMaintenance" ? facilityMaintenanceConfig.label : t.services.fundingPage.label;
+  const landing = SERVICE_LANDINGS[route.page];
+  if (route.page === "facilityMaintenance" || landing) {
+    const label = landing ? landing.content.label : facilityMaintenanceConfig.label;
     trail.push({ name: txt(t.nav.services, route.lang), route: { page: "services", lang: route.lang, projectId: null } });
     trail.push({ name: txt(label, route.lang), route });
   } else if (route.projectId !== null) {
@@ -115,9 +116,8 @@ function facilityMaintenanceService(route: Route): Record<string, unknown> {
   };
 }
 
-/** The Funding Consulting landing page. Built from the same copy the page renders. */
-function fundingConsultingService(route: Route): Record<string, unknown> {
-  const fp = t.services.fundingPage;
+/** A templated service landing page. Built from the same copy the page renders. */
+function serviceLanding(route: Route, fp: ServiceLandingContent): Record<string, unknown> {
   return {
     "@type": "Service",
     "@id": `${routeUrl(route)}#service`,
@@ -166,7 +166,8 @@ export function structuredDataFor(route: Route): Record<string, unknown> {
   }
 
   if (route.page === "facilityMaintenance") graph.push(facilityMaintenanceService(route));
-  if (route.page === "fundingConsulting") graph.push(fundingConsultingService(route));
+  const landing = SERVICE_LANDINGS[route.page];
+  if (landing) graph.push(serviceLanding(route, landing.content));
   if (route.page === "services") graph.push(servicesCatalog(route));
 
   if (route.page === "contact") {

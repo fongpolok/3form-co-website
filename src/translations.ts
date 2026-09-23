@@ -273,6 +273,62 @@ export const t = {
       ctaButton: { en: "Contact us", tc: "聯絡我們" },
       cardLink: { en: "Full funding consulting details →", tc: "查看資助顧問詳情 →" },
     },
+
+    // ── Engineering & Process Enhancement landing page (/services/lean-six-sigma/).
+    // Built from Edward's interview answers (2026-09-23). He asked for no
+    // examples or results at this stage — don't add any until he supplies them.
+    processPage: {
+      label: { en: "Engineering & Process Enhancement", tc: "工程及流程優化" },
+      heading: {
+        en: "Lean and Six Sigma process consulting in Hong Kong",
+        tc: "香港精益及六西格瑪流程優化顧問",
+      },
+      intro: {
+        en: "3form helps manufacturers find where production, operations and cost can improve, and fixes it with Lean and Six Sigma. We start from your pain points on site, then provide technical work or advice, whichever your process needs.",
+        tc: "3form 協助製造商找出生產、營運及成本上可改善之處，並以精益及六西格瑪方法優化。我們由實地了解痛點開始，再按流程所需提供技術支援或顧問意見。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support you with both technical and advisory consultancy.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們同時提供技術及顧問支援。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We start with a preliminary review of your pain points and an evaluation of your site.",
+            tc: "我們先初步了解您的痛點，並進行實地評估。",
+          },
+        },
+        {
+          title: { en: "Production, operation and cost study", tc: "生產、營運及成本研究" },
+          body: {
+            en: "We study your production, operations and costs with Lean and Six Sigma to find where to optimise.",
+            tc: "我們以精益及六西格瑪方法研究您的生產、營運及成本，找出可優化之處。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We enhance your current business process, either by doing the technical work or by advising your team, whichever fits.",
+            tc: "按實際需要，以技術執行或顧問建議的方式，提升您現有的業務流程。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Want to see where your process can improve?", tc: "想了解您的流程可如何改善？" },
+      ctaBody: {
+        en: "Tell us about your production line or operation. We reply within one business day.",
+        tc: "告訴我們您的生產線或營運情況，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full process enhancement details →", tc: "查看流程優化詳情 →" },
+    },
   },
 
   // ── Live Demos — engineering builds behind the advisory work. `real: true`
@@ -395,8 +451,8 @@ export const t = {
       {
         id: 6,
         tag:    { en: "Funding",           tc: "資助" },
-        title:  { en: "NIFS & NIAS Grant for Technology Upgrade",   tc: "NIFS及NIAS科技升級資助" },
-        desc:   { en: "Prepared and submitted successful applications under the New Industrialisation Funding Scheme (NIFS) and New Industrialisation Acceleration Scheme (NIAS), enabling a manufacturer to upgrade legacy production equipment with government co-funding.", tc: "準備並提交新型工業化資助計劃（NIFS）及新型工業化加速計劃（NIAS）的成功申請，協助製造商利用政府共同資助升級舊有生產設備。" },
+        title:  { en: "Funding Grant for Technology Upgrade",   tc: "科技升級資助" },
+        desc:   { en: "Prepared and submitted a successful general funding application, enabling a manufacturer to upgrade legacy production equipment with government co-funding.", tc: "準備並提交成功的一般資助申請，協助製造商利用政府共同資助升級舊有生產設備。" },
         result: { en: "HK$500K equipment co-funded", tc: "50萬港元設備共同資助" },
         featured: false,
       },
@@ -442,10 +498,9 @@ export const t = {
       street:   "Room C22, 12/F, Wong King Industrial Building",
       locality: "San Po Kong",
       region:   "Kowloon",
-      // Chinese building name not yet confirmed, so the TC page shows English.
       display: {
         en: "Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong",
-        tc: "Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong",
+        tc: "香港九龍新蒲崗旺景工業大廈12樓C22室",
       },
     },
     phone:   "5744 9594",

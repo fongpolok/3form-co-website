@@ -51,6 +51,7 @@ export type Page =
   | "services"
   | "facilityMaintenance"
   | "fundingConsulting"
+  | "processEnhancement"
   | "projects"
   | "demos"
   | "contact";
@@ -62,13 +63,27 @@ const PAGE_SEGMENT: Record<Page, string> = {
   services: "services",
   facilityMaintenance: "services/facility-maintenance",
   fundingConsulting: "services/funding-consulting",
+  processEnhancement: "services/lean-six-sigma",
   projects: "projects",
   demos: "demos",
   contact: "contact",
 };
 
 /** Per-service landing pages. They live under /services/ and highlight that nav item. */
-export const SERVICE_PAGES: readonly Page[] = ["facilityMaintenance", "fundingConsulting"];
+export const SERVICE_PAGES: readonly Page[] = ["facilityMaintenance", "fundingConsulting", "processEnhancement"];
+
+/** Copy for a templated service landing page (see ServiceLandingPage in App.tsx). */
+export type ServiceLandingContent = typeof t.services.fundingPage;
+
+/**
+ * Service landing pages built from the shared template, keyed by page, with the
+ * Services-page card (`t.services.items[].id`) that links to each. Facility
+ * Maintenance is not here: it has its own component and content.json.
+ */
+export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number }>> = {
+  fundingConsulting: { content: t.services.fundingPage, cardId: 1 },
+  processEnhancement: { content: t.services.processPage, cardId: 2 },
+};
 
 /** Which nav item highlights for a given page (service landings sit under Services). */
 export function navKeyFor(page: Page): Page {
@@ -210,6 +225,10 @@ const PAGE_TITLE: Record<Page, BiString> = {
     en: "Engineering Consulting & Funding Applications for Manufacturers",
     tc: "製造業工程顧問及資助申請 — 香港",
   },
+  processEnhancement: {
+    en: "Lean & Six Sigma Consulting for Manufacturers in Hong Kong",
+    tc: "精益及六西格瑪顧問 — 香港製造業流程優化",
+  },
   projects: {
     en: "Projects & Case Studies",
     tc: "項目及個案研究",
@@ -244,6 +263,10 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
   fundingConsulting: {
     en: "On-site assessment, a Lean and Six Sigma solution and the funding application, for Hong Kong manufacturers and Mainland firms setting up production in Hong Kong.",
     tc: "3form 為香港製造商及來港設廠的內地企業提供實地評估、精益及六西格瑪改善方案，以及資助申請服務。",
+  },
+  processEnhancement: {
+    en: "Lean and Six Sigma consulting in Hong Kong: site evaluation, production and cost studies, and technical or advisory support for Greater Bay Area manufacturers.",
+    tc: "3form 為大灣區製造商提供精益及六西格瑪顧問服務：實地評估、生產營運及成本研究，以及技術或顧問支援。",
   },
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
@@ -329,6 +352,7 @@ const PRERENDERED_PAGES: Page[] = [
   "services",
   "facilityMaintenance",
   "fundingConsulting",
+  "processEnhancement",
   "contact",
   "about",
   "projects",
@@ -356,6 +380,7 @@ export function sitemapPriority(route: Route): string {
       return "1.0";
     case "facilityMaintenance":
     case "fundingConsulting":
+    case "processEnhancement":
     case "services":
     case "contact":
       return "0.9";

@@ -34,13 +34,14 @@ rules or server config.
 | `/services/` | `/tc/services/` | `dist/services/index.html` | 0.9 |
 | **`/services/facility-maintenance/`** | **`/tc/services/facility-maintenance/`** | `dist/services/facility-maintenance/index.html` | 0.9 |
 | **`/services/funding-consulting/`** | **`/tc/services/funding-consulting/`** | `dist/services/funding-consulting/index.html` | 0.9 |
+| **`/services/lean-six-sigma/`** | **`/tc/services/lean-six-sigma/`** | `dist/services/lean-six-sigma/index.html` | 0.9 |
 | **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
 | `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
 
-**32 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**34 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 
@@ -161,16 +162,21 @@ Add another profile there only once it is real and public.
   paragraph Edward approved on 2026-09-23: who 3form works with, the
   one-business-day reply, and walkthrough-then-quotation for site work.
 - **Per-service landing pages.** In progress, one service at a time from an
-  interview with Edward. Live pattern: add the page to `Page`, `PAGE_SEGMENT`,
-  `SERVICE_PAGES`, `PAGE_TITLE`, `PAGE_DESCRIPTION` and `PRERENDERED_PAGES` in
-  `src/routes.ts`; a component in `App.tsx`; a `Service` node in
-  `src/structuredData.ts`; and a card link on the Services page. Never publish
-  one without real copy: thin duplicates of the Services page hurt rankings.
+  interview with Edward. To add one: write a `t.services.<name>Page` block
+  (same shape as `fundingPage`), then add the page to `Page`, `PAGE_SEGMENT`,
+  `SERVICE_PAGES`, `SERVICE_LANDINGS` (with its Services-card id),
+  `PAGE_TITLE`, `PAGE_DESCRIPTION` and `PRERENDERED_PAGES` in
+  `src/routes.ts`. The shared `ServiceLandingPage` template, the Service
+  JSON-LD, the breadcrumbs and the Services-card link all follow
+  automatically. Never publish one without real copy: thin duplicates of the
+  Services page hurt rankings.
   - ✅ Facility Maintenance: `/services/facility-maintenance/`
   - ✅ Funding Consulting: `/services/funding-consulting/`. Copy lives in
     `t.services.fundingPage`. A results section is still pending Edward's
     publishable example.
-  - Still to interview: Engineering & Process Enhancement, AI & Data,
+  - ✅ Engineering & Process Enhancement: `/services/lean-six-sigma/`. Copy
+    lives in `t.services.processPage`. Edward asked for no examples yet.
+  - Still to interview: AI & Data,
     Production Site Setup, Warehouse Management System, General Maintenance &
     Repair, Industrial Agentic Development.
 - ✅ **`og:image`.** Done. Every page ships `og:image` (1200×630, with alt
@@ -187,8 +193,8 @@ Add another profile there only once it is real and public.
   Industrial Building, San Po Kong, Kowloon) come from `t.contact` in
   `src/translations.ts`. The Contact page shows the same address, so the
   name, address and phone match everywhere. A "missing postalCode" warning
-  can be ignored: Hong Kong has no postcodes. The zh-HK page shows the address
-  in English until the Chinese building name is confirmed.
+  can be ignored: Hong Kong has no postcodes. The zh-HK page shows it in Chinese
+  (香港九龍新蒲崗旺景工業大廈12樓C22室).
 - ✅ **Analytics.** Done. GA4 `G-8XY75DG091` is set in
   `.figma/make/site.json`, and `vite.config.ts` injects the tag into every
   page. In-app navigation is counted by GA4's enhanced measurement (browser

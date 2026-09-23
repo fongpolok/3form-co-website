@@ -13,8 +13,10 @@ import {
   routeFromLegacyHash,
   routeHref,
   routeMeta,
+  SERVICE_LANDINGS,
   SOCIAL_PROFILES,
   type Page,
+  type ServiceLandingContent,
   type Route,
 } from "./routes";
 
@@ -953,14 +955,20 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
                 {txt(svc.detail, lang)}
               </p>
               {/* Services with their own landing page link to it — a real <a>
-                  so crawlers can follow it. Add an id here as pages ship. */}
-              {svc.id === 1 && (
-                <RouteLink to={{ page: "fundingConsulting", lang, projectId: null }}
-                  onNavigate={() => { log.event("Services → funding consulting page"); setPage("fundingConsulting"); }}
-                  style={{ display: "inline-block", marginTop: "20px", color: CONFIG.accent, fontSize: "14px", fontWeight: 600 }}>
-                  {txt(t.services.fundingPage.cardLink, lang)}
-                </RouteLink>
-              )}
+                  so crawlers can follow it. Wired from SERVICE_LANDINGS. */}
+              {(() => {
+                const entry = (Object.entries(SERVICE_LANDINGS) as [Page, { content: ServiceLandingContent; cardId: number }][])
+                  .find(([, l]) => l.cardId === svc.id);
+                if (!entry) return null;
+                const [landingPage, landing] = entry;
+                return (
+                  <RouteLink to={{ page: landingPage, lang, projectId: null }}
+                    onNavigate={() => { log.event("Services → landing page", landingPage); setPage(landingPage); }}
+                    style={{ display: "inline-block", marginTop: "20px", color: CONFIG.accent, fontSize: "14px", fontWeight: 600 }}>
+                    {txt(landing.content.cardLink, lang)}
+                  </RouteLink>
+                );
+              })()}
             </div>
             );
           })}
@@ -1257,11 +1265,11 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
   );
 }
 
-// ── Funding Consulting / 資助顧問 — its own indexable page ────────────────────
-// Targets engineering-consulting and funding-application searches. Copy lives in
-// t.services.fundingPage; the Services-page card links here.
-function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: () => void; setPage: (p: Page) => void }) {
-  const fp = t.services.fundingPage;
+// ── Service landing page template — one indexable page per service ───────────
+// Used by every entry in SERVICE_LANDINGS (src/routes.ts): Funding Consulting,
+// Engineering & Process Enhancement, and any service added later. Copy lives in
+// t.services.<name>Page; the matching Services-page card links here.
+function ServiceLandingPage({ lang, content: fp, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; onBack: () => void; setPage: (p: Page) => void }) {
   const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
   const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px" };
   const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0 };
@@ -1287,7 +1295,7 @@ function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: 
           </p>
 
           <h2 style={h2Style}>{txt(fp.audienceHeading, lang)}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
+          <div style={{ display: "grid", gridTemplateColumns: fp.audiences.length > 1 ? "repeat(2, 1fr)" : "minmax(0, 720px)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
             {fp.audiences.map((a, i) => (
               <div key={i} style={{ background: CONFIG.sectionBg.about, borderTop: `3px solid ${CONFIG.accent}`, padding: "32px" }}>
                 <h3 style={h3Style}>{txt(a.title, lang)}</h3>
@@ -1297,7 +1305,7 @@ function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: 
           </div>
 
           <h2 style={h2Style}>{txt(fp.stepsHeading, lang)}</h2>
-          <ol style={{ listStyle: "none", padding: 0, margin: "0 0 72px", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "40px 48px" }} className="grid-responsive">
+          <ol style={{ listStyle: "none", padding: 0, margin: "0 0 72px", display: "grid", gridTemplateColumns: `repeat(${fp.steps.length === 3 ? 3 : 2}, 1fr)`, gap: "40px 48px" }} className="grid-responsive">
             {fp.steps.map((step, i) => (
               <li key={i} style={{ display: "flex", gap: "20px", alignItems: "flex-start" }}>
                 <span aria-hidden="true" style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, letterSpacing: "0.1em", paddingTop: "5px", minWidth: "24px" }}>
@@ -1321,7 +1329,7 @@ function FundingConsultingPage({ lang, onBack, setPage }: { lang: Lang; onBack: 
               </p>
             </div>
             <RouteLink to={{ page: "contact", lang, projectId: null }}
-              onNavigate={() => { log.event("Funding page → contact"); setPage("contact"); }}
+              onNavigate={() => { log.event("Service landing → contact"); setPage("contact"); }}
               style={{ background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
               {txt(fp.ctaButton, lang)}
             </RouteLink>
@@ -1821,7 +1829,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
-        {page === "fundingConsulting" && <FundingConsultingPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
+        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />
