@@ -1,0 +1,611 @@
+<!doctype html>
+<!--
+  Google Search Console indexing checklist for 3formhk.com.
+  Local tool only — not part of the website build, never deployed.
+  Generated from dist/sitemap.xml on 2026-09-24 (44 pages). After adding
+  pages, run `pnpm run build` and ask Claude to regenerate this file.
+  Ticks are saved in this browser only (localStorage).
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Indexing Checklist</title>
+<style>
+  :root {
+    --navy: #002D72; --navy-dark: #001A4A; --accent: #0050CC; --accent-tint: #E8F0FE;
+    --ink: #1A1A1A; --slate: #6B7280; --hairline: #E5E7EB; --wash: #F8FAFF; --paper: #FFFFFF;
+    --done: #15803D;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --navy: #5B9BF0; --navy-dark: #E8F0FE; --accent: #7FB2F5; --accent-tint: #13264A;
+      --ink: #E5E7EB; --slate: #9CA3AF; --hairline: #26324A; --wash: #0B1426; --paper: #0F1B33; --done: #4ADE80;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--wash); color: var(--ink); font: 15px/1.6 Inter, system-ui, -apple-system, "PingFang HK", sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 16px 80px; }
+  header h1 { font-family: "Source Serif 4", Georgia, serif; color: var(--navy-dark); font-size: clamp(26px, 4vw, 36px); margin: 0 0 8px; letter-spacing: -0.01em; }
+  header p { color: var(--slate); margin: 0 0 8px; max-width: 70ch; }
+  .progress { margin: 24px 0 40px; display: flex; align-items: center; gap: 16px; }
+  .bar { flex: 1; height: 8px; background: var(--hairline); border-radius: 4px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  .progress output { font-weight: 600; color: var(--navy-dark); white-space: nowrap; }
+  details.how { background: var(--paper); border: 1px solid var(--hairline); border-radius: 6px; padding: 16px 20px; margin-bottom: 40px; }
+  details.how summary { cursor: pointer; font-weight: 600; color: var(--navy-dark); }
+  details.how ol { margin: 12px 0 0; padding-left: 20px; }
+  section { margin-bottom: 44px; }
+  h2 { font-family: "Source Serif 4", Georgia, serif; color: var(--navy-dark); font-size: 21px; margin: 0 0 4px; }
+  .count { font: 600 12px Inter, system-ui, sans-serif; color: var(--accent); background: var(--accent-tint); border-radius: 10px; padding: 2px 8px; vertical-align: middle; }
+  .sub { color: var(--slate); margin: 0 0 16px; }
+  ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--hairline); }
+  li { display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: center; padding: 14px 4px; border-bottom: 1px solid var(--hairline); }
+  li.done .title, li.done code { color: var(--slate); text-decoration: line-through; }
+  .check { position: relative; width: 22px; height: 22px; cursor: pointer; }
+  .check input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .box { display: block; width: 22px; height: 22px; border: 2px solid var(--slate); border-radius: 4px; }
+  .check input:checked + .box { background: var(--done); border-color: var(--done); }
+  .check input:checked + .box::after { content: ""; display: block; width: 6px; height: 11px; margin: 2px 0 0 6px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+  .check input:focus-visible + .box { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .title { font-weight: 600; }
+  code { font: 13px ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--slate); word-break: break-all; }
+  .badge { font: 600 11px Inter, system-ui, sans-serif; color: var(--slate); border: 1px solid var(--hairline); border-radius: 10px; padding: 1px 8px; margin-left: 6px; }
+  .actions { display: flex; gap: 8px; }
+  .actions a, .actions button { font: 600 13px Inter, system-ui, sans-serif; border-radius: 4px; padding: 8px 12px; cursor: pointer; white-space: nowrap; }
+  .inspect { background: var(--accent); color: #fff; text-decoration: none; }
+  .copy { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  @media (max-width: 720px) {
+    li { grid-template-columns: auto 1fr; }
+    .actions { grid-column: 2; flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Google indexing checklist — 3formhk.com</h1>
+    <p>44 pages from the live sitemap. Work top to bottom. Tick a page after Search Console says <strong>“Indexing requested”</strong>. Ticks are saved in this browser.</p>
+  </header>
+  <div class="progress"><div class="bar"><span id="bar"></span></div><output id="count">0 / 0</output></div>
+  <details class="how">
+    <summary>How to request indexing</summary>
+    <ol>
+      <li>Click <strong>Inspect in Search Console</strong>. Sign in with the account that owns 3formhk.com if asked.</li>
+      <li>Wait about 10 seconds. A new page shows “URL is not on Google”. That is normal.</li>
+      <li>Click <strong>Request indexing</strong> and wait 1–2 minutes for Google's live test.</li>
+      <li>When it says <strong>Indexing requested</strong>, click Got it, come back here and tick the box.</li>
+      <li>If the link opens the wrong screen, click <strong>Copy URL</strong> and paste it into the search bar at the top of Search Console instead.</li>
+    </ol>
+  </details>
+    <section>
+      <h2>Day 1 — new service pages <span class="count">10</span></h2>
+      <p class="sub">Request these first. Google allows roughly 10 requests a day per property.</p>
+      <ol>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/ai-data-adoption/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">AI &amp; Data Digitalisation Consulting in Hong Kong</div>
+          <code>/services/ai-data-adoption/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/ai-data-adoption/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Fai-data-adoption%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/ai-data-adoption/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">人工智能及數據數碼化顧問 — 香港製造業</div>
+          <code>/tc/services/ai-data-adoption/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/ai-data-adoption/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Fai-data-adoption%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/production-site-setup/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Production Site Setup in Hong Kong — Licensing, HACCP, GMP</div>
+          <code>/services/production-site-setup/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/production-site-setup/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Fproduction-site-setup%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/production-site-setup/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">香港生產場地設立 — 牌照、HACCP、GMP</div>
+          <code>/tc/services/production-site-setup/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/production-site-setup/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Fproduction-site-setup%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/warehouse-management-system/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Warehouse Management System (WMS) — Lot &amp; FEFO Tracking</div>
+          <code>/services/warehouse-management-system/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/warehouse-management-system/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Fwarehouse-management-system%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/warehouse-management-system/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">倉庫管理系統（WMS）— 批次及效期追蹤</div>
+          <code>/tc/services/warehouse-management-system/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/warehouse-management-system/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Fwarehouse-management-system%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/equipment-maintenance-repair/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Production Equipment Maintenance &amp; Repair in Hong Kong</div>
+          <code>/services/equipment-maintenance-repair/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/equipment-maintenance-repair/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Fequipment-maintenance-repair%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/equipment-maintenance-repair/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">生產設備維修及保養 — 香港</div>
+          <code>/tc/services/equipment-maintenance-repair/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/equipment-maintenance-repair/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Fequipment-maintenance-repair%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/industrial-ai-agents/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Industrial AI Agent Development in Hong Kong</div>
+          <code>/services/industrial-ai-agents/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/industrial-ai-agents/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Findustrial-ai-agents%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/industrial-ai-agents/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">工業人工智能代理開發 — 香港</div>
+          <code>/tc/services/industrial-ai-agents/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/industrial-ai-agents/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Findustrial-ai-agents%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      </ol>
+    </section>
+    <section>
+      <h2>Day 2 — remaining new pages and pages that changed <span class="count">9</span></h2>
+      <p class="sub">The Services pages gained links to the new pages; Contact gained the office address.</p>
+      <ol>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/lean-six-sigma/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Lean &amp; Six Sigma Consulting for Manufacturers in Hong Kong</div>
+          <code>/services/lean-six-sigma/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/lean-six-sigma/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Flean-six-sigma%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/lean-six-sigma/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">精益及六西格瑪顧問 — 香港製造業流程優化</div>
+          <code>/tc/services/lean-six-sigma/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/lean-six-sigma/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Flean-six-sigma%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Engineering &amp; Management Consulting in Hong Kong</div>
+          <code>/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Services — Funding, Lean &amp; 6 Sigma, AI Adoption, Maintenance</div>
+          <code>/services/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/contact/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Contact Us — Hong Kong Engineering Consultants <span class="badge">requested before</span></div>
+          <code>/contact/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/contact/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fcontact%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">香港工程及管理顧問公司</div>
+          <code>/tc/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">服務範疇 — 資助顧問、精益六西格瑪、人工智能、場地保養</div>
+          <code>/tc/services/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/contact/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">聯絡我們 — 香港工程顧問 <span class="badge">requested before</span></div>
+          <code>/tc/contact/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/contact/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fcontact%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/about/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">關於我們 — 香港工程顧問公司</div>
+          <code>/tc/about/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/about/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fabout%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      </ol>
+    </section>
+    <section>
+      <h2>Optional — everything else <span class="count">25</span></h2>
+      <p class="sub">Google finds these through the sitemap on its own. Request one only if Search Console shows it as not indexed after 2–3 weeks.</p>
+      <ol>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/facility-maintenance/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Facility Maintenance Hong Kong — HVAC, Electrical &amp; FIFO Layout <span class="badge">requested before</span></div>
+          <code>/services/facility-maintenance/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/facility-maintenance/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Ffacility-maintenance%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/services/funding-consulting/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Engineering Consulting &amp; Funding Applications for Manufacturers <span class="badge">requested before</span></div>
+          <code>/services/funding-consulting/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/services/funding-consulting/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fservices%2Ffunding-consulting%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/about/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">About Us — Hong Kong Engineering Consultancy <span class="badge">requested before</span></div>
+          <code>/about/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/about/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fabout%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Projects &amp; Case Studies</div>
+          <code>/projects/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/demos/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Live Demos — Warehouse Management &amp; ESG Tools</div>
+          <code>/demos/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/demos/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fdemos%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/1/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Production Line Overhaul for FMCG Manufacturer | Projects</div>
+          <code>/projects/1/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/1/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F1%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/2/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">BUD Fund Application for SME Expansion | Projects</div>
+          <code>/projects/2/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/2/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F2%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/3/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Real-Time KPI Dashboard for Food Production Facility | Projects</div>
+          <code>/projects/3/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/3/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F3%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/4/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Food Factory Licensing &amp; HACCP Implementation | Projects</div>
+          <code>/projects/4/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/4/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F4%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/5/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Warehouse Layout Optimisation for Logistics Company | Projects</div>
+          <code>/projects/5/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/5/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F5%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/6/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">Funding Grant for Technology Upgrade | Projects</div>
+          <code>/projects/6/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/6/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F6%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/7/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">AI Demand Forecasting for Retail SME | Projects</div>
+          <code>/projects/7/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/7/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F7%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/projects/8/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">GMP Compliance Audit &amp; Remediation | Projects</div>
+          <code>/projects/8/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/projects/8/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Fprojects%2F8%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/facility-maintenance/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">場地保養服務（香港）— 冷氣通風、電力系統、FIFO 生產線佈局 <span class="badge">requested before</span></div>
+          <code>/tc/services/facility-maintenance/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/facility-maintenance/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Ffacility-maintenance%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/services/funding-consulting/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">製造業工程顧問及資助申請 — 香港 <span class="badge">requested before</span></div>
+          <code>/tc/services/funding-consulting/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/services/funding-consulting/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fservices%2Ffunding-consulting%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">項目及個案研究</div>
+          <code>/tc/projects/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/demos/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">現場示範 — 倉庫管理及 ESG 工具</div>
+          <code>/tc/demos/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/demos/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fdemos%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/1/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">快消品製造商生產線優化 | 項目</div>
+          <code>/tc/projects/1/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/1/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F1%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/2/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">中小企BUD基金擴張申請 | 項目</div>
+          <code>/tc/projects/2/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/2/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F2%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/3/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">食品生產設施實時KPI儀表板 | 項目</div>
+          <code>/tc/projects/3/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/3/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F3%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/4/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">食品廠牌照申請及HACCP實施 | 項目</div>
+          <code>/tc/projects/4/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/4/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F4%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/5/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">物流公司倉庫佈局優化 | 項目</div>
+          <code>/tc/projects/5/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/5/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F5%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/6/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">科技升級資助 | 項目</div>
+          <code>/tc/projects/6/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/6/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F6%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/7/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">零售中小企AI需求預測 | 項目</div>
+          <code>/tc/projects/7/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/7/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F7%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      <li>
+        <label class="check"><input type="checkbox" data-url="https://3formhk.com/tc/projects/8/" /><span class="box" aria-hidden="true"></span></label>
+        <div class="meta">
+          <div class="title">GMP合規審核及整改 | 項目</div>
+          <code>/tc/projects/8/</code>
+        </div>
+        <div class="actions">
+          <button type="button" class="copy" data-copy="https://3formhk.com/tc/projects/8/">Copy URL</button>
+          <a class="inspect" href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2F3formhk.com%2F&amp;id=https%3A%2F%2F3formhk.com%2Ftc%2Fprojects%2F8%2F" target="_blank" rel="noopener">Inspect in Search Console ↗</a>
+        </div>
+      </li>
+      </ol>
+    </section>
+</main>
+<script>
+  const KEY = "3formhk-indexing-v1";
+  const boxes = [...document.querySelectorAll("input[data-url]")];
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch {}
+  function render() {
+    const done = boxes.filter(b => b.checked).length;
+    document.getElementById("count").textContent = done + " / " + boxes.length + " requested";
+    document.getElementById("bar").style.width = (100 * done / boxes.length) + "%";
+    boxes.forEach(b => b.closest("li").classList.toggle("done", b.checked));
+  }
+  boxes.forEach(b => {
+    b.checked = !!saved[b.dataset.url];
+    b.addEventListener("change", () => {
+      if (b.checked) saved[b.dataset.url] = new Date().toISOString().slice(0, 10); else delete saved[b.dataset.url];
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch {}
+      render();
+    });
+  });
+  document.querySelectorAll("button[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText(btn.dataset.copy); btn.textContent = "Copied"; }
+    catch { btn.textContent = "Copy failed"; }
+    setTimeout(() => (btn.textContent = "Copy URL"), 1500);
+  }));
+  render();
+</script>
+</body>
+</html>

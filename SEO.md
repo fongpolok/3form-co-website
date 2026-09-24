@@ -35,13 +35,18 @@ rules or server config.
 | **`/services/facility-maintenance/`** | **`/tc/services/facility-maintenance/`** | `dist/services/facility-maintenance/index.html` | 0.9 |
 | **`/services/funding-consulting/`** | **`/tc/services/funding-consulting/`** | `dist/services/funding-consulting/index.html` | 0.9 |
 | **`/services/lean-six-sigma/`** | **`/tc/services/lean-six-sigma/`** | `dist/services/lean-six-sigma/index.html` | 0.9 |
+| **`/services/ai-data-adoption/`** | **`/tc/services/ai-data-adoption/`** | `dist/services/ai-data-adoption/index.html` | 0.9 |
+| **`/services/production-site-setup/`** | **`/tc/services/production-site-setup/`** | `dist/services/production-site-setup/index.html` | 0.9 |
+| **`/services/warehouse-management-system/`** | **`/tc/services/warehouse-management-system/`** | `dist/services/warehouse-management-system/index.html` | 0.9 |
+| **`/services/equipment-maintenance-repair/`** | **`/tc/services/equipment-maintenance-repair/`** | `dist/services/equipment-maintenance-repair/index.html` | 0.9 |
+| **`/services/industrial-ai-agents/`** | **`/tc/services/industrial-ai-agents/`** | `dist/services/industrial-ai-agents/index.html` | 0.9 |
 | **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
 | `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
 
-**34 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**44 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 
@@ -176,9 +181,14 @@ Add another profile there only once it is real and public.
     publishable example.
   - ✅ Engineering & Process Enhancement: `/services/lean-six-sigma/`. Copy
     lives in `t.services.processPage`. Edward asked for no examples yet.
-  - Still to interview: AI & Data,
-    Production Site Setup, Warehouse Management System, General Maintenance &
-    Repair, Industrial Agentic Development.
+  - ✅ AI & Data (`/services/ai-data-adoption/`), Production Site Setup
+    (`/services/production-site-setup/`), Warehouse Management System
+    (`/services/warehouse-management-system/`), General Maintenance & Repair
+    (`/services/equipment-maintenance-repair/`) and Industrial Agentic
+    Development (`/services/industrial-ai-agents/`). Edward confirmed on
+    2026-09-24 that they follow the same client and step pattern. Each page's
+    copy is built from its Services-card text plus that pattern. No examples.
+  - All seven services now have their own page.
 - ✅ **`og:image`.** Done. Every page ships `og:image` (1200×630, with alt
   text in the page's language) and `twitter:card=summary_large_image`. The
   card is `public/og-image.png`; its source is `scripts/og-image/card.html`,
@@ -201,3 +211,13 @@ Add another profile there only once it is real and public.
   history events, on by default), so there is no manual `page_view` call.
   Adding one would double-count. The Privacy Policy names Google Analytics
   and links Google's opt-out add-on.
+
+## Indexing checklist
+
+`scripts/seo/indexing-checklist.html` is a local tool, not part of the site
+build. Open it in a browser to work through Search Console "Request indexing"
+one page at a time. It lists every URL in `dist/sitemap.xml`, grouped by day to
+respect Google's ~10-requests-a-day limit. Each row has a one-click link to
+Search Console's URL Inspection page, and ticks are saved in the browser.
+Regenerate it after adding pages.
+

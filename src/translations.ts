@@ -329,6 +329,281 @@ export const t = {
       ctaButton: { en: "Contact us", tc: "聯絡我們" },
       cardLink: { en: "Full process enhancement details →", tc: "查看流程優化詳情 →" },
     },
+    // ── AI & Data Digitalization landing page (/services/ai-data-adoption/). Follows the interview
+    // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
+    // evaluation, a study, then technical or advisory support). No examples.
+    aiDataPage: {
+      label: { en: "AI & Data Digitalization", tc: "人工智能及數據數碼化" },
+      heading: {
+        en: "AI and data digitalisation consulting in Hong Kong",
+        tc: "香港人工智能及數據數碼化顧問",
+      },
+      intro: {
+        en: "3form guides manufacturers through AI tool selection, data pipeline setup and digital transformation, so raw production data turns into business intelligence you can act on.",
+        tc: "3form 引導製造商完成人工智能工具選擇、數據流程建立及數碼轉型，將原始生產數據轉化為可行的商業洞察。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support your digital transformation with both technical and advisory consultancy.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們同時以技術及顧問支援，協助您完成數碼轉型。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We start with a preliminary review of your pain points and how data moves through your operation today.",
+            tc: "我們先初步了解您的痛點，以及現時數據在營運中的流轉方式。",
+          },
+        },
+        {
+          title: { en: "Tool and data pipeline study", tc: "工具及數據流程研究" },
+          body: {
+            en: "We assess which AI tools fit your needs and how a data pipeline should connect your systems.",
+            tc: "我們評估哪些人工智能工具切合您的需要，以及數據流程應如何連接您的系統。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We set up the tools and pipeline for you, or advise your team through the transformation, whichever fits.",
+            tc: "按實際需要，由我們建立工具及數據流程，或以顧問身份指導您的團隊完成轉型。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Want to put your production data to work?", tc: "想讓生產數據發揮作用？" },
+      ctaBody: {
+        en: "Tell us about your operation and the data you collect today. We reply within one business day.",
+        tc: "告訴我們您的營運情況及現時收集的數據，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full AI & data details →", tc: "查看人工智能及數據詳情 →" },
+    },
+    // ── Production Site Setup landing page (/services/production-site-setup/). Follows the interview
+    // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
+    // evaluation, a study, then technical or advisory support). No examples.
+    productionSetupPage: {
+      label: { en: "Production Site Setup", tc: "生產場地設立" },
+      heading: {
+        en: "Production site setup in Hong Kong",
+        tc: "香港生產場地設立顧問",
+      },
+      intro: {
+        en: "3form supports manufacturers setting up compliant production facilities in Hong Kong, covering licensing, HACCP food safety systems, GMP standards and FIFO inventory management.",
+        tc: "3form 支援製造商在香港設立合規的生產設施，涵蓋牌照申請、HACCP食品安全系統、GMP標準及先進先出存貨管理。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We help you set up a compliant production site here, with both technical and advisory consultancy.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，協助您在港設立合規的生產基地。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We start with a preliminary review of your production plans and pain points, and evaluate the site.",
+            tc: "我們先初步了解您的生產規劃及痛點，並評估場地。",
+          },
+        },
+        {
+          title: { en: "Compliance and layout study", tc: "合規及佈局研究" },
+          body: {
+            en: "We map the licensing, HACCP and GMP requirements that apply, and plan the layout and FIFO inventory flow.",
+            tc: "我們梳理適用的牌照、HACCP及GMP要求，並規劃廠房佈局及先進先出存貨流程。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We carry out the setup work, or advise your team through it, whichever fits.",
+            tc: "按實際需要，由我們執行設立工作，或以顧問身份指導您的團隊。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Setting up production in Hong Kong?", tc: "正在香港設立生產基地？" },
+      ctaBody: {
+        en: "Tell us about your product and your site plan. We reply within one business day.",
+        tc: "告訴我們您的產品及場地計劃，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full production site setup details →", tc: "查看生產場地設立詳情 →" },
+    },
+    // ── Warehouse Management System landing page (/services/warehouse-management-system/). Follows the interview
+    // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
+    // evaluation, a study, then technical or advisory support). No examples.
+    warehouseSystemPage: {
+      label: { en: "Warehouse Management System", tc: "倉庫管理系統" },
+      heading: {
+        en: "Warehouse management system for Hong Kong operations",
+        tc: "香港倉庫管理系統（SaaS）",
+      },
+      intro: {
+        en: "3form's hosted warehouse management platform tracks lots and expiry dates (FEFO), alerts you to low stock and upcoming expiry, and keeps a full audit trail. We configure it around how your stock actually moves.",
+        tc: "3form 的託管式倉庫管理平台可追蹤批次及效期（FEFO）、發出低庫存及到期預警，並保留完整審計軌跡。我們按您實際的存貨流轉方式設定平台。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We set up stock control for your Hong Kong operation, with both technical and advisory support.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，為您在港的營運建立存貨管理。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We review your stock pain points and walk through how goods move in your warehouse today.",
+            tc: "我們了解您在存貨管理上的痛點，並實地了解現時貨物在倉庫中的流轉。",
+          },
+        },
+        {
+          title: { en: "Workflow study", tc: "流程研究" },
+          body: {
+            en: "We map your receiving, storage and picking flow and your lot and expiry rules, then configure the platform around them.",
+            tc: "我們梳理收貨、儲存及揀貨流程，以及批次和效期規則，再按此設定平台。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We configure and roll out the platform, or advise your team on running it, whichever fits.",
+            tc: "按實際需要，由我們設定及推行平台，或以顧問身份指導您的團隊運用。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Losing track of lots or expiry dates?", tc: "難以追蹤批次或效期？" },
+      ctaBody: {
+        en: "Tell us how your warehouse runs today. We reply within one business day.",
+        tc: "告訴我們您倉庫現時的運作方式，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full warehouse system details →", tc: "查看倉庫管理系統詳情 →" },
+    },
+    // ── General Maintenance & Repair landing page (/services/equipment-maintenance-repair/). Follows the interview
+    // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
+    // evaluation, a study, then technical or advisory support). No examples.
+    equipmentMaintenancePage: {
+      label: { en: "General Maintenance & Repair", tc: "一般維修及保養服務" },
+      heading: {
+        en: "Production equipment maintenance and repair in Hong Kong",
+        tc: "香港生產設備維修及保養",
+      },
+      intro: {
+        en: "3form plans preventive maintenance, diagnoses breakdowns and supports repairs for production equipment, keeping machinery serviceable and downtime measured rather than guessed at.",
+        tc: "3form 為生產設備提供預防性保養規劃、故障診斷及維修支援，令機器保持可運作狀態，停機時間有數據可依，而非憑估算。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We keep your production equipment running, with both technical and advisory support.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，確保您的生產設備運作暢順。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We review the breakdowns and downtime you face, and evaluate your equipment on site.",
+            tc: "我們了解您面對的故障及停機問題，並實地評估您的設備。",
+          },
+        },
+        {
+          title: { en: "Maintenance study", tc: "保養研究" },
+          body: {
+            en: "We study failure patterns and downtime to build a preventive maintenance plan.",
+            tc: "我們研究故障規律及停機數據，制定預防性保養計劃。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We carry out diagnosis and repair work, or advise your maintenance team, whichever fits.",
+            tc: "按實際需要，由我們進行診斷及維修，或以顧問身份指導您的保養團隊。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Equipment keeps breaking down?", tc: "設備經常故障？" },
+      ctaBody: {
+        en: "Tell us about the machines and the downtime you face. We reply within one business day.",
+        tc: "告訴我們您的設備及停機情況，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full maintenance & repair details →", tc: "查看維修及保養詳情 →" },
+    },
+    // ── Industrial Agentic Development landing page (/services/industrial-ai-agents/). Follows the interview
+    // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
+    // evaluation, a study, then technical or advisory support). No examples.
+    industrialAgentsPage: {
+      label: { en: "Industrial Agentic Development", tc: "工業智能代理開發" },
+      heading: {
+        en: "Industrial AI agent development in Hong Kong",
+        tc: "香港工業人工智能代理開發",
+      },
+      intro: {
+        en: "3form builds AI agents that work on real plant data, reading sensor streams, documents and inspection results to automate the routine decisions your operations team repeats every day.",
+        tc: "3form 開發能處理真實廠房數據的人工智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
+          body: {
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We automate routine operations decisions, with both technical and advisory consultancy.",
+            tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，將例行營運決策自動化。",
+          },
+        },
+      ],
+      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      steps: [
+        {
+          title: { en: "Pain points and site evaluation", tc: "痛點分析及實地評估" },
+          body: {
+            en: "We review your pain points on site and find the routine decisions your team repeats every day.",
+            tc: "我們實地了解您的痛點，找出團隊每日重複的例行決策。",
+          },
+        },
+        {
+          title: { en: "Data and decision study", tc: "數據及決策研究" },
+          body: {
+            en: "We study the sensor streams, documents and inspection results those decisions depend on.",
+            tc: "我們研究這些決策所依據的感測器數據、文件及檢測結果。",
+          },
+        },
+        {
+          title: { en: "Technical or advisory support", tc: "技術或顧問支援" },
+          body: {
+            en: "We build and deploy the agents, or advise your team on building them, whichever fits.",
+            tc: "按實際需要，由我們開發及部署代理，或以顧問身份指導您的團隊開發。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Repeating the same decisions every day?", tc: "每日重複同樣的決策？" },
+      ctaBody: {
+        en: "Tell us about the routine work your operations team handles. We reply within one business day.",
+        tc: "告訴我們營運團隊處理的例行工作，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full AI agent details →", tc: "查看工業智能代理詳情 →" },
+    },
   },
 
   // ── Live Demos — engineering builds behind the advisory work. `real: true`

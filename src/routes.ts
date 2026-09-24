@@ -52,6 +52,11 @@ export type Page =
   | "facilityMaintenance"
   | "fundingConsulting"
   | "processEnhancement"
+  | "aiDataAdoption"
+  | "productionSetup"
+  | "warehouseSystem"
+  | "equipmentMaintenance"
+  | "industrialAgents"
   | "projects"
   | "demos"
   | "contact";
@@ -64,13 +69,27 @@ const PAGE_SEGMENT: Record<Page, string> = {
   facilityMaintenance: "services/facility-maintenance",
   fundingConsulting: "services/funding-consulting",
   processEnhancement: "services/lean-six-sigma",
+  aiDataAdoption: "services/ai-data-adoption",
+  productionSetup: "services/production-site-setup",
+  warehouseSystem: "services/warehouse-management-system",
+  equipmentMaintenance: "services/equipment-maintenance-repair",
+  industrialAgents: "services/industrial-ai-agents",
   projects: "projects",
   demos: "demos",
   contact: "contact",
 };
 
 /** Per-service landing pages. They live under /services/ and highlight that nav item. */
-export const SERVICE_PAGES: readonly Page[] = ["facilityMaintenance", "fundingConsulting", "processEnhancement"];
+export const SERVICE_PAGES: readonly Page[] = [
+  "facilityMaintenance",
+  "fundingConsulting",
+  "processEnhancement",
+  "aiDataAdoption",
+  "productionSetup",
+  "warehouseSystem",
+  "equipmentMaintenance",
+  "industrialAgents",
+];
 
 /** Copy for a templated service landing page (see ServiceLandingPage in App.tsx). */
 export type ServiceLandingContent = typeof t.services.fundingPage;
@@ -83,6 +102,11 @@ export type ServiceLandingContent = typeof t.services.fundingPage;
 export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number }>> = {
   fundingConsulting: { content: t.services.fundingPage, cardId: 1 },
   processEnhancement: { content: t.services.processPage, cardId: 2 },
+  aiDataAdoption: { content: t.services.aiDataPage, cardId: 3 },
+  productionSetup: { content: t.services.productionSetupPage, cardId: 4 },
+  warehouseSystem: { content: t.services.warehouseSystemPage, cardId: 5 },
+  equipmentMaintenance: { content: t.services.equipmentMaintenancePage, cardId: 6 },
+  industrialAgents: { content: t.services.industrialAgentsPage, cardId: 7 },
 };
 
 /** Which nav item highlights for a given page (service landings sit under Services). */
@@ -229,6 +253,26 @@ const PAGE_TITLE: Record<Page, BiString> = {
     en: "Lean & Six Sigma Consulting for Manufacturers in Hong Kong",
     tc: "精益及六西格瑪顧問 — 香港製造業流程優化",
   },
+  aiDataAdoption: {
+    en: "AI & Data Digitalisation Consulting in Hong Kong",
+    tc: "人工智能及數據數碼化顧問 — 香港製造業",
+  },
+  productionSetup: {
+    en: "Production Site Setup in Hong Kong — Licensing, HACCP, GMP",
+    tc: "香港生產場地設立 — 牌照、HACCP、GMP",
+  },
+  warehouseSystem: {
+    en: "Warehouse Management System (WMS) — Lot & FEFO Tracking",
+    tc: "倉庫管理系統（WMS）— 批次及效期追蹤",
+  },
+  equipmentMaintenance: {
+    en: "Production Equipment Maintenance & Repair in Hong Kong",
+    tc: "生產設備維修及保養 — 香港",
+  },
+  industrialAgents: {
+    en: "Industrial AI Agent Development in Hong Kong",
+    tc: "工業人工智能代理開發 — 香港",
+  },
   projects: {
     en: "Projects & Case Studies",
     tc: "項目及個案研究",
@@ -267,6 +311,26 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
   processEnhancement: {
     en: "Lean and Six Sigma consulting in Hong Kong: site evaluation, production and cost studies, and technical or advisory support for Greater Bay Area manufacturers.",
     tc: "3form 為大灣區製造商提供精益及六西格瑪顧問服務：實地評估、生產營運及成本研究，以及技術或顧問支援。",
+  },
+  aiDataAdoption: {
+    en: "AI tool selection, data pipeline setup and digital transformation for Greater Bay Area manufacturers, turning raw production data into business intelligence.",
+    tc: "3form 為大灣區製造商提供人工智能工具選擇、數據流程建立及數碼轉型服務，將原始生產數據轉化為商業洞察。",
+  },
+  productionSetup: {
+    en: "Support for setting up compliant production facilities in Hong Kong: licensing, HACCP food safety systems, GMP standards and FIFO inventory management.",
+    tc: "3form 支援製造商在香港設立合規生產設施：牌照申請、HACCP食品安全系統、GMP標準及先進先出存貨管理。",
+  },
+  warehouseSystem: {
+    en: "A hosted warehouse management system for Hong Kong operations: lot and expiry (FEFO) tracking, low-stock and expiry alerts, and full audit trails.",
+    tc: "3form 託管式倉庫管理系統：批次及效期（FEFO）追蹤、低庫存及到期預警，以及完整審計軌跡，按您的存貨流轉方式設定。",
+  },
+  equipmentMaintenance: {
+    en: "Preventive maintenance planning, breakdown diagnosis and repair support for production equipment in Hong Kong, with downtime measured rather than guessed at.",
+    tc: "3form 為香港生產設備提供預防性保養規劃、故障診斷及維修支援，停機時間有數據可依，而非憑估算。",
+  },
+  industrialAgents: {
+    en: "AI agents built on real plant data: reading sensor streams, documents and inspection results to automate the routine decisions your operations team repeats.",
+    tc: "3form 為大灣區製造商開發以真實廠房數據運作的人工智能代理，讀取感測器數據、文件及檢測結果，自動化例行營運決策。",
   },
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
@@ -353,6 +417,11 @@ const PRERENDERED_PAGES: Page[] = [
   "facilityMaintenance",
   "fundingConsulting",
   "processEnhancement",
+  "aiDataAdoption",
+  "productionSetup",
+  "warehouseSystem",
+  "equipmentMaintenance",
+  "industrialAgents",
   "contact",
   "about",
   "projects",
@@ -381,6 +450,11 @@ export function sitemapPriority(route: Route): string {
     case "facilityMaintenance":
     case "fundingConsulting":
     case "processEnhancement":
+    case "aiDataAdoption":
+    case "productionSetup":
+    case "warehouseSystem":
+    case "equipmentMaintenance":
+    case "industrialAgents":
     case "services":
     case "contact":
       return "0.9";
