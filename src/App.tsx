@@ -935,8 +935,8 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
               <div className="sv-sweep-bar" />
               <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
                 {/* One icon per service, keyed to svc.id. The full photo
-                    (service-NN.webp) lives on that service's own page. A real
-                    <img> rather than a CSS background so the icon carries
+                    (service-NN.webp) lives on that service's own page. An image
+                    element rather than a CSS background so the icon carries
                     alt text in the page language. */}
                 <img className="sv-sweep-photo"
                   src={asset(`/services/icon-${String(svc.id).padStart(2, "0")}.webp`)}
