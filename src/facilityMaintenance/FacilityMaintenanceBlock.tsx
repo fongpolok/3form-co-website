@@ -98,7 +98,7 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
         <div className="fm-cat-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cfg.categories.length === 4 ? 2 : Math.min(cfg.categories.length, 3)}, 1fr)`, gap: "2px", background: "#E5E7EB" }}>
           {cfg.categories.map((cat, i) => (
             <div key={cat.id} style={{ background: "#fff", padding: "28px 24px" }}>
-              {/* Category photo — a real <img> so it carries alt text in the
+              {/* Category photo — an image element so it carries alt text in the
                   page language and is indexable. Dedicated page only. */}
               {showPhotos && (
                 <img src={asset(cat.image)} alt={txt(cat.imageAlt, lang)}
@@ -137,7 +137,7 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
             {txt(cfg.cta.sub, lang)}
           </p>
           <p style={{ fontSize: "14px", color: "#374151", margin: 0 }}>
-            <a href={telHref} onClick={() => facilityLog.event("phone link")} style={{ color: accent, fontWeight: 600, textDecoration: "none" }}>
+            <a href={telHref} onClick={() => facilityLog.event("phone link")} style={{ color: accent, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
               {t.contact.phone}
             </a>
             <span aria-hidden="true" style={{ color: "#9CA3AF", margin: "0 10px" }}>·</span>
@@ -146,11 +146,11 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
             </a>
           </p>
         </div>
-        <div style={{ flexShrink: 0, display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
+        <div style={{ flex: "0 1 auto", minWidth: 0, maxWidth: "100%", display: "flex", alignItems: "center", gap: "20px", flexWrap: "wrap" }}>
           {secondaryAction}
           <button type="button"
             onClick={() => { facilityLog.event("CTA → contact"); onContact(); }}
-            style={{ background: accent, color: "#fff", border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s" }}
+            style={{ background: accent, color: "#fff", border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", maxWidth: "100%", whiteSpace: "normal", textAlign: "center" }}
             onMouseEnter={e => (e.currentTarget.style.background = accentHover)}
             onMouseLeave={e => (e.currentTarget.style.background = accent)}>
             {txt(cfg.cta.button, lang)}

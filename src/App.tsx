@@ -174,7 +174,7 @@ function ContactDetail({ icon, label, value }: {
     <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
       <span style={{ color: "#5B9BF0", marginTop: "2px", flexShrink: 0 }}>{icon}</span>
       <div>
-        <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.45)", marginBottom: "4px" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.65)", marginBottom: "4px" }}>
           {label}
         </div>
         <div style={{ fontSize: "15px", color: "rgba(255,255,255,0.9)" }}>
@@ -728,7 +728,7 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
         <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.demos.heading, lang)}
         </h1>
-        <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "56px", maxWidth: "620px" }}>
+        <p style={{ fontSize: "16px", color: "#4B5563", marginBottom: "56px", maxWidth: "620px" }}>
           {txt(t.demos.sub, lang)}
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }} className="grid-responsive">
@@ -745,7 +745,7 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
                   {txt(demo.tag, lang)}
                 </span>
                 {!demo.real && (
-                  <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+                  <span style={{ display: "inline-block", background: "#fff", color: "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
                     {txt(t.demos.illustrative_badge, lang)}
                   </span>
                 )}
@@ -759,7 +759,7 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
                 {txt(demo.desc, lang)}
               </p>
               {demo.real && txt(demo.note, lang) && (
-                <p style={{ fontSize: "12px", color: "#9CA3AF", margin: "16px 0 0", fontStyle: "italic" }}>
+                <p style={{ fontSize: "12px", color: "#6B7280", margin: "16px 0 0", fontStyle: "italic" }}>
                   {txt(demo.note, lang)}
                 </p>
               )}
@@ -1008,7 +1008,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
           </div>
           <RouteLink to={{ page: "contact", lang, projectId: null }}
             onNavigate={() => { log.event("Services CTA → contact"); setPage("contact"); }}
-            style={{ flexShrink: 0, display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "nowrap" }}
+            style={{ flexShrink: 0, display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "normal", maxWidth: "100%", textAlign: "center" }}
             onMouseEnter={e => (e.currentTarget.style.background = CONFIG.accentHover)}
             onMouseLeave={e => (e.currentTarget.style.background = CONFIG.accent)}>
             {txt(t.services.cta.button, lang)}
@@ -1044,11 +1044,11 @@ function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang:
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; if (real) e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,45,114,0.12)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = real ? "0 2px 16px rgba(0,45,114,0.06)" : "none"; }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "20px" }}>
-        <span style={{ display: "inline-block", background: real ? "#E8F0FE" : "#F3F4F6", color: real ? CONFIG.accent : "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
+        <span style={{ display: "inline-block", background: real ? "#E8F0FE" : "#F3F4F6", color: real ? CONFIG.accent : "#4B5563", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
           {txt(p.tag, lang)}
         </span>
         {!real && (
-          <span style={{ display: "inline-block", background: "#fff", color: "#9CA3AF", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+          <span style={{ display: "inline-block", background: "#fff", color: "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
             {txt(t.projects.illustrative_badge, lang)}
           </span>
         )}
@@ -1060,7 +1060,7 @@ function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang:
         {txt(p.desc, lang)}
       </p>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-        <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : "#9CA3AF", background: real ? "#E8F0FE" : "#F3F4F6", display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : "#4B5563", background: real ? "#E8F0FE" : "#F3F4F6", display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
           {real ? "✓ " : ""}{txt(p.result, lang)}
         </div>
         <span style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, whiteSpace: "nowrap" }}>
@@ -1163,10 +1163,10 @@ function ContactSection({ lang }: { lang: Lang }) {
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 {(["name", "email"] as const).map(field => (
                   <div key={field}>
-                    <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
+                    <label htmlFor={`contact-${field}`} style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
                       {txt(t.contact[`form_${field}` as "form_name" | "form_email"], lang)}
                     </label>
-                    <input type={field === "email" ? "email" : "text"} required disabled={sending} value={form[field]}
+                    <input id={`contact-${field}`} name={field} autoComplete={field === "email" ? "email" : "name"} type={field === "email" ? "email" : "text"} required disabled={sending} value={form[field]}
                       onChange={e => setForm({ ...form, [field]: e.target.value })}
                       style={{ width: "100%", padding: "12px 16px", border: "1.5px solid #D1D5DB", borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
                       onFocus={e => { e.currentTarget.style.borderColor = CONFIG.accent; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(0,80,204,0.15)`; }}
@@ -1174,10 +1174,10 @@ function ContactSection({ lang }: { lang: Lang }) {
                   </div>
                 ))}
                 <div>
-                  <label style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
+                  <label htmlFor="contact-message" style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
                     {txt(t.contact.form_message, lang)}
                   </label>
-                  <textarea required rows={5} disabled={sending} value={form.message}
+                  <textarea id="contact-message" name="message" required rows={5} disabled={sending} value={form.message}
                     onChange={e => setForm({ ...form, message: e.target.value })}
                     style={{ width: "100%", padding: "12px 16px", border: "1.5px solid #D1D5DB", borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", resize: "vertical", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
                     onFocus={e => { e.currentTarget.style.borderColor = CONFIG.accent; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(0,80,204,0.15)`; }}
@@ -1386,25 +1386,25 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
         {/* Top row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px", marginBottom: "24px" }}>
           <div>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", margin: "0 0 4px" }}>
+            <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", margin: "0 0 4px" }}>
               {txt(t.footer.rights, lang)}
             </p>
-            <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", margin: 0 }}>
+            <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "12px", margin: 0 }}>
               {t.footer.domain}
             </p>
           </div>
           {/* Social icons — muted and inert until a real profile URL is set above */}
-          <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "0px", alignItems: "center", margin: "0 -13px" }}>
             {socials.map(s => s.href ? (
               <a key={s.label} href={s.href} title={s.label} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", color: "rgba(255,255,255,0.6)", transition: "opacity 0.2s", opacity: 1 }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "44px", height: "44px", color: "rgba(255,255,255,0.6)", transition: "opacity 0.2s", opacity: 1 }}
                 onMouseEnter={e => (e.currentTarget.style.opacity = "0.6")}
                 onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
                 {s.icon}
               </a>
             ) : (
               <span key={s.label} aria-disabled="true" title={lang === "en" ? `${s.label} — coming soon` : `${s.label} — 即將推出`}
-                style={{ display: "flex", alignItems: "center", color: "rgba(255,255,255,0.6)", opacity: 0.35, cursor: "not-allowed" }}>
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "44px", height: "44px", color: "rgba(255,255,255,0.6)", opacity: 0.35, cursor: "not-allowed" }}>
                 {s.icon}
               </span>
             ))}
@@ -1412,17 +1412,17 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
         </div>
 
         {/* Bottom row — legal links */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "20px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "8px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
           <button onClick={() => { log.event("Legal modal: terms"); onOpenLegal("terms"); }}
-            style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: "12px", cursor: "pointer", fontFamily: "var(--font-sans)", padding: 0, transition: "color 0.2s" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.8)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}>
+            style={{ background: "none", border: "none", color: "rgba(255,255,255,0.65)", fontSize: "12px", cursor: "pointer", fontFamily: "var(--font-sans)", padding: 0, minHeight: "44px", transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}>
             {txt(t.legal.terms_link, lang)}
           </button>
           <button onClick={() => { log.event("Legal modal: privacy"); onOpenLegal("privacy"); }}
-            style={{ background: "none", border: "none", color: "rgba(255,255,255,0.4)", fontSize: "12px", cursor: "pointer", fontFamily: "var(--font-sans)", padding: 0, transition: "color 0.2s" }}
-            onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.8)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.4)")}>
+            style={{ background: "none", border: "none", color: "rgba(255,255,255,0.65)", fontSize: "12px", cursor: "pointer", fontFamily: "var(--font-sans)", padding: 0, minHeight: "44px", transition: "color 0.2s" }}
+            onMouseEnter={e => (e.currentTarget.style.color = "rgba(255,255,255,0.9)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "rgba(255,255,255,0.65)")}>
             {txt(t.legal.privacy_link, lang)}
           </button>
         </div>
@@ -1499,7 +1499,7 @@ function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: 
             {filtered.map(p => <ProjectCard key={p.id} p={p} lang={lang} onOpen={() => onOpenProject(p.id)} />)}
           </div>
           {filtered.length === 0 && (
-            <p style={{ textAlign: "center", color: "#9CA3AF", padding: "60px 0" }}>
+            <p style={{ textAlign: "center", color: "#6B7280", padding: "60px 0" }}>
               {lang === "en" ? "No projects found." : "找不到項目。"}
             </p>
           )}
@@ -1665,7 +1665,7 @@ function PartnersSection({ lang }: { lang: Lang }) {
                   <div style={{ fontSize: "18px", fontWeight: 800, color: colors.text, letterSpacing: "-0.01em", marginBottom: "4px", fontFamily: "var(--font-sans)" }}>
                     {partner.shortName}
                   </div>
-                  <div style={{ fontSize: "10px", color: "#9CA3AF", lineHeight: 1.4 }}>
+                  <div style={{ fontSize: "10px", color: "#6B7280", lineHeight: 1.4 }}>
                     {txt(partner.desc, lang)}
                   </div>
                 </div>
@@ -1716,14 +1716,14 @@ function LegalModal({ type, lang, onClose }: { type: LegalType; lang: Lang; onCl
         style={{ background: "#fff", borderRadius: "4px", maxWidth: "720px", width: "100%", padding: "56px 48px", position: "relative" }}>
         {/* Close button */}
         <button onClick={onClose} aria-label={lang === "en" ? "Close" : "關閉"}
-          style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", cursor: "pointer", color: "#9CA3AF", lineHeight: 0, padding: "4px" }}>
+          style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", cursor: "pointer", color: "#6B7280", lineHeight: 0, padding: "4px" }}>
           <IconClose size={22} />
         </button>
 
         <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "30px", fontWeight: 700, color: "#001A4A", margin: "0 0 8px", letterSpacing: "-0.02em" }}>
           {txt(data.heading, lang)}
         </h2>
-        <p style={{ fontSize: "12px", color: "#9CA3AF", marginBottom: "36px" }}>
+        <p style={{ fontSize: "12px", color: "#6B7280", marginBottom: "36px" }}>
           {txt(data.updated, lang)}
         </p>
 
