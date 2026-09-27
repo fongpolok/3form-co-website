@@ -934,14 +934,21 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
             }}>
               <div className="sv-sweep-bar" />
               <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
-                {/* One icon per service, keyed to svc.id — these used to be
+                {/* One image per service, keyed to svc.id — these used to be
                     four rotating crops of the hero skyline photo, which meant
-                    the mark never matched the service it sat above. */}
-                <div className="sv-sweep-photo" style={{
-                  width: "64px", height: "64px", borderRadius: "50%", overflow: "hidden", border: `2px solid ${CONFIG.accent}`, flexShrink: 0,
-                  backgroundImage: `url(${asset(`/services/service-${String(svc.id).padStart(2, "0")}.webp`)})`,
-                  backgroundSize: "cover", backgroundPosition: "center",
-                }} />
+                    the mark never matched the service it sat above. A real
+                    <img> rather than a CSS background so the picture carries
+                    alt text in the page language and is indexable. */}
+                <img className="sv-sweep-photo"
+                  src={asset(`/services/service-${String(svc.id).padStart(2, "0")}.webp`)}
+                  alt={lang === "en"
+                    ? `${txt(svc.title, lang)} — 3form service`
+                    : `${txt(svc.title, lang)} — 3form 服務`}
+                  loading="lazy" decoding="async" width={64} height={64}
+                  style={{
+                    width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover",
+                    border: `2px solid ${CONFIG.accent}`, flexShrink: 0, display: "block",
+                  }} />
                 <div style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                   {String(svc.id).padStart(2, "0")}
                 </div>

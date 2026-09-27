@@ -20,6 +20,13 @@ type Props = {
   secondaryAction?: ReactNode;
 };
 
+// Same base-URL rule as App's asset(): this deploys under a subpath on GitHub
+// Pages, where a bare "/services/..." would resolve against the domain root.
+// Kept local rather than imported from App.tsx, which imports this block.
+function asset(path: string): string {
+  return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
+}
+
 // "5744 9594" → "tel:+85257449594" (Hong Kong numbers are 8 digits, no area code)
 const telHref = `tel:+852${t.contact.phone.replace(/\D/g, "")}`;
 
@@ -86,6 +93,12 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
         <div className="fm-cat-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cfg.categories.length === 4 ? 2 : Math.min(cfg.categories.length, 3)}, 1fr)`, gap: "2px", background: "#E5E7EB" }}>
           {cfg.categories.map((cat, i) => (
             <div key={cat.id} style={{ background: "#fff", padding: "28px 24px" }}>
+              {/* Category photo — a real <img> so it carries alt text in the
+                  page language and is indexable. Renders in both placements,
+                  including the dedicated facility-maintenance page. */}
+              <img src={asset(cat.image)} alt={txt(cat.imageAlt, lang)}
+                loading="lazy" decoding="async"
+                style={{ width: "100%", height: "180px", objectFit: "cover", display: "block", marginBottom: "18px", borderRadius: "2px", background: "#E5E7EB" }} />
               <div style={{ fontSize: "13px", fontWeight: 600, color: accent, letterSpacing: "0.1em", marginBottom: "10px" }}>
                 {String(i + 1).padStart(2, "0")}
               </div>

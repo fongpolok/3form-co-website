@@ -18,6 +18,10 @@ export type FacilityCategory = {
   covers: string[];
   title: BiString;
   points: BiString[];
+  /** Root-relative path to the category photo in public/services. */
+  image: string;
+  /** Alt text for `image`, in the page language. */
+  imageAlt: BiString;
 };
 
 export type FacilityMaintenanceConfig = {

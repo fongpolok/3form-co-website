@@ -23,6 +23,11 @@
       "id": "hvac",
       "enabled": true,
       "covers": ["upkeep"],
+      "image": "/services/fm01_hvac.webp",
+      "imageAlt": {
+        "en": "Air-conditioning and ventilation plant serviced under 3form facility maintenance",
+        "tc": "3form 場地保養服務中的冷氣及通風系統設備"
+      },
       "title": { "en": "HVAC", "tc": "冷氣及通風" },
       "points": [
         {
@@ -35,6 +40,11 @@
       "id": "electrical",
       "enabled": true,
       "covers": ["upkeep"],
+      "image": "/services/fm02_electrical.webp",
+      "imageAlt": {
+        "en": "Site electrical distribution panel checked during 3form facility maintenance",
+        "tc": "3form 場地保養期間檢查的場地電力配電裝置"
+      },
       "title": { "en": "Electrical systems", "tc": "電力系統" },
       "points": [
         {
@@ -47,6 +57,11 @@
       "id": "office_equipment",
       "enabled": true,
       "covers": ["support"],
+      "image": "/services/fm03_office_equipment.webp",
+      "imageAlt": {
+        "en": "Office equipment kept serviceable by 3form facility maintenance",
+        "tc": "由 3form 場地保養服務維持正常運作的辦公室設備"
+      },
       "title": { "en": "Office equipment", "tc": "辦公室設備" },
       "points": [
         {
@@ -59,6 +74,11 @@
       "id": "production_line_fifo",
       "enabled": true,
       "covers": ["design"],
+      "image": "/services/fm04_layout_fifo.webp",
+      "imageAlt": {
+        "en": "Production line laid out so materials flow first-in-first-out (FIFO)",
+        "tc": "按先進先出（FIFO）原則規劃物料流轉的生產線佈局"
+      },
       "title": {
         "en": "Production line layout with first-in-first-out (FIFO) concern",
         "tc": "生產線佈局（須考慮先進先出 FIFO）"
