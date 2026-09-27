@@ -934,13 +934,12 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
             }}>
               <div className="sv-sweep-bar" />
               <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "20px" }}>
-                {/* One image per service, keyed to svc.id — these used to be
-                    four rotating crops of the hero skyline photo, which meant
-                    the mark never matched the service it sat above. A real
-                    <img> rather than a CSS background so the picture carries
-                    alt text in the page language and is indexable. */}
+                {/* One icon per service, keyed to svc.id. The full photo
+                    (service-NN.webp) lives on that service's own page. A real
+                    <img> rather than a CSS background so the icon carries
+                    alt text in the page language. */}
                 <img className="sv-sweep-photo"
-                  src={asset(`/services/service-${String(svc.id).padStart(2, "0")}.webp`)}
+                  src={asset(`/services/icon-${String(svc.id).padStart(2, "0")}.webp`)}
                   alt={lang === "en"
                     ? `${txt(svc.title, lang)} — 3form service`
                     : `${txt(svc.title, lang)} — 3form 服務`}
@@ -1265,6 +1264,7 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
             accentHover={CONFIG.accentHover}
             onContact={() => setPage("contact")}
             omitIntro
+            showPhotos
           />
         </div>
       </section>
@@ -1276,7 +1276,7 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
 // Used by every entry in SERVICE_LANDINGS (src/routes.ts): Funding Consulting,
 // Engineering & Process Enhancement, and any service added later. Copy lives in
 // t.services.<name>Page; the matching Services-page card links here.
-function ServiceLandingPage({ lang, content: fp, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; onBack: () => void; setPage: (p: Page) => void }) {
+function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; onBack: () => void; setPage: (p: Page) => void }) {
   const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
   const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px" };
   const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0 };
@@ -1300,6 +1300,12 @@ function ServiceLandingPage({ lang, content: fp, onBack, setPage }: { lang: Lang
           <p style={{ fontSize: "16px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 72px", maxWidth: "68ch" }}>
             {txt(fp.intro, lang)}
           </p>
+
+          {/* The service's photo — the Services-page card shows only its icon. */}
+          <img src={asset(`/services/service-${String(cardId).padStart(2, "0")}.webp`)}
+            alt={txt(fp.heading, lang)}
+            decoding="async" width={1280} height={720}
+            style={{ width: "100%", maxWidth: "960px", height: "auto", aspectRatio: "16 / 9", objectFit: "cover", display: "block", margin: "-32px 0 72px", borderRadius: "2px", background: "#E5E7EB" }} />
 
           <h2 style={h2Style}>{txt(fp.audienceHeading, lang)}</h2>
           <div style={{ display: "grid", gridTemplateColumns: fp.audiences.length > 1 ? "repeat(2, 1fr)" : "minmax(0, 720px)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
@@ -1836,7 +1842,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
-        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} onBack={() => setPage("home")} setPage={setPage} />}
+        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} cardId={SERVICE_LANDINGS[page]!.cardId} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />

@@ -18,6 +18,11 @@ type Props = {
   omitIntro?: boolean;
   /** Extra link rendered beside the CTA (Services page → the full landing page). */
   secondaryAction?: ReactNode;
+  /**
+   * Show each category's photo. Set only on the dedicated facility-maintenance
+   * page; the Services-page summary stays text-only.
+   */
+  showPhotos?: boolean;
 };
 
 // Same base-URL rule as App's asset(): this deploys under a subpath on GitHub
@@ -35,7 +40,7 @@ const telHref = `tel:+852${t.contact.phone.replace(/\D/g, "")}`;
  * Premises (HVAC, electrical, office equipment, FIFO production line layout) — not the production-equipment
  * "General Maintenance & Repair" card. Copy lives in content.json.
  */
-export default function FacilityMaintenanceBlock({ lang, accent, accentHover, onContact, omitIntro = false, secondaryAction }: Props) {
+export default function FacilityMaintenanceBlock({ lang, accent, accentHover, onContact, omitIntro = false, secondaryAction, showPhotos = false }: Props) {
   // Keep the document outline contiguous in both placements: on the Services
   // page the block's own heading is an <h2> under that page's <h1>, so its
   // subheadings are <h3>; on its own page the page supplies the <h1> and the
@@ -94,11 +99,12 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
           {cfg.categories.map((cat, i) => (
             <div key={cat.id} style={{ background: "#fff", padding: "28px 24px" }}>
               {/* Category photo — a real <img> so it carries alt text in the
-                  page language and is indexable. Renders in both placements,
-                  including the dedicated facility-maintenance page. */}
-              <img src={asset(cat.image)} alt={txt(cat.imageAlt, lang)}
-                loading="lazy" decoding="async"
-                style={{ width: "100%", height: "180px", objectFit: "cover", display: "block", marginBottom: "18px", borderRadius: "2px", background: "#E5E7EB" }} />
+                  page language and is indexable. Dedicated page only. */}
+              {showPhotos && (
+                <img src={asset(cat.image)} alt={txt(cat.imageAlt, lang)}
+                  loading="lazy" decoding="async"
+                  style={{ width: "100%", height: "180px", objectFit: "cover", display: "block", marginBottom: "18px", borderRadius: "2px", background: "#E5E7EB" }} />
+              )}
               <div style={{ fontSize: "13px", fontWeight: 600, color: accent, letterSpacing: "0.1em", marginBottom: "10px" }}>
                 {String(i + 1).padStart(2, "0")}
               </div>
