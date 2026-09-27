@@ -104,6 +104,8 @@ Confirmed visual anti-references: no gradient text, no glassmorphism, no playful
 
 ## Colors
 
+In code, every colour comes from `COLORS` in `src/theme.ts`, whose names match the `colors:` list above; do not type hex values into components.
+
 A restrained two-hue system — navy for authority and structure, one confident blue for action and evidence — set against near-white surfaces and a standard gray text ramp.
 
 ### Primary

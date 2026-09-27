@@ -6,6 +6,7 @@
 import { useState, useEffect, useRef, Fragment, type CSSProperties, type ReactNode } from "react";
 import { t, txt, type Lang } from "./translations";
 import { FacilityMaintenanceBlock, facilityMaintenanceConfig } from "./facilityMaintenance";
+import { COLORS } from "./theme";
 import {
   HOME_ROUTE,
   navKeyFor,
@@ -42,24 +43,24 @@ const visuallyHidden = {
 // ── Tunable visual parameters — change colours/sizes here ────────────────────
 const CONFIG = {
   navHeight: "72px",
-  navBg:        "#002D72",
-  navText:      "#FFFFFF",
-  accent:       "#0050CC",
-  accentHover:  "#003FA3",
+  navBg:        COLORS.navy,
+  navText:      COLORS.white,
+  accent:       COLORS.accent,
+  accentHover:  COLORS.accentHover,
   heroOverlay:  "rgba(0, 29, 72, 0.78)",
   // Overall strength of the hero's blueprint grid. The canvas paints on top of
   // heroOverlay (painting it underneath meant the overlay ate ~78% of it), so
   // this single dial is what actually governs how present the effect reads.
   heroGridOpacity: 0.85,
   sectionBg: {
-    hero:     "#001A4A",
-    about:    "#F8FAFF",
-    founder:  "#FFFFFF",
-    services: "#FFFFFF",
-    projects: "#F0F4FF",
-    allProjects: "#F8FAFF",
-    contact:  "#002D72",
-    footer:   "#001A4A",
+    hero:     COLORS.navyDark,
+    about:    COLORS.frostWash,
+    founder:  COLORS.white,
+    services: COLORS.white,
+    projects: COLORS.iceWash,
+    allProjects: COLORS.frostWash,
+    contact:  COLORS.navy,
+    footer:   COLORS.navyDark,
   },
   heroImageUrl:
     "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&h=900&fit=crop&auto=format",
@@ -156,10 +157,10 @@ function RouteLink({ to, onNavigate, style, className, children, ariaCurrent, on
 function SectionLabel({ lang, en, tc, light = false }: { lang: Lang; en: string; tc: string; light?: boolean }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-      <div style={{ width: "32px", height: "2px", background: light ? "#5B9BF0" : CONFIG.accent }} />
+      <div style={{ width: "32px", height: "2px", background: light ? COLORS.accentLight : CONFIG.accent }} />
       <span style={{
         fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em",
-        textTransform: "uppercase", color: light ? "#5B9BF0" : CONFIG.accent,
+        textTransform: "uppercase", color: light ? COLORS.accentLight : CONFIG.accent,
       }}>
         {lang === "en" ? en : tc}
       </span>
@@ -172,7 +173,7 @@ function ContactDetail({ icon, label, value }: {
 }) {
   return (
     <div style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
-      <span style={{ color: "#5B9BF0", marginTop: "2px", flexShrink: 0 }}>{icon}</span>
+      <span style={{ color: COLORS.accentLight, marginTop: "2px", flexShrink: 0 }}>{icon}</span>
       <div>
         <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.65)", marginBottom: "4px" }}>
           {label}
@@ -343,7 +344,7 @@ function LangToggle({ route, setLang, inline = false }: { route: Route; setLang:
         aria-label={lang === "en" ? "Select language" : "選擇語言"}
         style={{
           display: "flex", alignItems: "center", gap: "8px",
-          border: "1.5px solid rgba(255,255,255,0.6)", color: "#fff",
+          border: "1.5px solid rgba(255,255,255,0.6)", color: COLORS.white,
           background: open ? "rgba(255,255,255,0.12)" : "transparent",
           padding: "6px 12px 6px 16px", borderRadius: "4px", fontFamily: "var(--font-sans)",
           fontSize: "13px", fontWeight: 500, cursor: "pointer", letterSpacing: "0.04em", transition: "background 0.2s",
@@ -365,11 +366,11 @@ function LangToggle({ route, setLang, inline = false }: { route: Route; setLang:
             // contain it — an absolutely-positioned flyout here would hang
             // off the panel's bottom edge with page content showing behind it.
             marginTop: "8px", minWidth: "150px", maxWidth: "220px",
-            background: "#fff", borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
+            background: COLORS.white, borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
             overflow: "hidden",
           } : {
             position: "absolute", top: "calc(100% + 8px)", right: 0, minWidth: "150px",
-            background: "#fff", borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
+            background: COLORS.white, borderRadius: "3px", boxShadow: "0 8px 32px rgba(0,45,114,0.18)",
             overflow: "hidden", zIndex: 10,
           }}>
           {/* Real links to the same page in the other language, so a crawler
@@ -382,11 +383,11 @@ function LangToggle({ route, setLang, inline = false }: { route: Route; setLang:
                 onNavigate={() => { log.event("Language →", opt.value); setLang(opt.value); setOpen(false); }}
                 style={{
                   display: "block", width: "100%", textAlign: "left", padding: "12px 16px",
-                  background: active ? "#E8F0FE" : "transparent",
-                  color: active ? CONFIG.accent : "#374151", fontSize: "14px",
+                  background: active ? COLORS.accentTint : "transparent",
+                  color: active ? CONFIG.accent : COLORS.graphite, fontSize: "14px",
                   fontWeight: active ? 700 : 500, cursor: "pointer", fontFamily: "var(--font-sans)",
                 }}
-                onMouseEnter={e => { if (!active) e.currentTarget.style.background = "#F3F4F6"; }}
+                onMouseEnter={e => { if (!active) e.currentTarget.style.background = COLORS.mistGray; }}
                 onMouseLeave={e => { if (!active) e.currentTarget.style.background = "transparent"; }}
               >
                 {opt.label}
@@ -448,7 +449,7 @@ function Navbar({ route, setLang, setPage }: {
           onNavigate={() => { setPage("home"); window.scrollTo({ top: 0 }); }}
           style={{ display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}>
           <img src={asset("/logo.white.png")} alt="" style={{ width: "40px", height: "auto", flexShrink: 0 }} />
-          <span style={{ fontFamily: "var(--font-serif)", color: "#FFFFFF", letterSpacing: "-0.015em", fontSize: "25px" }}>
+          <span style={{ fontFamily: "var(--font-serif)", color: COLORS.white, letterSpacing: "-0.015em", fontSize: "25px" }}>
             <span style={{ fontWeight: 700 }}>3form</span>{" "}
             <span style={{ fontWeight: 400 }}>Co</span>
           </span>
@@ -462,9 +463,9 @@ function Navbar({ route, setLang, setPage }: {
             <RouteLink key={link.key} to={{ page: link.key, lang, projectId: null }}
               ariaCurrent={activeKey === link.key}
               onNavigate={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
-              style={{ color: activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", fontSize: "14px", fontWeight: activeKey === link.key ? 700 : 500, letterSpacing: "0.02em", cursor: "pointer", transition: "color 0.2s", fontFamily: "var(--font-sans)" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#FFFFFF")}
-              onMouseLeave={e => (e.currentTarget.style.color = activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)")}>
+              style={{ color: activeKey === link.key ? COLORS.white : "rgba(255,255,255,0.85)", fontSize: "14px", fontWeight: activeKey === link.key ? 700 : 500, letterSpacing: "0.02em", cursor: "pointer", transition: "color 0.2s", fontFamily: "var(--font-sans)" }}
+              onMouseEnter={e => (e.currentTarget.style.color = COLORS.white)}
+              onMouseLeave={e => (e.currentTarget.style.color = activeKey === link.key ? COLORS.white : "rgba(255,255,255,0.85)")}>
               {txt(link.label, lang)}
             </RouteLink>
           ))}
@@ -472,7 +473,7 @@ function Navbar({ route, setLang, setPage }: {
           <LangToggle route={route} setLang={setLang} />
         </div>
         <button onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? (lang === "en" ? "Close menu" : "關閉選單") : (lang === "en" ? "Open menu" : "開啟選單")}
-          style={{ display: "none", background: "none", border: "none", color: "#fff", cursor: "pointer", padding: 0, lineHeight: 0 }} className="show-mobile">
+          style={{ display: "none", background: "none", border: "none", color: COLORS.white, cursor: "pointer", padding: 0, lineHeight: 0 }} className="show-mobile">
           {menuOpen ? <IconClose size={24} /> : <IconMenu size={24} />}
         </button>
       </div>
@@ -482,7 +483,7 @@ function Navbar({ route, setLang, setPage }: {
             <RouteLink key={link.key} to={{ page: link.key, lang, projectId: null }}
               ariaCurrent={activeKey === link.key}
               onNavigate={() => { log.event("Nav:", link.key); setPage(link.key); setMenuOpen(false); }}
-              style={{ display: "block", width: "100%", textAlign: "left", color: activeKey === link.key ? "#FFFFFF" : "rgba(255,255,255,0.85)", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: "15px", fontWeight: activeKey === link.key ? 700 : 500, padding: "10px 0", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
+              style={{ display: "block", width: "100%", textAlign: "left", color: activeKey === link.key ? COLORS.white : "rgba(255,255,255,0.85)", borderBottom: "1px solid rgba(255,255,255,0.08)", fontSize: "15px", fontWeight: activeKey === link.key ? 700 : 500, padding: "10px 0", cursor: "pointer", fontFamily: "var(--font-sans)" }}>
               {txt(link.label, lang)}
             </RouteLink>
           ))}
@@ -632,12 +633,12 @@ function HeroSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => void
       <div style={{ position: "relative", maxWidth: "1280px", margin: "0 auto", padding: "120px 32px 80px", width: "100%" }}>
         <div style={{ maxWidth: "700px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "28px" }}>
-            <div style={{ width: "40px", height: "2px", background: "#5B9BF0" }} />
-            <span style={{ color: "#5B9BF0", fontSize: "12px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" }}>
+            <div style={{ width: "40px", height: "2px", background: COLORS.accentLight }} />
+            <span style={{ color: COLORS.accentLight, fontSize: "12px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" }}>
               {lang === "en" ? "Engineering Consulting · Hong Kong" : "工程顧問 · 香港"}
             </span>
           </div>
-          <h1 style={{ fontFamily: "var(--font-serif)", color: "#FFFFFF", fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 700, lineHeight: 1.15, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", color: COLORS.white, fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 700, lineHeight: 1.15, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
             {txt(t.hero.tagline, lang)}
           </h1>
           <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "18px", lineHeight: 1.7, margin: "0 0 44px", fontWeight: 300 }}>
@@ -645,13 +646,13 @@ function HeroSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => void
           </p>
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <RouteLink to={{ page: "services", lang, projectId: null }} onNavigate={() => { log.event("Hero CTA → services"); setPage("services"); }}
-              style={{ display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
+              style={{ display: "inline-block", background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.background = CONFIG.accentHover)}
               onMouseLeave={e => (e.currentTarget.style.background = CONFIG.accent)}>
               {txt(t.hero.cta, lang)}
             </RouteLink>
             <RouteLink to={{ page: "contact", lang, projectId: null }} onNavigate={() => { log.event("Hero CTA → contact"); setPage("contact"); }}
-              style={{ display: "inline-block", border: "1.5px solid rgba(255,255,255,0.6)", color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
+              style={{ display: "inline-block", border: "1.5px solid rgba(255,255,255,0.6)", color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", transition: "background 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.1)")}
               onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
               {txt(t.hero.cta2, lang)}
@@ -687,7 +688,7 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="Explore" tc="探索更多" />
         <h2 style={visuallyHidden}>{lang === "en" ? "Explore" : "探索更多"}</h2>
-        <p style={{ fontSize: "16px", color: "#6B7280", margin: "16px 0 48px", maxWidth: "560px" }}>
+        <p style={{ fontSize: "16px", color: COLORS.slate, margin: "16px 0 48px", maxWidth: "560px" }}>
           {txt(t.home.intro, lang)}
         </p>
         {/* auto-fit rather than a fixed 4 columns — the Facility Maintenance
@@ -696,13 +697,13 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
           {cards.map(c => (
             <RouteLink key={c.key} to={{ page: c.key, lang, projectId: null }}
               onNavigate={() => { log.event("Home quicklink →", c.key); setPage(c.key); }}
-              style={{ display: "block", textAlign: "left", background: "#fff", border: "1px solid #E5E7EB", borderTop: `5px solid ${CONFIG.accent}`, padding: "40px 28px", cursor: "pointer", boxShadow: "0 2px 16px rgba(0,45,114,0.06)", transition: "transform 0.2s" }}
+              style={{ display: "block", textAlign: "left", background: COLORS.white, border: `1px solid ${COLORS.hairline}`, borderTop: `5px solid ${CONFIG.accent}`, padding: "40px 28px", cursor: "pointer", boxShadow: "0 2px 16px rgba(0,45,114,0.06)", transition: "transform 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.transform = "translateY(-4px)")}
               onMouseLeave={e => (e.currentTarget.style.transform = "translateY(0)")}>
-              <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "23px", fontWeight: 700, color: "#001A4A", margin: "0 0 12px" }}>
+              <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "23px", fontWeight: 700, color: COLORS.navyDark, margin: "0 0 12px" }}>
                 {txt(c.heading, lang)}
               </h3>
-              <p style={{ fontSize: "15px", color: "#6B7280", lineHeight: 1.6, margin: "0 0 18px" }}>
+              <p style={{ fontSize: "15px", color: COLORS.slate, lineHeight: 1.6, margin: "0 0 18px" }}>
                 {txt(c.teaser, lang)}
               </p>
               <span style={{ fontSize: "14px", color: CONFIG.accent, fontWeight: 700 }}>{txt(c.cta, lang)} →</span>
@@ -725,41 +726,41 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
         <SectionLabel lang={lang} en="Live Demos" tc="現場示範" />
         {/* <h1>, not <h2>: this section is the whole Demos page, and every
             prerendered page needs exactly one top-level heading. */}
-        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
+        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.demos.heading, lang)}
         </h1>
-        <p style={{ fontSize: "16px", color: "#4B5563", marginBottom: "56px", maxWidth: "620px" }}>
+        <p style={{ fontSize: "16px", color: COLORS.charcoal, marginBottom: "56px", maxWidth: "620px" }}>
           {txt(t.demos.sub, lang)}
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "24px" }} className="grid-responsive">
           {t.demos.items.map(demo => (
             <div key={demo.id} style={{
-              background: demo.real ? "#fff" : "#FAFAFA",
+              background: demo.real ? COLORS.white : COLORS.paperGray,
               padding: "36px 32px",
-              borderTop: `3px solid ${demo.real ? CONFIG.accent : "#D1D5DB"}`,
+              borderTop: `3px solid ${demo.real ? CONFIG.accent : COLORS.borderGray}`,
               boxShadow: demo.real ? "0 2px 16px rgba(0,45,114,0.06)" : "none",
               display: "flex", flexDirection: "column",
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "20px" }}>
-                <span style={{ display: "inline-block", background: demo.real ? "#E8F0FE" : "#F3F4F6", color: demo.real ? CONFIG.accent : "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
+                <span style={{ display: "inline-block", background: demo.real ? COLORS.accentTint : COLORS.mistGray, color: demo.real ? CONFIG.accent : COLORS.slate, fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
                   {txt(demo.tag, lang)}
                 </span>
                 {!demo.real && (
-                  <span style={{ display: "inline-block", background: "#fff", color: "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+                  <span style={{ display: "inline-block", background: COLORS.white, color: COLORS.slate, fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: `1px solid ${COLORS.borderGray}`, whiteSpace: "nowrap" }}>
                     {txt(t.demos.illustrative_badge, lang)}
                   </span>
                 )}
               </div>
               {/* <h2> under the page <h1> — each demo is a top-level topic of
                   the Demos page, which is the whole of this section. */}
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 12px" }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: demo.real ? COLORS.navyDark : COLORS.charcoal, lineHeight: 1.35, margin: "0 0 12px" }}>
                 {txt(demo.title, lang)}
               </h2>
-              <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0, flex: 1 }}>
+              <p style={{ fontSize: "14px", lineHeight: 1.7, color: COLORS.slate, margin: 0, flex: 1 }}>
                 {txt(demo.desc, lang)}
               </p>
               {demo.real && txt(demo.note, lang) && (
-                <p style={{ fontSize: "12px", color: "#6B7280", margin: "16px 0 0", fontStyle: "italic" }}>
+                <p style={{ fontSize: "12px", color: COLORS.slate, margin: "16px 0 0", fontStyle: "italic" }}>
                   {txt(demo.note, lang)}
                 </p>
               )}
@@ -791,18 +792,18 @@ function AboutCompanySection({ lang }: { lang: Lang }) {
           <div>
             <SectionLabel lang={lang} en="Who We Are" tc="關於我們" />
             {/* The About page's top-level heading — see the note on the Demos <h1>. */}
-            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
+            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
               {txt(t.about.heading, lang)}
             </h1>
-            <p style={{ fontSize: "16px", lineHeight: 1.8, color: "#4B5563", margin: 0 }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.8, color: COLORS.charcoal, margin: 0 }}>
               {txt(t.about.company_body, lang)}
             </p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "24px" }}>
             {stats.map((s, i) => (
-              <div key={i} style={{ minWidth: 0, textAlign: "center", padding: "32px 12px", background: "#fff", borderTop: `3px solid ${CONFIG.accent}`, boxShadow: "0 2px 16px rgba(0,45,114,0.07)" }}>
+              <div key={i} style={{ minWidth: 0, textAlign: "center", padding: "32px 12px", background: COLORS.white, borderTop: `3px solid ${CONFIG.accent}`, boxShadow: "0 2px 16px rgba(0,45,114,0.07)" }}>
                 <div style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 6vw, 42px)", fontWeight: 700, color: CONFIG.navBg, lineHeight: 1, marginBottom: "8px" }}>{s.num}</div>
-                <div style={{ fontSize: "12px", color: "#6B7280", fontWeight: 500 }}>{txt(s.label, lang)}</div>
+                <div style={{ fontSize: "12px", color: COLORS.slate, fontWeight: 500 }}>{txt(s.label, lang)}</div>
               </div>
             ))}
           </div>
@@ -816,26 +817,26 @@ function AboutCompanySection({ lang }: { lang: Lang }) {
 function RoadmapSection({ lang }: { lang: Lang }) {
   const steps = t.about.roadmap.steps;
   return (
-    <section style={{ background: CONFIG.sectionBg.about, padding: "100px 32px", borderTop: "1px solid #E5E7EB" }}>
+    <section style={{ background: CONFIG.sectionBg.about, padding: "100px 32px", borderTop: `1px solid ${COLORS.hairline}` }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="How We Work" tc="我們的工作方式" />
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
+        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.about.roadmap.heading, lang)}
         </h2>
-        <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "56px", maxWidth: "620px" }}>
+        <p style={{ fontSize: "16px", color: COLORS.slate, marginBottom: "56px", maxWidth: "620px" }}>
           {txt(t.about.roadmap.sub, lang)}
         </p>
         <div className="roadmap-track" style={{ display: "flex", alignItems: "flex-start" }}>
           {steps.map((step, i) => (
             <Fragment key={i}>
               <div className="roadmap-step" style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", flex: 1, padding: "0 16px", minWidth: 0 }}>
-                <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: CONFIG.accent, color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 700, flexShrink: 0, marginBottom: "24px" }}>
+                <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: CONFIG.accent, color: COLORS.white, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 700, flexShrink: 0, marginBottom: "24px" }}>
                   {i + 1}
                 </div>
-                <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: "#001A4A", margin: "0 0 10px" }}>
+                <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: COLORS.navyDark, margin: "0 0 10px" }}>
                   {txt(step.title, lang)}
                 </h3>
-                <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: 0 }}>
+                <p style={{ fontSize: "14px", lineHeight: 1.7, color: COLORS.slate, margin: 0 }}>
                   {txt(step.desc, lang)}
                 </p>
               </div>
@@ -854,7 +855,7 @@ function RoadmapSection({ lang }: { lang: Lang }) {
 function FounderSection({ lang }: { lang: Lang }) {
   const f = t.about.founder;
   return (
-    <section style={{ background: CONFIG.sectionBg.founder, padding: "100px 32px", borderTop: "1px solid #E5E7EB" }}>
+    <section style={{ background: CONFIG.sectionBg.founder, padding: "100px 32px", borderTop: `1px solid ${COLORS.hairline}` }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="Meet Our Founder" tc="認識我們的創辦人" />
         <div style={{ display: "grid", gridTemplateColumns: "280px 1fr", gap: "72px", alignItems: "start", marginTop: "48px" }} className="grid-responsive">
@@ -865,7 +866,7 @@ function FounderSection({ lang }: { lang: Lang }) {
               width: "200px", height: "200px", borderRadius: "50%", margin: "0 auto 24px",
               objectFit: "cover", boxShadow: "0 4px 20px rgba(0,45,114,0.15)",
             }} />
-            <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: "#001A4A", margin: "0 0 6px" }}>
+            <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: COLORS.navyDark, margin: "0 0 6px" }}>
               {f.name}
             </h3>
             <p style={{ fontSize: "14px", color: CONFIG.accent, fontWeight: 600, margin: "0 0 20px", letterSpacing: "0.02em" }}>
@@ -874,7 +875,7 @@ function FounderSection({ lang }: { lang: Lang }) {
             {/* Credential pills */}
             <div style={{ display: "flex", flexDirection: "column", gap: "8px", alignItems: "center" }}>
               {f.credentials.map((c, i) => (
-                <span key={i} style={{ display: "inline-block", background: "#E8F0FE", color: CONFIG.accent, fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "2px", textAlign: "center" }}>
+                <span key={i} style={{ display: "inline-block", background: COLORS.accentTint, color: CONFIG.accent, fontSize: "11px", fontWeight: 600, padding: "5px 12px", borderRadius: "2px", textAlign: "center" }}>
                   {txt(c, lang)}
                 </span>
               ))}
@@ -883,10 +884,10 @@ function FounderSection({ lang }: { lang: Lang }) {
 
           {/* Right: bio */}
           <div>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", marginBottom: "20px", maxWidth: "62ch" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, marginBottom: "20px", maxWidth: "62ch" }}>
               {txt(f.bio_p1, lang)}
             </p>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: "#374151", margin: 0, maxWidth: "62ch" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, margin: 0, maxWidth: "62ch" }}>
               {txt(f.bio_p2, lang)}
             </p>
           </div>
@@ -904,7 +905,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
         .sv-sweep-card { position: relative; overflow: hidden; }
         .sv-sweep-photo { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .sv-sweep-card:hover .sv-sweep-photo, .sv-sweep-card:focus-within .sv-sweep-photo { transform: scale(1.06); }
-        .sv-sweep-bar { position: absolute; top: 0; left: 0; height: 5px; width: 100%; background: #0050CC; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+        .sv-sweep-bar { position: absolute; top: 0; left: 0; height: 5px; width: 100%; background: ${COLORS.accent}; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
         .sv-sweep-card:hover .sv-sweep-bar, .sv-sweep-card:focus-within .sv-sweep-bar { transform: scaleX(1); }
         @media (prefers-reduced-motion: reduce) {
           .sv-sweep-photo { transition-duration: 0.01ms !important; transform: none !important; }
@@ -914,13 +915,13 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <SectionLabel lang={lang} en="What We Do" tc="我們的服務範疇" />
         {/* The Services page's top-level heading — see the note on the Demos <h1>. */}
-        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
+        <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
           {txt(t.services.heading, lang)}
         </h1>
-        <p style={{ fontSize: "16px", color: "#6B7280", marginBottom: "56px", maxWidth: "560px" }}>
+        <p style={{ fontSize: "16px", color: COLORS.slate, marginBottom: "56px", maxWidth: "560px" }}>
           {txt(t.services.sub, lang)}
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px", background: "#E5E7EB" }} className="services-grid">
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px", background: COLORS.hairline }} className="services-grid">
           {t.services.items.map((svc, i) => {
             // An odd number of services would otherwise leave the last row
             // half-empty, exposing the grid's gray seam background as a blank
@@ -929,7 +930,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
             const isWide = i === t.services.items.length - 1 && t.services.items.length % 2 === 1;
             return (
             <div key={svc.id} className="sv-sweep-card" style={{
-              background: "#fff", padding: "48px 40px",
+              background: COLORS.white, padding: "48px 40px",
               gridColumn: isWide ? "1 / -1" : undefined,
             }}>
               <div className="sv-sweep-bar" />
@@ -954,10 +955,10 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
               </div>
               {/* <h2> under the page <h1> — each service card is a top-level
                   topic of the Services page, not a subsection of one. */}
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 16px" }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "22px", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 16px" }}>
                 {txt(svc.title, lang)}
               </h2>
-              <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
+              <p style={{ fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
                 {txt(svc.detail, lang)}
               </p>
               {/* Services with their own landing page link to it — a real <a>
@@ -999,7 +1000,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
         {/* CTA — request a demo or a quotation */}
         <div style={{ marginTop: "2px", background: CONFIG.navBg, padding: "56px 48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
           <div style={{ maxWidth: "480px" }}>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: "#fff", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: COLORS.white, margin: "0 0 10px", letterSpacing: "-0.01em" }}>
               {txt(t.services.cta.heading, lang)}
             </h2>
             <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: 0 }}>
@@ -1008,7 +1009,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
           </div>
           <RouteLink to={{ page: "contact", lang, projectId: null }}
             onNavigate={() => { log.event("Services CTA → contact"); setPage("contact"); }}
-            style={{ flexShrink: 0, display: "inline-block", background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "normal", maxWidth: "100%", textAlign: "center" }}
+            style={{ flexShrink: 0, display: "inline-block", background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", whiteSpace: "normal", maxWidth: "100%", textAlign: "center" }}
             onMouseEnter={e => (e.currentTarget.style.background = CONFIG.accentHover)}
             onMouseLeave={e => (e.currentTarget.style.background = CONFIG.accent)}>
             {txt(t.services.cta.button, lang)}
@@ -1035,32 +1036,32 @@ function ProjectCard({ p, lang, onOpen }: { p: typeof t.projects.items[0]; lang:
       textAlign: "left",
       font: "inherit",
       cursor: "pointer",
-      background: real ? "#fff" : "#FAFAFA",
+      background: real ? COLORS.white : COLORS.paperGray,
       padding: "40px 32px",
-      borderTop: `3px solid ${real ? CONFIG.accent : "#D1D5DB"}`,
+      borderTop: `3px solid ${real ? CONFIG.accent : COLORS.borderGray}`,
       boxShadow: real ? "0 2px 16px rgba(0,45,114,0.06)" : "none",
       transition: "transform 0.2s, box-shadow 0.2s",
     }}
       onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; if (real) e.currentTarget.style.boxShadow = "0 8px 32px rgba(0,45,114,0.12)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = real ? "0 2px 16px rgba(0,45,114,0.06)" : "none"; }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "20px" }}>
-        <span style={{ display: "inline-block", background: real ? "#E8F0FE" : "#F3F4F6", color: real ? CONFIG.accent : "#4B5563", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
+        <span style={{ display: "inline-block", background: real ? COLORS.accentTint : COLORS.mistGray, color: real ? CONFIG.accent : COLORS.charcoal, fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
           {txt(p.tag, lang)}
         </span>
         {!real && (
-          <span style={{ display: "inline-block", background: "#fff", color: "#6B7280", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: "1px solid #D1D5DB", whiteSpace: "nowrap" }}>
+          <span style={{ display: "inline-block", background: COLORS.white, color: COLORS.slate, fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px", border: `1px solid ${COLORS.borderGray}`, whiteSpace: "nowrap" }}>
             {txt(t.projects.illustrative_badge, lang)}
           </span>
         )}
       </div>
-      <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: real ? "#001A4A" : "#4B5563", lineHeight: 1.35, margin: "0 0 14px" }}>
+      <h3 style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 600, color: real ? COLORS.navyDark : COLORS.charcoal, lineHeight: 1.35, margin: "0 0 14px" }}>
         {txt(p.title, lang)}
       </h3>
-      <p style={{ fontSize: "14px", lineHeight: 1.7, color: "#6B7280", margin: "0 0 20px" }}>
+      <p style={{ fontSize: "14px", lineHeight: 1.7, color: COLORS.slate, margin: "0 0 20px" }}>
         {txt(p.desc, lang)}
       </p>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-        <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : "#4B5563", background: real ? "#E8F0FE" : "#F3F4F6", display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: real ? CONFIG.accent : COLORS.charcoal, background: real ? COLORS.accentTint : COLORS.mistGray, display: "inline-block", padding: "4px 10px", borderRadius: "2px" }}>
           {real ? "✓ " : ""}{txt(p.result, lang)}
         </div>
         <span style={{ fontSize: "13px", fontWeight: 600, color: CONFIG.accent, whiteSpace: "nowrap" }}>
@@ -1117,7 +1118,7 @@ function ContactSection({ lang }: { lang: Lang }) {
           <div>
             <SectionLabel lang={lang} en="Get In Touch" tc="聯絡我們" light />
             {/* The Contact page's top-level heading — see the note on the Demos <h1>. */}
-            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: "#FFFFFF", lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
+            <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.white, lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
               {txt(t.contact.heading, lang)}
             </h1>
             <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "48px" }}>
@@ -1130,7 +1131,7 @@ function ContactSection({ lang }: { lang: Lang }) {
               <ContactDetail icon={<IconMapPin size={18} />} label={lang === "en" ? "Office" : "辦公室"} value={txt(t.contact.address.display, lang)} />
             </div>
           </div>
-          <div style={{ background: "#fff", padding: "48px 40px", borderRadius: "4px" }}>
+          <div style={{ background: COLORS.white, padding: "48px 40px", borderRadius: "4px" }}>
             {(status === "sent" || status === "mailto") && (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
                 <div style={{ color: CONFIG.accent, marginBottom: "16px", display: "flex", justifyContent: "center" }}>
@@ -1139,22 +1140,22 @@ function ContactSection({ lang }: { lang: Lang }) {
                 <p style={{ color: CONFIG.navBg, fontWeight: 600, fontSize: "18px" }}>
                   {txt(status === "sent" ? t.contact.sent_endpoint_heading : t.contact.sent_mailto_heading, lang)}
                 </p>
-                <p style={{ color: "#6B7280", fontSize: "14px" }}>
+                <p style={{ color: COLORS.slate, fontSize: "14px" }}>
                   {txt(status === "sent" ? t.contact.sent_endpoint_body : t.contact.sent_mailto_body, lang)}
                 </p>
-                <button onClick={() => setStatus("idle")} style={{ marginTop: "20px", background: CONFIG.accent, color: "#fff", border: "none", padding: "10px 24px", borderRadius: "3px", cursor: "pointer", fontSize: "14px", fontWeight: 600 }}>
+                <button onClick={() => setStatus("idle")} style={{ marginTop: "20px", background: CONFIG.accent, color: COLORS.white, border: "none", padding: "10px 24px", borderRadius: "3px", cursor: "pointer", fontSize: "14px", fontWeight: 600 }}>
                   {txt(t.contact.send_another, lang)}
                 </button>
               </div>
             )}
             {status === "error" && (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
-                <div style={{ color: "#B91C1C", marginBottom: "16px", display: "flex", justifyContent: "center" }}>
+                <div style={{ color: COLORS.alertRed, marginBottom: "16px", display: "flex", justifyContent: "center" }}>
                   <IconAlertTriangle size={48} />
                 </div>
-                <p style={{ color: "#B91C1C", fontWeight: 600, fontSize: "18px" }}>{txt(t.contact.error_heading, lang)}</p>
-                <p style={{ color: "#6B7280", fontSize: "14px" }}>{txt(t.contact.error_body, lang)}</p>
-                <button onClick={() => setStatus("idle")} style={{ marginTop: "20px", background: CONFIG.accent, color: "#fff", border: "none", padding: "10px 24px", borderRadius: "3px", cursor: "pointer", fontSize: "14px", fontWeight: 600 }}>
+                <p style={{ color: COLORS.alertRed, fontWeight: 600, fontSize: "18px" }}>{txt(t.contact.error_heading, lang)}</p>
+                <p style={{ color: COLORS.slate, fontSize: "14px" }}>{txt(t.contact.error_body, lang)}</p>
+                <button onClick={() => setStatus("idle")} style={{ marginTop: "20px", background: CONFIG.accent, color: COLORS.white, border: "none", padding: "10px 24px", borderRadius: "3px", cursor: "pointer", fontSize: "14px", fontWeight: 600 }}>
                   {txt(t.contact.try_again, lang)}
                 </button>
               </div>
@@ -1163,27 +1164,27 @@ function ContactSection({ lang }: { lang: Lang }) {
               <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
                 {(["name", "email"] as const).map(field => (
                   <div key={field}>
-                    <label htmlFor={`contact-${field}`} style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
+                    <label htmlFor={`contact-${field}`} style={{ display: "block", fontSize: "12px", fontWeight: 600, color: COLORS.graphite, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
                       {txt(t.contact[`form_${field}` as "form_name" | "form_email"], lang)}
                     </label>
                     <input id={`contact-${field}`} name={field} autoComplete={field === "email" ? "email" : "name"} type={field === "email" ? "email" : "text"} required disabled={sending} value={form[field]}
                       onChange={e => setForm({ ...form, [field]: e.target.value })}
-                      style={{ width: "100%", padding: "12px 16px", border: "1.5px solid #D1D5DB", borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
+                      style={{ width: "100%", padding: "12px 16px", border: `1.5px solid ${COLORS.borderGray}`, borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
                       onFocus={e => { e.currentTarget.style.borderColor = CONFIG.accent; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(0,80,204,0.15)`; }}
-                      onBlur={e => { e.currentTarget.style.borderColor = "#D1D5DB"; e.currentTarget.style.boxShadow = "none"; }} />
+                      onBlur={e => { e.currentTarget.style.borderColor = COLORS.borderGray; e.currentTarget.style.boxShadow = "none"; }} />
                   </div>
                 ))}
                 <div>
-                  <label htmlFor="contact-message" style={{ display: "block", fontSize: "12px", fontWeight: 600, color: "#374151", letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
+                  <label htmlFor="contact-message" style={{ display: "block", fontSize: "12px", fontWeight: 600, color: COLORS.graphite, letterSpacing: "0.06em", textTransform: "uppercase", marginBottom: "8px" }}>
                     {txt(t.contact.form_message, lang)}
                   </label>
                   <textarea id="contact-message" name="message" required rows={5} disabled={sending} value={form.message}
                     onChange={e => setForm({ ...form, message: e.target.value })}
-                    style={{ width: "100%", padding: "12px 16px", border: "1.5px solid #D1D5DB", borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", resize: "vertical", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
+                    style={{ width: "100%", padding: "12px 16px", border: `1.5px solid ${COLORS.borderGray}`, borderRadius: "3px", fontSize: "15px", outline: "none", fontFamily: "var(--font-sans)", resize: "vertical", transition: "border-color 0.2s, box-shadow 0.2s", opacity: sending ? 0.6 : 1 }}
                     onFocus={e => { e.currentTarget.style.borderColor = CONFIG.accent; e.currentTarget.style.boxShadow = `0 0 0 3px rgba(0,80,204,0.15)`; }}
-                    onBlur={e => { e.currentTarget.style.borderColor = "#D1D5DB"; e.currentTarget.style.boxShadow = "none"; }} />
+                    onBlur={e => { e.currentTarget.style.borderColor = COLORS.borderGray; e.currentTarget.style.boxShadow = "none"; }} />
                 </div>
-                <button type="submit" disabled={sending} aria-busy={sending} style={{ background: CONFIG.accent, color: "#fff", border: "none", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: sending ? "not-allowed" : "pointer", opacity: sending ? 0.7 : 1, transition: "background 0.2s, opacity 0.2s", alignSelf: "flex-start" }}
+                <button type="submit" disabled={sending} aria-busy={sending} style={{ background: CONFIG.accent, color: COLORS.white, border: "none", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: sending ? "not-allowed" : "pointer", opacity: sending ? 0.7 : 1, transition: "background 0.2s, opacity 0.2s", alignSelf: "flex-start" }}
                   onMouseEnter={e => { if (!sending) e.currentTarget.style.background = CONFIG.accentHover; }}
                   onMouseLeave={e => { if (!sending) e.currentTarget.style.background = CONFIG.accent; }}>
                   {sending ? txt(t.contact.form_sending, lang) : txt(t.contact.form_send, lang)}
@@ -1239,22 +1240,22 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
     <PageShell lang={lang} onBack={onBack}>
       <section style={{ background: CONFIG.sectionBg.services, padding: "80px 32px 100px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: "#6B7280", marginBottom: "24px" }}>
+          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: COLORS.slate, marginBottom: "24px" }}>
             <RouteLink to={{ page: "services", lang, projectId: null }}
               onNavigate={() => { log.event("Breadcrumb → services"); setPage("services"); }}
               style={{ color: CONFIG.accent, fontWeight: 600 }}>
               {txt(t.nav.services, lang)}
             </RouteLink>
-            <span aria-hidden="true" style={{ margin: "0 8px", color: "#9CA3AF" }}>/</span>
+            <span aria-hidden="true" style={{ margin: "0 8px", color: COLORS.paleAsh }}>/</span>
             <span>{txt(cfg.label, lang)}</span>
           </nav>
 
           {/* Headline role, sized to match the All-Projects page <h1> — the
               other standalone page heading in DESIGN.md's hierarchy. */}
-          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "20ch" }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "20ch" }}>
             {txt(cfg.heading, lang)}
           </h1>
-          <p style={{ fontSize: "16px", lineHeight: 1.75, color: "#4B5563", margin: 0, maxWidth: "68ch" }}>
+          <p style={{ fontSize: "16px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0, maxWidth: "68ch" }}>
             {txt(cfg.sub, lang)}
           </p>
 
@@ -1277,27 +1278,27 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
 // Engineering & Process Enhancement, and any service added later. Copy lives in
 // t.services.<name>Page; the matching Services-page card links here.
 function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; onBack: () => void; setPage: (p: Page) => void }) {
-  const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
-  const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px" };
-  const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: 0 };
+  const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
+  const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 12px" };
+  const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0 };
   return (
     <PageShell lang={lang} onBack={onBack}>
       <section style={{ background: CONFIG.sectionBg.services, padding: "80px 32px 100px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: "#6B7280", marginBottom: "24px" }}>
+          <nav aria-label={lang === "en" ? "Breadcrumb" : "頁面路徑"} style={{ fontSize: "13px", color: COLORS.slate, marginBottom: "24px" }}>
             <RouteLink to={{ page: "services", lang, projectId: null }}
               onNavigate={() => { log.event("Breadcrumb → services"); setPage("services"); }}
               style={{ color: CONFIG.accent, fontWeight: 600 }}>
               {txt(t.nav.services, lang)}
             </RouteLink>
-            <span aria-hidden="true" style={{ margin: "0 8px", color: "#9CA3AF" }}>/</span>
+            <span aria-hidden="true" style={{ margin: "0 8px", color: COLORS.paleAsh }}>/</span>
             <span>{txt(fp.label, lang)}</span>
           </nav>
 
-          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "22ch" }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "22ch" }}>
             {txt(fp.heading, lang)}
           </h1>
-          <p style={{ fontSize: "16px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 72px", maxWidth: "68ch" }}>
+          <p style={{ fontSize: "16px", lineHeight: 1.75, color: COLORS.charcoal, margin: "0 0 72px", maxWidth: "68ch" }}>
             {txt(fp.intro, lang)}
           </p>
 
@@ -1305,7 +1306,7 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
           <img src={asset(`/services/service-${String(cardId).padStart(2, "0")}.webp`)}
             alt={txt(fp.heading, lang)}
             decoding="async" width={1280} height={720}
-            style={{ width: "100%", maxWidth: "960px", height: "auto", aspectRatio: "16 / 9", objectFit: "cover", display: "block", margin: "-32px 0 72px", borderRadius: "2px", background: "#E5E7EB" }} />
+            style={{ width: "100%", maxWidth: "960px", height: "auto", aspectRatio: "16 / 9", objectFit: "cover", display: "block", margin: "-32px 0 72px", borderRadius: "2px", background: COLORS.hairline }} />
 
           <h2 style={h2Style}>{txt(fp.audienceHeading, lang)}</h2>
           <div style={{ display: "grid", gridTemplateColumns: fp.audiences.length > 1 ? "repeat(2, 1fr)" : "minmax(0, 720px)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
@@ -1334,7 +1335,7 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
 
           <div style={{ background: CONFIG.navBg, padding: "48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
             <div style={{ maxWidth: "520px" }}>
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: "#fff", margin: "0 0 10px", letterSpacing: "-0.01em" }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: COLORS.white, margin: "0 0 10px", letterSpacing: "-0.01em" }}>
                 {txt(fp.ctaHeading, lang)}
               </h2>
               <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: 0 }}>
@@ -1343,7 +1344,7 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
             </div>
             <RouteLink to={{ page: "contact", lang, projectId: null }}
               onNavigate={() => { log.event("Service landing → contact"); setPage("contact"); }}
-              style={{ background: CONFIG.accent, color: "#fff", padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
+              style={{ background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
               {txt(fp.ctaButton, lang)}
             </RouteLink>
           </div>
@@ -1454,7 +1455,7 @@ function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: 
             {txt(t.nav.back, lang)}
           </button>
           <SectionLabel lang={lang} en="Our Work" tc="我們的工作" light />
-          <h1 style={{ fontFamily: "var(--font-serif)", color: "#fff", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, margin: "16px 0 16px", letterSpacing: "-0.02em" }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", color: COLORS.white, fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, margin: "16px 0 16px", letterSpacing: "-0.02em" }}>
             {txt(t.projects.all_heading, lang)}
           </h1>
           <p style={{ color: "rgba(255,255,255,0.6)", fontSize: "16px", margin: 0 }}>
@@ -1464,13 +1465,13 @@ function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: 
       </div>
 
       {/* Filter tabs */}
-      <div style={{ background: "#fff", borderBottom: "1px solid #E5E7EB", padding: "0 32px 4px" }}>
+      <div style={{ background: COLORS.white, borderBottom: `1px solid ${COLORS.hairline}`, padding: "0 32px 4px" }}>
         <div style={{ maxWidth: "1280px", margin: "0 auto", display: "flex", gap: "0", overflowX: "auto" }}>
           <button key="all" onClick={() => { log.event("Projects filter:", "all"); setFilterTag("all"); }}
             style={{
               background: "none", border: "none", padding: "16px 20px", fontSize: "13px", fontWeight: 600,
               cursor: "pointer", whiteSpace: "nowrap", fontFamily: "var(--font-sans)",
-              color: filterTag === "all" ? CONFIG.accent : "#6B7280",
+              color: filterTag === "all" ? CONFIG.accent : COLORS.slate,
               borderBottom: filterTag === "all" ? `2px solid ${CONFIG.accent}` : "2px solid transparent",
               transition: "all 0.2s",
             }}>
@@ -1481,7 +1482,7 @@ function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: 
               style={{
                 background: "none", border: "none", padding: "16px 20px", fontSize: "13px", fontWeight: 600,
                 cursor: "pointer", whiteSpace: "nowrap", fontFamily: "var(--font-sans)",
-                color: filterTag === tag.en ? CONFIG.accent : "#6B7280",
+                color: filterTag === tag.en ? CONFIG.accent : COLORS.slate,
                 borderBottom: filterTag === tag.en ? `2px solid ${CONFIG.accent}` : "2px solid transparent",
                 transition: "all 0.2s",
               }}>
@@ -1499,7 +1500,7 @@ function AllProjectsPage({ lang, onBack, onOpenProject }: { lang: Lang; onBack: 
             {filtered.map(p => <ProjectCard key={p.id} p={p} lang={lang} onOpen={() => onOpenProject(p.id)} />)}
           </div>
           {filtered.length === 0 && (
-            <p style={{ textAlign: "center", color: "#6B7280", padding: "60px 0" }}>
+            <p style={{ textAlign: "center", color: COLORS.slate, padding: "60px 0" }}>
               {lang === "en" ? "No projects found." : "找不到項目。"}
             </p>
           )}
@@ -1522,7 +1523,7 @@ function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId:
   if (!p) {
     return (
       <div style={{ background: CONFIG.sectionBg.allProjects, padding: "100px 32px", textAlign: "center" }}>
-        <p style={{ color: "#6B7280", margin: "0 0 24px" }}>
+        <p style={{ color: COLORS.slate, margin: "0 0 24px" }}>
           {lang === "en" ? "Project not found." : "找不到此項目。"}
         </p>
         <button onClick={onBack}
@@ -1545,7 +1546,7 @@ function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId:
             {txt(t.projects.back_to_projects, lang)}
           </button>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", marginBottom: "18px" }}>
-            <span style={{ display: "inline-block", background: "rgba(0,80,204,0.22)", color: "#fff", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
+            <span style={{ display: "inline-block", background: "rgba(0,80,204,0.22)", color: COLORS.white, fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px" }}>
               {txt(p.tag, lang)}
             </span>
             {!real && (
@@ -1554,13 +1555,13 @@ function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId:
               </span>
             )}
           </div>
-          <h1 style={{ fontFamily: "var(--font-serif)", color: "#fff", fontSize: "clamp(28px, 3.4vw, 44px)", fontWeight: 700, margin: "0 0 18px", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+          <h1 style={{ fontFamily: "var(--font-serif)", color: COLORS.white, fontSize: "clamp(28px, 3.4vw, 44px)", fontWeight: 700, margin: "0 0 18px", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
             {txt(p.title, lang)}
           </h1>
           <p style={{ color: "rgba(255,255,255,0.62)", fontSize: "16px", lineHeight: 1.7, margin: "0 0 24px", maxWidth: "62ch" }}>
             {txt(p.desc, lang)}
           </p>
-          <div style={{ display: "inline-block", fontSize: "13px", fontWeight: 700, color: "#fff", background: "rgba(0,80,204,0.35)", padding: "6px 12px", borderRadius: "2px" }}>
+          <div style={{ display: "inline-block", fontSize: "13px", fontWeight: 700, color: COLORS.white, background: "rgba(0,80,204,0.35)", padding: "6px 12px", borderRadius: "2px" }}>
             {real ? "\u2713 " : ""}{txt(p.result, lang)}
           </div>
         </div>
@@ -1570,8 +1571,8 @@ function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId:
       <div style={{ background: CONFIG.sectionBg.allProjects, padding: "72px 32px 100px" }}>
         <div style={{ maxWidth: "960px", margin: "0 auto" }}>
           <SectionLabel lang={lang} en="Deliverables" tc="交付成果" />
-          <div style={{ background: "#fff", border: "1px dashed #D1D5DB", padding: "56px 40px", marginTop: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#6B7280", margin: "0 auto", maxWidth: "56ch" }}>
+          <div style={{ background: COLORS.white, border: `1px dashed ${COLORS.borderGray}`, padding: "56px 40px", marginTop: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "15px", lineHeight: 1.75, color: COLORS.slate, margin: "0 auto", maxWidth: "56ch" }}>
               {txt(t.projects.detail_pending, lang)}
             </p>
           </div>
@@ -1588,14 +1589,14 @@ function ProjectDetailPage({ lang, projectId, onBack }: { lang: Lang; projectId:
 // Fallback text plate uses the same gray tint as illustrative project cards —
 // per the Evidence-Tint Rule, an unconfirmed logo file reads as "not yet
 // verified," not as a per-partner brand color.
-const PARTNER_FALLBACK = { bg: "#F3F4F6", text: "#374151", border: "#D1D5DB" };
+const PARTNER_FALLBACK = { bg: COLORS.mistGray, text: COLORS.graphite, border: COLORS.borderGray };
 
 function PartnersSection({ lang }: { lang: Lang }) {
   // Duplicate the list so the CSS scroll loop appears seamless
   const items = [...t.partners.items, ...t.partners.items];
 
   return (
-    <section style={{ background: "#fff", padding: "80px 0", borderTop: "1px solid #E5E7EB" }}>
+    <section style={{ background: COLORS.white, padding: "80px 0", borderTop: `1px solid ${COLORS.hairline}` }}>
       {/* Inject keyframe animation once */}
       <style>{`
         @keyframes marquee {
@@ -1613,10 +1614,10 @@ function PartnersSection({ lang }: { lang: Lang }) {
 
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 32px", marginBottom: "40px", textAlign: "center" }}>
         <SectionLabel lang={lang} en="Our Partners & Affiliations" tc="合作夥伴及聯繫機構" />
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: "#001A4A", margin: "16px auto 8px", letterSpacing: "-0.02em" }}>
+        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 700, color: COLORS.navyDark, margin: "16px auto 8px", letterSpacing: "-0.02em" }}>
           {txt(t.partners.heading, lang)}
         </h2>
-        <p style={{ fontSize: "15px", color: "#6B7280", margin: "0 auto", maxWidth: "560px" }}>
+        <p style={{ fontSize: "15px", color: COLORS.slate, margin: "0 auto", maxWidth: "560px" }}>
           {txt(t.partners.sub, lang)}
         </p>
       </div>
@@ -1635,8 +1636,8 @@ function PartnersSection({ lang }: { lang: Lang }) {
                   width: "200px",
                   height: "100px",
                   padding: "16px 20px",
-                  background: hasLogo ? "#ffffff" : colors.bg,
-                  border: `1.5px solid ${hasLogo ? "#E5E7EB" : colors.border}`,
+                  background: hasLogo ? COLORS.white : colors.bg,
+                  border: `1.5px solid ${hasLogo ? COLORS.hairline : colors.border}`,
                   borderRadius: "4px",
                   display: "flex",
                   flexDirection: "column",
@@ -1650,7 +1651,10 @@ function PartnersSection({ lang }: { lang: Lang }) {
                   <img
                     src={asset(partner.imgUrl)}
                     alt={partner.name}
-                    style={{ maxWidth: "140px", maxHeight: "52px", objectFit: "contain" }}
+                    // Fixed 140×52 box (files are sized to 2× that) so the strip
+                    // never shifts while logos load; contain keeps each ratio.
+                    width={140} height={52} loading="lazy" decoding="async"
+                    style={{ width: "140px", height: "52px", objectFit: "contain" }}
                     onError={e => {
                       // If the image fails to load, hide it and show the text fallback
                       const el = e.currentTarget as HTMLImageElement;
@@ -1665,7 +1669,7 @@ function PartnersSection({ lang }: { lang: Lang }) {
                   <div style={{ fontSize: "18px", fontWeight: 800, color: colors.text, letterSpacing: "-0.01em", marginBottom: "4px", fontFamily: "var(--font-sans)" }}>
                     {partner.shortName}
                   </div>
-                  <div style={{ fontSize: "10px", color: "#6B7280", lineHeight: 1.4 }}>
+                  <div style={{ fontSize: "10px", color: COLORS.slate, lineHeight: 1.4 }}>
                     {txt(partner.desc, lang)}
                   </div>
                 </div>
@@ -1679,7 +1683,7 @@ function PartnersSection({ lang }: { lang: Lang }) {
           enough not to compete with them but legible on its own. */}
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "28px 32px 0" }}>
         <p style={{
-          fontSize: "12px", fontStyle: "italic", color: "#6B7280",
+          fontSize: "12px", fontStyle: "italic", color: COLORS.slate,
           lineHeight: 1.65, margin: "0 auto", maxWidth: "760px", textAlign: "center",
         }}>
           {txt(t.partners.disclaimer, lang)}
@@ -1713,34 +1717,34 @@ function LegalModal({ type, lang, onClose }: { type: LegalType; lang: Lang; onCl
       style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.6)", zIndex: 2000, display: "flex", alignItems: "flex-start", justifyContent: "center", overflowY: "auto", padding: "40px 16px" }}>
       {/* Modal panel — stop click bubbling so clicking the panel doesn't close it */}
       <div onClick={e => e.stopPropagation()}
-        style={{ background: "#fff", borderRadius: "4px", maxWidth: "720px", width: "100%", padding: "56px 48px", position: "relative" }}>
+        style={{ background: COLORS.white, borderRadius: "4px", maxWidth: "720px", width: "100%", padding: "56px 48px", position: "relative" }}>
         {/* Close button */}
         <button onClick={onClose} aria-label={lang === "en" ? "Close" : "關閉"}
-          style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", cursor: "pointer", color: "#6B7280", lineHeight: 0, padding: "4px" }}>
+          style={{ position: "absolute", top: "20px", right: "20px", background: "none", border: "none", cursor: "pointer", color: COLORS.slate, lineHeight: 0, padding: "4px" }}>
           <IconClose size={22} />
         </button>
 
-        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "30px", fontWeight: 700, color: "#001A4A", margin: "0 0 8px", letterSpacing: "-0.02em" }}>
+        <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "30px", fontWeight: 700, color: COLORS.navyDark, margin: "0 0 8px", letterSpacing: "-0.02em" }}>
           {txt(data.heading, lang)}
         </h2>
-        <p style={{ fontSize: "12px", color: "#6B7280", marginBottom: "36px" }}>
+        <p style={{ fontSize: "12px", color: COLORS.slate, marginBottom: "36px" }}>
           {txt(data.updated, lang)}
         </p>
 
         {data.sections.map((s, i) => (
           <div key={i} style={{ marginBottom: "28px" }}>
-            <h3 style={{ fontFamily: "var(--font-sans)", fontSize: "14px", fontWeight: 700, color: "#374151", margin: "0 0 8px", letterSpacing: "0.01em" }}>
+            <h3 style={{ fontFamily: "var(--font-sans)", fontSize: "14px", fontWeight: 700, color: COLORS.graphite, margin: "0 0 8px", letterSpacing: "0.01em" }}>
               {txt(s.title, lang)}
             </h3>
-            <p style={{ fontSize: "14px", lineHeight: 1.8, color: "#4B5563", margin: 0 }}>
+            <p style={{ fontSize: "14px", lineHeight: 1.8, color: COLORS.charcoal, margin: 0 }}>
               {txt(s.body, lang)}
             </p>
           </div>
         ))}
 
-        <div style={{ borderTop: "1px solid #E5E7EB", paddingTop: "24px", marginTop: "8px" }}>
+        <div style={{ borderTop: `1px solid ${COLORS.hairline}`, paddingTop: "24px", marginTop: "8px" }}>
           <button onClick={onClose}
-            style={{ background: CONFIG.accent, color: "#fff", border: "none", padding: "12px 28px", borderRadius: "3px", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
+            style={{ background: CONFIG.accent, color: COLORS.white, border: "none", padding: "12px 28px", borderRadius: "3px", fontSize: "14px", fontWeight: 600, cursor: "pointer" }}>
             {lang === "en" ? "Close" : "關閉"}
           </button>
         </div>

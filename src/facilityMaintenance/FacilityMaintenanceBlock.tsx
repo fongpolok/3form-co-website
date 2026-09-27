@@ -2,6 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { t, txt, type Lang } from "../translations";
 import { facilityMaintenanceConfig as cfg } from "./config";
 import { facilityLog } from "./logger";
+import { COLORS } from "../theme";
 
 type Props = {
   lang: Lang;
@@ -60,7 +61,7 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
   if (!cfg.enabled || cfg.categories.length === 0) return null;
 
   return (
-    <div id={cfg.sectionId} style={{ margin: "48px 0", borderTop: `3px solid ${accent}`, background: "#F8FAFF" }}>
+    <div id={cfg.sectionId} style={{ margin: "48px 0", borderTop: `3px solid ${accent}`, background: COLORS.frostWash }}>
       <style>{`
         @media (max-width: 900px) {
           .fm-cat-grid { grid-template-columns: 1fr !important; }
@@ -77,10 +78,10 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
                 {txt(cfg.label, lang)}
               </span>
             </div>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(22px, 2.5vw, 28px)", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 12px", letterSpacing: "-0.01em" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(22px, 2.5vw, 28px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 12px", letterSpacing: "-0.01em" }}>
               {txt(cfg.heading, lang)}
             </h2>
-            <p style={{ fontSize: "15px", lineHeight: 1.75, color: "#4B5563", margin: "0 0 20px", maxWidth: "68ch" }}>
+            <p style={{ fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: "0 0 20px", maxWidth: "68ch" }}>
               {txt(cfg.sub, lang)}
             </p>
           </>
@@ -89,31 +90,31 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
         {/* Who it is for */}
         <ul aria-label={lang === "en" ? "Suitable for" : "適用場地"} style={{ display: "flex", flexWrap: "wrap", gap: "8px", listStyle: "none", padding: 0, margin: "0 0 32px" }}>
           {cfg.audiences.map((a) => (
-            <li key={a.id} style={{ fontSize: "12px", fontWeight: 600, color: accent, background: "#E8F0FE", padding: "5px 12px", borderRadius: "2px" }}>
+            <li key={a.id} style={{ fontSize: "12px", fontWeight: 600, color: accent, background: COLORS.accentTint, padding: "5px 12px", borderRadius: "2px" }}>
               {txt(a.label, lang)}
             </li>
           ))}
         </ul>
 
-        <div className="fm-cat-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cfg.categories.length === 4 ? 2 : Math.min(cfg.categories.length, 3)}, 1fr)`, gap: "2px", background: "#E5E7EB" }}>
+        <div className="fm-cat-grid" style={{ display: "grid", gridTemplateColumns: `repeat(${cfg.categories.length === 4 ? 2 : Math.min(cfg.categories.length, 3)}, 1fr)`, gap: "2px", background: COLORS.hairline }}>
           {cfg.categories.map((cat, i) => (
-            <div key={cat.id} style={{ background: "#fff", padding: "28px 24px" }}>
+            <div key={cat.id} style={{ background: COLORS.white, padding: "28px 24px" }}>
               {/* Category photo — an image element so it carries alt text in the
                   page language and is indexable. Dedicated page only. */}
               {showPhotos && (
                 <img src={asset(cat.image)} alt={txt(cat.imageAlt, lang)}
                   loading="lazy" decoding="async"
-                  style={{ width: "100%", height: "180px", objectFit: "cover", display: "block", marginBottom: "18px", borderRadius: "2px", background: "#E5E7EB" }} />
+                  style={{ width: "100%", height: "180px", objectFit: "cover", display: "block", marginBottom: "18px", borderRadius: "2px", background: COLORS.hairline }} />
               )}
               <div style={{ fontSize: "13px", fontWeight: 600, color: accent, letterSpacing: "0.1em", marginBottom: "10px" }}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <CategoryHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", lineHeight: 1.3, margin: "0 0 14px" }}>
+              <CategoryHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 14px" }}>
                 {txt(cat.title, lang)}
               </CategoryHeading>
               <ul style={{ margin: 0, paddingLeft: "18px", display: "flex", flexDirection: "column", gap: "8px" }}>
                 {cat.points.map((p, j) => (
-                  <li key={j} style={{ fontSize: "14px", lineHeight: 1.7, color: "#4B5563" }}>
+                  <li key={j} style={{ fontSize: "14px", lineHeight: 1.7, color: COLORS.charcoal }}>
                     {txt(p, lang)}
                   </li>
                 ))}
@@ -122,25 +123,25 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
           ))}
         </div>
 
-        <p style={{ fontSize: "13px", lineHeight: 1.6, color: "#6B7280", margin: "20px 0 0", maxWidth: "68ch" }}>
+        <p style={{ fontSize: "13px", lineHeight: 1.6, color: COLORS.slate, margin: "20px 0 0", maxWidth: "68ch" }}>
           {txt(cfg.distinctionNote, lang)}
         </p>
       </div>
 
       {/* Block-level CTA — kept light so it doesn't stack against the navy Services CTA below */}
-      <div className="fm-pad" style={{ borderTop: "1px solid #E5E7EB", padding: "28px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}>
+      <div className="fm-pad" style={{ borderTop: `1px solid ${COLORS.hairline}`, padding: "28px 40px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "24px", flexWrap: "wrap" }}>
         <div style={{ maxWidth: "560px" }}>
-          <CtaHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: "#001A4A", margin: "0 0 6px" }}>
+          <CtaHeading style={{ fontFamily: "var(--font-serif)", fontSize: "19px", fontWeight: 700, color: COLORS.navyDark, margin: "0 0 6px" }}>
             {txt(cfg.cta.heading, lang)}
           </CtaHeading>
-          <p style={{ fontSize: "14px", color: "#4B5563", lineHeight: 1.65, margin: "0 0 6px" }}>
+          <p style={{ fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 6px" }}>
             {txt(cfg.cta.sub, lang)}
           </p>
-          <p style={{ fontSize: "14px", color: "#374151", margin: 0 }}>
+          <p style={{ fontSize: "14px", color: COLORS.graphite, margin: 0 }}>
             <a href={telHref} onClick={() => facilityLog.event("phone link")} style={{ color: accent, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
               {t.contact.phone}
             </a>
-            <span aria-hidden="true" style={{ color: "#9CA3AF", margin: "0 10px" }}>·</span>
+            <span aria-hidden="true" style={{ color: COLORS.paleAsh, margin: "0 10px" }}>·</span>
             <a href={`mailto:${t.contact.email}`} onClick={() => facilityLog.event("email link")} style={{ color: accent, fontWeight: 600, textDecoration: "none" }}>
               {t.contact.email}
             </a>
@@ -150,7 +151,7 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
           {secondaryAction}
           <button type="button"
             onClick={() => { facilityLog.event("CTA → contact"); onContact(); }}
-            style={{ background: accent, color: "#fff", border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", maxWidth: "100%", whiteSpace: "normal", textAlign: "center" }}
+            style={{ background: accent, color: COLORS.white, border: "none", padding: "14px 28px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", cursor: "pointer", transition: "background 0.2s", maxWidth: "100%", whiteSpace: "normal", textAlign: "center" }}
             onMouseEnter={e => (e.currentTarget.style.background = accentHover)}
             onMouseLeave={e => (e.currentTarget.style.background = accent)}>
             {txt(cfg.cta.button, lang)}
