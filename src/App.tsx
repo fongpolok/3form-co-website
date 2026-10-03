@@ -1246,7 +1246,11 @@ function ContactSection({ lang }: { lang: Lang }) {
     <section id="contact" style={{ background: CONFIG.sectionBg.contact, padding: "100px 32px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "80px", alignItems: "start" }} className="grid-responsive">
-          <div>
+          {/* Heading, WhatsApp and contact details sit on the right on desktop
+              (Edward, 2026-10-03). Swapped with CSS order (.contact-info, set in
+              the global style block) rather than in the markup, so on phones —
+              one column — the heading and WhatsApp still come before the form. */}
+          <div className="contact-info">
             <SectionLabel lang={lang} en="Get In Touch" tc="聯絡我們" light />
             {/* The Contact page's top-level heading — see the note on the Demos <h1>. */}
             <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.white, lineHeight: 1.2, margin: "16px 0 24px", letterSpacing: "-0.02em" }}>
@@ -1978,6 +1982,9 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
   return (
     <>
       <style>{`
+        @media (min-width: 901px) {
+          .contact-info { order: 2; }
+        }
         @media (max-width: 900px) {
           .hidden-mobile   { display: none !important; }
           .show-mobile     { display: block !important; }
