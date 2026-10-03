@@ -223,55 +223,56 @@ export function routeFromLegacyHash(hash: string, lang: Lang): Route | null {
 }
 
 // ── Per-page SEO metadata ─────────────────────────────────────────────────────
-// Titles stay under ~60 characters before the brand suffix and descriptions
-// under ~160 so neither is truncated in the search result.
+// Titles stay under ~60 characters and descriptions under ~160 so neither is
+// truncated in the search result. A title that already names 3form is used as
+// written; routeMeta() appends the brand suffix to the rest.
 
 type BiString = { en: string; tc: string };
 
 const PAGE_TITLE: Record<Page, BiString> = {
   home: {
-    en: "Engineering & Management Consulting in Hong Kong",
-    tc: "香港工程及管理顧問公司",
+    en: "3form Engineering | HK Engineering & Management Consultancy",
+    tc: "3form Engineering｜香港工程及管理顧問｜資助、AI、設備保養",
   },
   about: {
     en: "About Us — Hong Kong Engineering Consultancy",
     tc: "關於我們 — 香港工程顧問公司",
   },
   services: {
-    en: "Services — Funding, Lean & 6 Sigma, AI Adoption, Maintenance",
+    en: "Services: Funding, AI, Lean & Maintenance | 3form",
     tc: "服務範疇 — 資助顧問、精益六西格瑪、人工智能、場地保養",
   },
   facilityMaintenance: {
-    en: "Facility Maintenance Hong Kong — HVAC, Electrical & FIFO Layout",
-    tc: "場地保養服務（香港）— 冷氣通風、電力系統、FIFO 生產線佈局",
+    en: "Facility Maintenance Hong Kong — Factory & Office | 3form",
+    tc: "工廠及寫字樓冷氣、電力保養維修｜香港｜3form",
   },
   fundingConsulting: {
-    en: "Engineering Consulting & Funding Applications for Manufacturers",
-    tc: "製造業工程顧問及資助申請 — 香港",
+    en: "BUD Fund & NIFS Application Support in Hong Kong | 3form",
+    tc: "BUD專項基金、新型工業化資助（NIFS）申請支援｜3form",
   },
   processEnhancement: {
-    en: "Lean & Six Sigma Consulting for Manufacturers in Hong Kong",
-    tc: "精益及六西格瑪顧問 — 香港製造業流程優化",
+    en: "Lean & Six Sigma Consulting for HK Manufacturers | 3form",
+    tc: "香港工廠精益生產及流程改善顧問｜3form",
   },
   aiDataAdoption: {
-    en: "AI & Data Digitalisation Consulting in Hong Kong",
-    tc: "人工智能及數據數碼化顧問 — 香港製造業",
+    en: "AI & Data Consulting for Hong Kong Manufacturers | 3form",
+    tc: "香港工廠 AI 及數據應用顧問｜智能製造｜3form",
   },
   productionSetup: {
-    en: "Production Site Setup in Hong Kong — Licensing, HACCP, GMP",
-    tc: "香港生產場地設立 — 牌照、HACCP、GMP",
+    en: "Production Site Setup HK — HACCP & GMP | 3form",
+    tc: "香港生產場地設立｜HACCP、GMP｜3form",
   },
   warehouseSystem: {
-    en: "Warehouse Management System (WMS) — Lot & FEFO Tracking",
-    tc: "倉庫管理系統（WMS）— 批次及效期追蹤",
+    en: "Warehouse Management System (WMS) Hong Kong | 3form",
+    tc: "香港倉庫管理系統（WMS）｜批次及效期追蹤｜3form",
   },
   equipmentMaintenance: {
-    en: "Production Equipment Maintenance & Repair in Hong Kong",
-    tc: "生產設備維修及保養 — 香港",
+    en: "Factory Equipment Maintenance & Repair Hong Kong | 3form",
+    tc: "工廠設備維修保養｜預防性保養、故障診斷｜香港｜3form",
   },
   industrialAgents: {
-    en: "Industrial AI Agent Development in Hong Kong",
-    tc: "工業人工智能代理開發 — 香港",
+    en: "Industrial AI Agents for Factories in Hong Kong | 3form",
+    tc: "工廠 AI Agent（智能代理）開發｜香港｜3form",
   },
   projects: {
     en: "Projects & Case Studies",
@@ -282,15 +283,15 @@ const PAGE_TITLE: Record<Page, BiString> = {
     tc: "現場示範 — 倉庫管理及 ESG 工具",
   },
   contact: {
-    en: "Contact Us — Hong Kong Engineering Consultants",
-    tc: "聯絡我們 — 香港工程顧問",
+    en: "Contact 3form Engineering | Hong Kong",
+    tc: "聯絡 3form Engineering｜香港工程顧問",
   },
 };
 
 const PAGE_DESCRIPTION: Record<Page, BiString> = {
   home: {
-    en: "3form Engineering Co is a Hong Kong engineering and management consultancy: government funding applications, Lean and Six Sigma process improvement, AI and data adoption, production site setup and facility maintenance.",
-    tc: "3form Engineering Co 是香港工程及管理顧問公司，提供政府資助申請、精益及六西格瑪流程優化、人工智能及數據應用、生產場地設立，以及場地保養服務。",
+    en: "Hong Kong engineering and management consultancy: funding application support, AI and data adoption, equipment and facility maintenance, Lean.",
+    tc: "3form 是香港工程及管理顧問公司，提供資助申請支援、AI 及數據應用、工廠設備與場地保養維修，以及精益六西格瑪流程改善。",
   },
   about: {
     en: "A Hong Kong–based engineering and management consulting firm helping manufacturers, food producers and technology businesses improve operations, adopt new technology and meet regulatory requirements.",
@@ -301,20 +302,20 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     tc: "3form 提供資助顧問（BUD、NIAS 及一般資助申請）、六西格瑪及精益流程優化、人工智能及數據數碼化、生產場地設立、倉庫管理系統、設備維修及場地保養服務。",
   },
   facilityMaintenance: {
-    en: "Facility maintenance in Hong Kong for offices, commercial buildings, factories and warehouses: HVAC, electrical systems, office equipment and FIFO production line layout. Scope confirmed by site walkthrough, then a detailed quotation.",
-    tc: "3form 為香港寫字樓、商業大廈、工廠及倉庫提供場地保養服務：冷氣及通風（HVAC）、電力系統、辦公室設備，以及先進先出（FIFO）生產線佈局。經實地視察釐清範圍後提供詳細報價。",
+    en: "Facility maintenance in Hong Kong for factories, warehouses and offices: HVAC, electrical, office equipment, FIFO layout. Site walkthrough first.",
+    tc: "3form 為香港工廠、倉庫及寫字樓提供冷氣、電力系統、辦公室設備保養維修，以及 FIFO 生產線佈局。先實地視察，再提供報價。",
   },
   fundingConsulting: {
-    en: "On-site assessment, a Lean and Six Sigma solution and the funding application, for Hong Kong manufacturers and Mainland firms setting up production in Hong Kong.",
-    tc: "3form 為香港製造商及來港設廠的內地企業提供實地評估、精益及六西格瑪改善方案，以及資助申請服務。",
+    en: "On-site assessment, project planning and application support for the BUD Fund and NIFS, for Hong Kong manufacturers. Approval cannot be guaranteed.",
+    tc: "3form 協助香港製造業準備 BUD 專項基金及新型工業化資助計劃（NIFS）申請：實地評估、項目規劃及申請文件支援。不保證獲批。",
   },
   processEnhancement: {
     en: "Lean and Six Sigma consulting in Hong Kong: site evaluation, production and cost studies, and technical or advisory support for Greater Bay Area manufacturers.",
     tc: "3form 為大灣區製造商提供精益及六西格瑪顧問服務：實地評估、生產營運及成本研究，以及技術或顧問支援。",
   },
   aiDataAdoption: {
-    en: "AI tool selection, data pipeline setup and digital transformation for Greater Bay Area manufacturers, turning raw production data into business intelligence.",
-    tc: "3form 為大灣區製造商提供人工智能工具選擇、數據流程建立及數碼轉型服務，將原始生產數據轉化為商業洞察。",
+    en: "AI tool selection, data pipeline setup and digital transformation for Hong Kong and Greater Bay Area manufacturers, using their production data.",
+    tc: "3form 為香港及大灣區製造商提供 AI 工具揀選、數據流程建立及數碼轉型支援，將生產數據轉化為商業洞察。",
   },
   productionSetup: {
     en: "Support for setting up compliant production facilities in Hong Kong: licensing, HACCP food safety systems, GMP standards and FIFO inventory management.",
@@ -325,12 +326,12 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     tc: "3form 託管式倉庫管理系統：批次及效期（FEFO）追蹤、低庫存及到期預警，以及完整審計軌跡，按您的存貨流轉方式設定。",
   },
   equipmentMaintenance: {
-    en: "Preventive maintenance planning, breakdown diagnosis and repair support for production equipment in Hong Kong, with downtime measured rather than guessed at.",
-    tc: "3form 為香港生產設備提供預防性保養規劃、故障診斷及維修支援，停機時間有數據可依，而非憑估算。",
+    en: "Preventive maintenance planning, breakdown diagnosis and repair support for factory equipment in Hong Kong, with downtime measured rather than guessed at.",
+    tc: "3form 為香港工廠設備提供預防性保養規劃、故障診斷及維修支援，停機時間有數據可依，而非憑估算。",
   },
   industrialAgents: {
-    en: "AI agents built on real plant data: reading sensor streams, documents and inspection results to automate the routine decisions your operations team repeats.",
-    tc: "3form 為大灣區製造商開發以真實廠房數據運作的人工智能代理，讀取感測器數據、文件及檢測結果，自動化例行營運決策。",
+    en: "AI agents built on real plant data: reading sensor streams, documents and inspection results to automate routine operations decisions.",
+    tc: "3form 為大灣區製造商開發以真實廠房數據運作的 AI Agent，讀取感測器數據、文件及檢測結果，自動化例行營運決策。",
   },
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
@@ -341,8 +342,8 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     tc: "試用我們開發的工具：具備批次及效期追蹤的倉庫管理平台，以及為香港中小企而設的 ESG 報告支援。",
   },
   contact: {
-    en: `Contact 3form Engineering Co in Hong Kong. Phone ${t.contact.phone}, email ${t.contact.email}. Tell us about your project and we will reply within one business day.`,
-    tc: `聯絡 3form Engineering Co（香港）。電話 ${t.contact.phone}，電郵 ${t.contact.email}。告訴我們您的項目需要，我們將於一個工作天內回覆。`,
+    en: `Contact 3form Engineering Co in Hong Kong. Phone ${t.contact.phone}, email ${t.contact.email}. Tell us about your project. We reply within the same business day.`,
+    tc: `聯絡 3form Engineering Co（香港）。電話 ${t.contact.phone}，電郵 ${t.contact.email}。告訴我們您的項目需要，我們會於同一個工作天內回覆。`,
   },
 };
 
@@ -374,13 +375,17 @@ const OG_IMAGE = {
   },
 };
 
+function withBrand(title: string): string {
+  return title.includes("3form") ? title : `${title} | ${SITE_NAME}`;
+}
+
 export function routeMeta(route: Route): RouteMeta {
   const project =
     route.projectId !== null ? t.projects.items.find((p) => p.id === route.projectId) : undefined;
 
   const title = project
     ? `${txt(project.title, route.lang)} | ${txt(t.nav.projects, route.lang)} | ${SITE_NAME}`
-    : `${txt(PAGE_TITLE[route.page], route.lang)} | ${SITE_NAME}`;
+    : withBrand(txt(PAGE_TITLE[route.page], route.lang));
 
   const description = project
     ? txt(project.desc, route.lang)

@@ -34,10 +34,10 @@ export const t = {
 
   // ── Hero Section ─────────────────────────────────────────────────────────────
   hero: {
-    // McKinsey-style tagline: authoritative, outcome-focused, no fluff
+    // The home page <h1>: says what the firm is and where, for search.
     tagline: {
-      en: "Helping Hong Kong businesses achieve meaningful, measurable, and lasting improvement.",
-      tc: "協助香港企業實現有意義、可量化且持久的業務提升。",
+      en: "Engineering and management consultancy for Hong Kong businesses",
+      tc: "香港工程及管理顧問：資助申請、AI 應用、設備保養",
     },
     sub: {
       en: "We combine engineering precision, data intelligence, and regulatory expertise to transform your operations — from the factory floor to the boardroom.",
@@ -210,8 +210,8 @@ export const t = {
     fundingPage: {
       label: { en: "Funding Consulting", tc: "資助顧問" },
       heading: {
-        en: "Engineering consulting for manufacturers in Hong Kong",
-        tc: "香港製造業工程顧問",
+        en: "BUD Fund and NIFS application support for Hong Kong manufacturers",
+        tc: "香港製造業資助申請支援：BUD 專項基金及新型工業化資助計劃（NIFS）",
       },
       intro: {
         en: "3form helps manufacturers turn a production problem into a funded project. We assess your line on site, design the fix with Lean and Six Sigma, and prepare the funding application that helps pay for it.",
@@ -280,8 +280,8 @@ export const t = {
     processPage: {
       label: { en: "Engineering & Process Enhancement", tc: "工程及流程優化" },
       heading: {
-        en: "Lean and Six Sigma process consulting in Hong Kong",
-        tc: "香港精益及六西格瑪流程優化顧問",
+        en: "Lean & Six Sigma Consulting for HK Manufacturers",
+        tc: "香港工廠精益生產及流程改善顧問",
       },
       intro: {
         en: "3form helps manufacturers find where production, operations and cost can improve, and fixes it with Lean and Six Sigma. We start from your pain points on site, then provide technical work or advice, whichever your process needs.",
@@ -335,8 +335,8 @@ export const t = {
     aiDataPage: {
       label: { en: "AI & Data Digitalization", tc: "人工智能及數據數碼化" },
       heading: {
-        en: "AI and data digitalisation consulting in Hong Kong",
-        tc: "香港人工智能及數據數碼化顧問",
+        en: "AI and data consulting for Hong Kong manufacturers",
+        tc: "香港製造業 AI 及數據應用顧問",
       },
       intro: {
         en: "3form guides manufacturers through AI tool selection, data pipeline setup and digital transformation, so raw production data turns into business intelligence you can act on.",
@@ -500,8 +500,8 @@ export const t = {
     equipmentMaintenancePage: {
       label: { en: "General Maintenance & Repair", tc: "一般維修及保養服務" },
       heading: {
-        en: "Production equipment maintenance and repair in Hong Kong",
-        tc: "香港生產設備維修及保養",
+        en: "Factory equipment maintenance and repair in Hong Kong",
+        tc: "香港工廠設備維修及保養",
       },
       intro: {
         en: "3form plans preventive maintenance, diagnoses breakdowns and supports repairs for production equipment, keeping machinery serviceable and downtime measured rather than guessed at.",
@@ -555,8 +555,8 @@ export const t = {
     industrialAgentsPage: {
       label: { en: "Industrial Agentic Development", tc: "工業智能代理開發" },
       heading: {
-        en: "Industrial AI agent development in Hong Kong",
-        tc: "香港工業人工智能代理開發",
+        en: "Industrial AI agents for factories in Hong Kong",
+        tc: "香港工廠 AI Agent 開發：自動化每日重複的營運決策",
       },
       intro: {
         en: "3form builds AI agents that work on real plant data, reading sensor streams, documents and inspection results to automate the routine decisions your operations team repeats every day.",
