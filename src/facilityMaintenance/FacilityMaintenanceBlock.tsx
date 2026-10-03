@@ -3,6 +3,7 @@ import { t, txt, type Lang } from "../translations";
 import { facilityMaintenanceConfig as cfg } from "./config";
 import { facilityLog } from "./logger";
 import { COLORS } from "../theme";
+import { track } from "../analytics";
 
 type Props = {
   lang: Lang;
@@ -33,8 +34,9 @@ function asset(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 }
 
-// "5744 9594" → "tel:+85257449594" (Hong Kong numbers are 8 digits, no area code)
-const telHref = `tel:+852${t.contact.phone.replace(/\D/g, "")}`;
+// Both from the single contact model in translations.ts.
+const telHref = `tel:${t.contact.tel}`;
+const mailtoHref = `mailto:${t.contact.email}`;
 
 /**
  * Facility Maintenance / 場地保養 block on the Services page.
@@ -46,6 +48,9 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
   // page the block's own heading is an <h2> under that page's <h1>, so its
   // subheadings are <h3>; on its own page the page supplies the <h1> and the
   // block starts at <h2>.
+  // wa.me with the bilingual, price-free opener prefilled (contact spec).
+  const waHref = `${t.contact.whatsapp.href}?text=${encodeURIComponent(txt(t.contact.whatsapp.message, lang))}`;
+
   const CategoryHeading = omitIntro ? "h2" : "h3";
   const CtaHeading = omitIntro ? "h2" : "h3";
 
@@ -137,12 +142,26 @@ export default function FacilityMaintenanceBlock({ lang, accent, accentHover, on
           <p style={{ fontSize: "14px", color: COLORS.charcoal, lineHeight: 1.65, margin: "0 0 6px" }}>
             {txt(cfg.cta.sub, lang)}
           </p>
-          <p style={{ fontSize: "14px", color: COLORS.graphite, margin: 0 }}>
-            <a href={telHref} onClick={() => facilityLog.event("phone link")} style={{ color: accent, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+          {/* flex-wrap: the three links have no spaces between them, so as
+              inline text they formed one unbreakable line wider than a phone. */}
+          <p style={{ fontSize: "14px", color: COLORS.graphite, margin: 0, display: "flex", flexWrap: "wrap", alignItems: "baseline", rowGap: "4px" }}>
+            {/* WhatsApp first here too — same order as the Contact page. */}
+            <a href={waHref} target="_blank" rel="noopener noreferrer"
+              title={txt(t.contact.whatsapp.aria, lang)} aria-label={txt(t.contact.whatsapp.aria, lang)}
+              onClick={() => { facilityLog.event("whatsapp link"); track("whatsapp_click", { link_url: t.contact.whatsapp.href, placement: "facility_maintenance" }); }}
+              style={{ color: accent, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+              {txt(t.contact.labels.whatsapp, lang)} {t.contact.whatsapp.display}
+            </a>
+            <span aria-hidden="true" style={{ color: COLORS.paleAsh, margin: "0 10px" }}>·</span>
+            <a href={telHref}
+              onClick={() => { facilityLog.event("phone link"); track("tel_click", { link_url: telHref, placement: "facility_maintenance" }); }}
+              style={{ color: accent, fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
               {t.contact.phone}
             </a>
             <span aria-hidden="true" style={{ color: COLORS.paleAsh, margin: "0 10px" }}>·</span>
-            <a href={`mailto:${t.contact.email}`} onClick={() => facilityLog.event("email link")} style={{ color: accent, fontWeight: 600, textDecoration: "none" }}>
+            <a href={mailtoHref}
+              onClick={() => { facilityLog.event("email link"); track("email_click", { link_url: mailtoHref, placement: "facility_maintenance" }); }}
+              style={{ color: accent, fontWeight: 600, textDecoration: "none" }}>
               {t.contact.email}
             </a>
           </p>

@@ -12,8 +12,21 @@ import { t, txt } from "./translations";
 import { facilityMaintenanceConfig } from "./facilityMaintenance/config";
 import { HTML_LANG, SERVICE_LANDINGS, SITE_NAME, SITE_ORIGIN, SOCIAL_PROFILES, routeUrl, type Route, type ServiceLandingContent } from "./routes";
 
-/** "5744 9594" → "+85257449594" — Hong Kong numbers are 8 digits, no area code. */
-const TEL = `+852${t.contact.phone.replace(/\D/g, "")}`;
+/** E.164, from the same contact model the page renders. */
+const TEL = t.contact.tel;
+
+/**
+ * Mon–Fri 09:00–18:00. Declared on the Organization rather than as a
+ * LocalBusiness: the office is an industrial-building unit visited by
+ * appointment, not a storefront, and claiming otherwise would invite
+ * walk-in traffic Google surfaces for local businesses.
+ */
+const OPENING_HOURS = {
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: t.contact.hours.days.map((d) => `https://schema.org/${d}`),
+  opens: t.contact.hours.opens,
+  closes: t.contact.hours.closes,
+};
 
 function organization(route: Route): Record<string, unknown> {
   return {
@@ -43,16 +56,33 @@ function organization(route: Route): Record<string, unknown> {
       streetAddress: t.contact.address.street,
       addressLocality: t.contact.address.locality,
       addressRegion: t.contact.address.region,
-      addressCountry: "HK",
+      addressCountry: t.contact.address.country,
     },
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "sales",
-      telephone: TEL,
-      email: t.contact.email,
-      areaServed: "HK",
-      availableLanguage: ["en", "zh-HK"],
-    },
+    openingHoursSpecification: OPENING_HOURS,
+    // The appointment-only fact, stated where schema.org actually supports it
+    // rather than invented as a storefront property.
+    publicAccess: false,
+    availableLanguage: ["en", "zh-HK"],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: TEL,
+        email: t.contact.email,
+        areaServed: "HK",
+        availableLanguage: ["en", "zh-HK"],
+        hoursAvailable: OPENING_HOURS,
+        description: txt(t.contact.appointmentOnly, route.lang),
+      },
+      {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        telephone: TEL,
+        url: t.contact.whatsapp.href,
+        areaServed: "HK",
+        availableLanguage: ["en", "zh-HK"],
+      },
+    ],
   };
 }
 

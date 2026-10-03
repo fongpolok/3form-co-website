@@ -7,6 +7,7 @@ import { useState, useEffect, useRef, Fragment, type CSSProperties, type ReactNo
 import { t, txt, type Lang } from "./translations";
 import { FacilityMaintenanceBlock, facilityMaintenanceConfig } from "./facilityMaintenance";
 import { COLORS } from "./theme";
+import { copyText, track } from "./analytics";
 import {
   HOME_ROUTE,
   navKeyFor,
@@ -183,6 +184,136 @@ function ContactDetail({ icon, label, value }: {
         </div>
       </div>
     </div>
+  );
+}
+
+// ── Contact channels ──────────────────────────────────────────────────────────
+// Every href a visitor can act on, derived from the single contact model in
+// translations.ts so the page, the footer and the JSON-LD cannot drift apart.
+const CONTACT = {
+  telHref:    `tel:${t.contact.tel}`,
+  mailtoHref: `mailto:${t.contact.email}`,
+  /** wa.me with the bilingual, deliberately price-free opener prefilled. */
+  waHref: (lang: Lang) =>
+    `${t.contact.whatsapp.href}?text=${encodeURIComponent(txt(t.contact.whatsapp.message, lang))}`,
+};
+
+function IconWhatsApp({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.87 9.87 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.13h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.18 8.18 0 0 1-1.25-4.36c0-4.54 3.7-8.23 8.23-8.23 2.2 0 4.26.86 5.81 2.41a8.17 8.17 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.23 8.21Zm4.52-6.15c-.25-.12-1.47-.72-1.69-.81-.23-.08-.4-.12-.56.13-.17.25-.65.81-.8.97-.14.17-.29.19-.54.06a6.7 6.7 0 0 1-1.97-1.21 7.4 7.4 0 0 1-1.37-1.7c-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.44.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.89 2.41 1.02 2.58.12.17 1.76 2.68 4.25 3.76.59.26 1.06.41 1.42.52.6.19 1.14.17 1.57.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.11-.23-.17-.48-.29Z" />
+    </svg>
+  );
+}
+
+function IconWeChat({ size = 18, color = "currentColor" }: { size?: number; color?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill={color} xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M8.69 3C4.44 3 1 5.84 1 9.34c0 2.02 1.15 3.82 2.94 5l-.73 2.2 2.56-1.28c.63.16 1.29.26 1.97.29a5.6 5.6 0 0 1-.18-1.4c0-3.27 3.13-5.92 6.99-5.92.23 0 .46.01.68.03C14.62 5.2 11.95 3 8.69 3Zm-2.6 3.16a.97.97 0 1 1 0 1.94.97.97 0 0 1 0-1.94Zm5.2 0a.97.97 0 1 1 0 1.94.97.97 0 0 1 0-1.94Zm3.26 3.38c-3.4 0-6.16 2.24-6.16 5 0 2.76 2.76 5 6.16 5 .6 0 1.19-.07 1.74-.21l2.2 1.1-.62-1.88A4.96 4.96 0 0 0 20.7 14.5c0-2.76-2.76-4.96-6.15-4.96Zm-2.03 2.53a.83.83 0 1 1 0 1.66.83.83 0 0 1 0-1.66Zm4.16 0a.83.83 0 1 1 0 1.66.83.83 0 0 1 0-1.66Z" />
+    </svg>
+  );
+}
+
+/**
+ * The contact actions block, WhatsApp first per the contact spec. Rendered on
+ * the Contact page (`light`, on navy) and in the footer (compact).
+ * `placement` is what GA4 reports the click against.
+ */
+function ContactActions({ lang, placement, compact = false }: {
+  lang: Lang; placement: string; compact?: boolean;
+}) {
+  const [copied, setCopied] = useState<"idle" | "ok" | "fail">("idle");
+  const wa = t.contact.whatsapp;
+  const size = compact ? 13 : 15;
+
+  const copyWeChat = async () => {
+    track("wechat_click", { link_url: `wechat:${t.contact.wechat.id}`, placement });
+    const ok = await copyText(t.contact.wechat.id);
+    setCopied(ok ? "ok" : "fail");
+    window.setTimeout(() => setCopied("idle"), 3000);
+  };
+
+  const linkStyle: CSSProperties = {
+    color: COLORS.accentLight, fontSize: `${size}px`, fontWeight: 600,
+    textDecoration: "none", display: "inline-flex", alignItems: "center",
+    gap: "8px", minHeight: "44px",
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: compact ? "2px" : "10px", alignItems: "flex-start" }}>
+      {/* WhatsApp leads: it is the channel we answer fastest. */}
+      <a href={CONTACT.waHref(lang)} target="_blank" rel="noopener noreferrer"
+        title={txt(wa.aria, lang)} aria-label={txt(wa.aria, lang)}
+        onClick={() => track("whatsapp_click", { link_url: wa.href, placement })}
+        style={{
+          ...linkStyle, background: COLORS.accent, color: COLORS.white,
+          padding: compact ? "10px 16px" : "12px 22px", borderRadius: "3px",
+          minHeight: "48px", marginBottom: compact ? "6px" : 0,
+        }}>
+        <IconWhatsApp size={18} />
+        {txt(wa.label, lang)} · {wa.display}
+      </a>
+
+      <a href={CONTACT.mailtoHref} style={linkStyle}
+        onClick={() => track("email_click", { link_url: CONTACT.mailtoHref, placement })}>
+        <IconMail size={16} />{t.contact.email}
+      </a>
+
+      <a href={CONTACT.telHref} style={linkStyle}
+        onClick={() => track("tel_click", { link_url: CONTACT.telHref, placement })}>
+        <IconPhone size={16} />{t.contact.phone}
+      </a>
+
+      {/* WeChat has no link scheme that works from a desktop browser, so the
+          useful action is copying the ID rather than a dead href. */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", minHeight: "44px" }}>
+        <span style={{ ...linkStyle, minHeight: "auto" }}>
+          <IconWeChat size={16} />{txt(t.contact.wechat.label, lang)}: {t.contact.wechat.id}
+        </span>
+        <button type="button" onClick={copyWeChat}
+          style={{
+            background: "transparent", color: COLORS.white, fontSize: "12px", fontWeight: 600,
+            border: "1px solid rgba(255,255,255,0.35)", borderRadius: "3px",
+            padding: "8px 12px", minHeight: "40px", cursor: "pointer", fontFamily: "var(--font-sans)",
+          }}>
+          {txt(t.contact.wechat.copy, lang)}
+        </button>
+        <span role="status" aria-live="polite" style={{ fontSize: "12px", color: "rgba(255,255,255,0.8)" }}>
+          {copied === "ok" ? txt(t.contact.wechat.copied, lang)
+            : copied === "fail" ? txt(t.contact.wechat.copy_failed, lang) : ""}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Sitewide floating WhatsApp button — fixed bottom-right on every route in both
+ * languages. Offset with env(safe-area-inset-*) so it clears an iPhone home bar,
+ * and kept to the right edge so it never sits over the contact form's fields.
+ */
+function FloatingWhatsApp({ lang }: { lang: Lang }) {
+  const wa = t.contact.whatsapp;
+  return (
+    <a href={CONTACT.waHref(lang)} target="_blank" rel="noopener noreferrer"
+      className="floating-whatsapp"
+      title={txt(wa.aria, lang)} aria-label={txt(wa.aria, lang)}
+      onClick={() => { log.event("Floating WhatsApp"); track("whatsapp_click", { link_url: wa.href, placement: "floating" }); }}
+      style={{
+        position: "fixed",
+        right: "calc(20px + env(safe-area-inset-right, 0px))",
+        bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
+        zIndex: 900,
+        width: "56px", height: "56px", borderRadius: "50%",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: COLORS.accent, color: COLORS.white,
+        boxShadow: "0 6px 20px rgba(0,0,0,0.28)",
+        transition: "transform 0.2s, box-shadow 0.2s",
+      }}
+      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.06)"; }}
+      onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}>
+      <IconWhatsApp size={30} color={COLORS.white} />
+    </a>
   );
 }
 
@@ -1124,11 +1255,17 @@ function ContactSection({ lang }: { lang: Lang }) {
             <p style={{ fontSize: "16px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, marginBottom: "48px" }}>
               {txt(t.contact.sub, lang)}
             </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "28px" }}>
-              <ContactDetail icon={<IconPhone size={18} />} label={lang === "en" ? "Phone" : "電話"} value={t.contact.phone} />
-              <ContactDetail icon={<IconMail size={18} />} label={lang === "en" ? "Email" : "電郵"} value={t.contact.email} />
-              <ContactDetail icon={<IconGlobe size={18} />} label={lang === "en" ? "Website" : "網站"} value={t.contact.website} />
-              <ContactDetail icon={<IconMapPin size={18} />} label={lang === "en" ? "Office" : "辦公室"} value={txt(t.contact.address.display, lang)} />
+            {/* Actions first (WhatsApp leading), then the static facts a
+                visitor needs before turning up: address, hours, appointment. */}
+            <ContactActions lang={lang} placement="contact_page" />
+            <div style={{ display: "flex", flexDirection: "column", gap: "28px", marginTop: "36px" }}>
+              <ContactDetail icon={<IconMapPin size={18} />} label={txt(t.contact.labels.office, lang)} value={txt(t.contact.address.display, lang)} />
+              <ContactDetail
+                icon={<IconPhone size={18} />}
+                label={txt(t.contact.labels.hours, lang)}
+                value={`${txt(t.contact.hours.display, lang)} · ${txt(t.contact.appointmentOnly, lang)}`}
+              />
+              <ContactDetail icon={<IconGlobe size={18} />} label={txt(t.contact.labels.website, lang)} value={t.contact.website} />
             </div>
           </div>
           <div style={{ background: COLORS.white, padding: "48px 40px", borderRadius: "4px" }}>
@@ -1384,6 +1521,22 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
   return (
     <footer style={{ background: CONFIG.sectionBg.footer, borderTop: "1px solid rgba(255,255,255,0.08)", padding: "40px 32px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        {/* Contact row — every route's footer carries the address, the hours
+            and a reachable action, so a visitor never has to find the Contact
+            page to get in touch. Same model as the Contact page, no re-prose. */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "32px", marginBottom: "28px", paddingBottom: "24px", borderBottom: "1px solid rgba(255,255,255,0.08)" }} className="grid-responsive">
+          <div style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", lineHeight: 1.7 }}>
+            <p style={{ margin: "0 0 6px", color: COLORS.white, fontWeight: 600, fontSize: "13px" }}>
+              {t.contact.legalName}
+            </p>
+            <p style={{ margin: "0 0 6px" }}>{txt(t.contact.address.display, lang)}</p>
+            <p style={{ margin: 0 }}>
+              {txt(t.contact.hours.display, lang)} · {txt(t.contact.appointmentOnly, lang)}
+            </p>
+          </div>
+          <ContactActions lang={lang} placement="footer" compact />
+        </div>
+
         {/* Top row */}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "24px", marginBottom: "24px" }}>
           <div>
@@ -1837,6 +1990,16 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         @media (min-width: 901px) {
           .show-mobile { display: none !important; }
         }
+        /* Keep the floating WhatsApp button clear of the contact form: on a
+           narrow screen the form fills the width, so the section gets enough
+           bottom padding for the button to sit below the send button. */
+        @media (max-width: 900px) {
+          #contact { padding-bottom: 140px !important; }
+          .floating-whatsapp {
+            right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+            bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+          }
+        }
       `}</style>
 
       <Navbar route={route} setLang={setLang} setPage={setPage} />
@@ -1856,6 +2019,13 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
       </main>
 
       <Footer lang={lang} onOpenLegal={setLegalOpen} />
+
+      {/* Sitewide on every page and both languages, per the contact spec */}
+      {/* Own landmark: it floats outside <main>, so without one screen-reader
+          users navigating by region would never reach it. */}
+      <aside aria-label={txt(t.contact.labels.whatsapp, lang)}>
+        <FloatingWhatsApp lang={lang} />
+      </aside>
 
       {/* Legal modals — rendered above everything */}
       <LegalModal type={legalOpen} lang={lang} onClose={() => setLegalOpen(null)} />

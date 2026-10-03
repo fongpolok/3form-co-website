@@ -767,20 +767,73 @@ export const t = {
     },
     // Company facts from Edward, 2026-09-23. Also feed the Organization
     // JSON-LD (legalName, foundingDate, address) in src/structuredData.ts.
-    legalName:    "3form Engineering Co Ltd",
+    legalName:    "3form Engineering Co Ltd.",
     foundingYear: "2026",
     address: {
-      street:   "Room C22, 12/F, Wong King Industrial Building",
+      street:   "Room C22, 12/F, Wong King Industrial Building, 2-4 Tai Yau Street",
       locality: "San Po Kong",
       region:   "Kowloon",
+      country:  "HK",
       display: {
-        en: "Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong",
-        tc: "香港九龍新蒲崗旺景工業大廈12樓C22室",
+        en: "Room C22, 12/F, Wong King Industrial Building, 2-4 Tai Yau Street, San Po Kong, Kowloon, Hong Kong",
+        tc: "香港九龍新蒲崗大有街2-4號旺景工業大廈12樓C22室",
       },
     },
+    // Office hours feed both the visible contact block and the JSON-LD
+    // openingHoursSpecification in src/structuredData.ts.
+    hours: {
+      days:    ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens:   "09:00",
+      closes:  "18:00",
+      display: { en: "Mon–Fri 09:00–18:00", tc: "星期一至五 09:00–18:00" },
+    },
+    // We work on client sites; the office is not a shop. Say so plainly rather
+    // than letting a visitor turn up to a closed industrial-building door.
+    appointmentOnly: {
+      en: "By appointment only — no walk-in storefront.",
+      tc: "預約制，不設門市。",
+    },
     phone:   "5744 9594",
+    tel:     "+85257449594",
     email:   "edwardfong@3formhk.com",
     website: "www.3formhk.com",
+    // WhatsApp Business is the fastest route to a reply, so it leads every
+    // contact action list and gets the sitewide floating button.
+    whatsapp: {
+      display: "+852 5744 9594",
+      href:    "https://wa.me/85257449594",
+      /** Prefilled opener. Deliberately price-free: quotes follow a site walk-through. */
+      message: {
+        en: "Hello 3form Engineering, I'd like to ask about your engineering services.",
+        tc: "您好，3form Engineering，我想諮詢貴公司的工程服務。",
+      },
+      label: { en: "WhatsApp us", tc: "WhatsApp 聯絡我們" },
+      aria: {
+        en: "Chat with 3form Engineering on WhatsApp",
+        tc: "透過 WhatsApp 與 3form Engineering 聯絡",
+      },
+    },
+    wechat: {
+      id:     "edwardfpl",
+      label:  { en: "WeChat ID", tc: "微信 ID" },
+      copy:   { en: "Copy ID",   tc: "複製 ID" },
+      copied: { en: "Copied!",   tc: "已複製！" },
+      copy_failed: {
+        en: "Copy failed — the WeChat ID is edwardfpl.",
+        tc: "複製失敗 — 微信 ID 為 edwardfpl。",
+      },
+    },
+    labels: {
+      office:     { en: "Office",       tc: "辦公室" },
+      hours:      { en: "Office hours", tc: "辦公時間" },
+      phone:      { en: "Phone",        tc: "電話" },
+      email:      { en: "Email",        tc: "電郵" },
+      website:    { en: "Website",      tc: "網站" },
+      whatsapp:   { en: "WhatsApp",     tc: "WhatsApp" },
+      wechat:     { en: "WeChat",       tc: "微信" },
+      call:       { en: "Call us",      tc: "致電我們" },
+      emailUs:    { en: "Email us",     tc: "電郵聯絡" },
+    },
     form_name:    { en: "Your Name",   tc: "您的姓名" },
     form_email:   { en: "Your Email",  tc: "您的電郵" },
     form_message: { en: "Your Message", tc: "您的訊息" },
