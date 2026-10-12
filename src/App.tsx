@@ -802,18 +802,6 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
     { key: "services", heading: t.nav.services, teaser: t.home.links.services, cta: { en: "View services",  tc: "查看服務" } },
     { key: "projects", heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } },
     { key: "contact",  heading: t.nav.contact,  teaser: t.home.links.contact,  cta: { en: "Contact us",     tc: "聯絡我們" } },
-    { key: "onCallAdvisory", heading: t.services.onCallAdvisoryPage.label, teaser: t.home.links.onCallAdvisory, cta: { en: "View on-call advisory", tc: "查看隨時支援顧問" } },
-    // Facility Maintenance is not a nav item, so the home page is where a
-    // crawler first picks up its URL. Hidden when the block is switched off in
-    // content.json, which is also when the landing page stops being built.
-    ...(facilityMaintenanceConfig.enabled
-      ? [{
-          key: "facilityMaintenance" as Page,
-          heading: facilityMaintenanceConfig.label,
-          teaser: { en: "HVAC, electrical, office equipment and FIFO line layout for your premises.", tc: "冷氣通風、電力系統、辦公室設備及先進先出生產線佈局。" },
-          cta: { en: "View facility maintenance", tc: "查看場地保養" },
-        }]
-      : []),
   ];
   return (
     <section style={{ background: CONFIG.sectionBg.about, padding: "100px 32px" }}>

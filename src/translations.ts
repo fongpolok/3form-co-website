@@ -29,7 +29,6 @@ export const t = {
       services: { en: "See how we help businesses improve and grow.",      tc: "了解我們如何協助企業提升及發展。" },
       projects: { en: "Browse case studies from real client engagements.", tc: "瀏覽真實客戶項目的個案研究。" },
       contact:  { en: "Get in touch to start a conversation.",             tc: "聯絡我們，開展合作對話。" },
-      onCallAdvisory: { en: "An engineering advisor on call for a fixed monthly fee.", tc: "以固定月費，讓工程顧問隨時候命。" },
     },
   },
 
