@@ -40,13 +40,14 @@ rules or server config.
 | **`/services/warehouse-management-system/`** | **`/tc/services/warehouse-management-system/`** | `dist/services/warehouse-management-system/index.html` | 0.9 |
 | **`/services/equipment-maintenance-repair/`** | **`/tc/services/equipment-maintenance-repair/`** | `dist/services/equipment-maintenance-repair/index.html` | 0.9 |
 | **`/services/industrial-ai-agents/`** | **`/tc/services/industrial-ai-agents/`** | `dist/services/industrial-ai-agents/index.html` | 0.9 |
+| **`/services/on-call-engineering-advisory/`** | **`/tc/services/on-call-engineering-advisory/`** | `dist/services/on-call-engineering-advisory/index.html` | 0.9 |
 | **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
 | `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/products/` | `/tc/products/` | `dist/products/index.html` | 0.9 |
 
-**44 pages** in total (the Demos page was renamed Products and moved from `/demos/` to `/products/` on 2026-10-12; `/demos/` and `/tc/demos/` are forwarding pages written from `LEGACY_REDIRECTS` in `src/routes.ts`), plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**46 pages** in total (the Demos page was renamed Products and moved from `/demos/` to `/products/` on 2026-10-12; `/demos/` and `/tc/demos/` are forwarding pages written from `LEGACY_REDIRECTS` in `src/routes.ts`), plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 

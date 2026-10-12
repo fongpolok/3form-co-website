@@ -802,6 +802,7 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
     { key: "services", heading: t.nav.services, teaser: t.home.links.services, cta: { en: "View services",  tc: "查看服務" } },
     { key: "projects", heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } },
     { key: "contact",  heading: t.nav.contact,  teaser: t.home.links.contact,  cta: { en: "Contact us",     tc: "聯絡我們" } },
+    { key: "onCallAdvisory", heading: t.services.onCallAdvisoryPage.label, teaser: t.home.links.onCallAdvisory, cta: { en: "View on-call advisory", tc: "查看隨時支援顧問" } },
     // Facility Maintenance is not a nav item, so the home page is where a
     // crawler first picks up its URL. Hidden when the block is switched off in
     // content.json, which is also when the landing page stops being built.
@@ -1418,7 +1419,7 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
 // Used by every entry in SERVICE_LANDINGS (src/routes.ts): Funding Consulting,
 // Engineering & Process Enhancement, and any service added later. Copy lives in
 // t.services.<name>Page; the matching Services-page card links here.
-function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; onBack: () => void; setPage: (p: Page) => void }) {
+function ServiceLandingPage({ lang, content: fp, cardId, photo = true, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; photo?: boolean; onBack: () => void; setPage: (p: Page) => void }) {
   const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
   const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 12px" };
   const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0 };
@@ -1443,11 +1444,14 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
             {txt(fp.intro, lang)}
           </p>
 
-          {/* The service's photo — the Services-page card shows only its icon. */}
-          <img src={asset(`/services/service-${String(cardId).padStart(2, "0")}.webp`)}
-            alt={txt(fp.heading, lang)}
-            decoding="async" width={1280} height={720}
-            style={{ width: "100%", maxWidth: "960px", height: "auto", aspectRatio: "16 / 9", objectFit: "cover", display: "block", margin: "-32px 0 72px", borderRadius: "2px", background: COLORS.hairline }} />
+          {/* The service's photo — the Services-page card shows only its icon.
+              Skipped for a service that has no photo yet (photo: false). */}
+          {photo ? (
+            <img src={asset(`/services/service-${String(cardId).padStart(2, "0")}.webp`)}
+              alt={txt(fp.heading, lang)}
+              decoding="async" width={1280} height={720}
+              style={{ width: "100%", maxWidth: "960px", height: "auto", aspectRatio: "16 / 9", objectFit: "cover", display: "block", margin: "-32px 0 72px", borderRadius: "2px", background: COLORS.hairline }} />
+          ) : null}
 
           <h2 style={h2Style}>{txt(fp.audienceHeading, lang)}</h2>
           <div style={{ display: "grid", gridTemplateColumns: fp.audiences.length > 1 ? "repeat(2, 1fr)" : "minmax(0, 720px)", gap: "24px", marginBottom: "72px" }} className="grid-responsive">
@@ -1458,6 +1462,22 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
               </div>
             ))}
           </div>
+
+          {fp.coverage && (
+            <>
+              <h2 style={h2Style}>{txt(fp.coverage.heading, lang)}</h2>
+              {/* Hairline-separated list, not a second row of cards: the
+                  audience block above already uses the card treatment. */}
+              <dl style={{ margin: "0 0 72px", borderTop: `1px solid ${COLORS.hairline}`, maxWidth: "960px" }}>
+                {fp.coverage.items.map((c, i) => (
+                  <div key={i} style={{ display: "flex", flexWrap: "wrap", gap: "8px 48px", padding: "24px 0", borderBottom: `1px solid ${COLORS.hairline}` }}>
+                    <dt style={{ ...h3Style, margin: 0, flex: "1 1 240px" }}>{txt(c.title, lang)}</dt>
+                    <dd style={{ ...bodyStyle, margin: 0, flex: "2 1 320px" }}>{txt(c.body, lang)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </>
+          )}
 
           <h2 style={h2Style}>{txt(fp.stepsHeading, lang)}</h2>
           <ol style={{ listStyle: "none", padding: 0, margin: "0 0 72px", display: "grid", gridTemplateColumns: `repeat(${fp.steps.length === 3 ? 3 : 2}, 1fr)`, gap: "40px 48px" }} className="grid-responsive">
@@ -2016,7 +2036,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
-        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} cardId={SERVICE_LANDINGS[page]!.cardId} onBack={() => setPage("home")} setPage={setPage} />}
+        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} cardId={SERVICE_LANDINGS[page]!.cardId} photo={SERVICE_LANDINGS[page]!.photo} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />

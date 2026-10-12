@@ -57,6 +57,7 @@ export type Page =
   | "warehouseSystem"
   | "equipmentMaintenance"
   | "industrialAgents"
+  | "onCallAdvisory"
   | "projects"
   | "demos"
   | "contact";
@@ -74,6 +75,7 @@ const PAGE_SEGMENT: Record<Page, string> = {
   warehouseSystem: "services/warehouse-management-system",
   equipmentMaintenance: "services/equipment-maintenance-repair",
   industrialAgents: "services/industrial-ai-agents",
+  onCallAdvisory: "services/on-call-engineering-advisory",
   projects: "projects",
   // The page key is still "demos" (it is the same page and component), but it
   // is presented as Products and lives at /products/ since 2026-10-12. The old
@@ -92,17 +94,24 @@ export const SERVICE_PAGES: readonly Page[] = [
   "warehouseSystem",
   "equipmentMaintenance",
   "industrialAgents",
+  "onCallAdvisory",
 ];
 
 /** Copy for a templated service landing page (see ServiceLandingPage in App.tsx). */
-export type ServiceLandingContent = typeof t.services.fundingPage;
+export type ServiceLandingContent = typeof t.services.fundingPage & {
+  /** Optional "what it covers" block, shown between the audience and the steps. */
+  coverage?: {
+    heading: { en: string; tc: string };
+    items: { title: { en: string; tc: string }; body: { en: string; tc: string } }[];
+  };
+};
 
 /**
  * Service landing pages built from the shared template, keyed by page, with the
  * Services-page card (`t.services.items[].id`) that links to each. Facility
  * Maintenance is not here: it has its own component and content.json.
  */
-export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number }>> = {
+export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number; photo?: boolean }>> = {
   fundingConsulting: { content: t.services.fundingPage, cardId: 1 },
   processEnhancement: { content: t.services.processPage, cardId: 2 },
   aiDataAdoption: { content: t.services.aiDataPage, cardId: 3 },
@@ -110,6 +119,9 @@ export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingCon
   warehouseSystem: { content: t.services.warehouseSystemPage, cardId: 5 },
   equipmentMaintenance: { content: t.services.equipmentMaintenancePage, cardId: 6 },
   industrialAgents: { content: t.services.industrialAgentsPage, cardId: 7 },
+  // photo: false until public/services/service-08.webp exists; the page then
+  // simply shows no picture rather than a broken one.
+  onCallAdvisory: { content: t.services.onCallAdvisoryPage, cardId: 8, photo: false },
 };
 
 /** Which nav item highlights for a given page (service landings sit under Services). */
@@ -277,6 +289,10 @@ const PAGE_TITLE: Record<Page, BiString> = {
     en: "Industrial AI Agents for Factories in Hong Kong | 3form",
     tc: "工廠 AI Agent（智能代理）開發｜香港｜3form",
   },
+  onCallAdvisory: {
+    en: "On-Call Engineering Advisory Retainer Hong Kong | 3form",
+    tc: "香港工程顧問月費服務｜產品設計及製造業隨時支援｜3form",
+  },
   projects: {
     en: "Projects & Case Studies",
     tc: "項目及個案研究",
@@ -335,6 +351,10 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
   industrialAgents: {
     en: "AI agents built on real plant data: reading sensor streams, documents and inspection results to automate routine operations decisions.",
     tc: "3form 為大灣區製造商開發以真實廠房數據運作的 AI Agent，讀取感測器數據、文件及檢測結果，自動化例行營運決策。",
+  },
+  onCallAdvisory: {
+    en: "An engineering advisor on a monthly retainer for Hong Kong product design and manufacturing companies: design support, manufacturing engineering, supplier liaison, funding and technology advice. Minimum three months.",
+    tc: "3form 以月費形式為香港產品設計及製造企業提供隨時支援的工程顧問：產品設計支援、製造工程、供應商聯絡、資助及技術建議。最短服務期三個月。",
   },
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
@@ -430,6 +450,7 @@ const PRERENDERED_PAGES: Page[] = [
   "warehouseSystem",
   "equipmentMaintenance",
   "industrialAgents",
+  "onCallAdvisory",
   "contact",
   "about",
   "projects",
@@ -473,6 +494,7 @@ export function sitemapPriority(route: Route): string {
     case "warehouseSystem":
     case "equipmentMaintenance":
     case "industrialAgents":
+    case "onCallAdvisory":
     case "services":
     case "demos":
     case "contact":

@@ -29,6 +29,7 @@ export const t = {
       services: { en: "See how we help businesses improve and grow.",      tc: "了解我們如何協助企業提升及發展。" },
       projects: { en: "Browse case studies from real client engagements.", tc: "瀏覽真實客戶項目的個案研究。" },
       contact:  { en: "Get in touch to start a conversation.",             tc: "聯絡我們，開展合作對話。" },
+      onCallAdvisory: { en: "An engineering advisor on call for a fixed monthly fee.", tc: "以固定月費，讓工程顧問隨時候命。" },
     },
   },
 
@@ -192,6 +193,14 @@ export const t = {
           tc: "開發能處理真實廠房數據的人工智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
         },
       },
+      {
+        id: 8,
+        title:  { en: "On-Call Engineering Advisory",                      tc: "隨時支援工程顧問服務" },
+        detail: {
+          en: "A standing engineering advisor on a monthly retainer for Hong Kong product design and manufacturing companies — design support, manufacturing engineering, supplier liaison, and funding and technology advice.",
+          tc: "以月費形式為香港產品設計及製造企業提供常設工程顧問，涵蓋產品設計支援、製造工程、供應商聯絡，以及資助與技術建議。",
+        },
+      },
     ],
     // ── CTA block at the bottom of the Services page ─────────────────────────
     cta: {
@@ -203,6 +212,96 @@ export const t = {
       button: { en: "Request a Demo / Quotation", tc: "查詢示範／報價" },
     },
 
+    // ── On-Call Engineering Advisory landing page (/services/on-call-engineering-advisory/).
+    // A retainer, from Edward's answers on 2026-10-12: on call and mostly
+    // remote, visiting site when needed; four work areas; a fixed monthly fee
+    // agreed after a first meeting; three-month minimum. No prices, response
+    // times or client examples have been given — do not add any.
+    onCallAdvisoryPage: {
+      label: { en: "On-Call Engineering Advisory", tc: "隨時支援工程顧問服務" },
+      heading: {
+        en: "On-call engineering advisory for product design and manufacturing in Hong Kong",
+        tc: "香港產品設計及製造業隨時支援工程顧問",
+      },
+      intro: {
+        en: "Keep an engineering advisor on call for a fixed monthly fee. 3form supports your team by phone, WhatsApp and video call during office hours, and visits your site when the work needs it.",
+        tc: "以固定月費，讓工程顧問隨時候命。3form 於辦公時間內透過電話、WhatsApp 及視像通話支援您的團隊，並在工作有需要時到場。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Hong Kong product design and manufacturing companies", tc: "香港產品設計及製造企業" },
+          body: {
+            en: "You design or make products and need engineering judgement regularly, but not a full-time senior engineer on the payroll. We act as your standing advisor.",
+            tc: "您從事產品設計或製造，經常需要工程專業判斷，但未必需要聘請全職資深工程師。我們擔任您的常設顧問。",
+          },
+        },
+      ],
+      coverage: {
+        heading: { en: "What the retainer covers", tc: "服務涵蓋範圍" },
+        items: [
+          {
+            title: { en: "Product design support", tc: "產品設計支援" },
+            body: {
+              en: "Design reviews, design-for-manufacturing advice, material and process selection, and guidance on prototyping.",
+              tc: "設計評審、可製造性設計建議、物料及製程選擇，以及原型製作指導。",
+            },
+          },
+          {
+            title: { en: "Manufacturing engineering", tc: "製造工程" },
+            body: {
+              en: "Production line and process problems, Lean and Six Sigma improvement, quality and inspection.",
+              tc: "生產線及製程問題、精益及六西格瑪改善、品質及檢測。",
+            },
+          },
+          {
+            title: { en: "Supplier and factory liaison", tc: "供應商及工廠聯絡" },
+            body: {
+              en: "Technical checks, sampling and quality follow-up with your factories in the Greater Bay Area or overseas, on your behalf.",
+              tc: "代您與大灣區或海外的工廠跟進技術審核、樣辦及品質事宜。",
+            },
+          },
+          {
+            title: { en: "Funding and technology advice", tc: "資助及技術建議" },
+            body: {
+              en: "Ongoing advice on funding applications, AI and automation adoption, and equipment choices.",
+              tc: "就資助申請、人工智能及自動化應用，以及設備選擇提供持續建議。",
+            },
+          },
+        ],
+      },
+      stepsHeading: { en: "How the retainer works", tc: "服務如何運作" },
+      steps: [
+        {
+          title: { en: "First meeting", tc: "首次會面" },
+          body: {
+            en: "We learn your products, your team and where you need support, then agree the scope and a fixed monthly fee.",
+            tc: "我們了解您的產品、團隊及需要支援的範疇，然後議定服務範圍及固定月費。",
+          },
+        },
+        {
+          title: { en: "On call each month", tc: "每月隨時支援" },
+          body: {
+            en: "Your team contacts us by phone, WhatsApp or video call during office hours, Monday to Friday, 09:00 to 18:00. We visit your site when the work needs it.",
+            tc: "您的團隊可於辦公時間（星期一至五，09:00 至 18:00）透過電話、WhatsApp 或視像通話聯絡我們。工作有需要時，我們會到場支援。",
+          },
+        },
+        {
+          title: { en: "Minimum three months", tc: "最短服務期三個月" },
+          body: {
+            en: "The retainer runs for a minimum of three months, so we have time to learn your products and follow issues through.",
+            tc: "服務期最短為三個月，讓我們有足夠時間了解您的產品，並把問題跟進到底。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Need an engineer on call?", tc: "需要工程顧問隨時候命？" },
+      ctaBody: {
+        en: "Tell us what you design or make and where you need support. We reply within one business day.",
+        tc: "告訴我們您設計或生產的產品，以及需要支援的範疇，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full on-call advisory details →", tc: "查看隨時支援顧問詳情 →" },
+    },
     // ── Funding Consulting landing page (/services/funding-consulting/).
     // Built from Edward's interview answers (2026-09-23): who the client is
     // and how the engagement runs. A results section is deliberately absent
