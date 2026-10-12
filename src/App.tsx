@@ -854,7 +854,7 @@ function LiveDemoSection({ lang }: { lang: Lang }) {
   return (
     <section style={{ background: CONFIG.sectionBg.projects, padding: "100px 32px" }}>
       <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-        <SectionLabel lang={lang} en="Live Demos" tc="現場示範" />
+        <SectionLabel lang={lang} en="Built by 3form" tc="3form 自家開發" />
         {/* <h1>, not <h2>: this section is the whole Demos page, and every
             prerendered page needs exactly one top-level heading. */}
         <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "16px 0 12px", letterSpacing: "-0.02em" }}>
