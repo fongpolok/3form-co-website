@@ -44,9 +44,9 @@ rules or server config.
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
 | `/projects/` | `/tc/projects/` | `dist/projects/index.html` | 0.7 |
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
-| `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
+| `/products/` | `/tc/products/` | `dist/products/index.html` | 0.9 |
 
-**46 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**44 pages** in total (the Demos page was renamed Products and moved from `/demos/` to `/products/` on 2026-10-12; `/demos/` and `/tc/demos/` are forwarding pages written from `LEGACY_REDIRECTS` in `src/routes.ts`), plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 

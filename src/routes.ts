@@ -58,7 +58,6 @@ export type Page =
   | "equipmentMaintenance"
   | "industrialAgents"
   | "projects"
-  | "products"
   | "demos"
   | "contact";
 
@@ -76,8 +75,10 @@ const PAGE_SEGMENT: Record<Page, string> = {
   equipmentMaintenance: "services/equipment-maintenance-repair",
   industrialAgents: "services/industrial-ai-agents",
   projects: "projects",
-  products: "products",
-  demos: "demos",
+  // The page key is still "demos" (it is the same page and component), but it
+  // is presented as Products and lives at /products/ since 2026-10-12. The old
+  // /demos/ URLs forward here — see LEGACY_REDIRECTS.
+  demos: "products",
   contact: "contact",
 };
 
@@ -280,13 +281,9 @@ const PAGE_TITLE: Record<Page, BiString> = {
     en: "Projects & Case Studies",
     tc: "項目及個案研究",
   },
-  products: {
-    en: "Products: Warehouse SaaS, AI Agents, Machine Vision | 3form",
-    tc: "產品：倉庫管理 SaaS、工業 AI Agent、機器視覺檢測｜3form",
-  },
   demos: {
-    en: "Live Demos — Warehouse Management & ESG Tools",
-    tc: "現場示範 — 倉庫管理及 ESG 工具",
+    en: "Products & Live Demos — Warehouse, AI, Machine Vision | 3form",
+    tc: "產品及現場示範 — 倉庫管理、AI、機器視覺｜3form",
   },
   contact: {
     en: "Contact 3form Engineering | Hong Kong",
@@ -343,13 +340,9 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
     tc: "3form 已完成項目及代表性案例，涵蓋精益及六西格瑪、政府資助申請、人工智能檢測、倉庫系統，以及 GMP／HACCP 合規工作。",
   },
-  products: {
-    en: "Software built in-house by 3form in Hong Kong: a hosted warehouse management platform, industrial AI agents for plant data, and machine vision defect inspection. Live demos available.",
-    tc: "3form 於香港自行開發的軟件：託管式倉庫管理平台、處理廠房數據的工業 AI 智能代理，以及機器視覺缺陷檢測。設有現場示範。",
-  },
   demos: {
-    en: "Try the tools we build — a warehouse management platform with lot and expiry tracking, and ESG reporting support for Hong Kong SMEs.",
-    tc: "試用我們開發的工具：具備批次及效期追蹤的倉庫管理平台，以及為香港中小企而設的 ESG 報告支援。",
+    en: "Try the products 3form builds: a warehouse management platform with lot and expiry tracking, machine vision defect detection, a Cantonese AI health companion and an ESG auditing dashboard.",
+    tc: "試用 3form 開發的產品：具備批次及效期追蹤的倉庫管理平台、機器視覺缺陷檢測、粵語 AI 健康伴侶，以及 ESG 審核儀表板。",
   },
   contact: {
     en: `Contact 3form Engineering Co in Hong Kong. Phone ${t.contact.phone}, email ${t.contact.email}. Tell us about your project. We reply within the same business day.`,
@@ -440,7 +433,6 @@ const PRERENDERED_PAGES: Page[] = [
   "contact",
   "about",
   "projects",
-  "products",
   "demos",
 ];
 
@@ -453,6 +445,16 @@ export const ALL_ROUTES: Route[] = LANGS.flatMap((lang) => [
   ...PRERENDERED_PAGES.map((page): Route => ({ page, lang, projectId: null })),
   ...t.projects.items.map((p): Route => ({ page: "projects", lang, projectId: p.id })),
 ]);
+
+/**
+ * Old URLs that must keep working. GitHub Pages cannot send a real 301, so the
+ * prerender step writes a tiny forwarding page (instant meta refresh plus a
+ * canonical link) at each `from` path. Not listed in the sitemap.
+ */
+export const LEGACY_REDIRECTS: { from: string; to: Route }[] = LANGS.map((lang) => ({
+  from: `/${[LANG_PREFIX[lang], "demos"].filter(Boolean).join("/")}/`,
+  to: { page: "demos", lang, projectId: null },
+}));
 
 /**
  * Relative crawl priority for sitemap.xml. Facility maintenance and Contact are
@@ -472,7 +474,7 @@ export function sitemapPriority(route: Route): string {
     case "equipmentMaintenance":
     case "industrialAgents":
     case "services":
-    case "products":
+    case "demos":
     case "contact":
       return "0.9";
     default:

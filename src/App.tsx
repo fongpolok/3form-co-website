@@ -565,7 +565,6 @@ function Navbar({ route, setLang, setPage }: {
     { key: "about",    label: t.nav.about },
     { key: "projects", label: t.nav.projects },
     { key: "services", label: t.nav.services },
-    { key: "products", label: t.nav.products },
     { key: "demos",    label: t.nav.demos },
     { key: "contact",  label: t.nav.contact },
   ];
@@ -802,7 +801,6 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
     { key: "about",    heading: t.nav.about,    teaser: t.home.links.about,    cta: { en: "Learn more",     tc: "了解更多" } },
     { key: "services", heading: t.nav.services, teaser: t.home.links.services, cta: { en: "View services",  tc: "查看服務" } },
     { key: "projects", heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } },
-    { key: "products", heading: t.nav.products, teaser: t.home.links.products, cta: { en: "View products",  tc: "查看產品" } },
     { key: "contact",  heading: t.nav.contact,  teaser: t.home.links.contact,  cta: { en: "Contact us",     tc: "聯絡我們" } },
     // Facility Maintenance is not a nav item, so the home page is where a
     // crawler first picks up its URL. Hidden when the block is switched off in
@@ -1497,100 +1495,6 @@ function ServiceLandingPage({ lang, content: fp, cardId, onBack, setPage }: { la
   );
 }
 
-// ── Products — the software 3form builds and owns ────────────────────────────
-// One row per product rather than a card grid: a name-and-status column beside
-// the description, so the page reads as a product sheet. Copy is in
-// t.products and only restates what the service and Demos pages already say.
-function ProductsPage({ lang, onBack, setPage }: { lang: Lang; onBack: () => void; setPage: (p: Page) => void }) {
-  const tp = t.products;
-  const linkStyle: CSSProperties = { color: CONFIG.accent, fontSize: "14px", fontWeight: 600, display: "inline-flex", alignItems: "center", minHeight: "44px" };
-  return (
-    <PageShell lang={lang} onBack={onBack}>
-      <section style={{ background: CONFIG.sectionBg.services, padding: "80px 32px 100px" }}>
-        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
-          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(32px, 4vw, 52px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.2, margin: "0 0 20px", letterSpacing: "-0.02em", maxWidth: "20ch", textWrap: "balance" }}>
-            {txt(tp.heading, lang)}
-          </h1>
-          <p style={{ fontSize: "16px", lineHeight: 1.75, color: COLORS.charcoal, margin: "0 0 56px", maxWidth: "68ch" }}>
-            {txt(tp.sub, lang)}
-          </p>
-
-          <div style={{ borderTop: `1px solid ${COLORS.hairline}`, marginBottom: "72px" }}>
-            {tp.items.map(item => (
-              <article key={item.id} className="grid-responsive"
-                style={{ display: "grid", gridTemplateColumns: "minmax(0, 5fr) minmax(0, 7fr)", gap: "24px 64px", padding: "48px 0", borderBottom: `1px solid ${COLORS.hairline}` }}>
-                <div>
-                  <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.25, margin: "0 0 8px", letterSpacing: "-0.01em" }}>
-                    {txt(item.name, lang)}
-                  </h2>
-                  <p style={{ fontSize: "14px", color: COLORS.slate, margin: "0 0 20px" }}>
-                    {txt(item.kind, lang)}
-                  </p>
-                  {/* Evidence-Tint Rule: blue only where there is a demo to check. */}
-                  <span style={{
-                    display: "inline-block", fontSize: "11px", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", padding: "4px 10px", borderRadius: "2px",
-                    background: item.hasDemo ? COLORS.accentTint : COLORS.white,
-                    color: item.hasDemo ? CONFIG.accent : COLORS.slate,
-                    border: item.hasDemo ? "1px solid transparent" : `1px solid ${COLORS.borderGray}`,
-                  }}>
-                    {txt(item.status, lang)}
-                  </span>
-                </div>
-                <div>
-                  <p style={{ fontSize: "16px", lineHeight: 1.75, color: COLORS.charcoal, margin: "0 0 24px", maxWidth: "62ch" }}>
-                    {txt(item.desc, lang)}
-                  </p>
-                  <h3 style={{ fontSize: "12px", fontWeight: 600, color: COLORS.graphite, letterSpacing: "0.06em", textTransform: "uppercase", margin: "0 0 12px" }}>
-                    {txt(tp.featuresLabel, lang)}
-                  </h3>
-                  <ul style={{ listStyle: "none", padding: 0, margin: "0 0 20px", display: "grid", gap: "10px" }}>
-                    {item.features.map((f, i) => (
-                      <li key={i} style={{ display: "flex", gap: "12px", alignItems: "baseline", fontSize: "15px", lineHeight: 1.6, color: COLORS.graphite }}>
-                        <span aria-hidden="true" style={{ width: "6px", height: "6px", background: CONFIG.accent, flexShrink: 0, transform: "translateY(-2px)" }} />
-                        {txt(f, lang)}
-                      </li>
-                    ))}
-                  </ul>
-                  <div style={{ display: "flex", gap: "8px 32px", flexWrap: "wrap" }}>
-                    {item.hasDemo && (
-                      <a href={item.demoUrl} target="_blank" rel="noopener noreferrer"
-                        onClick={() => log.event(`Products → demo: ${item.id}`)}
-                        style={linkStyle}>
-                        {txt(tp.demoLink, lang)} ↗
-                      </a>
-                    )}
-                    <RouteLink to={{ page: item.detailsPage as Page, lang, projectId: null }}
-                      onNavigate={() => { log.event(`Products → details: ${item.id}`); setPage(item.detailsPage as Page); }}
-                      style={linkStyle}>
-                      {txt(tp.detailsLink, lang)}<span style={visuallyHidden}>: {txt(item.name, lang)}</span>{" →"}
-                    </RouteLink>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div style={{ background: CONFIG.navBg, padding: "48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
-            <div style={{ maxWidth: "520px" }}>
-              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "24px", fontWeight: 700, color: COLORS.white, margin: "0 0 10px", letterSpacing: "-0.01em" }}>
-                {txt(tp.ctaHeading, lang)}
-              </h2>
-              <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.7)", lineHeight: 1.7, margin: 0 }}>
-                {txt(tp.ctaBody, lang)}
-              </p>
-            </div>
-            <RouteLink to={{ page: "contact", lang, projectId: null }}
-              onNavigate={() => { log.event("Products → contact"); setPage("contact"); }}
-              style={{ background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", maxWidth: "100%", textAlign: "center" }}>
-              {txt(tp.ctaButton, lang)}
-            </RouteLink>
-          </div>
-        </div>
-      </section>
-    </PageShell>
-  );
-}
-
 function DemosPage({ lang, onBack }: { lang: Lang; onBack: () => void }) {
   return (
     <PageShell lang={lang} onBack={onBack}>
@@ -2117,7 +2021,6 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />
         )}
-        {page === "products" && <ProductsPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "demos"    && <DemosPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "contact"  && <ContactPage  lang={lang} onBack={() => setPage("home")} />}
       </main>

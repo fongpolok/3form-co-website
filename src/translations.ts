@@ -13,8 +13,7 @@ export const t = {
     about:    { en: "About",    tc: "關於我們" },
     projects: { en: "Projects", tc: "項目" },
     services: { en: "Services", tc: "服務" },
-    products: { en: "Products", tc: "產品" },
-    demos:    { en: "Demos",    tc: "示範" },
+    demos:    { en: "Products", tc: "產品" },
     contact:  { en: "Contact",  tc: "聯絡我們" },
     back:     { en: "← Back to Home", tc: "← 返回主頁" },
   },
@@ -30,7 +29,6 @@ export const t = {
       services: { en: "See how we help businesses improve and grow.",      tc: "了解我們如何協助企業提升及發展。" },
       projects: { en: "Browse case studies from real client engagements.", tc: "瀏覽真實客戶項目的個案研究。" },
       contact:  { en: "Get in touch to start a conversation.",             tc: "聯絡我們，開展合作對話。" },
-      products: { en: "See the software 3form builds in-house.",           tc: "了解 3form 自行開發的軟件產品。" },
     },
   },
 
@@ -613,7 +611,7 @@ export const t = {
   // are announced but not yet built, and use the same illustrative treatment
   // as unbuilt project cards.
   demos: {
-    heading: { en: "Live Demos", tc: "現場示範" },
+    heading: { en: "Products", tc: "產品" },
     sub: {
       en: "A closer look at the engineering behind the advisory work — built, not just proposed.",
       tc: "深入了解顧問工作背後的工程開發 — 實際建構，並非紙上談兵。",
@@ -675,83 +673,6 @@ export const t = {
     ],
   },
 
-  // ── Products page ─────────────────────────────────────────────────────────────
-  // Software 3form builds and owns (Edward confirmed all three on 2026-10-12).
-  // Every claim below restates something already on the site — the service
-  // pages and the Demos page — so nothing here is new, unverified copy. Keep it
-  // that way: `status` must stay honest about what has a public demo.
-  products: {
-    heading: { en: "Software built by 3form", tc: "3form 自家開發的軟件" },
-    sub: {
-      en: "Alongside our consulting work, 3form develops its own software for factories and warehouses. These are the three products we build and maintain ourselves.",
-      tc: "除顧問服務外，3form 亦自行開發應用於工廠及倉庫的軟件。以下是我們自行開發及維護的三項產品。",
-    },
-    featuresLabel: { en: "What it does", tc: "功能" },
-    demoLink:    { en: "Open the live demo", tc: "開啟現場示範" },
-    detailsLink: { en: "Read more",          tc: "了解更多" },
-    ctaHeading: { en: "Want to see a product on your own data?", tc: "想以您的數據試用產品？" },
-    ctaBody: {
-      en: "Tell us which product and what you would like it to do. We reply within one business day to arrange a walkthrough.",
-      tc: "告訴我們您感興趣的產品及用途，我們會於一個工作天內回覆並安排示範。",
-    },
-    ctaButton: { en: "Contact us", tc: "聯絡我們" },
-    items: [
-      {
-        id: "warehouse",
-        name: { en: "Warehouse management platform", tc: "倉庫管理平台" },
-        kind: { en: "Hosted software (SaaS)", tc: "託管式軟件（SaaS）" },
-        desc: {
-          en: "A hosted warehouse management platform that tracks lots and expiry dates, warns you before stock runs low or expires, and keeps a full audit trail.",
-          tc: "託管式倉庫管理平台，可追蹤批次及效期，在存貨不足或即將到期前發出預警，並保留完整審計軌跡。",
-        },
-        features: [
-          { en: "Lot and expiry tracking, first-expired-first-out (FEFO)", tc: "批次及效期追蹤，先到期先出（FEFO）" },
-          { en: "Low-stock and upcoming-expiry alerts", tc: "低庫存及即將到期預警" },
-          { en: "Void and audit trails for inventory traceability", tc: "作廢及審計紀錄，確保存貨可追溯" },
-        ],
-        status: { en: "Live demo available", tc: "設有現場示範" },
-        hasDemo: true,
-        demoUrl: "https://fongpolok.github.io/3form-wms-demo-ui/",
-        detailsPage: "warehouseSystem",
-      },
-      {
-        id: "agents",
-        name: { en: "Industrial AI agents", tc: "工業 AI 智能代理" },
-        kind: { en: "AI software", tc: "人工智能軟件" },
-        desc: {
-          en: "AI agents that work on real plant data. They read sensor streams, documents and inspection results to automate the routine decisions an operations team repeats every day.",
-          tc: "能處理真實廠房數據的人工智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
-        },
-        features: [
-          { en: "Reads live sensor streams from the plant", tc: "讀取廠房的實時感測器數據" },
-          { en: "Reads documents and inspection results", tc: "讀取文件及檢測結果" },
-          { en: "Automates routine operations decisions", tc: "將例行營運決策自動化" },
-        ],
-        status: { en: "No public demo yet", tc: "暫未設公開示範" },
-        hasDemo: false,
-        demoUrl: "",
-        detailsPage: "industrialAgents",
-      },
-      {
-        id: "vision",
-        name: { en: "Machine vision inspection", tc: "機器視覺檢測" },
-        kind: { en: "AI inspection software", tc: "人工智能檢測軟件" },
-        desc: {
-          en: "An inspection-station control app with recipe teach and run. Its defect detectors run real inference on sample images; in the public demo the robot, camera and lighting are simulated.",
-          tc: "檢測工作站控制應用程式，支援配方教導及執行。缺陷檢測器會對樣本圖像進行真實推理運算；公開示範中的機械人、相機及燈光則為模擬。",
-        },
-        features: [
-          { en: "Classical OpenCV template comparison", tc: "傳統 OpenCV 模板比對" },
-          { en: "Anomaly detection on a pretrained backbone", tc: "以預訓練骨幹網絡進行異常檢測" },
-          { en: "YOLO detector in development, pending labelled training data", tc: "YOLO 檢測器開發中，有待標註訓練數據" },
-        ],
-        status: { en: "Live demo available", tc: "設有現場示範" },
-        hasDemo: true,
-        demoUrl: "https://fongpolok.github.io/3form-defect-demo-ui/",
-        detailsPage: "demos",
-      },
-    ],
-  },
   // ── Projects page ─────────────────────────────────────────────────────────────
   projects: {
     all_heading: { en: "All Projects",     tc: "所有項目" },

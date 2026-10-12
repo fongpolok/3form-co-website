@@ -18,7 +18,7 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { log, step } from "./logger.mjs";
-import { render404, renderDocument, renderSitemap } from "./html.mjs";
+import { render404, renderDocument, renderRedirect, renderSitemap } from "./html.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const DIST_DIR = path.join(PROJECT_ROOT, "dist");
@@ -71,6 +71,7 @@ async function main() {
 
   const {
     ALL_ROUTES,
+    LEGACY_REDIRECTS,
     renderRoute,
     routeMeta,
     routePath,
@@ -117,6 +118,14 @@ async function main() {
         `${pathname} → ${path.relative(PROJECT_ROOT, outputPath)} ` +
           `(${(html.length / 1024).toFixed(1)} kB, "${meta.title}")`,
       );
+    }
+  });
+
+  await step(`Writing ${LEGACY_REDIRECTS.length} forwarding pages for old URLs`, async () => {
+    for (const { from, to } of LEGACY_REDIRECTS) {
+      const html = renderRedirect({ targetUrl: routeUrl(to), targetPath: routePath(to), title: routeMeta(to).title });
+      await writeFileEnsuringDir(outputPathFor(from), html);
+      log.debug(`${from} → forwards to ${routePath(to)}`);
     }
   });
 

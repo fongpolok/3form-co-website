@@ -126,6 +126,28 @@ ${urls}
  * hits a dead URL can still get somewhere. Deliberately *not* a copy of the
  * home page — that would be a soft 404, which search engines penalise.
  */
+/**
+ * A forwarding page for a URL that has moved. Standalone on purpose (no app
+ * bundle): an instant meta refresh, which search engines treat as a permanent
+ * redirect, a canonical link to the new address, and a plain link as fallback.
+ */
+export function renderRedirect({ targetUrl, targetPath, title }) {
+  return `<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>${text(title)}</title>
+    <link rel="canonical" href="${attr(targetUrl)}" />
+    <meta http-equiv="refresh" content="0; url=${attr(targetPath)}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body style="font-family:system-ui,-apple-system,'Segoe UI',sans-serif;padding:32px">
+    <p>This page has moved to <a href="${attr(targetPath)}">${text(targetUrl)}</a>.</p>
+  </body>
+</html>
+`;
+}
+
 export function render404({ shell, links, siteName }) {
   const items = links
     .map(

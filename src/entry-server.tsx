@@ -14,7 +14,7 @@ import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App";
 import { structuredDataFor } from "./structuredData";
-import { ALL_ROUTES, routeMeta, routePath, routeUrl, sitemapPriority, SITE_ORIGIN, type Route } from "./routes";
+import { ALL_ROUTES, LEGACY_REDIRECTS, routeMeta, routePath, routeUrl, sitemapPriority, SITE_ORIGIN, type Route } from "./routes";
 
 /** Render one route to the HTML string that goes inside <div id="root">. */
 export function renderRoute(route: Route): string {
@@ -26,4 +26,4 @@ export function renderRoute(route: Route): string {
   );
 }
 
-export { ALL_ROUTES, routeMeta, routePath, routeUrl, sitemapPriority, structuredDataFor, SITE_ORIGIN };
+export { ALL_ROUTES, LEGACY_REDIRECTS, routeMeta, routePath, routeUrl, sitemapPriority, structuredDataFor, SITE_ORIGIN };
