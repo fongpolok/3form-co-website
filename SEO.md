@@ -46,7 +46,7 @@ rules or server config.
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/demos/` | `/tc/demos/` | `dist/demos/index.html` | 0.7 |
 
-**44 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**46 pages** in total, plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 

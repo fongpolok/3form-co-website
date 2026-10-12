@@ -58,6 +58,7 @@ export type Page =
   | "equipmentMaintenance"
   | "industrialAgents"
   | "projects"
+  | "products"
   | "demos"
   | "contact";
 
@@ -75,6 +76,7 @@ const PAGE_SEGMENT: Record<Page, string> = {
   equipmentMaintenance: "services/equipment-maintenance-repair",
   industrialAgents: "services/industrial-ai-agents",
   projects: "projects",
+  products: "products",
   demos: "demos",
   contact: "contact",
 };
@@ -278,6 +280,10 @@ const PAGE_TITLE: Record<Page, BiString> = {
     en: "Projects & Case Studies",
     tc: "項目及個案研究",
   },
+  products: {
+    en: "Products: Warehouse SaaS, AI Agents, Machine Vision | 3form",
+    tc: "產品：倉庫管理 SaaS、工業 AI Agent、機器視覺檢測｜3form",
+  },
   demos: {
     en: "Live Demos — Warehouse Management & ESG Tools",
     tc: "現場示範 — 倉庫管理及 ESG 工具",
@@ -336,6 +342,10 @@ const PAGE_DESCRIPTION: Record<Page, BiString> = {
   projects: {
     en: "Completed engagements and representative examples of our work across Lean and Six Sigma, government funding applications, AI inspection, warehouse systems and GMP/HACCP compliance.",
     tc: "3form 已完成項目及代表性案例，涵蓋精益及六西格瑪、政府資助申請、人工智能檢測、倉庫系統，以及 GMP／HACCP 合規工作。",
+  },
+  products: {
+    en: "Software built in-house by 3form in Hong Kong: a hosted warehouse management platform, industrial AI agents for plant data, and machine vision defect inspection. Live demos available.",
+    tc: "3form 於香港自行開發的軟件：託管式倉庫管理平台、處理廠房數據的工業 AI 智能代理，以及機器視覺缺陷檢測。設有現場示範。",
   },
   demos: {
     en: "Try the tools we build — a warehouse management platform with lot and expiry tracking, and ESG reporting support for Hong Kong SMEs.",
@@ -430,6 +440,7 @@ const PRERENDERED_PAGES: Page[] = [
   "contact",
   "about",
   "projects",
+  "products",
   "demos",
 ];
 
@@ -461,6 +472,7 @@ export function sitemapPriority(route: Route): string {
     case "equipmentMaintenance":
     case "industrialAgents":
     case "services":
+    case "products":
     case "contact":
       return "0.9";
     default:

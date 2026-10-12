@@ -27,6 +27,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 ## Capabilities and Constraints
 
 - Seven confirmed service lines: Funding Consulting; Engineering & Process Enhancement (Six Sigma/Lean); AI & Data Digitalisation Tech Adoption; Production Site Setup (licensing/HACCP/GMP/FIFO); Warehouse Management System (SaaS); General Maintenance & Repair; Industrial Agentic Development.
+- `/products/` (and `/tc/products/`, added 2026-10-12) presents the three pieces of software 3form builds and owns: the hosted warehouse management platform, industrial AI agents, and machine vision inspection. Its copy only restates what the service and Demos pages already say; keep each product's status honest (which have a public demo, what is still in development). The firm remains a consultancy that also builds products; do not reposition the whole site as a product company without Edward's say.
 - Each service has its own indexable page under `/services/<slug>/` (plus `/services/facility-maintenance/`), with a `/tc/` twin. Service photos live on those pages; the Services overview cards show only the small round icons (`public/services/icon-NN.webp`).
 - Contact form: with `CONFIG.contactFormEndpoint` empty (the current setting) it opens the visitor's email client via `mailto:` rather than posting to a backend. Setting a Formspree-style endpoint switches it to a server-side send.
 - Office address is confirmed: Room C22, 12/F, Wong King Industrial Building, San Po Kong, Kowloon, Hong Kong (香港九龍新蒲崗旺景工業大廈12樓C22室). Hong Kong has no postcode.
