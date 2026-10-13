@@ -17,7 +17,7 @@ Edward repositioned the firm. Where this section conflicts with older text below
 - **How We Work:** Diagnose, Design, Deliver, Support.
 - **Clients:** manufacturers in Hong Kong and the Greater Bay Area.
 - **Look:** unchanged; wording and structure only.
-- **Not changed, left for Edward:** his title "Founder & Principal Consultant", the founder bio, the statistics, and the LinkedIn company page, which still says consulting.
+- **Not changed, left for Edward:** the founder bio, the "50+ projects" and "30+ clients" statistics, and the LinkedIn company page, which still says consulting.
 - No prices, client names or results were supplied for the three new solution pages, and they have no photos. Do not add any.
 
 ## Users
@@ -54,14 +54,14 @@ The firm's differentiator is combining engineering execution with funding/grant 
 ## Brand Commitments
 
 - Firm name: **3form Engineering Co**; **3form Co** is the accepted short form (used for the navbar wordmark and casual in-copy mentions). Domain: `3formhk.com` (served over HTTPS from GitHub Pages; `public/CNAME` is the source of truth).
-- Founder: **Edward Fong**, Founder & Principal Consultant. Credentials: IMechE Associate Member (HK Branch); BEng & MSc Mechanical Engineering (HKU, both completed); patent holder for a machine-vision inspection system for automotive parts.
+- Founder: **Edward Fong**, Founder (title changed from "Founder & Principal Consultant" on 2026-10-13, at his request). Credentials: IMechE Associate Member (HK Branch); BEng & MSc Mechanical Engineering (HKU, both completed); patent holder for a machine-vision inspection system for automotive parts.
 - Existing visual identity: dark navy (#001A4A/#002D72) with blue accent (#0050CC), serif display type + sans body, McKinsey-style authoritative tone — established in `src/App.tsx`. This is incumbent visual truth to preserve or deliberately supersede, not to ignore.
 - Contact: Edward Fong, phone 5744 9594, email edwardfong@3formhk.com.
 
 ## Evidence on Hand
 
 - **Founder bio and credentials are real** (sourced from Edward's LinkedIn profile per code comment) — his HKPC role, patent, and academic credentials should be treated as factual and preserved.
-- **Homepage stats ("10+ years experience, 50+ projects completed, 30+ clients served") represent Edward's personal professional track record** accumulated via his HKPC role — **not** 3form Engineering Co's own independent history as a firm, since 3form Engineering Co is a new solo practice. Future copy should not imply these are the firm's own multi-year numbers.
+- **Homepage stats ("6+ years experience" — corrected from 10+ by Edward on 2026-10-13 — 50+ projects completed, 30+ clients served") represent Edward's personal professional track record** accumulated via his HKPC role — **not** 3form Engineering Co's own independent history as a firm, since 3form Engineering Co is a new solo practice. Future copy should not imply these are the firm's own multi-year numbers.
 - **Of the 8 project case studies in `src/translations.ts`, 3 are marked `featured: true`** (production line overhaul, BUD Fund application, KPI dashboard) with full write-ups. **The other 5 (`featured: false`) are now labelled "Actual Example" per Edward's direction (2026-09-11)** rather than "Illustrative Example" — he indicated these are real engagements and the detailed write-ups (desc/result copy) will be supplied in a follow-up session. Until that copy arrives, treat the existing desc/result text on those 5 as provisional placeholder wording, not confirmed fact.
 - Project 6 is titled "Funding Grant for Technology Upgrade" (科技升級資助).
 - Each project (including the 5 above) now links to its own detail page (`/projects/<id>/`, `ProjectDetailPage` in `src/App.tsx`) for a fuller deliverables write-up; the detail page body is intentionally blank pending that content.

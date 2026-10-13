@@ -54,7 +54,7 @@ export const t = {
       en: "3form Engineering Co is a Hong Kong–based engineering and AI solutions company. We design and deliver AI and data systems, agentic AI, turnkey engineering, industrial layout and product design for manufacturers in Hong Kong and the Greater Bay Area — one team from first diagnosis to a working result.",
       tc: "3form Engineering Co 是一家總部位於香港的工程及 AI 解決方案公司。我們為香港及大灣區製造商設計及交付 AI 及數據系統、Agentic AI、一站式工程、工業佈局及產品設計，由診斷到成果落地，全程由同一團隊負責。",
     },
-    stat1_num:   "10+",
+    stat1_num:   "6+",
     stat1_label: { en: "Years of Experience", tc: "年豐富經驗" },
     stat2_num:   "50+",
     stat2_label: { en: "Projects Completed",  tc: "完成項目" },
@@ -66,8 +66,8 @@ export const t = {
       name:  "Edward Fong",
       photoUrl: "/team/edward-fong.png",
       title: {
-        en: "Founder & Principal Consultant",
-        tc: "創辦人及首席顧問",
+        en: "Founder",
+        tc: "創辦人",
       },
       bio_p1: {
         en: "Edward is a Mechanical Engineer with over three years at the Hong Kong Productivity Council (HKPC), where he currently serves as Senior Consultant — Smart Machinery and Equipment. His work spans IoT 4.0 and warehouse management system (WMS) development, AI-driven computer vision inspection, and advanced plastic and composite processing — supporting Hong Kong manufacturers through government funding applications and schemes such as the New Industrialisation and Technology Training Programme (NITTP) and the Cash Rebate Scheme (CRS).",
