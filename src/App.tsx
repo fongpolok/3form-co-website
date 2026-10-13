@@ -766,7 +766,7 @@ function HeroSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => void
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "28px" }}>
             <div style={{ width: "40px", height: "2px", background: COLORS.accentLight }} />
             <span style={{ color: COLORS.accentLight, fontSize: "12px", fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase" }}>
-              {lang === "en" ? "Engineering Consulting · Hong Kong" : "工程顧問 · 香港"}
+              {lang === "en" ? "AI & Engineering Solutions · Hong Kong" : "AI 及工程解決方案 · 香港"}
             </span>
           </div>
           <h1 style={{ fontFamily: "var(--font-serif)", color: COLORS.white, fontSize: "clamp(36px, 5vw, 60px)", fontWeight: 700, lineHeight: 1.15, margin: "0 0 24px", letterSpacing: "-0.02em" }}>
@@ -966,6 +966,9 @@ function RoadmapSection({ lang }: { lang: Lang }) {
             </Fragment>
           ))}
         </div>
+        <p style={{ fontSize: "14px", lineHeight: 1.7, color: COLORS.slate, margin: "40px auto 0", maxWidth: "68ch", textAlign: "center" }}>
+          {txt(t.services.fundingNote, lang)}
+        </p>
       </div>
     </section>
   );
@@ -1060,7 +1063,7 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
                     element rather than a CSS background so the icon carries
                     alt text in the page language. */}
                 <img className="sv-sweep-photo"
-                  src={asset(`/services/icon-${String(svc.id).padStart(2, "0")}.webp`)}
+                  src={asset(`/services/${svc.icon}`)}
                   alt={lang === "en"
                     ? `${txt(svc.title, lang)} — 3form service`
                     : `${txt(svc.title, lang)} — 3form 服務`}
@@ -1081,21 +1084,35 @@ function ServicesSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) => 
               <p style={{ fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0, maxWidth: isWide ? "58ch" : undefined }}>
                 {txt(svc.detail, lang)}
               </p>
-              {/* Services with their own landing page link to it — a real <a>
-                  so crawlers can follow it. Wired from SERVICE_LANDINGS. */}
-              {(() => {
-                const entry = (Object.entries(SERVICE_LANDINGS) as [Page, { content: ServiceLandingContent; cardId: number }][])
-                  .find(([, l]) => l.cardId === svc.id);
-                if (!entry) return null;
-                const [landingPage, landing] = entry;
-                return (
-                  <RouteLink to={{ page: landingPage, lang, projectId: null }}
-                    onNavigate={() => { log.event("Services → landing page", landingPage); setPage(landingPage); }}
-                    style={{ display: "inline-block", marginTop: "20px", color: CONFIG.accent, fontSize: "14px", fontWeight: 600 }}>
-                    {txt(landing.content.cardLink, lang)}
-                  </RouteLink>
-                );
-              })()}
+              {/* Each solution links to its own page — a real <a> so crawlers
+                  can follow it — then to the earlier services grouped under it. */}
+              <RouteLink to={{ page: svc.page as Page, lang, projectId: null }}
+                onNavigate={() => { log.event("Services → landing page", svc.page); setPage(svc.page as Page); }}
+                style={{ display: "inline-flex", alignItems: "center", minHeight: "44px", marginTop: "12px", color: CONFIG.accent, fontSize: "14px", fontWeight: 600 }}>
+                {txt(t.services.cardLink, lang)}<span style={visuallyHidden}>: {txt(svc.title, lang)}</span>
+              </RouteLink>
+              {svc.related.length > 0 && (
+                <div style={{ marginTop: "12px", paddingTop: "16px", borderTop: `1px solid ${COLORS.hairline}` }}>
+                  <h3 style={{ fontSize: "12px", fontWeight: 600, color: COLORS.graphite, letterSpacing: "0.06em", textTransform: "uppercase", margin: "0 0 4px" }}>
+                    {txt(t.services.relatedLabel, lang)}
+                  </h3>
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexWrap: "wrap", gap: "0 24px" }}>
+                    {(svc.related as Page[]).map(rel => {
+                      const label = rel === "facilityMaintenance" ? facilityMaintenanceConfig.label : SERVICE_LANDINGS[rel]?.content.label;
+                      if (!label) return null;
+                      return (
+                        <li key={rel}>
+                          <RouteLink to={{ page: rel, lang, projectId: null }}
+                            onNavigate={() => { log.event("Services → related", rel); setPage(rel); }}
+                            style={{ display: "inline-flex", alignItems: "center", minHeight: "44px", color: CONFIG.accent, fontSize: "14px", fontWeight: 500 }}>
+                            {txt(label, lang)}
+                          </RouteLink>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              )}
             </div>
             );
           })}
@@ -1481,6 +1498,10 @@ function ServiceLandingPage({ lang, content: fp, cardId, photo = true, onBack, s
               </li>
             ))}
           </ol>
+
+          <p style={{ ...bodyStyle, margin: "0 0 40px", maxWidth: "68ch", paddingLeft: "16px", borderLeft: `1px solid ${COLORS.borderGray}` }}>
+            {txt(t.services.fundingNote, lang)}
+          </p>
 
           <div style={{ background: CONFIG.navBg, padding: "48px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "32px", flexWrap: "wrap" }}>
             <div style={{ maxWidth: "520px" }}>

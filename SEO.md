@@ -33,13 +33,15 @@ rules or server config.
 | `/` | `/tc/` | `dist/index.html` | 1.0 |
 | `/services/` | `/tc/services/` | `dist/services/index.html` | 0.9 |
 | **`/services/facility-maintenance/`** | **`/tc/services/facility-maintenance/`** | `dist/services/facility-maintenance/index.html` | 0.9 |
-| **`/services/funding-consulting/`** | **`/tc/services/funding-consulting/`** | `dist/services/funding-consulting/index.html` | 0.9 |
 | **`/services/lean-six-sigma/`** | **`/tc/services/lean-six-sigma/`** | `dist/services/lean-six-sigma/index.html` | 0.9 |
 | **`/services/ai-data-adoption/`** | **`/tc/services/ai-data-adoption/`** | `dist/services/ai-data-adoption/index.html` | 0.9 |
 | **`/services/production-site-setup/`** | **`/tc/services/production-site-setup/`** | `dist/services/production-site-setup/index.html` | 0.9 |
 | **`/services/warehouse-management-system/`** | **`/tc/services/warehouse-management-system/`** | `dist/services/warehouse-management-system/index.html` | 0.9 |
 | **`/services/equipment-maintenance-repair/`** | **`/tc/services/equipment-maintenance-repair/`** | `dist/services/equipment-maintenance-repair/index.html` | 0.9 |
 | **`/services/industrial-ai-agents/`** | **`/tc/services/industrial-ai-agents/`** | `dist/services/industrial-ai-agents/index.html` | 0.9 |
+| **`/services/engineering-turnkey/`** | **`/tc/services/engineering-turnkey/`** | `dist/services/engineering-turnkey/index.html` | 0.9 |
+| **`/services/industrial-layout/`** | **`/tc/services/industrial-layout/`** | `dist/services/industrial-layout/index.html` | 0.9 |
+| **`/services/product-design/`** | **`/tc/services/product-design/`** | `dist/services/product-design/index.html` | 0.9 |
 | **`/services/on-call-engineering-advisory/`** | **`/tc/services/on-call-engineering-advisory/`** | `dist/services/on-call-engineering-advisory/index.html` | 0.9 |
 | **`/contact/`** | **`/tc/contact/`** | `dist/contact/index.html` | 0.9 |
 | `/about/` | `/tc/about/` | `dist/about/index.html` | 0.7 |
@@ -47,7 +49,7 @@ rules or server config.
 | `/projects/1/` … `/projects/8/` | `/tc/projects/<id>/` | `dist/projects/<id>/index.html` | 0.5 |
 | `/products/` | `/tc/products/` | `dist/products/index.html` | 0.9 |
 
-**46 pages** in total (the Demos page was renamed Products and moved from `/demos/` to `/products/` on 2026-10-12; `/demos/` and `/tc/demos/` are forwarding pages written from `LEGACY_REDIRECTS` in `src/routes.ts`), plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
+**50 pages** in total (2026-10-13: the site was repositioned as an engineering and AI solutions company with five solutions; `/services/funding-consulting/` was removed and forwards to `/services/`) (the Demos page was renamed Products and moved from `/demos/` to `/products/` on 2026-10-12; `/demos/` and `/tc/demos/` are forwarding pages written from `LEGACY_REDIRECTS` in `src/routes.ts`), plus `sitemap.xml`, a `Sitemap:` line in `robots.txt`,
 and a genuine `404.html` (noindex, no app bundle — so it can't turn into a soft
 404 by silently client-rendering the home page).
 

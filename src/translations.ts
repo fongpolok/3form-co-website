@@ -26,7 +26,7 @@ export const t = {
     },
     links: {
       about:    { en: "Learn about our team, mission, and track record.",  tc: "了解我們的團隊、使命及往績。" },
-      services: { en: "See how we help businesses improve and grow.",      tc: "了解我們如何協助企業提升及發展。" },
+      services: { en: "See the five solutions we design and deliver.",     tc: "了解我們設計及交付的五大方案。" },
       projects: { en: "Browse case studies from real client engagements.", tc: "瀏覽真實客戶項目的個案研究。" },
       contact:  { en: "Get in touch to start a conversation.",             tc: "聯絡我們，開展合作對話。" },
     },
@@ -36,12 +36,12 @@ export const t = {
   hero: {
     // The home page <h1>: says what the firm is and where, for search.
     tagline: {
-      en: "Engineering and management consultancy for Hong Kong businesses",
-      tc: "香港工程及管理顧問：資助申請、AI 應用、設備保養",
+      en: "AI and engineering solutions for Hong Kong industry",
+      tc: "香港工業 AI 及工程解決方案",
     },
     sub: {
-      en: "We combine engineering precision, data intelligence, and regulatory expertise to transform your operations — from the factory floor to the boardroom.",
-      tc: "我們結合工程精準度、數據智能及監管專業知識，從生產現場到董事會，全面轉化您的營運。",
+      en: "3form designs and delivers AI and data systems, agentic AI, turnkey engineering, industrial layout and product design for manufacturers in Hong Kong and the Greater Bay Area.",
+      tc: "3form 為香港及大灣區製造商設計及交付 AI 及數據系統、Agentic AI、一站式工程、工業佈局及產品設計。",
     },
     cta:  { en: "Explore Our Services", tc: "探索我們的服務" },
     cta2: { en: "Get in Touch",         tc: "立即聯絡" },
@@ -51,8 +51,8 @@ export const t = {
   about: {
     heading: { en: "About 3form Engineering Co", tc: "關於 3form Engineering Co" },
     company_body: {
-      en: "3form Engineering Co is a Hong Kong–based engineering and management consulting firm dedicated to helping businesses improve operations, adopt emerging technologies, and navigate complex regulatory environments. We work across manufacturing, food production, and technology sectors — bringing structured methodology and hands-on execution to every engagement.",
-      tc: "3form Engineering Co 是一家總部位於香港的工程及管理顧問公司，致力協助企業改善營運、採用新興技術，並應對複雜的監管環境。我們在製造、食品生產及科技行業提供服務，為每個項目帶來系統化方法論及實際執行能力。",
+      en: "3form Engineering Co is a Hong Kong–based engineering and AI solutions company. We design and deliver AI and data systems, agentic AI, turnkey engineering, industrial layout and product design for manufacturers in Hong Kong and the Greater Bay Area — one team from first diagnosis to a working result.",
+      tc: "3form Engineering Co 是一家總部位於香港的工程及 AI 解決方案公司。我們為香港及大灣區製造商設計及交付 AI 及數據系統、Agentic AI、一站式工程、工業佈局及產品設計，由診斷到成果落地，全程由同一團隊負責。",
     },
     stat1_num:   "10+",
     stat1_label: { en: "Years of Experience", tc: "年豐富經驗" },
@@ -85,43 +85,42 @@ export const t = {
       ],
     },
 
-    // ── Engagement roadmap — the four stages of a typical client engagement,
-    // in order: diagnosis through funded implementation to project delivery,
-    // without a vendor handoff. Compliance work is offered where a project
-    // needs it, not promised as a universal final step (Edward, 2026-09-23).
+    // ── Engagement roadmap — the four stages of a typical engagement (Edward,
+    // 2026-10-13): Diagnose, Design, Deliver, Support. Funding is no longer a
+    // step; it is offered as support alongside (see services.fundingNote).
     roadmap: {
       heading: { en: "How We Work", tc: "我們的工作方式" },
       sub: {
-        en: "One firm, one team, from first diagnosis to project delivery — no handoff between separate vendors.",
-        tc: "一家公司，一個團隊，由診斷到項目交付一站式完成，毋須在不同供應商之間轉手。",
+        en: "One company, one team, from first diagnosis to support after handover — no handoff between separate vendors.",
+        tc: "一家公司，一個團隊，由診斷到交付後支援一站式完成，毋須在不同供應商之間轉手。",
       },
       steps: [
         {
           title: { en: "Diagnose", tc: "診斷評估" },
           desc: {
-            en: "Assess your operations on-site and identify which government funding schemes you're eligible for.",
-            tc: "實地評估您的營運狀況，識別合資格申請的政府資助計劃。",
+            en: "We visit your site, study the problem and agree what the finished result must do.",
+            tc: "我們實地了解問題，並與您確定成果須達到的要求。",
           },
         },
         {
-          title: { en: "Fund", tc: "申請資助" },
+          title: { en: "Design", tc: "方案設計" },
           desc: {
-            en: "Prepare, submit, and manage funding applications — BUD Fund, NIAS, and other general funding schemes.",
-            tc: "準備、提交及管理資助申請，包括BUD專項基金、NIAS及其他一般資助計劃。",
-          },
-        },
-        {
-          title: { en: "Engineer", tc: "工程優化" },
-          desc: {
-            en: "Apply Six Sigma, Lean, and AI/data tools to re-engineer the process the funding is paying to fix.",
-            tc: "應用六西格瑪、精益及人工智能／數據工具，重新設計資助所針對改善的流程。",
+            en: "We design the solution: the system, the layout, the product or the AI that fits.",
+            tc: "我們設計合適的方案，包括系統、佈局、產品或 AI。",
           },
         },
         {
           title: { en: "Deliver", tc: "項目交付" },
           desc: {
-            en: "Deliver the project, with licensing, HACCP or GMP compliance support where the project needs it.",
-            tc: "交付項目，並在項目需要時提供牌照申請、HACCP或GMP合規支援。",
+            en: "We build it, install it and commission it, with compliance support where the project needs it.",
+            tc: "我們負責建造、安裝及調試，並在項目需要時提供合規支援。",
+          },
+        },
+        {
+          title: { en: "Support", tc: "持續支援" },
+          desc: {
+            en: "We stay on after handover to keep it working and improve it.",
+            tc: "交付後我們繼續跟進，確保運作暢順並持續改善。",
           },
         },
       ],
@@ -132,75 +131,78 @@ export const t = {
   services: {
     heading: { en: "Our Services", tc: "我們的服務" },
     sub: {
-      en: "End-to-end consulting solutions tailored to Hong Kong's business landscape.",
-      tc: "專為香港商業環境度身訂造的全方位顧問解決方案。",
+      en: "Five solutions we design and deliver for manufacturers in Hong Kong and the Greater Bay Area.",
+      tc: "我們為香港及大灣區製造商設計及交付的五大方案。",
     },
+    // The five solutions (Edward, 2026-10-13). Each is a card on the Services
+    // page linking to its own page; `related` lists the earlier services now
+    // grouped under it (page keys from src/routes.ts). `icon` is a file in
+    // public/services. Funding is not a pillar: see fundingNote below.
     items: [
       {
         id: 1,
-        title:  { en: "Funding Consulting",                                tc: "資助顧問" },
+        page: "aiDataAdoption",
+        icon: "icon-03.webp",
+        title:  { en: "AI & Data Solutions",                               tc: "AI 及數據方案" },
         detail: {
-          en: "Identify, apply for, and manage government grants and funding schemes available to Hong Kong businesses — including BUD Fund, NIAS, and general funding applications for SMEs.",
-          tc: "識別、申請及管理香港企業可獲取的政府資助計劃，包括BUD專項基金、NIAS及中小企一般資助申請。",
+          en: "AI tools, data pipelines and dashboards that turn raw production data into decisions you can act on.",
+          tc: "以 AI 工具、數據流程及儀表板，將原始生產數據轉化為可行的決策。",
         },
+        related: [] as string[],
       },
       {
         id: 2,
-        title:  { en: "Engineering & Process Enhancement (6 Sigma / Lean)", tc: "工程及流程優化（六西格瑪 / 精益）" },
+        page: "industrialAgents",
+        icon: "icon-09.webp",
+        title:  { en: "Agentic AI Solutions",                              tc: "Agentic AI 智能代理方案" },
         detail: {
-          en: "Apply Six Sigma and Lean methodologies to eliminate waste, reduce defects, and systematically improve your operational processes.",
-          tc: "應用六西格瑪及精益方法論消除浪費、減少缺陷，並系統性地提升您的運營流程。",
+          en: "AI agents that work on real plant data — reading sensor streams, documents and inspection results to automate the routine decisions your operations team repeats every day.",
+          tc: "能處理真實廠房數據的 AI 智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
         },
+        related: [] as string[],
       },
       {
         id: 3,
-        title:  { en: "AI & Data Digitalization Tech Adoption",            tc: "人工智能及數據數碼化技術應用" },
+        page: "engineeringTurnkey",
+        icon: "icon-07.webp",
+        title:  { en: "Engineering Turnkey",                               tc: "一站式工程方案" },
         detail: {
-          en: "Guide your business through AI tool selection, data pipeline setup, and digital transformation — turning raw data into actionable business intelligence.",
-          tc: "引導您的業務完成人工智能工具選擇、數據流程建立及數碼轉型，將原始數據轉化為可行的商業洞察。",
+          en: "One team from diagnosis to a working result: production lines and automation, machine vision inspection stations, production site setup, and software and IoT systems.",
+          tc: "由診斷到成果落地，全程由同一團隊負責：生產線及自動化、機器視覺檢測站、生產場地設立，以及軟件及物聯網系統。",
         },
+        related: ["productionSetup", "warehouseSystem", "equipmentMaintenance"],
       },
       {
         id: 4,
-        title:  { en: "Production Site Setup",                             tc: "生產場地設立" },
+        page: "industrialLayout",
+        icon: "icon-10.webp",
+        title:  { en: "Industrial Layout",                                 tc: "工業佈局規劃" },
         detail: {
-          en: "End-to-end support for setting up compliant production facilities — including licensing, HACCP food safety systems, GMP standards, and FIFO inventory management.",
-          tc: "提供全面的合規生產設施設立支援，包括牌照申請、HACCP食品安全系統、GMP標準及先進先出存貨管理。",
+          en: "Production line and warehouse layout, whole-site planning, and the building services that go with it.",
+          tc: "生產線及倉庫佈局、整體廠房規劃，以及相關的屋宇裝備規劃。",
         },
+        related: ["processEnhancement", "facilityMaintenance"],
       },
       {
         id: 5,
-        title:  { en: "Warehouse Management System (SaaS)",                tc: "倉庫管理系統（SaaS）" },
+        page: "productDesign",
+        icon: "icon-11.webp",
+        title:  { en: "Product Design",                                    tc: "產品設計" },
         detail: {
-          en: "A hosted warehouse management platform with lot and expiry (FEFO) tracking, low-stock and expiry alerting, and full audit trails — configured around how your stock actually moves.",
-          tc: "託管式倉庫管理平台，具備批次及效期（FEFO）追蹤、低庫存及到期預警，以及完整審計軌跡，並按您實際的存貨流轉方式設定。",
+          en: "Mechanical design and CAD, design for manufacturing, prototyping, and materials and process selection.",
+          tc: "機械設計及 CAD、可製造性設計、原型製作，以及物料及製程選擇。",
         },
-      },
-      {
-        id: 6,
-        title:  { en: "General Maintenance & Repair",                      tc: "一般維修及保養服務" },
-        detail: {
-          en: "Preventive maintenance planning, breakdown diagnosis, and repair support for production equipment — keeping machinery serviceable and downtime measured rather than guessed at.",
-          tc: "為生產設備提供預防性保養規劃、故障診斷及維修支援，令機器保持可運作狀態，停機時間有數據可依，而非憑估算。",
-        },
-      },
-      {
-        id: 7,
-        title:  { en: "Industrial Agentic Development",                    tc: "工業智能代理開發" },
-        detail: {
-          en: "Build AI agents that work on real plant data — reading sensor streams, documents, and inspection results to automate the routine decisions your operations team repeats every day.",
-          tc: "開發能處理真實廠房數據的人工智能代理，讀取感測器數據、文件及檢測結果，將營運團隊每日重複的例行決策自動化。",
-        },
-      },
-      {
-        id: 8,
-        title:  { en: "On-Call Engineering Advisory",                      tc: "隨時支援工程顧問服務" },
-        detail: {
-          en: "A standing engineering advisor on a monthly retainer for Hong Kong product design and manufacturing companies — design support, manufacturing engineering, supplier liaison, and funding and technology advice.",
-          tc: "以月費形式為香港產品設計及製造企業提供常設工程顧問，涵蓋產品設計支援、製造工程、供應商聯絡，以及資助與技術建議。",
-        },
+        related: ["onCallAdvisory"],
       },
     ],
+    cardLink:     { en: "Full details →", tc: "查看詳情 →" },
+    relatedLabel: { en: "Also in this area", tc: "相關服務" },
+    // Shown on every service page and under the How We Work steps. Funding is
+    // support for a project, not a service of its own (Edward, 2026-10-13).
+    fundingNote: {
+      en: "Funding support is available: where a project qualifies for a government funding scheme, we prepare the application as part of the work.",
+      tc: "可提供資助支援：如項目符合政府資助計劃的資格，我們會在項目中一併準備申請。",
+    },
     // ── CTA block at the bottom of the Services page ─────────────────────────
     cta: {
       heading: { en: "Ready to get started?", tc: "準備好開始了嗎？" },
@@ -301,85 +303,302 @@ export const t = {
       ctaButton: { en: "Contact us", tc: "聯絡我們" },
       cardLink: { en: "Full on-call advisory details →", tc: "查看隨時支援顧問詳情 →" },
     },
-    // ── Funding Consulting landing page (/services/funding-consulting/).
-    // Built from Edward's interview answers (2026-09-23): who the client is
-    // and how the engagement runs. A results section is deliberately absent
-    // until he has a result he can publish — add it here, don't invent one.
-    fundingPage: {
-      label: { en: "Funding Consulting", tc: "資助顧問" },
+    // ── Engineering Turnkey landing page (/services/engineering-turnkey/).
+    // One of the five solutions (Edward, 2026-10-13). The "what we deliver"
+    // items restate what he confirmed 3form does; no prices, clients or
+    // results have been given — do not add any.
+    engineeringTurnkeyPage: {
+      label: { en: "Engineering Turnkey", tc: "一站式工程方案" },
       heading: {
-        en: "BUD Fund and NIFS application support for Hong Kong manufacturers",
-        tc: "香港製造業資助申請支援：BUD 專項基金及新型工業化資助計劃（NIFS）",
+        en: "Turnkey engineering for factories in Hong Kong",
+        tc: "香港工廠一站式工程方案",
       },
       intro: {
-        en: "3form helps manufacturers turn a production problem into a funded project. We assess your line on site, design the fix with Lean and Six Sigma, and prepare the funding application that helps pay for it.",
-        tc: "3form 協助製造商把生產上的難題轉化為獲資助的項目。我們會實地評估您的生產線，以精益及六西格瑪原則設計改善方案，並準備資助申請，為項目爭取資助。",
+        en: "3form takes an engineering project from first diagnosis to a working result. We design it, source it, install it and commission it, so you deal with one team instead of several vendors.",
+        tc: "3form 由診斷開始，把工程項目一直做到成果落地。我們負責設計、採購、安裝及調試，讓您只需面對一個團隊，毋須周旋於多個供應商之間。",
       },
       audienceHeading: { en: "Who we work with", tc: "服務對象" },
       audiences: [
         {
-          title: { en: "Hong Kong manufacturers", tc: "香港製造商" },
+          title: { en: "Hong Kong and Greater Bay Area manufacturers", tc: "香港及大灣區製造商" },
           body: {
-            en: "You run production in Hong Kong and want a turnkey upgrade: one team from diagnosis to a funded, working solution, with no handoff between separate vendors.",
-            tc: "您在香港從事生產，希望以一站式方式升級：由同一團隊負責，由診斷到獲資助並投入運作的方案，毋須在不同供應商之間轉手。",
-          },
-        },
-        {
-          title: { en: "Mainland manufacturers setting up in Hong Kong", tc: "來港設廠的內地製造商" },
-          body: {
-            en: "You plan to set up a production site in Hong Kong and want funding to support it. We evaluate the site and the production plan, then prepare a general funding application.",
-            tc: "您計劃在香港設立生產基地，並希望以資助支持項目。我們會評估場地及生產規劃，再準備一般資助申請。",
+            en: "You run manufacturing or production in Hong Kong or the Greater Bay Area and want one team to take a project from diagnosis to a working result.",
+            tc: "您在香港或大灣區從事製造或生產，並希望由同一團隊把項目由診斷做到成果落地。",
           },
         },
       ],
-      stepsHeading: { en: "How an engagement runs", tc: "合作流程" },
+      coverage: {
+        heading: { en: "What we deliver", tc: "交付範圍" },
+        items: [
+          {
+            title: { en: "Production lines and automation", tc: "生產線及自動化" },
+            body: {
+              en: "Design, sourcing, installation and commissioning of production lines and automated equipment.",
+              tc: "生產線及自動化設備的設計、採購、安裝及調試。",
+            },
+          },
+          {
+            title: { en: "Machine vision inspection stations", tc: "機器視覺檢測站" },
+            body: {
+              en: "Complete inspection stations: camera, lighting, software and integration with your line.",
+              tc: "完整的檢測站：相機、燈光、軟件，以及與生產線的整合。",
+            },
+          },
+          {
+            title: { en: "Production site setup", tc: "生產場地設立" },
+            body: {
+              en: "Setting up a whole production site, including licensing and HACCP or GMP systems.",
+              tc: "設立整個生產場地，包括牌照申請及 HACCP 或 GMP 系統。",
+            },
+          },
+          {
+            title: { en: "Software and IoT systems", tc: "軟件及物聯網系統" },
+            body: {
+              en: "Warehouse systems, dashboards, sensors and data systems, installed and running.",
+              tc: "倉庫系統、儀表板、感測器及數據系統，安裝妥當並投入運作。",
+            },
+          },
+        ],
+      },
+      stepsHeading: { en: "How we work", tc: "工作流程" },
       steps: [
         {
-          title: { en: "On-site assessment", tc: "實地評估" },
+          title: { en: "Diagnose", tc: "診斷評估" },
           body: {
-            en: "We visit your site, evaluate how production runs today, and pin down the pain points.",
-            tc: "我們親臨您的廠房，評估現時的生產運作，找出痛點所在。",
+            en: "We visit your site, review the problem and agree what the finished result must do.",
+            tc: "我們實地了解問題，並與您確定成果須達到的要求。",
           },
         },
         {
-          title: { en: "A holistic solution", tc: "整體改善方案" },
+          title: { en: "Design", tc: "方案設計" },
           body: {
-            en: "We design one solution for the whole problem, based on Lean and Six Sigma principles, rather than a one-off fix.",
-            tc: "我們以精益及六西格瑪原則，針對整體問題設計完整方案，而非一次性的修補。",
+            en: "We design the solution and specify the equipment and software.",
+            tc: "我們設計方案，並訂明所需的設備及軟件。",
           },
         },
         {
-          title: { en: "The right solution and funding", tc: "合適方案及資助" },
+          title: { en: "Deliver", tc: "項目交付" },
           body: {
-            en: "We look for the proper solution and the financial incentives, such as a funding application, that fit what you need and how you will use it.",
-            tc: "我們按您的需要及實際用途，尋求合適的方案及財務誘因，例如資助申請。",
+            en: "We source, install and commission it on your site.",
+            tc: "我們負責採購，並在您的場地安裝及調試。",
           },
         },
         {
-          title: { en: "Project delivery", tc: "項目交付" },
+          title: { en: "Support", tc: "持續支援" },
           body: {
-            en: "We deliver the project, carried out by the same team that designed the solution.",
-            tc: "由設計方案的同一團隊負責交付項目。",
+            en: "We stay on after handover to keep it running.",
+            tc: "交付後我們繼續跟進，確保運作暢順。",
           },
         },
       ],
-      ctaHeading: { en: "Planning a funded project?", tc: "正在籌劃資助項目？" },
+      ctaHeading: { en: "Planning an engineering project?", tc: "正在籌劃工程項目？" },
       ctaBody: {
-        en: "Tell us about your production line or your Hong Kong site plan. We reply within one business day.",
-        tc: "告訴我們您的生產線或在港設廠計劃，我們會於一個工作天內回覆。",
+        en: "Tell us what you want built and where. We reply within one business day.",
+        tc: "告訴我們您想建立的項目及地點，我們會於一個工作天內回覆。",
       },
       ctaButton: { en: "Contact us", tc: "聯絡我們" },
-      cardLink: { en: "Full funding consulting details →", tc: "查看資助顧問詳情 →" },
+      cardLink: { en: "Full engineering turnkey details →", tc: "查看一站式工程詳情 →" },
     },
-
+    // ── Industrial Layout landing page (/services/industrial-layout/).
+    // One of the five solutions (Edward, 2026-10-13). The "what we deliver"
+    // items restate what he confirmed 3form does; no prices, clients or
+    // results have been given — do not add any.
+    industrialLayoutPage: {
+      label: { en: "Industrial Layout", tc: "工業佈局規劃" },
+      heading: {
+        en: "Industrial layout planning for factories and warehouses in Hong Kong",
+        tc: "香港工廠及倉庫工業佈局規劃",
+      },
+      intro: {
+        en: "3form plans how your factory or warehouse is arranged, so materials, people and equipment flow well, from a single production line to a whole site.",
+        tc: "3form 為您規劃工廠或倉庫的佈局，令物料、人員及設備流轉暢順，範圍由單一生產線到整個廠房。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Hong Kong and Greater Bay Area manufacturers", tc: "香港及大灣區製造商" },
+          body: {
+            en: "You run manufacturing, production or warehousing in Hong Kong or the Greater Bay Area and are setting up, moving or rearranging a site.",
+            tc: "您在香港或大灣區從事製造、生產或倉儲，並正在設立、搬遷或重新佈置場地。",
+          },
+        },
+      ],
+      coverage: {
+        heading: { en: "What we plan", tc: "規劃範圍" },
+        items: [
+          {
+            title: { en: "Production line layout", tc: "生產線佈局" },
+            body: {
+              en: "Arranging machines and workstations so materials flow well, including first-in-first-out (FIFO).",
+              tc: "安排機器及工作站的位置，令物料流轉暢順，包括先進先出（FIFO）。",
+            },
+          },
+          {
+            title: { en: "Warehouse layout", tc: "倉庫佈局" },
+            body: {
+              en: "Racking, zones and picking routes for your warehouse.",
+              tc: "倉庫的貨架、分區及揀貨路線。",
+            },
+          },
+          {
+            title: { en: "Whole factory or site planning", tc: "整體廠房或場地規劃" },
+            body: {
+              en: "Planning a new or relocated site: space, utilities and compliance zones.",
+              tc: "為新設或搬遷的場地作規劃：空間、公用設施及合規分區。",
+            },
+          },
+          {
+            title: { en: "Building services for the site", tc: "場地屋宇裝備" },
+            body: {
+              en: "Air-conditioning, ventilation and electrical planning tied to the layout.",
+              tc: "配合佈局的冷氣、通風及電力規劃。",
+            },
+          },
+        ],
+      },
+      stepsHeading: { en: "How we work", tc: "工作流程" },
+      steps: [
+        {
+          title: { en: "Diagnose", tc: "診斷評估" },
+          body: {
+            en: "We walk your site and study how materials and people move today.",
+            tc: "我們實地視察，了解現時物料及人員的流動情況。",
+          },
+        },
+        {
+          title: { en: "Design", tc: "方案設計" },
+          body: {
+            en: "We draw the layout and plan the building services it needs.",
+            tc: "我們繪製佈局，並規劃所需的屋宇裝備。",
+          },
+        },
+        {
+          title: { en: "Deliver", tc: "項目交付" },
+          body: {
+            en: "We support the installation or the move on site.",
+            tc: "我們在現場支援安裝或搬遷。",
+          },
+        },
+        {
+          title: { en: "Support", tc: "持續支援" },
+          body: {
+            en: "We review the layout once it is in use and adjust it where needed.",
+            tc: "佈局投入使用後，我們會檢視並按需要調整。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Setting up or rearranging a site?", tc: "正在設立或重新佈置場地？" },
+      ctaBody: {
+        en: "Tell us about the site and what moves through it. We reply within one business day.",
+        tc: "告訴我們場地情況及當中流轉的物料，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full industrial layout details →", tc: "查看工業佈局詳情 →" },
+    },
+    // ── Product Design landing page (/services/product-design/).
+    // One of the five solutions (Edward, 2026-10-13). The "what we deliver"
+    // items restate what he confirmed 3form does; no prices, clients or
+    // results have been given — do not add any.
+    productDesignPage: {
+      label: { en: "Product Design", tc: "產品設計" },
+      heading: {
+        en: "Product design and engineering for manufacturing in Hong Kong",
+        tc: "香港產品設計及工程：為量產而設計",
+      },
+      intro: {
+        en: "3form designs products that a factory can make reliably: the mechanical design, design for manufacturing, prototypes, and the choice of material and process.",
+        tc: "3form 設計工廠能穩定生產的產品：機械設計、可製造性設計、原型製作，以及物料及製程選擇。",
+      },
+      audienceHeading: { en: "Who we work with", tc: "服務對象" },
+      audiences: [
+        {
+          title: { en: "Hong Kong and Greater Bay Area manufacturers", tc: "香港及大灣區製造商" },
+          body: {
+            en: "You make products in Hong Kong or the Greater Bay Area, or have them made, and need the design engineered for production.",
+            tc: "您在香港或大灣區生產產品，或委託工廠生產，並需要把設計做到可以量產。",
+          },
+        },
+      ],
+      coverage: {
+        heading: { en: "What we do", tc: "服務範圍" },
+        items: [
+          {
+            title: { en: "Mechanical design and CAD", tc: "機械設計及 CAD" },
+            body: {
+              en: "We design the parts and produce the drawings and 3D models.",
+              tc: "我們設計零件，並製作圖則及 3D 模型。",
+            },
+          },
+          {
+            title: { en: "Design for manufacturing", tc: "可製造性設計" },
+            body: {
+              en: "We review and adjust a design so a factory can make it reliably and at lower cost.",
+              tc: "我們檢視及調整設計，令工廠能穩定生產並降低成本。",
+            },
+          },
+          {
+            title: { en: "Prototyping", tc: "原型製作" },
+            body: {
+              en: "We make or manage prototypes and test samples.",
+              tc: "我們製作或統籌原型及測試樣辦。",
+            },
+          },
+          {
+            title: { en: "Materials and process selection", tc: "物料及製程選擇" },
+            body: {
+              en: "We choose the plastics, composites and manufacturing process for your product.",
+              tc: "我們為您的產品選擇塑膠、複合材料及製造工序。",
+            },
+          },
+        ],
+      },
+      stepsHeading: { en: "How we work", tc: "工作流程" },
+      steps: [
+        {
+          title: { en: "Diagnose", tc: "診斷評估" },
+          body: {
+            en: "We review your product idea or current design and what it must do.",
+            tc: "我們了解您的產品構思或現有設計，以及產品須達到的要求。",
+          },
+        },
+        {
+          title: { en: "Design", tc: "方案設計" },
+          body: {
+            en: "We produce the mechanical design, drawings and 3D models.",
+            tc: "我們完成機械設計、圖則及 3D 模型。",
+          },
+        },
+        {
+          title: { en: "Deliver", tc: "項目交付" },
+          body: {
+            en: "We prototype, test and prepare the design for the factory.",
+            tc: "我們製作原型、進行測試，並為工廠生產做好準備。",
+          },
+        },
+        {
+          title: { en: "Support", tc: "持續支援" },
+          body: {
+            en: "We support you through the first production runs.",
+            tc: "我們在首批生產期間繼續支援。",
+          },
+        },
+      ],
+      ctaHeading: { en: "Have a product to design or improve?", tc: "有產品需要設計或改良？" },
+      ctaBody: {
+        en: "Tell us about the product and where it will be made. We reply within one business day.",
+        tc: "告訴我們產品情況及生產地點，我們會於一個工作天內回覆。",
+      },
+      ctaButton: { en: "Contact us", tc: "聯絡我們" },
+      cardLink: { en: "Full product design details →", tc: "查看產品設計詳情 →" },
+    },
     // ── Engineering & Process Enhancement landing page (/services/lean-six-sigma/).
     // Built from Edward's interview answers (2026-09-23). He asked for no
     // examples or results at this stage — don't add any until he supplies them.
     processPage: {
       label: { en: "Engineering & Process Enhancement", tc: "工程及流程優化" },
       heading: {
-        en: "Lean & Six Sigma Consulting for HK Manufacturers",
-        tc: "香港工廠精益生產及流程改善顧問",
+        en: "Lean & Six Sigma process improvement for HK manufacturers",
+        tc: "香港工廠精益生產及流程改善",
       },
       intro: {
         en: "3form helps manufacturers find where production, operations and cost can improve, and fixes it with Lean and Six Sigma. We start from your pain points on site, then provide technical work or advice, whichever your process needs.",
@@ -390,7 +609,7 @@ export const t = {
         {
           title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
           body: {
-            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support you with both technical and advisory consultancy.",
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support you with both technical and advisory support.",
             tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們同時提供技術及顧問支援。",
           },
         },
@@ -431,10 +650,10 @@ export const t = {
     // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
     // evaluation, a study, then technical or advisory support). No examples.
     aiDataPage: {
-      label: { en: "AI & Data Digitalization", tc: "人工智能及數據數碼化" },
+      label: { en: "AI & Data Solutions", tc: "AI 及數據方案" },
       heading: {
-        en: "AI and data consulting for Hong Kong manufacturers",
-        tc: "香港製造業 AI 及數據應用顧問",
+        en: "AI and data solutions for Hong Kong manufacturers",
+        tc: "香港製造業 AI 及數據方案",
       },
       intro: {
         en: "3form guides manufacturers through AI tool selection, data pipeline setup and digital transformation, so raw production data turns into business intelligence you can act on.",
@@ -445,7 +664,7 @@ export const t = {
         {
           title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
           body: {
-            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support your digital transformation with both technical and advisory consultancy.",
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We support your digital transformation with both technical and advisory support.",
             tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們同時以技術及顧問支援，協助您完成數碼轉型。",
           },
         },
@@ -500,7 +719,7 @@ export const t = {
         {
           title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
           body: {
-            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We help you set up a compliant production site here, with both technical and advisory consultancy.",
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We help you set up a compliant production site here, with both technical and advisory support.",
             tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，協助您在港設立合規的生產基地。",
           },
         },
@@ -651,7 +870,7 @@ export const t = {
     // pattern Edward confirmed on 2026-09-24 (GBA clients; pain points and site
     // evaluation, a study, then technical or advisory support). No examples.
     industrialAgentsPage: {
-      label: { en: "Industrial Agentic Development", tc: "工業智能代理開發" },
+      label: { en: "Agentic AI Solutions", tc: "Agentic AI 智能代理方案" },
       heading: {
         en: "Industrial AI agents for factories in Hong Kong",
         tc: "香港工廠 AI Agent 開發：自動化每日重複的營運決策",
@@ -665,7 +884,7 @@ export const t = {
         {
           title: { en: "Greater Bay Area manufacturers expanding through Hong Kong", tc: "經香港拓展業務的大灣區製造商" },
           body: {
-            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We automate routine operations decisions, with both technical and advisory consultancy.",
+            en: "You run manufacturing or production in the Greater Bay Area and see Hong Kong as a stepping stone for overseas expansion and promotion. We automate routine operations decisions, with both technical and advisory support.",
             tc: "您在大灣區從事製造或生產，並以香港作為拓展海外市場及推廣的踏腳石。我們以技術及顧問支援，將例行營運決策自動化。",
           },
         },
@@ -704,15 +923,15 @@ export const t = {
     },
   },
 
-  // ── Live Demos — engineering builds behind the advisory work. `real: true`
+  // ── Products (formerly Live Demos) — working software 3form has built. `real: true`
   // items are working builds (see the disclosure line); `real: false` items
   // are announced but not yet built, and use the same illustrative treatment
   // as unbuilt project cards.
   demos: {
     heading: { en: "Products", tc: "產品" },
     sub: {
-      en: "A closer look at the engineering behind the advisory work — built, not just proposed.",
-      tc: "深入了解顧問工作背後的工程開發 — 實際建構，並非紙上談兵。",
+      en: "Working software we have built, not just proposed. Open any of them and try it.",
+      tc: "我們實際建構的軟件，並非紙上談兵。歡迎逐一開啟試用。",
     },
     illustrative_badge: { en: "Coming Soon", tc: "即將推出" },
     launch_demo: { en: "Launch Demo", tc: "啟動示範" },
@@ -795,7 +1014,7 @@ export const t = {
         title:  { en: "BUD Fund Application for SME Expansion",                  tc: "中小企BUD基金擴張申請" },
         desc:   { en: "Secured HK$2M in BUD Fund support for a local SME entering Southeast Asian markets, covering process documentation and market entry planning.", tc: "成功為本地中小企取得200萬港元BUD基金，拓展東南亞市場，涵蓋流程文件及市場進入規劃。" },
         result: { en: "HK$2M funding secured", tc: "取得200萬港元資助" },
-        featured: true,
+        featured: false,
       },
       {
         id: 3,
@@ -860,8 +1079,8 @@ export const t = {
     heading: { en: "Contact Us",       tc: "聯絡我們" },
     // Approved by Edward, 2026-09-23 (SEO item 4: the page was ~65 words).
     sub: {
-      en: "3form Engineering Co works with manufacturers, food producers, warehouses and technology firms across Hong Kong. Tell us what you want to improve: a funding application, a production line, a warehouse system, or equipment that keeps breaking down. We reply within one business day to arrange a short call. For work on site, we first walk through your site and then send a written quotation based on what we saw.",
-      tc: "3form Engineering Co 為全港製造商、食品生產商、倉儲及科技企業提供服務。請告訴我們您想改善的地方，無論是資助申請、生產線、倉庫系統，還是經常故障的設備。我們會於一個工作天內回覆，安排簡短通話。如涉及現場工作，我們會先實地視察，再按所見提供書面報價。",
+      en: "3form Engineering Co works with manufacturers, food producers, warehouses and technology firms across Hong Kong. Tell us what you want to build or improve: an AI system, a production line, a factory layout, or a new product. We reply within one business day to arrange a short call. For work on site, we first walk through your site and then send a written quotation based on what we saw.",
+      tc: "3form Engineering Co 為全港製造商、食品生產商、倉儲及科技企業提供服務。請告訴我們您想建立或改善的地方，無論是 AI 系統、生產線、廠房佈局，還是新產品。我們會於一個工作天內回覆，安排簡短通話。如涉及現場工作，我們會先實地視察，再按所見提供書面報價。",
     },
     // Company facts from Edward, 2026-09-23. Also feed the Organization
     // JSON-LD (legalName, foundingDate, address) in src/structuredData.ts.
@@ -1047,8 +1266,8 @@ export const t = {
         {
           title: { en: "Use of Personal Data", tc: "個人資料的使用" },
           body: {
-            en: "Personal data collected is used to respond to your enquiries and to provide the consulting services you have requested. With your consent, data may also be used to send you information about our services. You may opt out of receiving such communications at any time by contacting us at edwardfong@3formhk.com.",
-            tc: "所收集的個人資料用於回應您的查詢及提供您所要求的顧問服務。在獲得您同意的情況下，資料亦可能用於向您發送有關我們服務的資訊。您可隨時發送電郵至 edwardfong@3formhk.com 選擇退出接收此類通訊。",
+            en: "Personal data collected is used to respond to your enquiries and to provide the services you have requested. With your consent, data may also be used to send you information about our services. You may opt out of receiving such communications at any time by contacting us at edwardfong@3formhk.com.",
+            tc: "所收集的個人資料用於回應您的查詢及提供您所要求的服務。在獲得您同意的情況下，資料亦可能用於向您發送有關我們服務的資訊。您可隨時發送電郵至 edwardfong@3formhk.com 選擇退出接收此類通訊。",
           },
         },
         {

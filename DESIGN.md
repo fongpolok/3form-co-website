@@ -1,6 +1,6 @@
 ---
 name: 3form Engineering Co
-description: Hong Kong engineering & management consulting firm — bilingual marketing site
+description: Hong Kong engineering & AI solutions company — bilingual marketing site
 colors:
   navy: "#002D72"
   navy-dark: "#001A4A"

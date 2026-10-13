@@ -6,6 +6,20 @@
 
 web
 
+## Positioning update (2026-10-13) — read this first
+
+Edward repositioned the firm. Where this section conflicts with older text below, this section wins.
+
+- **Identity:** 3form Engineering Co is an **engineering and AI solutions company**, not a consulting firm. Do not describe the firm as a consultancy in headlines, titles, descriptions or structured data. Home headline: "AI and engineering solutions for Hong Kong industry".
+- **Five solutions**, each with its own page: AI & Data Solutions; Agentic AI Solutions; Engineering Turnkey (production lines and automation, machine vision inspection stations, production site setup, software and IoT systems); Industrial Layout (production line layout, warehouse layout, whole factory or site planning, building services); Product Design (mechanical design and CAD, design for manufacturing, prototyping, materials and process selection).
+- **Earlier services are kept and grouped under those five** on the Services page: Production Site Setup, Warehouse Management System and General Maintenance & Repair under Engineering Turnkey; Engineering & Process Enhancement (Lean / Six Sigma) and Facility Maintenance under Industrial Layout; On-Call Engineering Advisory under Product Design.
+- **Funding is not a service any more.** It appears only as one line of support on each service page and under the How We Work steps (`t.services.fundingNote`). The Funding Consulting page is gone; its address forwards to Services. The two funding projects stay in the project list, shown as examples rather than featured.
+- **How We Work:** Diagnose, Design, Deliver, Support.
+- **Clients:** manufacturers in Hong Kong and the Greater Bay Area.
+- **Look:** unchanged; wording and structure only.
+- **Not changed, left for Edward:** his title "Founder & Principal Consultant", the founder bio, the statistics, and the LinkedIn company page, which still says consulting.
+- No prices, client names or results were supplied for the three new solution pages, and they have no photos. Do not add any.
+
 ## Users
 
 Primary users are Hong Kong SME owners and operations leads in manufacturing, food production, and technology who need help improving operations, securing government funding, or adopting new technology/AI. A second client group is Greater Bay Area (GBA) manufacturers who use Hong Kong as a stepping stone for overseas expansion and promotion, and need both technical and advisory consultancy. Clients arrive both through direct outreach (searching for consulting help) and through referrals via government bodies and partner institutions (HKPC, InvestHK, HKSTP, and similar). Secondary audience: those institutional partners themselves, who need to see 3form Engineering Co presented as a credible, professional consulting entity worth referring business to.

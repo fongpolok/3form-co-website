@@ -50,7 +50,9 @@ export type Page =
   | "about"
   | "services"
   | "facilityMaintenance"
-  | "fundingConsulting"
+  | "engineeringTurnkey"
+  | "industrialLayout"
+  | "productDesign"
   | "processEnhancement"
   | "aiDataAdoption"
   | "productionSetup"
@@ -68,7 +70,9 @@ const PAGE_SEGMENT: Record<Page, string> = {
   about: "about",
   services: "services",
   facilityMaintenance: "services/facility-maintenance",
-  fundingConsulting: "services/funding-consulting",
+  engineeringTurnkey: "services/engineering-turnkey",
+  industrialLayout: "services/industrial-layout",
+  productDesign: "services/product-design",
   processEnhancement: "services/lean-six-sigma",
   aiDataAdoption: "services/ai-data-adoption",
   productionSetup: "services/production-site-setup",
@@ -87,7 +91,9 @@ const PAGE_SEGMENT: Record<Page, string> = {
 /** Per-service landing pages. They live under /services/ and highlight that nav item. */
 export const SERVICE_PAGES: readonly Page[] = [
   "facilityMaintenance",
-  "fundingConsulting",
+  "engineeringTurnkey",
+  "industrialLayout",
+  "productDesign",
   "processEnhancement",
   "aiDataAdoption",
   "productionSetup",
@@ -98,7 +104,7 @@ export const SERVICE_PAGES: readonly Page[] = [
 ];
 
 /** Copy for a templated service landing page (see ServiceLandingPage in App.tsx). */
-export type ServiceLandingContent = typeof t.services.fundingPage & {
+export type ServiceLandingContent = typeof t.services.processPage & {
   /** Optional "what it covers" block, shown between the audience and the steps. */
   coverage?: {
     heading: { en: string; tc: string };
@@ -112,7 +118,10 @@ export type ServiceLandingContent = typeof t.services.fundingPage & {
  * Maintenance is not here: it has its own component and content.json.
  */
 export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number; photo?: boolean }>> = {
-  fundingConsulting: { content: t.services.fundingPage, cardId: 1 },
+  // The three solution pages added 2026-10-13 have no photo yet.
+  engineeringTurnkey: { content: t.services.engineeringTurnkeyPage, cardId: 9, photo: false },
+  industrialLayout: { content: t.services.industrialLayoutPage, cardId: 10, photo: false },
+  productDesign: { content: t.services.productDesignPage, cardId: 11, photo: false },
   processEnhancement: { content: t.services.processPage, cardId: 2 },
   aiDataAdoption: { content: t.services.aiDataPage, cardId: 3 },
   productionSetup: { content: t.services.productionSetupPage, cardId: 4 },
@@ -246,32 +255,40 @@ type BiString = { en: string; tc: string };
 
 const PAGE_TITLE: Record<Page, BiString> = {
   home: {
-    en: "3form Engineering | HK Engineering & Management Consultancy",
-    tc: "3form Engineering｜香港工程及管理顧問｜資助、AI、設備保養",
+    en: "3form Engineering | AI & Engineering Solutions Hong Kong",
+    tc: "3form Engineering｜香港工業 AI 及工程解決方案",
   },
   about: {
-    en: "About Us — Hong Kong Engineering Consultancy",
-    tc: "關於我們 — 香港工程顧問公司",
+    en: "About 3form — AI & Engineering Solutions Company, Hong Kong",
+    tc: "關於 3form — 香港工程及 AI 解決方案公司",
   },
   services: {
-    en: "Services: Funding, AI, Lean & Maintenance | 3form",
-    tc: "服務範疇 — 資助顧問、精益六西格瑪、人工智能、場地保養",
+    en: "Solutions: AI, Agentic AI, Turnkey, Layout, Product Design | 3form",
+    tc: "方案：AI、Agentic AI、一站式工程、工業佈局、產品設計｜3form",
   },
   facilityMaintenance: {
     en: "Facility Maintenance Hong Kong — Factory & Office | 3form",
     tc: "工廠及寫字樓冷氣、電力保養維修｜香港｜3form",
   },
-  fundingConsulting: {
-    en: "BUD Fund & NIFS Application Support in Hong Kong | 3form",
-    tc: "BUD專項基金、新型工業化資助（NIFS）申請支援｜3form",
+  engineeringTurnkey: {
+    en: "Turnkey Engineering for Factories in Hong Kong | 3form",
+    tc: "香港工廠一站式工程方案｜生產線、自動化、機器視覺｜3form",
+  },
+  industrialLayout: {
+    en: "Industrial & Factory Layout Planning Hong Kong | 3form",
+    tc: "香港工廠及倉庫工業佈局規劃｜3form",
+  },
+  productDesign: {
+    en: "Product Design & Engineering for Manufacturing HK | 3form",
+    tc: "香港產品設計及工程｜機械設計、DFM、原型製作｜3form",
   },
   processEnhancement: {
-    en: "Lean & Six Sigma Consulting for HK Manufacturers | 3form",
-    tc: "香港工廠精益生產及流程改善顧問｜3form",
+    en: "Lean & Six Sigma Process Improvement for HK Manufacturers | 3form",
+    tc: "香港工廠精益生產及流程改善｜3form",
   },
   aiDataAdoption: {
-    en: "AI & Data Consulting for Hong Kong Manufacturers | 3form",
-    tc: "香港工廠 AI 及數據應用顧問｜智能製造｜3form",
+    en: "AI & Data Solutions for Hong Kong Manufacturers | 3form",
+    tc: "香港工廠 AI 及數據方案｜智能製造｜3form",
   },
   productionSetup: {
     en: "Production Site Setup HK — HACCP & GMP | 3form",
@@ -303,34 +320,42 @@ const PAGE_TITLE: Record<Page, BiString> = {
   },
   contact: {
     en: "Contact 3form Engineering | Hong Kong",
-    tc: "聯絡 3form Engineering｜香港工程顧問",
+    tc: "聯絡 3form Engineering｜香港工程及 AI 解決方案",
   },
 };
 
 const PAGE_DESCRIPTION: Record<Page, BiString> = {
   home: {
-    en: "Hong Kong engineering and management consultancy: funding application support, AI and data adoption, equipment and facility maintenance, Lean.",
-    tc: "3form 是香港工程及管理顧問公司，提供資助申請支援、AI 及數據應用、工廠設備與場地保養維修，以及精益六西格瑪流程改善。",
+    en: "Hong Kong engineering and AI solutions company: AI and data systems, agentic AI, turnkey engineering, industrial layout and product design for manufacturers.",
+    tc: "3form 是香港工程及 AI 解決方案公司，為製造商提供 AI 及數據系統、Agentic AI、一站式工程、工業佈局及產品設計。",
   },
   about: {
-    en: "A Hong Kong–based engineering and management consulting firm helping manufacturers, food producers and technology businesses improve operations, adopt new technology and meet regulatory requirements.",
-    tc: "3form Engineering Co 總部設於香港，協助製造業、食品生產及科技企業改善營運、採用新技術並符合監管要求。了解我們的團隊、工作方式及往績。",
+    en: "A Hong Kong–based engineering and AI solutions company that designs and delivers AI and data systems, agentic AI, turnkey engineering, industrial layout and product design for manufacturers.",
+    tc: "3form Engineering Co 是總部設於香港的工程及 AI 解決方案公司，為製造商設計及交付 AI 及數據系統、Agentic AI、一站式工程、工業佈局及產品設計。",
   },
   services: {
-    en: "Funding consulting (BUD, NIAS and general funding applications), Six Sigma and Lean process enhancement, AI and data digitalisation, production site setup, warehouse management SaaS, equipment repair and facility maintenance.",
-    tc: "3form 提供資助顧問（BUD、NIAS 及一般資助申請）、六西格瑪及精益流程優化、人工智能及數據數碼化、生產場地設立、倉庫管理系統、設備維修及場地保養服務。",
+    en: "Five solutions for manufacturers in Hong Kong and the Greater Bay Area: AI and data, agentic AI, turnkey engineering, industrial layout and product design, with funding support where a project qualifies.",
+    tc: "3form 為香港及大灣區製造商提供五大方案：AI 及數據、Agentic AI、一站式工程、工業佈局及產品設計；項目如符合資格，可提供資助支援。",
   },
   facilityMaintenance: {
     en: "Facility maintenance in Hong Kong for factories, warehouses and offices: HVAC, electrical, office equipment, FIFO layout. Site walkthrough first.",
     tc: "3form 為香港工廠、倉庫及寫字樓提供冷氣、電力系統、辦公室設備保養維修，以及 FIFO 生產線佈局。先實地視察，再提供報價。",
   },
-  fundingConsulting: {
-    en: "On-site assessment, project planning and application support for the BUD Fund and NIFS, for Hong Kong manufacturers. Approval cannot be guaranteed.",
-    tc: "3form 協助香港製造業準備 BUD 專項基金及新型工業化資助計劃（NIFS）申請：實地評估、項目規劃及申請文件支援。不保證獲批。",
+  engineeringTurnkey: {
+    en: "Turnkey engineering in Hong Kong: production lines and automation, machine vision inspection stations, production site setup, and software and IoT systems, from diagnosis to a working result.",
+    tc: "3form 一站式工程方案：生產線及自動化、機器視覺檢測站、生產場地設立，以及軟件及物聯網系統，由診斷到成果落地。",
+  },
+  industrialLayout: {
+    en: "Industrial layout planning in Hong Kong: production line layout, warehouse layout, whole factory or site planning, and the building services tied to it.",
+    tc: "3form 工業佈局規劃：生產線佈局、倉庫佈局、整體廠房或場地規劃，以及相關的屋宇裝備規劃。",
+  },
+  productDesign: {
+    en: "Product design for manufacturing in Hong Kong: mechanical design and CAD, design for manufacturing, prototyping, and materials and process selection.",
+    tc: "3form 產品設計：機械設計及 CAD、可製造性設計、原型製作，以及物料及製程選擇，為量產而設計。",
   },
   processEnhancement: {
-    en: "Lean and Six Sigma consulting in Hong Kong: site evaluation, production and cost studies, and technical or advisory support for Greater Bay Area manufacturers.",
-    tc: "3form 為大灣區製造商提供精益及六西格瑪顧問服務：實地評估、生產營運及成本研究，以及技術或顧問支援。",
+    en: "Lean and Six Sigma process improvement in Hong Kong: site evaluation, production and cost studies, and technical or advisory support for Greater Bay Area manufacturers.",
+    tc: "3form 為大灣區製造商提供精益及六西格瑪流程改善：實地評估、生產營運及成本研究，以及技術或顧問支援。",
   },
   aiDataAdoption: {
     en: "AI tool selection, data pipeline setup and digital transformation for Hong Kong and Greater Bay Area manufacturers, using their production data.",
@@ -393,8 +418,8 @@ const OG_IMAGE = {
   width: 1200,
   height: 630,
   alt: {
-    en: `${SITE_NAME} — engineering and management consulting in Hong Kong`,
-    tc: `${SITE_NAME} — 香港工程及管理顧問`,
+    en: `${SITE_NAME} — AI and engineering solutions in Hong Kong`,
+    tc: `${SITE_NAME} — 香港工業 AI 及工程解決方案`,
   },
 };
 
@@ -443,7 +468,9 @@ const PRERENDERED_PAGES: Page[] = [
   "home",
   "services",
   "facilityMaintenance",
-  "fundingConsulting",
+  "engineeringTurnkey",
+  "industrialLayout",
+  "productDesign",
   "processEnhancement",
   "aiDataAdoption",
   "productionSetup",
@@ -472,10 +499,18 @@ export const ALL_ROUTES: Route[] = LANGS.flatMap((lang) => [
  * prerender step writes a tiny forwarding page (instant meta refresh plus a
  * canonical link) at each `from` path. Not listed in the sitemap.
  */
-export const LEGACY_REDIRECTS: { from: string; to: Route }[] = LANGS.map((lang) => ({
-  from: `/${[LANG_PREFIX[lang], "demos"].filter(Boolean).join("/")}/`,
-  to: { page: "demos", lang, projectId: null },
-}));
+const MOVED: { segment: string; page: Page }[] = [
+  { segment: "demos", page: "demos" },
+  // Funding is no longer a service of its own (2026-10-13).
+  { segment: "services/funding-consulting", page: "services" },
+];
+
+export const LEGACY_REDIRECTS: { from: string; to: Route }[] = LANGS.flatMap((lang) =>
+  MOVED.map(({ segment, page }) => ({
+    from: `/${[LANG_PREFIX[lang], segment].filter(Boolean).join("/")}/`,
+    to: { page, lang, projectId: null },
+  })),
+);
 
 /**
  * Relative crawl priority for sitemap.xml. Facility maintenance and Contact are
@@ -487,7 +522,9 @@ export function sitemapPriority(route: Route): string {
     case "home":
       return "1.0";
     case "facilityMaintenance":
-    case "fundingConsulting":
+    case "engineeringTurnkey":
+    case "industrialLayout":
+    case "productDesign":
     case "processEnhancement":
     case "aiDataAdoption":
     case "productionSetup":
