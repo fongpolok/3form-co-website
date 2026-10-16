@@ -950,15 +950,18 @@ export const t = {
       },
       {
         id: 2,
-        tag: { en: "AI & Data", tc: "人工智能及數據" },
-        title: { en: "HK ElderGuard AI — Cantonese Health Companion", tc: "HK ElderGuard AI — 粵語健康伴侶" },
+        tag: { en: "Digital Twin & Agentic AI", tc: "數碼孿生及代理式人工智能" },
+        title: { en: "Inspection Cell Digital Twin with AI Tuning", tc: "檢測工作站數碼孿生及 AI 調校" },
         desc: {
-          en: "A Cantonese-first AI health companion for Hong Kong elderly with hypertension or type 2 diabetes — a local LLM grounded in HK clinical guidelines, with medication logging, OCR document scanning, and caregiver alerts.",
-          tc: "為患有高血壓或二型糖尿病的香港長者而設的粵語人工智能健康伴侶 — 採用本地大型語言模型並以香港臨床指引為基礎，具備藥物記錄、OCR文件掃描及照顧者警報功能。",
+          en: "A live 3D twin of a robotic visual-inspection cell — conveyor, UR7e suction pick, rail-mounted camera scan and good/reject sorting — with a dashboard and an AI process assistant that diagnoses rising reject rates and proposes setting changes for an engineer to approve.",
+          tc: "機械人視覺檢測工作站的即時三維孿生 — 涵蓋輸送帶、UR7e 真空吸取、導軌相機掃描及良品／不良品分揀 — 配備儀表板及 AI 製程助理，可診斷不良率上升的原因並建議參數調整，經工程師批准後方會執行。",
         },
-        note: { en: "HKU MECH6048 dissertation project · try it in Cantonese", tc: "香港大學 MECH6048 論文項目．可用粵語體驗" },
+        note: {
+          en: "Machine, robot and camera are simulated; inspection is rule-based until the real vision model is connected. The AI's diagnoses are real (DeepSeek). First visit may take about a minute while the server wakes up.",
+          tc: "機器、機械人及相機均為模擬；在接入真實視覺模型前，檢測採用規則判斷。AI 診斷為真實運算（DeepSeek）。首次瀏覽時伺服器需約一分鐘啟動。",
+        },
         real: true,
-        demoUrl: "https://fongpolok.github.io/3form-elderly-demo-ui/",
+        demoUrl: "https://fongpolok.github.io/3form-digital-twin-ui/",
       },
       {
         id: 3,
