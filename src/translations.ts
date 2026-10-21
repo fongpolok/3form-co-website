@@ -938,15 +938,18 @@ export const t = {
     items: [
       {
         id: 1,
-        tag: { en: "IoT & WMS", tc: "物聯網及倉庫管理" },
-        title: { en: "Warehouse Traceability & FEFO Alerting", tc: "倉庫可追溯性及FEFO預警系統" },
+        tag: { en: "Smart Factory · WMS / MES / APS", tc: "智能工廠・倉庫／生產執行／排程" },
+        title: { en: "3Form Factory OS: Warehouse, Production & Planning", tc: "3Form 工廠系統：倉庫、生產及排程一體化" },
         desc: {
-          en: "Extended an open-source warehouse platform with lot/expiry (FEFO) tracking, low-stock and expiry alerts, and void/audit trails — built for medical-device-grade inventory traceability.",
-          tc: "在開源倉庫管理平台上加入批次／有效期（FEFO）追蹤、低庫存及到期預警，以及作廢／審核紀錄功能，達到醫療器材級別的存貨可追溯性。",
+          en: "One system from order to delivery. Production planning on a real shift calendar, a simple touch screen for workers at each workstation, FEFO warehouse stock with full batch traceability, scrap and downtime tracking, and Lean / Six Sigma charts. An AI advisor suggests, but only people decide. Connects to SAP, Oracle and Workday.",
+          tc: "由接單到出貨，一個系統全包：按真實班次日曆排產、工作站觸控屏讓工人一按即用、FEFO 倉庫批次全程追溯、報廢及停機記錄，以及精益／六標準差分析圖表。AI 顧問只提供建議，決定權在人。可連接 SAP、Oracle 及 Workday。",
         },
-        note: { en: "", tc: "" },
+        note: {
+          en: "Live demo with 3 months of sample data. Try it as a manager or a worker; no sign-up needed. The first load can take about a minute.",
+          tc: "附三個月示範數據的實機示範。可用管理人員或工人身份試用，無需註冊。首次開啟約需一分鐘。",
+        },
         real: true,
-        demoUrl: "https://fongpolok.github.io/3form-wms-demo-ui/",
+        demoUrl: "https://demo.3formhk.com/",
       },
       {
         id: 2,
