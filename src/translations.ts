@@ -762,12 +762,12 @@ export const t = {
     warehouseSystemPage: {
       label: { en: "Warehouse Management System", tc: "倉庫管理系統" },
       heading: {
-        en: "Warehouse management system for Hong Kong operations",
-        tc: "香港倉庫管理系統（SaaS）",
+        en: "Warehouse, production and planning system for Hong Kong operations",
+        tc: "香港倉庫、生產及排程管理系統",
       },
       intro: {
-        en: "3form's hosted warehouse management platform tracks lots and expiry dates (FEFO), alerts you to low stock and upcoming expiry, and keeps a full audit trail. We configure it around how your stock actually moves.",
-        tc: "3form 的託管式倉庫管理平台可追蹤批次及效期（FEFO）、發出低庫存及到期預警，並保留完整審計軌跡。我們按您實際的存貨流轉方式設定平台。",
+        en: "3form's factory system runs your warehouse and production floor in one place: FEFO lot and expiry tracking, production planning on your shift calendar, simple touch screens for workers, scrap and downtime records, and a full audit trail. An AI advisor suggests improvements; your team decides. We configure it around how your stock and production actually move.",
+        tc: "3form 的工廠系統將倉庫與生產現場整合於同一平台：FEFO 批次及效期追蹤、按班次日曆排產、工人專用的簡易觸控屏、報廢及停機記錄，以及完整審計軌跡。AI 顧問提出改善建議，由您的團隊決定。我們按您實際的存貨及生產流程設定系統。",
       },
       audienceHeading: { en: "Who we work with", tc: "服務對象" },
       audiences: [
@@ -803,7 +803,7 @@ export const t = {
           },
         },
       ],
-      ctaHeading: { en: "Losing track of lots or expiry dates?", tc: "難以追蹤批次或效期？" },
+      ctaHeading: { en: "Losing track of lots, orders or production progress?", tc: "難以追蹤批次、工單或生產進度？" },
       ctaBody: {
         en: "Tell us how your warehouse runs today. We reply within one business day.",
         tc: "告訴我們您倉庫現時的運作方式，我們會於一個工作天內回覆。",
