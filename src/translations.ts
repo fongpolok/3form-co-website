@@ -949,7 +949,7 @@ export const t = {
           tc: "附三個月示範數據的實機示範。可用管理人員或工人身份試用，無需註冊。首次開啟約需一分鐘。",
         },
         real: true,
-        demoUrl: "https://demo.3formhk.com/",
+        demoUrl: "https://threeform-wms-demo.onrender.com/",
       },
       {
         id: 2,
