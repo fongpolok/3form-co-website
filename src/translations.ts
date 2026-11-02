@@ -21,8 +21,8 @@ export const t = {
   // ── Home page — short intro + quick links out to each section page ──────────
   home: {
     intro: {
-      en: "Explore what we do, how we've helped clients, and how to reach us.",
-      tc: "探索我們的服務範疇、過往成功案例，以及聯絡方式。",
+      en: "Explore what we do, what we've built, and how to reach us.",
+      tc: "探索我們的服務範疇、自家開發的成果，以及聯絡方式。",
     },
     links: {
       about:    { en: "Learn about our team, mission, and track record.",  tc: "了解我們的團隊、使命及往績。" },
