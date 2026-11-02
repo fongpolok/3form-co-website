@@ -108,6 +108,9 @@ async function main() {
       const outputPath = outputPathFor(pathname);
       await writeFileEnsuringDir(outputPath, html);
 
+      // Hidden pages (meta.noindex) are still written, just not advertised.
+      if (meta.noindex) continue;
+
       sitemapEntries.push({
         loc: routeUrl(route),
         priority: sitemapPriority(route),
@@ -148,7 +151,7 @@ async function main() {
     await writeFileEnsuringDir(path.join(DIST_DIR, "404.html"), render404({ shell, links, siteName }));
   });
 
-  log.info(`Done. ${sitemapEntries.length} pages now ship real HTML.`);
+  log.info(`Done. ${ALL_ROUTES.length} pages now ship real HTML; ${sitemapEntries.length} are listed in sitemap.xml.`);
 }
 
 main().catch((err) => {

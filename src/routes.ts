@@ -20,6 +20,14 @@ import { facilityMaintenanceConfig } from "./facilityMaintenance/config";
 
 /** Canonical origin. Used for <link rel="canonical">, og:url and sitemap.xml. */
 export const SITE_ORIGIN = "https://3formhk.com";
+
+/**
+ * Projects on/off (Edward, 2026-11-02: hide it for now). While false, the
+ * Projects pages are still built and open by direct address, but nothing on
+ * the site links to them, they are left out of sitemap.xml and they carry
+ * <meta name="robots" content="noindex">. Set back to true to restore all of it.
+ */
+export const PROJECTS_PUBLIC = false;
 export const SITE_NAME = "3form Engineering Co";
 
 /**
@@ -407,6 +415,8 @@ export type RouteMeta = {
   alternates: { hreflang: string; href: string }[];
   /** Social preview card shown when a link is shared (og:image / twitter:image). */
   ogImage: { url: string; width: number; height: number; alt: string };
+  /** true: ask search engines not to list the page, and keep it out of the sitemap. */
+  noindex: boolean;
 };
 
 /**
@@ -452,6 +462,7 @@ export function routeMeta(route: Route): RouteMeta {
       })),
       { hreflang: "x-default", href: routeUrl({ ...route, lang: "en" }) },
     ],
+    noindex: route.page === "projects" && !PROJECTS_PUBLIC,
     ogImage: {
       url: OG_IMAGE.url,
       width: OG_IMAGE.width,

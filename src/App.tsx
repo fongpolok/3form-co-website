@@ -8,7 +8,7 @@ import { t, txt, type Lang } from "./translations";
 import { FacilityMaintenanceBlock, facilityMaintenanceConfig } from "./facilityMaintenance";
 import { COLORS } from "./theme";
 import { copyText, track } from "./analytics";
-import {
+import { PROJECTS_PUBLIC,
   HOME_ROUTE,
   navKeyFor,
   parsePath,
@@ -563,7 +563,8 @@ function Navbar({ route, setLang, setPage }: {
   const navLinks: { key: Page; label: { en: string; tc: string } }[] = [
     { key: "home",     label: t.nav.home },
     { key: "about",    label: t.nav.about },
-    { key: "projects", label: t.nav.projects },
+    // Hidden while PROJECTS_PUBLIC is false (src/routes.ts).
+    ...(PROJECTS_PUBLIC ? [{ key: "projects" as Page, label: t.nav.projects }] : []),
     { key: "services", label: t.nav.services },
     { key: "demos",    label: t.nav.demos },
     { key: "contact",  label: t.nav.contact },
@@ -800,7 +801,7 @@ function QuickLinksSection({ lang, setPage }: { lang: Lang; setPage: (p: Page) =
   const cards: { key: Page; heading: { en: string; tc: string }; teaser: { en: string; tc: string }; cta: { en: string; tc: string } }[] = [
     { key: "about",    heading: t.nav.about,    teaser: t.home.links.about,    cta: { en: "Learn more",     tc: "了解更多" } },
     { key: "services", heading: t.nav.services, teaser: t.home.links.services, cta: { en: "View services",  tc: "查看服務" } },
-    { key: "projects", heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } },
+    ...(PROJECTS_PUBLIC ? [{ key: "projects" as Page, heading: t.nav.projects, teaser: t.home.links.projects, cta: { en: "View projects",  tc: "查看項目" } }] : []),
     { key: "contact",  heading: t.nav.contact,  teaser: t.home.links.contact,  cta: { en: "Contact us",     tc: "聯絡我們" } },
   ];
   return (

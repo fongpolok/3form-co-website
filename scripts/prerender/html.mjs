@@ -49,6 +49,7 @@ function headTags({ meta, structuredData, siteName }) {
     `<title>${text(meta.title)}</title>`,
     `<meta name="description" content="${attr(meta.description)}" />`,
     `<link rel="canonical" href="${attr(meta.canonical)}" />`,
+    ...(meta.noindex ? [`<meta name="robots" content="noindex, follow" />`] : []),
     ...meta.alternates.map(
       (alt) => `<link rel="alternate" hreflang="${attr(alt.hreflang)}" href="${attr(alt.href)}" />`,
     ),
