@@ -1006,13 +1006,13 @@ function FounderSection({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          {/* Right: bio — pushed to the right edge on desktop (Edward,
-              2026-11-20); the 62ch measure keeps lines readable. */}
+          {/* Right: bio — spread across the full column, from the photo to
+              the right margin (Edward, 2026-11-20). */}
           <div className="founder-bio">
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, marginBottom: "20px", maxWidth: "62ch" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, marginBottom: "20px" }}>
               {txt(f.bio_p1, lang)}
             </p>
-            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, margin: 0, maxWidth: "62ch" }}>
+            <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, margin: 0 }}>
               {txt(f.bio_p2, lang)}
             </p>
           </div>
@@ -2026,7 +2026,6 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
           .footer-contact .contact-actions-wechat { justify-content: flex-end; }
           /* The empty status line after "Copy ID" would otherwise leave a gap at the right edge. */
           .footer-contact .contact-actions-wechat [role="status"]:empty { margin-left: -10px; }
-          .founder-bio { display: flex; flex-direction: column; align-items: flex-end; }
         }
         @media (max-width: 900px) {
           .hidden-mobile   { display: none !important; }
