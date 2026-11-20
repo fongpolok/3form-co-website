@@ -240,7 +240,7 @@ function ContactActions({ lang, placement, compact = false }: {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: compact ? "2px" : "10px", alignItems: "flex-start" }}>
+    <div className="contact-actions" style={{ display: "flex", flexDirection: "column", gap: compact ? "2px" : "10px", alignItems: "flex-start" }}>
       {/* WhatsApp leads: it is the channel we answer fastest. */}
       <a href={CONTACT.waHref(lang)} target="_blank" rel="noopener noreferrer"
         title={txt(wa.aria, lang)} aria-label={txt(wa.aria, lang)}
@@ -266,7 +266,7 @@ function ContactActions({ lang, placement, compact = false }: {
 
       {/* WeChat has no link scheme that works from a desktop browser, so the
           useful action is copying the ID rather than a dead href. */}
-      <div style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", minHeight: "44px" }}>
+      <div className="contact-actions-wechat" style={{ display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap", minHeight: "44px" }}>
         <span style={{ ...linkStyle, minHeight: "auto" }}>
           <IconWeChat size={16} />{txt(t.contact.wechat.label, lang)}: {t.contact.wechat.id}
         </span>
@@ -1006,8 +1006,9 @@ function FounderSection({ lang }: { lang: Lang }) {
             </div>
           </div>
 
-          {/* Right: bio */}
-          <div>
+          {/* Right: bio — pushed to the right edge on desktop (Edward,
+              2026-11-20); the 62ch measure keeps lines readable. */}
+          <div className="founder-bio">
             <p style={{ fontSize: "16px", lineHeight: 1.85, color: COLORS.graphite, marginBottom: "20px", maxWidth: "62ch" }}>
               {txt(f.bio_p1, lang)}
             </p>
@@ -1568,7 +1569,11 @@ function Footer({ lang, onOpenLegal }: { lang: Lang; onOpenLegal: (type: LegalTy
               {txt(t.contact.hours.display, lang)} · {txt(t.contact.appointmentOnly, lang)}
             </p>
           </div>
-          <ContactActions lang={lang} placement="footer" compact />
+          {/* Pushed to the right edge on desktop (Edward, 2026-11-20), so the
+              contact actions line up with the social icons below. */}
+          <div className="footer-contact">
+            <ContactActions lang={lang} placement="footer" compact />
+          </div>
         </div>
 
         {/* Top row */}
@@ -2014,6 +2019,14 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
       <style>{`
         @media (min-width: 901px) {
           .contact-info { order: 2; }
+        }
+        @media (min-width: 901px) {
+          .footer-contact { display: flex; justify-content: flex-end; }
+          .footer-contact .contact-actions { align-items: flex-end !important; }
+          .footer-contact .contact-actions-wechat { justify-content: flex-end; }
+          /* The empty status line after "Copy ID" would otherwise leave a gap at the right edge. */
+          .footer-contact .contact-actions-wechat [role="status"]:empty { margin-left: -10px; }
+          .founder-bio { display: flex; flex-direction: column; align-items: flex-end; }
         }
         @media (max-width: 900px) {
           .hidden-mobile   { display: none !important; }
