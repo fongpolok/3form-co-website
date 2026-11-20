@@ -288,6 +288,72 @@ function ContactActions({ lang, placement, compact = false }: {
 }
 
 /**
+ * Inform-only cookie notice (Edward, 2026-11-20). Shown until the visitor
+ * clicks OK; the choice is remembered in localStorage. Rendered only after
+ * mount, so the prerendered HTML never contains it and hydration stays clean.
+ * While open it publishes its height as --cookie-bar-h so the floating
+ * WhatsApp button rises above it instead of covering the OK button.
+ */
+const COOKIE_NOTICE_KEY = "3formhk-cookie-notice-v1";
+
+function CookieNotice({ lang, onOpenPrivacy }: { lang: Lang; onOpenPrivacy: () => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const cn = t.cookieNotice;
+
+  useEffect(() => {
+    let seen = false;
+    try { seen = window.localStorage.getItem(COOKIE_NOTICE_KEY) === "ok"; } catch { /* storage blocked: show it */ }
+    if (!seen) setOpen(true);
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!open || !ref.current) { root.style.removeProperty("--cookie-bar-h"); return; }
+    const el = ref.current;
+    const sync = () => root.style.setProperty("--cookie-bar-h", `${el.offsetHeight}px`);
+    sync();
+    const ro = new ResizeObserver(sync);
+    ro.observe(el);
+    return () => { ro.disconnect(); root.style.removeProperty("--cookie-bar-h"); };
+  }, [open]);
+
+  if (!open) return null;
+
+  const dismiss = () => {
+    try { window.localStorage.setItem(COOKIE_NOTICE_KEY, "ok"); } catch { /* still close for this visit */ }
+    log.event("Cookie notice → OK");
+    setOpen(false);
+  };
+
+  return (
+    <div ref={ref} role="region" aria-label={txt(cn.label, lang)} className="cookie-notice"
+      style={{
+        position: "fixed", left: 0, right: 0, bottom: 0, zIndex: 950,
+        background: COLORS.navyDark, borderTop: "1px solid rgba(255,255,255,0.12)",
+        boxShadow: "0 -6px 24px rgba(0,26,74,0.25)",
+        padding: "14px 32px calc(14px + env(safe-area-inset-bottom, 0px))",
+      }}>
+      <div style={{ maxWidth: "1280px", margin: "0 auto", display: "flex", alignItems: "center", gap: "8px 24px", flexWrap: "wrap" }}>
+        <p style={{ flex: "1 1 420px", margin: 0, fontSize: "14px", lineHeight: 1.6, color: "rgba(255,255,255,0.85)" }}>
+          {txt(cn.body, lang)}
+        </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px 20px", flexWrap: "wrap" }}>
+          <button type="button" onClick={onOpenPrivacy}
+            style={{ background: "none", border: "none", padding: 0, minHeight: "44px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "14px", fontWeight: 600, color: COLORS.accentLight, textDecoration: "underline", textUnderlineOffset: "3px" }}>
+            {txt(cn.privacy, lang)}
+          </button>
+          <button type="button" onClick={dismiss}
+            style={{ background: COLORS.accent, color: COLORS.white, border: "none", borderRadius: "3px", padding: "0 28px", minHeight: "44px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em" }}>
+            {txt(cn.ok, lang)}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
  * Sitewide floating WhatsApp button — fixed bottom-right on every route in both
  * languages. Offset with env(safe-area-inset-*) so it clears an iPhone home bar,
  * and kept to the right edge so it never sits over the contact form's fields.
@@ -302,7 +368,7 @@ function FloatingWhatsApp({ lang }: { lang: Lang }) {
       style={{
         position: "fixed",
         right: "calc(20px + env(safe-area-inset-right, 0px))",
-        bottom: "calc(20px + env(safe-area-inset-bottom, 0px))",
+        bottom: "calc(20px + env(safe-area-inset-bottom, 0px) + var(--cookie-bar-h, 0px))",
         zIndex: 900,
         width: "56px", height: "56px", borderRadius: "50%",
         display: "flex", alignItems: "center", justifyContent: "center",
@@ -2046,7 +2112,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
           #contact { padding-bottom: 140px !important; }
           .floating-whatsapp {
             right: calc(16px + env(safe-area-inset-right, 0px)) !important;
-            bottom: calc(16px + env(safe-area-inset-bottom, 0px)) !important;
+            bottom: calc(16px + env(safe-area-inset-bottom, 0px) + var(--cookie-bar-h, 0px)) !important;
           }
         }
       `}</style>
@@ -2075,6 +2141,8 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
       <aside aria-label={txt(t.contact.labels.whatsapp, lang)}>
         <FloatingWhatsApp lang={lang} />
       </aside>
+
+      <CookieNotice lang={lang} onOpenPrivacy={() => setLegalOpen("privacy")} />
 
       {/* Legal modals — rendered above everything */}
       <LegalModal type={legalOpen} lang={lang} onClose={() => setLegalOpen(null)} />

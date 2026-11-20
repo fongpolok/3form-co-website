@@ -1210,6 +1210,18 @@ export const t = {
   },
 
   // ── Legal — Terms of Use & Privacy Policy ───────────────────────────────────
+  // ── Cookie notice — inform-only bar (Edward chose option 2, 2026-11-20).
+  // Google Analytics still loads on every visit; this bar only tells the
+  // visitor so, and points to the Privacy Policy's cookie section.
+  cookieNotice: {
+    label: { en: "Cookie notice", tc: "Cookies 通知" },
+    body: {
+      en: "This website uses cookies to count visits through Google Analytics. We use the figures only to improve the site.",
+      tc: "本網站使用 Cookies，透過 Google Analytics 統計瀏覽次數，數據只用於改善網站。",
+    },
+    privacy: { en: "Privacy Policy", tc: "私隱政策" },
+    ok:      { en: "OK",             tc: "知道了" },
+  },
   legal: {
     terms_link:   { en: "Terms of Use",    tc: "使用條款" },
     privacy_link: { en: "Privacy Policy",  tc: "私隱政策" },
