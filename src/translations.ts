@@ -1202,7 +1202,10 @@ export const t = {
       { id: 5,  name: "Keyence",        shortName: "KEYENCE",   imgUrl: "/logos/keyence.png",        desc: { en: "Sensors, Machine Vision & Automation", tc: "感測器、機器視覺及自動化" } },
       { id: 6,  name: "OPC Hub @ Cyberport", shortName: "OPC",  imgUrl: "/logos/opc-cyberport.png",  desc: { en: "One Person Company Hub, Cyberport",    tc: "數碼港一人公司培育基地" } },
       { id: 7,  name: "TÜV SÜD",        shortName: "TÜV SÜD",  imgUrl: "/logos/tuvsud.png",         desc: { en: "International Certification",          tc: "國際認證機構" } },
-      { id: 8,  name: "InvestHK",       shortName: "InvestHK",  imgUrl: "/logos/investhk.png",       desc: { en: "Dept. of Investment Promotion",        tc: "投資推廣署" } },
+      // NVIDIA Inception member badge (replaced InvestHK, 2026-11-20). Cropped
+      // unaltered from NVIDIA's member social templates; use is covered by the
+      // NVIDIA trademark licence 3form signed. Do not recolour or crop it further.
+      { id: 8,  name: "NVIDIA Inception Program", shortName: "NVIDIA Inception", imgUrl: "/logos/nvidia-inception.png", desc: { en: "NVIDIA Inception Program member", tc: "NVIDIA Inception 計劃成員" } },
     ],
   },
 

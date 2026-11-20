@@ -65,7 +65,7 @@ The firm's differentiator is combining engineering execution with funding/grant 
 - **Of the 8 project case studies in `src/translations.ts`, 3 are marked `featured: true`** (production line overhaul, BUD Fund application, KPI dashboard) with full write-ups. **The other 5 (`featured: false`) are now labelled "Actual Example" per Edward's direction (2026-09-11)** rather than "Illustrative Example" — he indicated these are real engagements and the detailed write-ups (desc/result copy) will be supplied in a follow-up session. Until that copy arrives, treat the existing desc/result text on those 5 as provisional placeholder wording, not confirmed fact.
 - Project 6 is titled "Funding Grant for Technology Upgrade" (科技升級資助).
 - Each project (including the 5 above) now links to its own detail page (`/projects/<id>/`, `ProjectDetailPage` in `src/App.tsx`) for a fuller deliverables write-up; the detail page body is intentionally blank pending that content.
-- Partner/affiliation logos all exist in `public/logos/`: HKPC, Cognex, HKSTP, HKU iDendron, Keyence, OPC Hub @ Cyberport, TÜV SÜD, InvestHK (list in `src/translations.ts`). Files are sized to 2× their 140×52 display box.
+- Partner/affiliation logos all exist in `public/logos/`: HKPC, Cognex, HKSTP, HKU iDendron, Keyence, OPC Hub @ Cyberport, TÜV SÜD, NVIDIA Inception Program (list in `src/translations.ts`; the NVIDIA Inception member badge replaced InvestHK on 2026-11-20, used under the NVIDIA trademark licence 3form signed). Files are sized to 2× their 140×52 display box.
 - No pricing, licensing, or additional testimonials exist beyond the above — do not invent any.
 
 ## Product Principles
