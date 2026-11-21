@@ -1492,7 +1492,7 @@ function FacilityMaintenancePage({ lang, onBack, setPage }: { lang: Lang; onBack
 // Used by every entry in SERVICE_LANDINGS (src/routes.ts): Funding Consulting,
 // Engineering & Process Enhancement, and any service added later. Copy lives in
 // t.services.<name>Page; the matching Services-page card links here.
-function ServiceLandingPage({ lang, content: fp, cardId, photo = true, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; photo?: boolean; onBack: () => void; setPage: (p: Page) => void }) {
+function ServiceLandingPage({ lang, content: fp, cardId, photo = true, externalAction, onBack, setPage }: { lang: Lang; content: ServiceLandingContent; cardId: number; photo?: boolean; externalAction?: { href: string; label: { en: string; tc: string } }; onBack: () => void; setPage: (p: Page) => void }) {
   const h2Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "clamp(24px, 2.6vw, 32px)", fontWeight: 700, color: COLORS.navyDark, lineHeight: 1.25, margin: "0 0 28px", letterSpacing: "-0.01em" };
   const h3Style: CSSProperties = { fontFamily: "var(--font-serif)", fontSize: "20px", fontWeight: 600, color: COLORS.navyDark, lineHeight: 1.3, margin: "0 0 12px" };
   const bodyStyle: CSSProperties = { fontSize: "15px", lineHeight: 1.75, color: COLORS.charcoal, margin: 0 };
@@ -1580,11 +1580,19 @@ function ServiceLandingPage({ lang, content: fp, cardId, photo = true, onBack, s
                 {txt(fp.ctaBody, lang)}
               </p>
             </div>
-            <RouteLink to={{ page: "contact", lang, projectId: null }}
-              onNavigate={() => { log.event("Service landing → contact"); setPage("contact"); }}
-              style={{ background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
-              {txt(fp.ctaButton, lang)}
-            </RouteLink>
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              {externalAction && (
+                <a href={externalAction.href} target="_blank" rel="noopener noreferrer"
+                  style={{ border: `1px solid ${COLORS.white}`, color: COLORS.white, padding: "13px 31px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
+                  {txt(externalAction.label, lang)} →
+                </a>
+              )}
+              <RouteLink to={{ page: "contact", lang, projectId: null }}
+                onNavigate={() => { log.event("Service landing → contact"); setPage("contact"); }}
+                style={{ background: CONFIG.accent, color: COLORS.white, padding: "14px 32px", fontSize: "14px", fontWeight: 600, letterSpacing: "0.04em", borderRadius: "3px", whiteSpace: "nowrap" }}>
+                {txt(fp.ctaButton, lang)}
+              </RouteLink>
+            </div>
           </div>
         </div>
       </section>
@@ -2124,7 +2132,7 @@ export default function App({ initialRoute }: { initialRoute?: Route } = {}) {
         {page === "about"    && <AboutPage    lang={lang} onBack={() => setPage("home")} />}
         {page === "services" && <ServicesPage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "facilityMaintenance" && <FacilityMaintenancePage lang={lang} onBack={() => setPage("home")} setPage={setPage} />}
-        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} cardId={SERVICE_LANDINGS[page]!.cardId} photo={SERVICE_LANDINGS[page]!.photo} onBack={() => setPage("home")} setPage={setPage} />}
+        {SERVICE_LANDINGS[page] && <ServiceLandingPage lang={lang} content={SERVICE_LANDINGS[page]!.content} cardId={SERVICE_LANDINGS[page]!.cardId} photo={SERVICE_LANDINGS[page]!.photo} externalAction={SERVICE_LANDINGS[page]!.externalAction} onBack={() => setPage("home")} setPage={setPage} />}
         {page === "projects" && (projectId !== null
           ? <ProjectDetailPage  lang={lang} projectId={projectId} onBack={() => setPage("projects")} />
           : <AllProjectsPage    lang={lang} onBack={() => setPage("home")} onOpenProject={openProject} />
