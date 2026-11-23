@@ -125,7 +125,12 @@ export type ServiceLandingContent = typeof t.services.processPage & {
  * Services-page card (`t.services.items[].id`) that links to each. Facility
  * Maintenance is not here: it has its own component and content.json.
  */
-export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingContent; cardId: number; photo?: boolean }>> = {
+export const SERVICE_LANDINGS: Partial<Record<Page, {
+  content: ServiceLandingContent;
+  cardId: number;
+  photo?: boolean;
+  externalAction?: { href: string; label: BiString };
+}>> = {
   // The three solution pages added 2026-10-13 have no photo yet.
   engineeringTurnkey: { content: t.services.engineeringTurnkeyPage, cardId: 9, photo: false },
   industrialLayout: { content: t.services.industrialLayoutPage, cardId: 10, photo: false },
@@ -133,7 +138,14 @@ export const SERVICE_LANDINGS: Partial<Record<Page, { content: ServiceLandingCon
   processEnhancement: { content: t.services.processPage, cardId: 2 },
   aiDataAdoption: { content: t.services.aiDataPage, cardId: 3 },
   productionSetup: { content: t.services.productionSetupPage, cardId: 4 },
-  warehouseSystem: { content: t.services.warehouseSystemPage, cardId: 5 },
+  warehouseSystem: {
+    content: t.services.warehouseSystemPage,
+    cardId: 5,
+    externalAction: {
+      href: t.demos.items[0].demoUrl,
+      label: t.demos.launch_demo,
+    },
+  },
   equipmentMaintenance: { content: t.services.equipmentMaintenancePage, cardId: 6 },
   industrialAgents: { content: t.services.industrialAgentsPage, cardId: 7 },
   // photo: false until public/services/service-08.webp exists; the page then
