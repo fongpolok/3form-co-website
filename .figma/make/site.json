@@ -9,6 +9,7 @@
     "ignoreReducedMotion": false
   },
   "analytics": {
-    "googleAnalyticsId": "G-8XY75DG091"
+    "googleAnalyticsId": "G-8XY75DG091",
+    "googleTagManagerId": "GTM-5RN2MCT9"
   }
 }

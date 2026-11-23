@@ -57,6 +57,7 @@ type FigmaSiteConfiguration = {
   }
   analytics?: {
     googleAnalyticsId?: string
+    googleTagManagerId?: string
   }
   customScripts?: {
     headStart?: string
@@ -87,6 +88,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
   const socialImage = config.openGraph?.image ?? ''
   const language = sanitizeHtmlValue(config.language) || 'en'
   const googleAnalyticsId = sanitizeHtmlValue(config.analytics?.googleAnalyticsId)
+  const googleTagManagerId = sanitizeHtmlValue(config.analytics?.googleTagManagerId)
   const headStart = config.customScripts?.headStart ?? ''
   const headEnd = config.customScripts?.headEnd ?? ''
   const bodyStart = config.customScripts?.bodyStart ?? ''
@@ -144,6 +146,25 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
             { tag: 'meta', attrs: { property: 'og:image', content: socialImage }, injectTo: 'head' },
             { tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' }, injectTo: 'head' },
             { tag: 'meta', attrs: { name: 'twitter:image', content: socialImage }, injectTo: 'head' },
+          )
+        }
+
+        if (googleTagManagerId) {
+          tags.push(
+            {
+              tag: 'script',
+              children: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer',${JSON.stringify(googleTagManagerId)});`,
+              injectTo: 'head-prepend',
+            },
+            {
+              tag: 'noscript',
+              children: `<iframe src="https://www.googletagmanager.com/ns.html?id=${googleTagManagerId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
+              injectTo: 'body-prepend',
+            },
           )
         }
 
