@@ -1,10 +1,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // analytics.ts — one SSR-safe entry point for GA4 events.
 //
-// The gtag loader is already injected into every page by the
-// figmaSiteConfiguration plugin in vite.config.ts, from the
-// `analytics.googleAnalyticsId` (G-8XY75DG091) in .figma/make/site.json — so
-// this module adds no loader of its own. It never assumes it loaded: during SSR
+// GA4 gtag and the GTM container loader are injected into every page by the
+// figmaSiteConfiguration plugin in vite.config.ts (see `analytics` in
+// .figma/make/site.json) — so this module adds no loader of its own. It never assumes it loaded: during SSR
 // and prerender there is no `window` at all, and a visitor with an ad blocker
 // has a `window` but no `gtag`. Both cases are no-ops here rather than a crash
 // in the middle of a render.
