@@ -49,6 +49,40 @@ export function track(event: TrackEvent, params: TrackParams): void {
   if (typeof window.gtag === "function") {
     window.gtag("event", event, params);
   }
+
+  // Every TrackEvent is a contact action, so each one also counts as a
+  // Google Ads "contact" conversion.
+  gtagSendEvent();
+}
+
+/** The Google Ads conversion event name, as set up in the Ads account. */
+const ADS_CONTACT_CONVERSION = "conversion_event_contact";
+
+/**
+ * Google Ads' "delayed navigation helper": send the contact conversion, then
+ * (if a URL is given) navigate once gtag confirms or 2s pass. Unlike Google's
+ * copy, a missing gtag (SSR, ad blocker) navigates straight away instead of
+ * throwing, and the callback can only navigate once.
+ */
+export function gtagSendEvent(url?: string): false {
+  if (typeof window === "undefined") return false;
+
+  let done = false;
+  const callback = () => {
+    if (done) return;
+    done = true;
+    if (typeof url === "string") window.location.href = url;
+  };
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", ADS_CONTACT_CONVERSION, {
+      event_callback: callback,
+      event_timeout: 2000,
+    });
+  } else {
+    callback();
+  }
+  return false;
 }
 
 /**

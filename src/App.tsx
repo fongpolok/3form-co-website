@@ -7,7 +7,7 @@ import { useState, useEffect, useRef, Fragment, type CSSProperties, type ReactNo
 import { t, txt, type Lang } from "./translations";
 import { FacilityMaintenanceBlock, facilityMaintenanceConfig } from "./facilityMaintenance";
 import { COLORS } from "./theme";
-import { copyText, track } from "./analytics";
+import { copyText, gtagSendEvent, track } from "./analytics";
 import { PROJECTS_PUBLIC,
   HOME_ROUTE,
   navKeyFor,
@@ -1299,12 +1299,14 @@ function ContactSection({ lang }: { lang: Lang }) {
         });
         if (!res.ok) throw new Error(`Endpoint responded ${res.status}`);
         log.event("Contact form sent via endpoint:", form);
+        gtagSendEvent();
         setStatus("sent");
         setForm({ name: "", email: "", message: "" });
       } else {
         const subject = encodeURIComponent(`New enquiry from ${form.name || "3form Co website"}`);
         const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-        window.location.href = `mailto:${t.contact.email}?subject=${subject}&body=${body}`;
+        // Conversion first, then hand off to the email client.
+        gtagSendEvent(`mailto:${t.contact.email}?subject=${subject}&body=${body}`);
         log.event("Contact form handed off via mailto:", form);
         setStatus("mailto");
       }
